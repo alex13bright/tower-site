@@ -6,6 +6,7 @@ import config from '~/config';
 import type { Room } from '~/api-types/Room';
 import type { Pagination } from '~/api-types/meta';
 import type { DynamicLinksFunction } from 'remix-utils';
+import { getLocaleFromRequest } from '~/core/utils';
 
 export const meta: MetaFunction = () => {
   return {
@@ -31,11 +32,13 @@ type LoaderData = {
     pagination: Pagination;
   };
 };
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const locale = getLocaleFromRequest(request);
   const query = qs.stringify(
     {
+      locale,
       populate: {
-        main: {
+        Main: {
           populate: '*',
         },
       },
@@ -47,6 +50,30 @@ export const loader: LoaderFunction = async () => {
   const apiUrl = `${apiEndPoint}/rooms/?${query}`;
   const apiResponse = await fetch(apiUrl);
   const rooms = await apiResponse.json();
+
+  // const referralLinksQuery = qs.stringify(
+  //   {
+  //     locale,
+  //     populate: {
+  //       Main: {
+  //         populate: '*',
+  //       },
+  //     },
+  //     filters: {
+  //       Main: {
+  //         room: {
+  //           id: {
+  //             $eq: 7,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   },
+  //   {
+  //     encode: false,
+  //   },
+  // );
+
   return json<LoaderData>(rooms);
 };
 
@@ -54,7 +81,7 @@ export default function RoomsRoute() {
   const loaderData = useLoaderData<LoaderData>();
   const {
     data: rooms,
-    meta: { pagination },
+    // meta: { pagination },
   } = loaderData;
   return (
     <div>

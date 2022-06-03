@@ -1,4 +1,4 @@
-import type { Locale } from './main';
+import type { Locale } from '~/core/types';
 import type { Network } from './Network';
 
 export type Room = {
@@ -9,7 +9,7 @@ export type Room = {
     updatedAt: string;
     publishedAt: string;
     locale: Locale;
-    localizations: { data: Room[] };
+    localizations?: { data: Room[] };
     main: {
       id: string;
       network: {

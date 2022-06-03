@@ -1,5 +1,5 @@
-import type { Locale } from '~/api-types/main';
-import type { Room } from './Room';
+import type { Locale } from '~/core/types';
+// import type { Room } from './Room';
 
 export type Network = {
   data: {
@@ -9,9 +9,9 @@ export type Network = {
       createdAt: string;
       updatedAt: string;
       publishedAt: string;
-      rooms: { data: Room[] };
+      // rooms: { data: Room[] };
       locale: Locale;
-      localizations: { data: Network[] };
+      localizations?: { data: Network[] };
     };
   };
 };

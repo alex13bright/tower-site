@@ -10,8 +10,9 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { DynamicLinks } from 'remix-utils';
-import type { Locale } from '~/api-types/main';
+import type { Locale } from '~/core/types';
 import { json } from '@remix-run/node';
+import { getLocaleFromRequest } from '~/core/utils';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -23,16 +24,8 @@ type LoaderData = {
   locale: Locale;
 };
 export const loader: LoaderFunction = async ({ request }) => {
-  const headers = request.headers;
-  const acceptLanguages = headers.get('Accept-Language');
-  if (acceptLanguages) {
-    const [locale] = acceptLanguages.split(',');
-    if (locale === 'en' || locale === 'ru') {
-      return json<LoaderData>({ locale: locale as Locale });
-    }
-  }
-  // in future at least fall back to en locale
-  throw new Error(`can't get locale from 'Accept-Language' request header`);
+  const locale = getLocaleFromRequest(request);
+  return json<LoaderData>({ locale: locale as Locale });
 };
 
 export default function Root() {
