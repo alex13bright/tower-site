@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useParams } from '@remix-run/react';
 
 export default function RoomRoute() {
   const { roomId } = useParams();
