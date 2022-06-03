@@ -38,7 +38,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     {
       locale,
       populate: {
-        Main: {
+        main: {
           populate: '*',
         },
       },
@@ -60,7 +60,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   //       },
   //     },
   //     filters: {
-  //       Main: {
+  //       main: {
   //         room: {
   //           id: {
   //             $eq: 7,

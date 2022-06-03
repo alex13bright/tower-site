@@ -4,7 +4,7 @@ export const request = `http://localhost:1337/api/referral-links/?locale=en&popu
 export const query = qs.stringify(
   {
     populate: {
-      Main: {
+      main: {
         populate: '*',
       },
     },
@@ -23,7 +23,7 @@ export const response = {
         updatedAt: '2022-06-03T16:59:46.765Z',
         publishedAt: '2022-06-03T16:58:54.811Z',
         link: 'Link1room1USA',
-        Main: {
+        main: {
           id: 2,
           room: {
             data: {
