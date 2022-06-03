@@ -1,10 +1,27 @@
-import type { LoaderFunction } from '@remix-run/node';
+import type { MetaFunction, LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import qs from 'qs';
 import config from '~/config';
 import type { Room } from '~/api-types/Room';
 import type { Pagination } from '~/api-types/meta';
+import type { DynamicLinksFunction } from 'remix-utils';
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Room list',
+    description: 'description of room list',
+  };
+};
+
+const dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
+  const { data: rooms } = data;
+  console.log(data);
+  return rooms.map(room => ({
+    rel: 'stylesheet',
+    href: `https://example.com/some/${room.attributes.name}.css`,
+  }));
+};
 
 const { apiEndPoint } = config;
 
@@ -28,7 +45,6 @@ export const loader: LoaderFunction = async () => {
     },
   );
   const apiUrl = `${apiEndPoint}/rooms/?${query}`;
-  console.log('apiUrl: ', apiUrl);
   const apiResponse = await fetch(apiUrl);
   const rooms = await apiResponse.json();
   return json<LoaderData>(rooms);
@@ -54,3 +70,7 @@ export default function RoomsRoute() {
     </div>
   );
 }
+
+export const handle = {
+  dynamicLinks,
+};
