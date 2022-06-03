@@ -9,8 +9,9 @@ export type Network = {
       createdAt: string;
       updatedAt: string;
       publishedAt: string;
-      locale: Locale;
       rooms: { data: Room[] };
+      locale: Locale;
+      localizations: { data: Network[] };
     };
   };
 };

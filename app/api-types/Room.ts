@@ -9,6 +9,7 @@ export type Room = {
     updatedAt: string;
     publishedAt: string;
     locale: Locale;
+    localizations: { data: Room[] };
     main: {
       id: string;
       network: {
