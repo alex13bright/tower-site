@@ -2,18 +2,15 @@ import type { Locale } from '~/core/types';
 import qs from 'qs';
 import config from '~/config';
 import type { Room } from '~/api/types/Room';
+import type { ApiListResponse } from '~/api/types/meta';
 
 const { apiEndPoint } = config;
 
-export const fetchRoomList = async (locale: Locale = 'en'): Promise<Room[] | null> => {
+export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListResponse<Room>> => {
   const query = qs.stringify(
     {
       locale,
-      populate: {
-        main: {
-          populate: '*',
-        },
-      },
+      populate: '*',
     },
     {
       encode: false,
@@ -21,8 +18,7 @@ export const fetchRoomList = async (locale: Locale = 'en'): Promise<Room[] | nul
   );
   const apiUrl = `${apiEndPoint}/rooms/?${query}`;
   const apiResponse = await fetch(apiUrl);
-  const rooms = await apiResponse.json();
-
+  return (await apiResponse.json()) as ApiListResponse<Room>;
   // if (!areRoomsValidate(rooms)) return null
 
   // const referralLinksQuery = qs.stringify(
@@ -48,5 +44,5 @@ export const fetchRoomList = async (locale: Locale = 'en'): Promise<Room[] | nul
   //   },
   // );
 
-  return rooms;
+  // return data;
 };

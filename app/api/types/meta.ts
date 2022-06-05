@@ -4,3 +4,10 @@ export type Pagination = {
   pageCount: number;
   total: number;
 };
+
+export type ApiListResponse<T> = {
+  data: T[];
+  meta: {
+    pagination: Pagination;
+  };
+};

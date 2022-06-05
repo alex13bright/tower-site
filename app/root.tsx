@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { Locale } from '~/core/types';
 import {
   Links,
   LiveReload,
@@ -10,9 +11,9 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { DynamicLinks } from 'remix-utils';
-import type { Locale } from '~/core/types';
 import { json } from '@remix-run/node';
-import { getLocaleFromRequest } from '~/core/utils';
+import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils';
+import { permanentRedirect } from '~/core/permanentReidrect';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -22,10 +23,13 @@ export const meta: MetaFunction = () => ({
 
 type LoaderData = {
   locale: Locale;
+  country: string;
 };
 export const loader: LoaderFunction = async ({ request }) => {
+  await permanentRedirect(request);
   const locale = getLocaleFromRequest(request);
-  return json<LoaderData>({ locale: locale as Locale });
+  const country = await getCountryFromRequest(request);
+  return json<LoaderData>({ locale: locale as Locale, country });
 };
 
 export default function Root() {
