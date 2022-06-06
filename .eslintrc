@@ -2,5 +2,8 @@
   "extends": [
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/node"
-  ]
+  ],
+  "rules": {
+    "consistent-type-imports": false
+  }
 }
