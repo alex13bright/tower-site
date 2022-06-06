@@ -15,11 +15,12 @@ import { json } from '@remix-run/node';
 import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils';
 import { permanentRedirect } from '~/core/permanentReidrect';
 import resetStyleUrl from '~/styles/preflight.css';
-import globalStyleUrl from '~/styles/globalStyleUrl.css';
+import styleUrl from '~/styles/main.css';
+import { PageLayout } from '~/components/page-layout/PageLayout';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetStyleUrl },
-  { rel: 'stylesheet', href: globalStyleUrl },
+  { rel: 'stylesheet', href: styleUrl },
 ];
 
 export const meta: MetaFunction = () => ({
@@ -43,7 +44,9 @@ export default function Root() {
   const { locale } = useLoaderData();
   return (
     <Document locale={locale}>
-      <Outlet />
+      <PageLayout>
+        <Outlet />
+      </PageLayout>
     </Document>
   );
 }
@@ -52,7 +55,7 @@ type DocumentProps = {
   locale: Locale;
   children: ReactNode;
 };
-const Document = ({ locale }: DocumentProps) => (
+const Document = ({ locale, children }: DocumentProps) => (
   <html lang={locale}>
     <head>
       <Meta />
@@ -61,7 +64,7 @@ const Document = ({ locale }: DocumentProps) => (
       {typeof document === 'undefined' ? '__STYLES__' : null}
     </head>
     <body>
-      <Outlet />
+      {children}
       <ScrollRestoration />
       <Scripts />
       <LiveReload />
