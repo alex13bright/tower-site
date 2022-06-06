@@ -51,6 +51,7 @@ const Document = ({ locale }: DocumentProps) => (
       <Meta />
       <DynamicLinks />
       <Links />
+      {typeof document === 'undefined' ? '__STYLES__' : null}
     </head>
     <body>
       <Outlet />

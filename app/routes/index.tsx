@@ -1,9 +1,14 @@
 import { Link } from '@remix-run/react';
+import styled from 'styled-components';
+
+const Box = styled.div`
+  border: 1px solid red;
+`;
 
 export default function Index() {
   return (
-    <div>
+    <Box>
       <Link to={'/rooms'}>Rooms</Link>
-    </div>
+    </Box>
   );
 }
