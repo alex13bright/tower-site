@@ -15,7 +15,7 @@ export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) 
   return (
     <Page>
       <PageHeader />
-      <OuterBox>
+      <OuterBox as={'main'}>
         <InnerBox>{children}</InnerBox>
       </OuterBox>
       <PageFooter />
