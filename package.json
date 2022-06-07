@@ -4,9 +4,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --debug",
-    "start": "remix-serve build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "start": "remix-serve build"
   },
   "dependencies": {
     "@remix-run/node": "^1.5.1",
@@ -22,14 +20,6 @@
     "@babel/core": "^7.18.2",
     "@remix-run/dev": "^1.5.1",
     "@remix-run/eslint-config": "^1.5.1",
-    "@storybook/addon-actions": "^6.5.7",
-    "@storybook/addon-essentials": "^6.5.7",
-    "@storybook/addon-interactions": "^6.5.7",
-    "@storybook/addon-links": "^6.5.7",
-    "@storybook/builder-webpack4": "^6.5.7",
-    "@storybook/manager-webpack4": "^6.5.7",
-    "@storybook/react": "^6.5.7",
-    "@storybook/testing-library": "^0.0.11",
     "@types/jest": "^28.1.0",
     "@types/qs": "^6.9.7",
     "@types/react": "^17.0.45",

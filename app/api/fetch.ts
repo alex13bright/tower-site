@@ -1,20 +1,21 @@
-import type { Locale } from '~/core/types';
-import qs from 'qs';
-import config from '~/config';
-import type { Room } from '~/api/types/Room';
-import type { ApiListResponse } from '~/api/types/meta';
+import {Locale} from "~/core/types";
+import qs from "qs";
+import config from "~/config";
+import {ApiListResponse, Room} from "~/api/types";
 
-const { apiEndPoint } = config;
+const {apiEndPoint} = config;
 
-export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListResponse<Room>> => {
+export const fetchRoomList = async (
+  locale: Locale = "en"
+): Promise<ApiListResponse<Room>> => {
   const query = qs.stringify(
     {
       locale,
-      populate: '*',
+      populate: "*",
     },
     {
       encode: false,
-    },
+    }
   );
   const apiUrl = `${apiEndPoint}/rooms/?${query}`;
   const apiResponse = await fetch(apiUrl);

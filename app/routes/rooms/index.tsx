@@ -1,23 +1,21 @@
-import type { MetaFunction, LoaderFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
-import type { Room } from '~/api/types/Room';
-import type { Pagination } from '~/api/types/meta';
-import type { DynamicLinksFunction } from 'remix-utils';
-import { getLocaleFromRequest } from '~/core/utils';
-import { fetchRoomList } from '~/api/fetching/rooms';
+import {MetaFunction, LoaderFunction, json} from "@remix-run/node";
+import {Link, useLoaderData} from "@remix-run/react";
+import {Pagination, Room} from "~/api/types";
+import {DynamicLinksFunction} from "remix-utils";
+import {getLocaleFromRequest} from "~/core/utils";
+import {fetchRoomList} from "~/api/fetch";
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Room list',
-    description: 'description of room list',
+    title: "Room list",
+    description: "description of room list",
   };
 };
 
-const dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
-  const { data: rooms } = data;
-  return rooms.map(room => ({
-    rel: 'stylesheet',
+const dynamicLinks: DynamicLinksFunction<LoaderData> = ({data}) => {
+  const {data: rooms} = data;
+  return rooms.map((room) => ({
+    rel: "stylesheet",
     href: `https://example.com/some/${room.attributes.name}.css`,
   }));
 };
@@ -36,12 +34,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function RoomsRoute() {
-  const loaderData = useLoaderData<LoaderData>();
-  const { data: rooms } = loaderData;
+  const {data: rooms} = useLoaderData<LoaderData>();
   return (
     <div>
       <ul>
-        {rooms.map(room => (
+        {rooms.map((room) => (
           <li key={room.id}>
             <Link to={`/rooms/${room.id}`}>{room.attributes.name}</Link>
             <p>{room.attributes.name}</p>

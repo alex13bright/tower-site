@@ -1,9 +1,9 @@
-/*breakpoint*/
-
-:root {
---breakpoint-mobile(320 px);
---breakpoint-tablet(768 px);
---breakpoint-laptop(1280 px);
---breakpoint-desktop(1440 px);
+* {
+  box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+  margin: 0;
+}
