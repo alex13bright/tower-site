@@ -1,57 +1,46 @@
 import { ReactNode, ReactElement } from 'react'
 import { breakpoints } from '~/styles/main'
-
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { PageHeader } from '~/components/PageHeader'
+import { PageFooter } from '~/components/PageFooter'
 
 export const Outer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `
-export const Inner = styled.div`
+export const innerCss = css`
+  width: 100%;
   min-width: ${breakpoints.mobile};
   max-width: ${breakpoints.desktop};
 `
-export const Page = styled.div`
+export const Page = styled.main`
   min-height: 100vh;
-  padding: 20px;
   display: grid;
   grid-template-rows: auto 1fr auto;
 `
-export const Header = styled(Outer)`
-  height: 100px;
-  color: #ccc;
-  background-color: #2b2e3b;
-  text-align: center;
+
+export const Header = styled(PageHeader)`
+  ${innerCss}
 `
-export const Content = styled(Outer)``
-export const ContentInner = styled(Inner)`
-  border: 1px solid grey;
+export const Footer = styled(PageFooter)`
+  ${innerCss}
 `
-export const Footer = styled(Outer)`
-  text-align: center;
-  height: 100px;
-  color: #ccc;
-  background-color: #2b2e3b;
+export const Content = styled.div`
+  ${innerCss}
 `
 
 type Props = { children: ReactNode }
-type Component = (props: Props) => ReactElement
-export const PageLayout: Component = (props: Props) => (
+export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) => (
   <Page>
-    <Header as="header">
-      <Inner>Header</Inner>
-    </Header>
-    <Content as="main">
-      <ContentInner>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem corporis cupiditate
-        distinctio, ea earum inventore ipsa ipsam iure iusto labore libero minus necessitatibus nisi
-        nobis numquam, pariatur placeat praesentium quaerat quasi qui quia quisquam quod reiciendis
-        sunt temporibus unde voluptas voluptates? Blanditiis culpa nam quas vitae. Amet aut dolor
-        laboriosam!
-      </ContentInner>
-    </Content>
-    <Footer as="footer">
-      <Inner>Footer</Inner>
-    </Footer>
+    <Outer>
+      <Header />
+    </Outer>
+    <Outer>
+      <Content>{children}</Content>
+    </Outer>
+    <Outer>
+      <Footer />
+    </Outer>
   </Page>
 )

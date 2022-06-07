@@ -4,6 +4,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --debug",
+    "dev-debug": "remix dev",
     "start": "remix-serve build"
   },
   "dependencies": {
