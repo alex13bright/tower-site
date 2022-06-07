@@ -3,4 +3,4 @@ export const breakpoints = {
   tablet: '768px',
   laptop: '1280px',
   desktop: '1440px',
-};
+}

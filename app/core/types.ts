@@ -1,5 +1,5 @@
-export type Locale = 'en' | 'ru' | 'es';
+export type Locale = 'en' | 'ru' | 'es'
 export type Geo = {
-  locale: Locale;
-  country: string;
-};
+  locale: Locale
+  country: string
+}

@@ -1,8 +1,8 @@
-import {Locale} from "~/core/types";
+import { Locale } from '~/core/types'
 
 const fakeUse = (...rest: any[]) => {
-  rest.forEach((r) => r);
-};
+  rest.forEach((r) => r)
+}
 
 // const getIpFromHeaders = (headers: Headers) => {
 //   return headers.get('x-forwarded-for');
@@ -21,11 +21,11 @@ const fakeUse = (...rest: any[]) => {
 // };
 
 export const getLocaleFromRequest = (request: Request): Locale => {
-  const hostname = new URL(request.url).hostname;
-  const [first] = hostname.split(".");
-  if (first === "ru" || first === "es") return first;
-  return "en";
-};
+  const hostname = new URL(request.url).hostname
+  const [first] = hostname.split('.')
+  if (first === 'ru' || first === 'es') return first
+  return 'en'
+}
 
 export const getCountryFromRequest = async (request: Request) => {
   // const standardHeader = 'x-forwarded-for'
@@ -33,8 +33,8 @@ export const getCountryFromRequest = async (request: Request) => {
   // const cloudFlareCountryHeader = 'CF-IPCountry'
   // const ip = request.headers.get('');
   // freegeoip.net/{format}/{IP_or_hostname}
-  fakeUse(request);
-  return "russia";
-};
+  fakeUse(request)
+  return 'russia'
+}
 
 // export const getRequestGeo = () => {};

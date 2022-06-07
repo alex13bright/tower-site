@@ -1,4 +1,4 @@
-export const request = `http://localhost:1337/api/rooms/?populate[main][populate]=*`;
+export const request = `http://localhost:1337/api/rooms/?populate[main][populate]=*`
 
 export const response = {
   data: [
@@ -36,4 +36,4 @@ export const response = {
       total: 1,
     },
   },
-};
+}

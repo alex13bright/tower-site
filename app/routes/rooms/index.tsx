@@ -1,40 +1,40 @@
-import {MetaFunction, LoaderFunction, json} from "@remix-run/node";
-import {Link, useLoaderData} from "@remix-run/react";
-import {Pagination, Room} from "~/api/types";
-import {DynamicLinksFunction} from "remix-utils";
-import {getLocaleFromRequest} from "~/core/utils";
-import {fetchRoomList} from "~/api/fetch";
+import { MetaFunction, LoaderFunction, json } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Pagination, Room } from '~/api/types'
+import { DynamicLinksFunction } from 'remix-utils'
+import { getLocaleFromRequest } from '~/core/utils'
+import { fetchRoomList } from '~/api/fetch'
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Room list",
-    description: "description of room list",
-  };
-};
+    title: 'Room list',
+    description: 'description of room list',
+  }
+}
 
-const dynamicLinks: DynamicLinksFunction<LoaderData> = ({data}) => {
-  const {data: rooms} = data;
+const dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
+  const { data: rooms } = data
   return rooms.map((room) => ({
-    rel: "stylesheet",
+    rel: 'stylesheet',
     href: `https://example.com/some/${room.attributes.name}.css`,
-  }));
-};
+  }))
+}
 
 type LoaderData = {
-  data: Room[];
+  data: Room[]
   meta: {
-    pagination: Pagination;
-  };
-};
+    pagination: Pagination
+  }
+}
 export const loader: LoaderFunction = async ({ request }) => {
-  const locale = getLocaleFromRequest(request);
-  const data = await fetchRoomList(locale);
+  const locale = getLocaleFromRequest(request)
+  const data = await fetchRoomList(locale)
   // if (rooms === null) throw new Error('cant get rooms');
-  return json<LoaderData>(data);
-};
+  return json<LoaderData>(data)
+}
 
 export default function RoomsRoute() {
-  const {data: rooms} = useLoaderData<LoaderData>();
+  const { data: rooms } = useLoaderData<LoaderData>()
   return (
     <div>
       <ul>
@@ -47,9 +47,9 @@ export default function RoomsRoute() {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 export const handle = {
   dynamicLinks,
-};
+}

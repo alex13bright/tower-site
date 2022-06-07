@@ -1,6 +1,6 @@
-import qs from 'qs';
+import qs from 'qs'
 
-export const request = `http://localhost:1337/api/referral-links/?locale=en&populate[Main][populate]=*`;
+export const request = `http://localhost:1337/api/referral-links/?locale=en&populate[Main][populate]=*`
 export const query = qs.stringify(
   {
     populate: {
@@ -11,8 +11,8 @@ export const query = qs.stringify(
   },
   {
     encode: false,
-  },
-);
+  }
+)
 
 export const response = {
   data: [
@@ -61,4 +61,4 @@ export const response = {
       total: 1,
     },
   },
-};
+}

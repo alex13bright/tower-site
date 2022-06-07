@@ -1,4 +1,4 @@
-export const request = `http://localhost:1337/api/networks?populate[rooms][populate]=*`;
+export const request = `http://localhost:1337/api/networks?populate[rooms][populate]=*`
 
 export const response = {
   data: [
@@ -66,4 +66,4 @@ export const response = {
       total: 2,
     },
   },
-};
+}
