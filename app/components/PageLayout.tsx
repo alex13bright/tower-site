@@ -2,7 +2,8 @@ import { ReactNode, ReactElement } from 'react'
 import styled from 'styled-components'
 import { PageHeader } from '~/components/PageHeader'
 import { PageFooter } from '~/components/PageFooter'
-import { OuterBox, InnerBox } from '~/components/page'
+import { OuterBox, InnerBox, FakeContent } from '~/components/page'
+import { PageTopButton } from '~/components/PageTopButton'
 
 export const Page = styled.main`
   min-height: 100vh;
@@ -16,9 +17,12 @@ export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) 
     <Page>
       <PageHeader />
       <OuterBox as={'main'}>
-        <InnerBox>{children}</InnerBox>
+        <InnerBox>
+          <FakeContent height={1500}>{children}</FakeContent>
+        </InnerBox>
       </OuterBox>
       <PageFooter />
+      <PageTopButton />
     </Page>
   )
 }
