@@ -11,9 +11,12 @@ const StyledButton = styled.button<StyledButtonProps>`
   height: 65px;
   z-index: 100;
   border-radius: 50%;
-  box-shadow: 0 19px 38px 0 rgba(34, 36, 43, 30%);
+  box-shadow: 0 19px 38px 0 #22242b;
   background: #2b88c9 url(/assets/i/ico-page-top.svg) no-repeat center;
   display: none;
+  &:hover {
+    outline: 0;
+  }
   @media (min-width: ${breakpoints.tablet}) {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   }
