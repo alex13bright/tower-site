@@ -1,15 +1,18 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
+import { InnerBox, OuterBox } from '~/components/page'
 
-const Box = styled.footer`
+const FooterOuterBox = styled(OuterBox).attrs({
+  as: 'header',
+})`
   height: 100px;
   color: #ccc;
   background-color: #2b2e3b;
   text-align: center;
 `
-type Props = {
-  className?: string
-}
-export const PageFooter: (props: Props) => ReactElement = ({ className }) => (
-  <Box className={className}>Page Footer</Box>
+
+export const PageFooter: () => ReactElement = () => (
+  <FooterOuterBox>
+    <InnerBox>Footer</InnerBox>
+  </FooterOuterBox>
 )
