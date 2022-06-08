@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { breakpoints } from '~/styles/main'
 import { ReactElement, ReactNode } from 'react'
 
 type KnownTags = keyof JSX.IntrinsicElements
@@ -11,8 +10,8 @@ const OuterBox = styled.div.attrs<OuterBoxProps>(({ as }) => ({ as }))<OuterBoxP
 `
 const InnerBox = styled.div`
   width: 100%;
-  min-width: ${breakpoints.mobile};
-  max-width: ${breakpoints.desktop};
+  min-width: ${({ theme: { breakpoints } }) => breakpoints.mobile};
+  max-width: ${({ theme: { breakpoints } }) => breakpoints.desktop};
 `
 type Props = {
   as?: KnownTags

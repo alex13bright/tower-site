@@ -17,6 +17,7 @@ import { permanentRedirect } from '~/core/permanentReidrect'
 import resetStyleUrl from '~/styles/preflight.css'
 import styleUrl from '~/styles/main.css'
 import { PageLayout } from '~/components/PageLayout'
+import { StyledComponentsTheme } from '~/styles/StyledTheme'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetStyleUrl },
@@ -64,7 +65,7 @@ const Document = ({ locale, children }: DocumentProps) => (
       {typeof document === 'undefined' ? '__STYLES__' : null}
     </head>
     <body>
-      {children}
+      <StyledComponentsTheme>{children}</StyledComponentsTheme>
       <ScrollRestoration />
       <Scripts />
       <LiveReload />

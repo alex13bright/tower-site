@@ -1,6 +1,5 @@
 import { ReactElement, useState } from 'react'
 import styled from 'styled-components'
-import { breakpoints } from '~/styles/main'
 import { useScroll } from '~/custom-hooks/useScroll'
 
 type StyledButtonProps = { isActive: boolean }
@@ -18,7 +17,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:hover {
     outline: 0;
   }
-  @media (min-width: ${breakpoints.tablet}) {
+  @media (min-width: ${(p) => p.theme.breakpoints.tablet}) {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   }
 `
