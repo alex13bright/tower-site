@@ -3,7 +3,8 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev --debug",
+    "dev": "remix dev ",
+    "dev-debug": "remix dev --debug",
     "start": "remix-serve build"
   },
   "dependencies": {

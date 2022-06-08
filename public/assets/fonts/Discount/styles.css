@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Discount';
+  src: url('Discount.eot'); /* IE9 Compat Modes */
+  src: url('Discount.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+     url('Discount.woff') format('woff'), /* Modern Browsers */
+     url('Discount.ttf') format('truetype'), /* Safari, Android, iOS */
+     url('Discount.svg#Discount') format('svg'); /* Legacy iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}

@@ -1,0 +1,129 @@
+.vip-payments-advantages {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas:
+    'title logo'
+    'list list';
+  row-gap: 44px;
+  position: relative;
+  margin-bottom: 40px;
+  padding: 40px 60px 44px 32px;
+  max-width: 1152px;
+  margin-left: auto;
+  margin-right: auto;
+  background: radial-gradient(
+    96.88% 66.11% at 57.43% 2.13%,
+    #3a3e51 0%,
+    #1d1f2c 100%
+  );
+  border-radius: 10px;
+  &__title {
+    grid-area: title;
+    font-family: 'Proxima Nova Sb';
+    font-size: 32px;
+    line-height: 36px;
+    color: #ffffff;
+    margin-bottom: 0;
+    &--highlight {
+      font-family: 'Proxima Nova Th';
+      color: #f6a519;
+    }
+
+  }
+
+  &__icon {
+    flex: 0 0 50px;
+  }
+
+  &__logo {
+    grid-area: logo;
+    justify-self: end;
+    align-self: center;
+  }
+  &__list {
+    grid-area: list;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 24px;
+    row-gap: 28px;
+    &--neteller {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__list-item {
+    display: flex;
+    &--neteller {
+      flex-direction: column;
+    }
+  }
+
+  &__label {
+    padding-top: 15px;
+    padding-left: 20px;
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    &--neteller {
+      padding-left: 0;
+      padding-top: 20px;
+    }
+  }
+}
+
+@include mq('desktop') {
+  .vip-payments-advantages {
+    max-width: 1016px;
+  }
+}
+
+@include mq('laptop') {
+  .vip-payments-advantages {
+    padding: 28px 24px 32px;
+    grid-template-columns: 1fr 1fr;
+    &__neteller {
+      grid-template-columns: 5fr 4fr;
+    }
+    &__list {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      &-item {
+        &--neteller {
+          flex-direction: row;
+        }
+      }
+    }
+    &__label {
+      &--neteller {
+        padding-left: 20px;
+        padding-top: 15px;
+      }
+    }
+    &__logo {
+      margin: 0 auto;
+    }
+  }
+}
+
+@include mq('tablet') {
+  .vip-payments-advantages {
+    grid-template-columns: 1fr;
+    align-items: center;
+    grid-template-areas:
+      'logo'
+      'title'
+      'list';
+    row-gap: 24px;
+    &__title {
+      font-size: 24px;
+      text-align: center;
+    }
+    &__list {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
+}
