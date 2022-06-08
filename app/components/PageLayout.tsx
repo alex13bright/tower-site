@@ -1,4 +1,5 @@
 import { ReactNode, ReactElement } from 'react'
+
 import styled from 'styled-components'
 import { PageHeader } from '~/components/PageHeader'
 import { PageFooter } from '~/components/PageFooter'
@@ -11,7 +12,6 @@ export const Page = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 `
-
 type Props = { children: ReactNode }
 export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) => {
   return (
