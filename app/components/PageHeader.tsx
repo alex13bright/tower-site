@@ -2,13 +2,10 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { FakeContent } from './styled/FakeContent'
 import { PageWrapper } from './PageWrapper'
+import { pageMainBlock } from '~/styles/commonStyles'
 
 const HeaderPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'header' })`
-  color: ${(p) => p.theme.text.colors.main};
-  background-image: linear-gradient(
-    ${(p) => p.theme.background.colors.main.start} 47.41%,
-    ${(p) => p.theme.background.colors.main.end}
-  );
+  ${pageMainBlock}
 `
 const Box = styled.div`
   border: 3px yellow solid;
