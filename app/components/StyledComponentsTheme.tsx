@@ -21,7 +21,7 @@ type Props = {
 }
 export const StyledComponentsTheme = ({ children }: Props): ReactElement => {
   const [theme, setTheme] = useState<DefaultTheme>(defaultTheme)
-  const memoizedTheme = useMemo(() => theme, [theme])
+  const memoizedTheme = useMemo(() => theme, [theme.id])
   return (
     <SetThemeContext.Provider value={{ setTheme }}>
       <ThemeProvider theme={memoizedTheme}>{children}</ThemeProvider>

@@ -17,7 +17,7 @@ import { permanentRedirect } from '~/core/permanentReidrect'
 import resetStyleUrl from '~/styles/preflight.css'
 import styleUrl from '~/styles/main.css'
 import { PageLayout } from '~/components/PageLayout'
-import { StyledComponentsTheme } from '~/components/StyledTheme'
+import { StyledComponentsTheme } from '~/components/StyledComponentsTheme'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetStyleUrl },
