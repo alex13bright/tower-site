@@ -13,7 +13,7 @@ const HeaderPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'header' })`
 const Box = styled.div`
   border: 3px yellow solid;
 `
-export const PageHeader: () => ReactElement = () => (
+export const PageHeader = (): ReactElement => (
   <HeaderPageWrapper>
     <Box>
       <FakeContent height={100}>Header</FakeContent>

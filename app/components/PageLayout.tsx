@@ -13,7 +13,7 @@ export const Page = styled.div`
   grid-template-rows: auto 1fr auto;
 `
 type Props = { children: ReactNode }
-export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) => {
+export const PageLayout = ({ children }: Props): ReactElement => {
   return (
     <Page>
       <PageHeader />

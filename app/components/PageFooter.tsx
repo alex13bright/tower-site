@@ -13,7 +13,7 @@ const FooterPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'footer' })`
 const Box = styled.div`
   border: 3px yellow solid;
 `
-export const PageFooter: () => ReactElement = () => (
+export const PageFooter = (): ReactElement => (
   <FooterPageWrapper>
     <Box>
       <FakeContent height={100}>Footer</FakeContent>

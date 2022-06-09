@@ -11,6 +11,6 @@ type Props = {
   height?: number
   children?: ReactNode
 }
-export const FakeContent: (props: Props) => ReactElement = ({ width, height, children }) => (
+export const FakeContent = ({ width, height, children }: Props): ReactElement => (
   <Box style={{ width, height }}>{children}</Box>
 )

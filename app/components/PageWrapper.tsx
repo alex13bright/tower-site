@@ -18,7 +18,7 @@ type Props = {
   className?: string
   children?: ReactNode
 }
-export const PageWrapper: (props: Props) => ReactElement = ({ className, as, children }) => {
+export const PageWrapper = ({ className, as, children }: Props): ReactElement => {
   return (
     <OuterBox className={className} as={as}>
       <InnerBox>{children}</InnerBox>

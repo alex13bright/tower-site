@@ -22,7 +22,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `
 
-export const PageTopButton: () => ReactElement = () => {
+export const PageTopButton = (): ReactElement => {
   const [isActive, setActive] = useState<boolean>(false)
   const handleClick = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useScroll(() => (window.scrollY > 500 ? setActive(true) : setActive(false)))
