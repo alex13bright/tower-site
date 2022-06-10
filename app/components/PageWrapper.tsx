@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
-import { breakpoints } from '~/styles/styleConfig.ts'
+import { breakpoints } from '~/styles/styles'
 
 type KnownTags = keyof JSX.IntrinsicElements
-type OuterBoxProps = { as?: KnownTags }
-const OuterBox = styled.div.attrs<OuterBoxProps>(({ as }) => ({ as }))<OuterBoxProps>`
+const OuterBox = styled.div<{ as?: KnownTags }>`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -18,7 +18,7 @@ export const PageLayout = ({ children }: Props): ReactElement => {
     <Page>
       <PageHeader />
       <PageWrapper as="main">
-        <FakeContent height={1500}>{children}</FakeContent>
+        <FakeContent height={2000}>{children}</FakeContent>
       </PageWrapper>
       <PageFooter />
       <PageTopButton />

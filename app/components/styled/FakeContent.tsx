@@ -4,7 +4,7 @@ import { ReactElement, ReactNode } from 'react'
 const Box = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  //align-items: center;
 `
 type Props = {
   width?: number

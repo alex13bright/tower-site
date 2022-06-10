@@ -1,10 +1,12 @@
 import { ReactElement, useState } from 'react'
 import styled from 'styled-components'
 import { useScroll } from '~/custom-hooks/useScroll'
-import { breakpoints } from '~/styles/styleConfig.ts'
+import { widthAtLeast } from '~/styles/styles'
 
-type StyledButtonProps = { isActive: boolean }
-const StyledButton = styled.button<StyledButtonProps>`
+const DISPLAY_DELAY_OFFSET = 500
+
+console.log(`${widthAtLeast.tablet}`)
+const StyledButton = styled.button<{ isActive: boolean }>`
   position: fixed;
   bottom: 105px;
   right: 20px;
@@ -18,7 +20,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:hover {
     outline: 0;
   }
-  @media (min-width: ${breakpoints.tablet}) {
+  @media ${widthAtLeast.tablet} {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   }
 `
@@ -26,6 +28,6 @@ const StyledButton = styled.button<StyledButtonProps>`
 export const PageTopButton = (): ReactElement => {
   const [isActive, setActive] = useState<boolean>(false)
   const handleClick = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-  useScroll(() => (window.scrollY > 500 ? setActive(true) : setActive(false)))
+  useScroll(() => setActive(window.scrollY > DISPLAY_DELAY_OFFSET))
   return <StyledButton isActive={isActive} onClick={handleClick} />
 }

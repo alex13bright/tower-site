@@ -1,14 +1,12 @@
-import { Link } from '@remix-run/react'
 import styled from 'styled-components'
+import { StickyComponent } from '~/components/StickyComponent'
 
-const Box = styled.div`
-  border: 1px solid red;
-`
+const Box = styled.div``
 
 export default function Index() {
   return (
     <Box>
-      <Link to={'/rooms'}>Rooms</Link>
+      <StickyComponent />
     </Box>
   )
 }
