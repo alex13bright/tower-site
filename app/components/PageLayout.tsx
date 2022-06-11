@@ -37,7 +37,9 @@ export const PageLayout = ({ children }: Props): ReactElement => {
             </StickyMarker>
           </FakeContent>
           <FakeContent height="2000px">{children}</FakeContent>
-          <Sticky>STICKY ACTION PANEL</Sticky>
+          <Sticky>
+            <MainActionPanel>STICKY ACTION PANEL</MainActionPanel>
+          </Sticky>
         </PageWrapper>
         <StickyMarker isVisibleKey="isFooterVisible">
           <PageFooter />
