@@ -42,7 +42,7 @@ export const StickyMarkerWrapper = ({ children }: { children: ReactNode }) => {
   const [_, setState] = useStickContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
-    setState((state) => ({ ...state, isMarkerVisible: isVisible.partially }))
+    setState((state) => ({ ...state, isMarkerVisible: isVisible }))
   }, [setState, isVisible])
   return <div ref={ref}>{children}</div>
 }
@@ -52,7 +52,7 @@ export const StickyFooterWrapper = ({ children }: { children: ReactNode }) => {
   const [_, setState] = useStickContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
-    setState((state) => ({ ...state, isFooterVisible: isVisible.partially }))
+    setState((state) => ({ ...state, isFooterVisible: isVisible }))
   }, [setState, isVisible])
   return <div ref={ref}>{children}</div>
 }
@@ -62,7 +62,6 @@ const StickyBox = styled.div<{ isVisible: boolean }>`
   position: fixed;
   bottom: 0;
   height: 50px;
-  width: 100%;
   place-items: center;
   color: yellowgreen;
   background-color: black;
