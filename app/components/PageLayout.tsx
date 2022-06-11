@@ -15,11 +15,12 @@ export const Page = styled.div`
 `
 type Props = { children: ReactNode }
 
-const Box = styled.div`
+const MainActionPanel = styled.div`
   place-items: center;
   color: yellowgreen;
   background-color: black;
   border: 3px solid yellowgreen;
+  height: 100px;
 `
 
 export const PageLayout = ({ children }: Props): ReactElement => {
@@ -31,7 +32,7 @@ export const PageLayout = ({ children }: Props): ReactElement => {
           <FakeContent>
             <StickyMarker isVisibleKey="isMarkerVisible">
               <FakeContent height="100px">
-                <Box>MAIN ACTION PANEL</Box>
+                <MainActionPanel>MAIN ACTION PANEL</MainActionPanel>
               </FakeContent>
             </StickyMarker>
           </FakeContent>

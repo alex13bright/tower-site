@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
 
 const Box = styled.div`
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
   //align-items: center;
   border: 1px solid #00aff0;
   margin: 5px;

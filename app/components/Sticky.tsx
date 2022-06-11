@@ -53,10 +53,7 @@ const StickyBox = styled.div<{ isVisible: boolean }>`
   bottom: 0;
   height: 100px;
   width: 100%;
-  place-items: center;
-  color: yellowgreen;
-  background-color: black;
-  border: 3px solid yellowgreen;
+  max-width: inherit;
 `
 
 export const Sticky = ({ children }: { children: ReactNode }) => {
