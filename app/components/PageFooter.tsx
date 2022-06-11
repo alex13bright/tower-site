@@ -7,13 +7,11 @@ import { pageMainBlock } from '~/styles/styles'
 const FooterPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'footer' })`
   ${pageMainBlock};
 `
-const Box = styled.div`
-  border: 3px yellow solid;
-`
-export const PageFooter = (): ReactElement => (
-  <FooterPageWrapper>
-    <Box>
-      <FakeContent height={100}>Footer</FakeContent>
-    </Box>
-  </FooterPageWrapper>
-)
+
+export const PageFooter = (): ReactElement => {
+  return (
+    <FooterPageWrapper>
+      <FakeContent height="100px">Footer</FakeContent>
+    </FooterPageWrapper>
+  )
+}

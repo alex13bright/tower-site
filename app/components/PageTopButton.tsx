@@ -5,7 +5,6 @@ import { widthAtLeast } from '~/styles/styles'
 
 const DISPLAY_DELAY_OFFSET = 500
 
-console.log(`${widthAtLeast.tablet}`)
 const StyledButton = styled.button<{ isActive: boolean }>`
   position: fixed;
   bottom: 105px;

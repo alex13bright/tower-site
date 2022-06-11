@@ -1,6 +1,6 @@
 import { Locale } from '~/core/types'
 
-const fakeUse = (...rest: any[]) => {
+export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)
 }
 

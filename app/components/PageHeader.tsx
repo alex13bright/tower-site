@@ -7,13 +7,8 @@ import { pageMainBlock } from '~/styles/styles'
 const HeaderPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'header' })`
   ${pageMainBlock};
 `
-const Box = styled.div`
-  border: 3px yellow solid;
-`
 export const PageHeader = (): ReactElement => (
   <HeaderPageWrapper>
-    <Box>
-      <FakeContent height={100}>Header</FakeContent>
-    </Box>
+    <FakeContent height="100px">Header</FakeContent>
   </HeaderPageWrapper>
 )

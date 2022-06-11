@@ -1,12 +1,8 @@
 import styled from 'styled-components'
-import { StickyComponent } from '~/components/StickyComponent'
+import { ReactElement } from 'react'
 
 const Box = styled.div``
 
-export default function Index() {
-  return (
-    <Box>
-      <StickyComponent />
-    </Box>
-  )
+export default function Index(): ReactElement | null {
+  return <Box>INDEX</Box>
 }

@@ -5,10 +5,12 @@ const Box = styled.div`
   display: flex;
   justify-content: center;
   //align-items: center;
+  border: 1px solid #00aff0;
+  margin: 5px;
 `
 type Props = {
-  width?: number
-  height?: number
+  width?: string
+  height?: string
   children?: ReactNode
 }
 export const FakeContent = ({ width, height, children }: Props): ReactElement => (

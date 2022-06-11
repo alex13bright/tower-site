@@ -3,8 +3,9 @@ import { debounce } from 'lodash'
 
 const DELAY = 50
 
-type UseScroll = (memoizedHandler: (event: WindowEventMap['scroll']) => void) => void
-export const useScroll: UseScroll = (handler) => {
+type Handler = (event: WindowEventMap['scroll']) => void
+
+export const useScroll = (handler: Handler): void => {
   useEffect(() => {
     const debouncedHandler = debounce(handler, DELAY)
     window.addEventListener('scroll', debouncedHandler)
