@@ -5,12 +5,7 @@ import { PageHeader } from '~/components/PageHeader'
 import { PageFooter } from '~/components/PageFooter'
 import { PageTopButton } from '~/components/PageTopButton'
 import { PageWrapper } from '~/components/PageWrapper'
-import {
-  StickyContext,
-  StickyWrapper,
-  StickyMarkerWrapper,
-  StickyFooterWrapper,
-} from '~/components/Sticky'
+import { StickyContext, Sticky, StickyMarker } from '~/components/Sticky'
 import { FakeContent } from '~/components/styled/FakeContent'
 
 export const Page = styled.div`
@@ -19,6 +14,14 @@ export const Page = styled.div`
   grid-template-rows: auto 1fr auto;
 `
 type Props = { children: ReactNode }
+
+const Box = styled.div`
+  place-items: center;
+  color: yellowgreen;
+  background-color: black;
+  border: 3px solid yellowgreen;
+`
+
 export const PageLayout = ({ children }: Props): ReactElement => {
   return (
     <StickyContext>
@@ -26,16 +29,18 @@ export const PageLayout = ({ children }: Props): ReactElement => {
         <PageHeader />
         <PageWrapper as="main">
           <FakeContent>
-            <StickyMarkerWrapper>
-              <FakeContent height="100px">MAIN ACTION PANEL</FakeContent>
-            </StickyMarkerWrapper>
+            <StickyMarker isVisibleKey="isMarkerVisible">
+              <FakeContent height="100px">
+                <Box>MAIN ACTION PANEL</Box>
+              </FakeContent>
+            </StickyMarker>
           </FakeContent>
           <FakeContent height="2000px">{children}</FakeContent>
-          <StickyWrapper>STICKY ACTION PANEL</StickyWrapper>
+          <Sticky>STICKY ACTION PANEL</Sticky>
         </PageWrapper>
-        <StickyFooterWrapper>
+        <StickyMarker isVisibleKey="isFooterVisible">
           <PageFooter />
-        </StickyFooterWrapper>
+        </StickyMarker>
         <PageTopButton />
       </Page>
     </StickyContext>

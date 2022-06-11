@@ -21,39 +21,29 @@ type ContextType = [State, Dispatch<SetStateAction<State>>]
 
 const Context = createContext<ContextType | null>(null)
 
-type Props = {
-  children?: ReactNode
-}
-
-export const StickyContext = ({ children }: Props): ReactElement => {
+export const StickyContext = ({ children }: { children?: ReactNode }): ReactElement => {
   const stateWithSetter = useState<State>({ isMarkerVisible: false, isFooterVisible: false })
   return <Context.Provider value={stateWithSetter}>{children}</Context.Provider>
 }
 
-export const useStickContext = () => {
+export const useStickyContext = () => {
   const context = useContext(Context)
   if (context === null) throw new Error(`StickyContext is not found`)
   return context
 }
 
-// wrappers or using custom hooks inside of components?
-export const StickyMarkerWrapper = ({ children }: { children: ReactNode }) => {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [_, setState] = useStickContext()
-  const isVisible = useIsVisible(ref)
-  useEffect(() => {
-    setState((state) => ({ ...state, isMarkerVisible: isVisible }))
-  }, [setState, isVisible])
-  return <div ref={ref}>{children}</div>
+type StickyMarkerProps = {
+  isVisibleKey: 'isMarkerVisible' | 'isFooterVisible'
+  children: ReactNode
 }
 
-export const StickyFooterWrapper = ({ children }: { children: ReactNode }) => {
+export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [_, setState] = useStickContext()
+  const [_, setState] = useStickyContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
-    setState((state) => ({ ...state, isFooterVisible: isVisible }))
-  }, [setState, isVisible])
+    setState((state) => ({ ...state, [isVisibleKey]: isVisible }))
+  }, [isVisibleKey, isVisible, setState])
   return <div ref={ref}>{children}</div>
 }
 
@@ -61,14 +51,16 @@ const StickyBox = styled.div<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? 'grid' : 'none')};
   position: fixed;
   bottom: 0;
-  height: 50px;
+  height: 100px;
+  width: 100%;
   place-items: center;
   color: yellowgreen;
   background-color: black;
   border: 3px solid yellowgreen;
 `
-export const StickyWrapper = ({ children }: { children: ReactNode }) => {
-  const [state] = useStickContext()
+
+export const Sticky = ({ children }: { children: ReactNode }) => {
+  const [state] = useStickyContext()
   const isVisible = !state.isFooterVisible && !state.isMarkerVisible
   return <StickyBox isVisible={isVisible}>{children}</StickyBox>
 }
