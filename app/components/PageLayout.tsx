@@ -19,23 +19,25 @@ export const Page = styled.div`
   grid-template-rows: auto 1fr auto;
 `
 type Props = { children: ReactNode }
-export const PageLayout = ({ children }: Props): ReactElement => (
-  <StickyContext>
-    <Page>
-      <PageHeader />
-      <PageWrapper as="main">
-        <FakeContent>
-          <StickyMarkerWrapper>
-            <FakeContent height="100px">MAIN ACTION PANEL</FakeContent>
-          </StickyMarkerWrapper>
-        </FakeContent>
-        <FakeContent height="2000px">{children}</FakeContent>
-        <StickyWrapper>STICKY ACTION PANEL</StickyWrapper>
-      </PageWrapper>
-      <StickyFooterWrapper>
-        <PageFooter />
-      </StickyFooterWrapper>
-      <PageTopButton />
-    </Page>
-  </StickyContext>
-)
+export const PageLayout = ({ children }: Props): ReactElement => {
+  return (
+    <StickyContext>
+      <Page>
+        <PageHeader />
+        <PageWrapper as="main">
+          <FakeContent>
+            <StickyMarkerWrapper>
+              <FakeContent height="100px">MAIN ACTION PANEL</FakeContent>
+            </StickyMarkerWrapper>
+          </FakeContent>
+          <FakeContent height="2000px">{children}</FakeContent>
+          <StickyWrapper>STICKY ACTION PANEL</StickyWrapper>
+        </PageWrapper>
+        <StickyFooterWrapper>
+          <PageFooter />
+        </StickyFooterWrapper>
+        <PageTopButton />
+      </Page>
+    </StickyContext>
+  )
+}

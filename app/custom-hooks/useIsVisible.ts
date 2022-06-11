@@ -1,22 +1,19 @@
-import { MutableRefObject, useEffect } from 'react'
+import { MutableRefObject, useEffect, useState } from 'react'
 
 export type IsVisible = {
   fullY: boolean
   partially: boolean
 }
 
-export const useIsVisible = (
-  callback: (isVisible: IsVisible) => void,
-  ref: MutableRefObject<HTMLDivElement | null>
-): void => {
-  // const [isVisible, setIsVisible] = useState<IsVisible>({ fullY: false, partially: false })
+export const useIsVisible = (ref: MutableRefObject<HTMLDivElement | null>): IsVisible => {
+  const [isVisible, setIsVisible] = useState<IsVisible>({ fullY: false, partially: false })
   useEffect(() => {
     if (ref.current === null) throw new Error(`ref can't be null`)
     const _refCurrent = ref.current
     const Observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
-        callback({
+        setIsVisible({
           fullY: entry.intersectionRatio === 1,
           partially: entry.isIntersecting,
         })
@@ -27,6 +24,6 @@ export const useIsVisible = (
     return () => {
       Observer.unobserve(_refCurrent)
     }
-  }, [callback, ref])
-  // return visibility
+  }, [ref])
+  return isVisible
 }

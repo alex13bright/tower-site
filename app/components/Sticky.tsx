@@ -7,6 +7,7 @@ import React, {
   ReactNode,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
 import styled from 'styled-components'
 import { useIsVisible } from '~/custom-hooks/useIsVisible'
@@ -38,27 +39,37 @@ export const useStickContext = () => {
 // wrappers or using custom hooks inside of components?
 export const StickyMarkerWrapper = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [state, setState] = useStickContext()
-  useIsVisible((isVisible) => setState({ ...state, isMarkerVisible: isVisible.fullY }), ref)
+  const [_, setState] = useStickContext()
+  const isVisible = useIsVisible(ref)
+  useEffect(() => {
+    setState((state) => ({ ...state, isMarkerVisible: isVisible.partially }))
+  }, [setState, isVisible])
   return <div ref={ref}>{children}</div>
 }
 
 export const StickyFooterWrapper = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [state, setState] = useStickContext()
-  useIsVisible((isVisible) => setState({ ...state, isFooterVisible: isVisible.partially }), ref)
+  const [_, setState] = useStickContext()
+  const isVisible = useIsVisible(ref)
+  useEffect(() => {
+    setState((state) => ({ ...state, isFooterVisible: isVisible.partially }))
+  }, [setState, isVisible])
   return <div ref={ref}>{children}</div>
 }
 
-const StickyBox = styled.div<{ display: string }>`
-  display: ${({ display }) => display};
+const StickyBox = styled.div<{ isVisible: boolean }>`
+  display: ${({ isVisible }) => (isVisible ? 'grid' : 'none')};
   position: fixed;
+  bottom: 0;
   height: 50px;
+  width: 100%;
+  place-items: center;
+  color: yellowgreen;
+  background-color: black;
   border: 3px solid yellowgreen;
 `
 export const StickyWrapper = ({ children }: { children: ReactNode }) => {
   const [state] = useStickContext()
-  console.log(state)
-  const display = !state.isFooterVisible && !state.isMarkerVisible ? 'block' : 'none'
-  return <StickyBox display={display}>{children}</StickyBox>
+  const isVisible = !state.isFooterVisible && !state.isMarkerVisible
+  return <StickyBox isVisible={isVisible}>{children}</StickyBox>
 }
