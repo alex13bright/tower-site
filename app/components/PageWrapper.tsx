@@ -6,7 +6,6 @@ type KnownTags = keyof JSX.IntrinsicElements
 const OuterBox = styled.div<{ as?: KnownTags }>`
   display: flex;
   justify-content: center;
-  align-items: center;
 `
 const InnerBox = styled.div`
   width: 100%;

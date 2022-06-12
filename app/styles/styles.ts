@@ -15,8 +15,10 @@ export const widthAtLeast = {
 }
 
 export const primary = '#ccc'
+export const backgroundFirst = '#20222c'
+export const backgroundSecond = '#2b2e3b'
 
 export const pageMainBlock = css`
   color: ${primary};
-  background-image: linear-gradient(#2b2e3b 47.41%, #20222c);
+  background-image: linear-gradient(${backgroundSecond} 47.41%, ${backgroundFirst});
 `

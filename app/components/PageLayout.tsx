@@ -15,30 +15,15 @@ export const Page = styled.div`
 `
 type Props = { children: ReactNode }
 
-const MainActionPanel = styled.div`
-  place-items: center;
-  color: yellowgreen;
-  background-color: black;
-  border: 3px solid yellowgreen;
-  height: 100px;
-`
-
 export const PageLayout = ({ children }: Props): ReactElement => {
   return (
     <StickyContext>
       <Page>
         <PageHeader />
         <PageWrapper as="main">
-          <FakeContent>
-            <StickyMarker isVisibleKey="isMarkerVisible">
-              <FakeContent height="100px">
-                <MainActionPanel>MAIN ACTION PANEL</MainActionPanel>
-              </FakeContent>
-            </StickyMarker>
-          </FakeContent>
-          <FakeContent height="2000px">{children}</FakeContent>
+          {children}
           <Sticky>
-            <MainActionPanel>STICKY ACTION PANEL</MainActionPanel>
+            <FakeContent>STICKY ACTION PANEL</FakeContent>
           </Sticky>
         </PageWrapper>
         <StickyMarker isVisibleKey="isFooterVisible">
