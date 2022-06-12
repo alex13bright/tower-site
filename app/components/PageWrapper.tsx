@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { breakpoints } from '~/styles/main'
 import { ReactElement, ReactNode } from 'react'
+import { breakpoints } from '~/styles/styles'
 
 type KnownTags = keyof JSX.IntrinsicElements
-type OuterBoxProps = { as?: KnownTags }
-const OuterBox = styled.div.attrs<OuterBoxProps>(({ as }) => ({ as }))<OuterBoxProps>`
+const OuterBox = styled.div<{ as?: KnownTags }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +18,7 @@ type Props = {
   className?: string
   children?: ReactNode
 }
-export const PageWrapper: (props: Props) => ReactElement = ({ className, as, children }) => {
+export const PageWrapper = ({ className, as, children }: Props): ReactElement => {
   return (
     <OuterBox className={className} as={as}>
       <InnerBox>{children}</InnerBox>

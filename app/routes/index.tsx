@@ -1,14 +1,8 @@
-import { Link } from '@remix-run/react'
 import styled from 'styled-components'
+import { ReactElement } from 'react'
 
-const Box = styled.div`
-  border: 1px solid red;
-`
+const Box = styled.div``
 
-export default function Index() {
-  return (
-    <Box>
-      <Link to={'/rooms'}>Rooms</Link>
-    </Box>
-  )
+export default function Index(): ReactElement | null {
+  return <Box>INDEX</Box>
 }

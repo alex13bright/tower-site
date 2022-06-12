@@ -1,24 +1,24 @@
 import { Locale } from '~/core/types'
 
-const fakeUse = (...rest: any[]) => {
+export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)
 }
 
-// const getIpFromHeaders = (headers: Headers) => {
-//   return headers.get('x-forwarded-for');
-// };
-//
-// const getLocaleFromHeaders = (headers: Headers) => {
-//   const acceptLanguages = headers.get('Accept-Language');
-//   if (acceptLanguages) {
-//     const [locale] = acceptLanguages.split(',');
-//     if (locale === 'en' || locale === 'ru') {
-//       return locale;
-//     }
-//   }
-//   return 'en';
-//   // throw new Error(`can't get locale out of 'Accept-Language' request header`);
-// };
+const getIpFromHeaders = (headers: Headers) => {
+  return headers.get('x-forwarded-for')
+}
+
+const getLocaleFromHeaders = (headers: Headers) => {
+  const acceptLanguages = headers.get('Accept-Language')
+  if (acceptLanguages) {
+    const [locale] = acceptLanguages.split(',')
+    if (locale === 'en' || locale === 'ru') {
+      return locale
+    }
+  }
+  return 'en'
+  // throw new Error(`can't get locale out of 'Accept-Language' request header`);
+}
 
 export const getLocaleFromRequest = (request: Request): Locale => {
   const hostname = new URL(request.url).hostname
@@ -37,4 +37,4 @@ export const getCountryFromRequest = async (request: Request) => {
   return 'russia'
 }
 
-// export const getRequestGeo = () => {};
+export const getRequestGeo = () => {}

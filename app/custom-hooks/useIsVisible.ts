@@ -1,0 +1,18 @@
+import { MutableRefObject, useEffect, useState } from 'react'
+
+export const useIsVisible = (ref: MutableRefObject<HTMLDivElement | null>): boolean => {
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+  useEffect(() => {
+    if (ref.current === null) throw new Error(`ref can't be null`)
+    const _refCurrent = ref.current
+    const Observer = new IntersectionObserver((entries) => {
+      const [entry] = entries
+      setIsVisible(entry.isIntersecting)
+    })
+    Observer.observe(ref.current)
+    return () => {
+      Observer.unobserve(_refCurrent)
+    }
+  }, [ref])
+  return isVisible
+}

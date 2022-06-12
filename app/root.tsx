@@ -14,13 +14,13 @@ import { DynamicLinks } from 'remix-utils'
 import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
 import { permanentRedirect } from '~/core/permanentReidrect'
-import resetStyleUrl from '~/styles/preflight.css'
-import styleUrl from '~/styles/main.css'
+import normalizeStylesUrl from '~/styles/normalizeStyles.css'
+import globalStylesUrl from '~/styles/globalStyles.css'
 import { PageLayout } from '~/components/PageLayout'
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: resetStyleUrl },
-  { rel: 'stylesheet', href: styleUrl },
+  { rel: 'stylesheet', href: normalizeStylesUrl },
+  { rel: 'stylesheet', href: globalStylesUrl },
 ]
 
 export const meta: MetaFunction = () => ({

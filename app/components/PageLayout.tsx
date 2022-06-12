@@ -3,9 +3,10 @@ import { ReactNode, ReactElement } from 'react'
 import styled from 'styled-components'
 import { PageHeader } from '~/components/PageHeader'
 import { PageFooter } from '~/components/PageFooter'
-import { FakeContent } from '~/components/styled/FakeContent'
 import { PageTopButton } from '~/components/PageTopButton'
 import { PageWrapper } from '~/components/PageWrapper'
+import { StickyContext, Sticky, StickyMarker } from '~/components/Sticky'
+import { FakeContent } from '~/components/styled/FakeContent'
 
 export const Page = styled.div`
   min-height: 100vh;
@@ -13,15 +14,38 @@ export const Page = styled.div`
   grid-template-rows: auto 1fr auto;
 `
 type Props = { children: ReactNode }
-export const PageLayout: (props: Props) => ReactElement = ({ children }: Props) => {
+
+const MainActionPanel = styled.div`
+  place-items: center;
+  color: yellowgreen;
+  background-color: black;
+  border: 3px solid yellowgreen;
+  height: 100px;
+`
+
+export const PageLayout = ({ children }: Props): ReactElement => {
   return (
-    <Page>
-      <PageHeader />
-      <PageWrapper as="main">
-        <FakeContent height={1500}>{children}</FakeContent>
-      </PageWrapper>
-      <PageFooter />
-      <PageTopButton />
-    </Page>
+    <StickyContext>
+      <Page>
+        <PageHeader />
+        <PageWrapper as="main">
+          <FakeContent>
+            <StickyMarker isVisibleKey="isMarkerVisible">
+              <FakeContent height="100px">
+                <MainActionPanel>MAIN ACTION PANEL</MainActionPanel>
+              </FakeContent>
+            </StickyMarker>
+          </FakeContent>
+          <FakeContent height="2000px">{children}</FakeContent>
+          <Sticky>
+            <MainActionPanel>STICKY ACTION PANEL</MainActionPanel>
+          </Sticky>
+        </PageWrapper>
+        <StickyMarker isVisibleKey="isFooterVisible">
+          <PageFooter />
+        </StickyMarker>
+        <PageTopButton />
+      </Page>
+    </StickyContext>
   )
 }

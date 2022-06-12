@@ -1,10 +1,16 @@
 import { useEffect } from 'react'
+import { debounce } from 'lodash'
 
-export const useScroll = (handler: any) => {
+const DELAY = 50
+
+type Handler = (event: WindowEventMap['scroll']) => void
+
+export const useScroll = (handler: Handler): void => {
   useEffect(() => {
-    window.addEventListener('scroll', handler)
+    const debouncedHandler = debounce(handler, DELAY)
+    window.addEventListener('scroll', debouncedHandler)
     return () => {
-      window.removeEventListener('scroll', handler)
+      window.removeEventListener('scroll', debouncedHandler)
     }
   }, [handler])
 }
