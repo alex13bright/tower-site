@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 const Main = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 4px;
 `
 const HighlightOut = styled.div<{ color: string }>`
@@ -15,6 +15,7 @@ const HighlightIn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  height: 100%;
 `
 const Name = styled.span`
   display: block;
@@ -26,6 +27,7 @@ const Value = styled.span`
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
+  height: 100%;
 `
 type Props = {
   bonus: string
@@ -37,7 +39,13 @@ export const Highlights = ({ bonus, rakeback, className }: Props) => (
     <HighlightOut color="#eb5757">
       <HighlightIn>
         <Name>Бонус</Name>
-        <Value color="#eb5757">{bonus}</Value>
+        <Value color="#eb5757">
+          {bonus} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias atque
+          aut harum mollitia numquam, perferendis qui sit. Accusantium, aliquam aliquid blanditiis
+          commodi cum debitis dicta distinctio dolorem ducimus eaque eveniet illo impedit ipsam,
+          iste iure iusto libero molestias, non nostrum pariatur perspiciatis quidem quis ratione
+          repudiandae sunt totam unde.
+        </Value>
       </HighlightIn>
     </HighlightOut>
     <HighlightOut color="#008be2">

@@ -25,8 +25,8 @@ const StyledRatings = styled(Ratings)`
   align-self: center;
 `
 const StyledHighlights = styled(Highlights)`
-  align-self: center;
-  padding: 10px;
+  width: 100%;
+  padding: 20px;
 `
 const Features = styled.div`
   width: 100%;
@@ -64,14 +64,7 @@ export const Header = () => {
         <Network />
         <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
         <StyledRatings ratings={4.8} />
-        <StyledHighlights
-          bonus="100% до $600         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias atque aut harum
-        mollitia numquam, perferendis qui sit. Accusantium, aliquam aliquid blanditiis commodi cum
-        debitis dicta distinctio dolorem ducimus eaque eveniet illo impedit ipsam, iste iure iusto
-        libero molestias, non nostrum pariatur perspiciatis quidem quis ratione repudiandae sunt
-        totam unde."
-          rakeback="60%"
-        />
+        <StyledHighlights bonus="100% до $600 " rakeback="60%" />
         <Actions>Actions</Actions>
         <Features />
         <Advantages />
