@@ -1,4 +1,5 @@
-export type Locale = 'en' | 'ru' | 'es'
+import { Locale } from '~/components/Locale'
+
 export type Geo = {
   locale: Locale
   country: string

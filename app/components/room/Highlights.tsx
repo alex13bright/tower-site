@@ -1,4 +1,19 @@
 import styled from 'styled-components'
+import { useLocale } from '~/components/Locale'
+
+const i18n = {
+  bonus: {
+    en: 'Bonus',
+    ru: 'Бонус',
+    es: 'Bono',
+  },
+  rakeback: {
+    en: 'Rakeback',
+    ru: 'Рейкбек',
+    es: 'Rakeback',
+  },
+}
+
 const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -30,19 +45,22 @@ type Props = {
   rakeback: string
   className?: string
 }
-export const Highlights = ({ bonus, rakeback, className }: Props) => (
-  <Main className={className}>
-    <HighlightOut color="#eb5757">
-      <HighlightIn>
-        <Name>Бонус</Name>
-        <Value color="#eb5757">{bonus}</Value>
-      </HighlightIn>
-    </HighlightOut>
-    <HighlightOut color="#008be2">
-      <HighlightIn>
-        <Name>Рейкбек</Name>
-        <Value color="#008be2">{rakeback}</Value>
-      </HighlightIn>
-    </HighlightOut>
-  </Main>
-)
+export const Highlights = ({ bonus, rakeback, className }: Props) => {
+  const locale = useLocale()
+  return (
+    <Main className={className}>
+      <HighlightOut color="#eb5757">
+        <HighlightIn>
+          <Name>{i18n.bonus[locale]}</Name>
+          <Value color="#eb5757">{bonus}</Value>
+        </HighlightIn>
+      </HighlightOut>
+      <HighlightOut color="#008be2">
+        <HighlightIn>
+          <Name>{i18n.rakeback[locale]}</Name>
+          <Value color="#008be2">{rakeback}</Value>
+        </HighlightIn>
+      </HighlightOut>
+    </Main>
+  )
+}

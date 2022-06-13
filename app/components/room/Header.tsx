@@ -4,6 +4,7 @@ import { backgroundDark, primaryDark } from '~/styles/styles'
 import { Ratings } from '~/components/room/Ratings'
 import { Network } from '~/components/room/Network'
 import { Highlights } from '~/components/room/Highlights'
+import { Actions } from '~/components/room/Actions'
 
 const box = css`
   background-color: #9e76cc;
@@ -23,11 +24,10 @@ const Main = styled.div`
   place-items: start center;
 `
 const StyledRatings = styled(Ratings)`
-  align-self: center;
-  width: 100%;
+  justify-self: normal;
 `
 const StyledHighlights = styled(Highlights)`
-  width: 100%;
+  justify-self: normal;
 `
 const Features = styled.div`
   width: 100%;
@@ -46,11 +46,6 @@ const Advantages = styled.div`
   ${box};
   border-top: 1px solid #343848;
 `
-const Actions = styled.div`
-  width: 100%;
-  height: 181px;
-  ${box};
-`
 const NavTabs = styled.div`
   width: 183px;
   height: 52px;
@@ -66,7 +61,7 @@ export const Header = () => {
         <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
         <StyledRatings ratings={2.3} />
         <StyledHighlights bonus="100% до $600" rakeback="60%" />
-        <Actions>Actions</Actions>
+        <Actions />
         <Features />
         <Advantages />
         <DetailedRatings />
