@@ -2,8 +2,7 @@ import styled from 'styled-components'
 const Main = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
-  gap: 10px;
+  row-gap: 4px;
 `
 const HighlightOut = styled.div<{ color: string }>`
   min-height: 60px;
@@ -15,21 +14,36 @@ const HighlightIn = styled.div`
   padding: 9px 28px 9px 40px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
 `
-const Name = styled.span``
-const Value = styled.span``
-export const Highlights = ({ bonus, rakeback }: { bonus: string; rakeback: string }) => (
-  <Main>
+const Name = styled.span`
+  display: block;
+  font-size: 14px;
+  line-height: 14px;
+`
+const Value = styled.span`
+  color: ${({ color }) => color};
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+`
+type Props = {
+  bonus: string
+  rakeback: string
+  className?: string
+}
+export const Highlights = ({ bonus, rakeback, className }: Props) => (
+  <Main className={className}>
     <HighlightOut color="#eb5757">
       <HighlightIn>
         <Name>Бонус</Name>
-        <Value>{bonus}</Value>
+        <Value color="#eb5757">{bonus}</Value>
       </HighlightIn>
     </HighlightOut>
     <HighlightOut color="#008be2">
       <HighlightIn>
         <Name>Рейкбек</Name>
-        <Value>{rakeback}</Value>
+        <Value color="#008be2">{rakeback}</Value>
       </HighlightIn>
     </HighlightOut>
   </Main>
