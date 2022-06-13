@@ -16,21 +16,7 @@ const i18n = {
   },
 }
 
-const Main = styled.div`
-  grid-area: ratings;
-  gap: 26px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media ${widthAtLeast.sm} {
-    justify-content: space-between;
-  }
-`
-const Mixer = styled.div`
-  display: grid;
-  grid-template-areas: 'content';
-`
-const Stars = styled.div<{ number: number; highlighted: boolean }>`
+const StarsBar = styled.div<{ number: number; highlighted: boolean }>`
   grid-area: content;
   background-image: url(/images/ratings-star.svg);
   background-repeat: repeat-x;
@@ -38,24 +24,31 @@ const Stars = styled.div<{ number: number; highlighted: boolean }>`
   background-position: 0 ${({ highlighted }) => (highlighted ? 0 : '100%')};
   height: 16px;
 `
-const Number = styled.span`
-  font-feature-settings: 'tnum' on, 'lnum' on;
+
+const Stars = styled.div`
+  display: grid;
+  grid-template-areas: 'content';
 `
-const MainText = styled.span<{ highlighted: boolean }>`
+
+const NumberValue = styled.span<{ highlighted: boolean }>`
   color: ${({ highlighted }) => (highlighted ? 'rgb(254, 184, 60)' : secondaryDark)};
   font-size: 24px;
   font-weight: 700;
 `
-const Text = ({ ratings, highlighted }: { ratings: number; highlighted: boolean }) => {
-  return <MainText highlighted={highlighted}>{ratings.toFixed(1)}</MainText>
-}
-const Unit = styled.span<{ highlighted: boolean }>`
+
+const NumberUnit = styled.span<{ highlighted: boolean }>`
   color: ${({ highlighted }) => (highlighted ? 'rgba(254, 184, 60, 0.5)' : secondaryDark)};
 `
+
+const Number = styled.span`
+  font-feature-settings: 'tnum' on, 'lnum' on;
+`
+
 const Title = styled.div`
   display: none;
   @media ${widthAtLeast.sm} {
     display: block;
+    width: min-content;
     color: ${secondaryDark};
     padding-top: 3px;
     font-size: 14px;
@@ -68,7 +61,19 @@ const Values = styled.div`
   align-items: center;
   gap: 10px;
 `
+
+const Main = styled.div`
+  grid-area: ratings;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media ${widthAtLeast.sm} {
+    justify-content: space-between;
+  }
+`
+
 type Props = { ratings: number; className?: string }
+
 export const Ratings = ({ ratings, className }: Props): ReactElement => {
   const locale = useLocale()
   const highlighted = ratings > 2.5
@@ -76,13 +81,13 @@ export const Ratings = ({ ratings, className }: Props): ReactElement => {
     <Main className={className}>
       <Title>{i18n.title[locale]}</Title>
       <Values>
-        <Mixer>
-          <Stars number={5} highlighted={false} />
-          <Stars number={Math.round(ratings)} highlighted={true} />
-        </Mixer>
+        <Stars>
+          <StarsBar number={5} highlighted={false} />
+          <StarsBar number={Math.round(ratings)} highlighted={true} />
+        </Stars>
         <Number>
-          <Text ratings={ratings} highlighted={highlighted} />
-          <Unit highlighted={highlighted}>/5</Unit>
+          <NumberValue highlighted={highlighted}>{ratings.toFixed(1)}</NumberValue>
+          <NumberUnit highlighted={highlighted}>/5</NumberUnit>
         </Number>
       </Values>
     </Main>
