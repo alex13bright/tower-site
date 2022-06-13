@@ -1,5 +1,19 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
+import { useLocale } from '~/components/Locale'
+
+const i18n = {
+  title: {
+    en: `Editor's rating`,
+    ru: 'Наш рейтинг',
+    es: 'Calificación del editor',
+  },
+  rakeback: {
+    en: 'Rakeback',
+    ru: 'Рейкбек',
+    es: 'Rakeback',
+  },
+}
 
 const Main = styled.div`
   display: flex;
@@ -39,9 +53,7 @@ const Title = styled.div`
   display: none;
   @media ${widthAtLeast.sm} {
     display: block;
-    color: #e5e5e5;
-    font-size: 10px;
-    line-height: 12px;
+    color: ${secondaryDark};
     letter-spacing: 1px;
     text-transform: uppercase;
   } ;
@@ -52,10 +64,11 @@ const Values = styled.div`
   gap: 10px;
 `
 export const Ratings = ({ ratings, className }: { ratings: number; className?: string }) => {
+  const locale = useLocale()
   const highlighted = ratings > 2.5
   return (
     <Main className={className}>
-      <Title>Editor's rating</Title>
+      <Title>{i18n.title[locale]}</Title>
       <Values>
         <Mixer>
           <Stars number={5} highlighted={false} />

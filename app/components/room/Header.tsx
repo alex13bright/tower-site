@@ -17,14 +17,14 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 20px;
+  padding: 0 20px;
 
   display: grid;
   grid-template-rows: 55px repeat(2, 60px) auto repeat(4, auto) 60px;
   place-items: start center;
 `
 const StyledRatings = styled(Ratings)`
-  justify-self: normal;
+  place-self: normal normal;
 `
 const StyledHighlights = styled(Highlights)`
   justify-self: normal;
@@ -59,7 +59,7 @@ export const Header = () => {
       <Main>
         <Network />
         <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
-        <StyledRatings ratings={2.3} />
+        <StyledRatings ratings={4.3} />
         <StyledHighlights bonus="100% до $600" rakeback="60%" />
         <Actions />
         <Features />

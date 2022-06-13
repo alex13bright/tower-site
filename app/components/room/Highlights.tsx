@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useLocale } from '~/components/Locale'
+import { secondaryDark } from '~/styles/styles'
 
 const i18n = {
   bonus: {
