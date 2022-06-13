@@ -14,7 +14,7 @@ const Main = styled.div`
 const Image = styled.img``
 const Title = styled.span`
   color: ${secondaryDark};
-  font-size: 10px;
+  font-size: 14px;
 `
 export const Network = () => (
   <Main>

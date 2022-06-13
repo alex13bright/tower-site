@@ -54,6 +54,8 @@ const Title = styled.div`
   @media ${widthAtLeast.sm} {
     display: block;
     color: ${secondaryDark};
+    padding-top: 3px;
+    font-size: 14px;
     letter-spacing: 1px;
     text-transform: uppercase;
   } ;

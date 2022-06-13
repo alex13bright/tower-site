@@ -20,11 +20,11 @@ const Main = styled.div`
   padding: 0 20px;
 
   display: grid;
-  grid-template-rows: 55px repeat(2, 60px) auto repeat(4, auto) 60px;
-  place-items: start center;
+  grid-template-rows: auto 140px 60px auto repeat(4, auto) 60px;
+  place-items: center center;
 `
 const StyledRatings = styled(Ratings)`
-  place-self: normal normal;
+  place-self: normal;
 `
 const StyledHighlights = styled(Highlights)`
   justify-self: normal;

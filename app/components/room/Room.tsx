@@ -9,7 +9,7 @@ export const Room = () => {
     <Layout>
       <BreadCrumbs />
       <Header />
-      <FakeContent height="1000px">Room review</FakeContent>
+      <FakeContent height="1500px">Room review</FakeContent>
     </Layout>
   )
 }
