@@ -2,7 +2,7 @@ import { css } from 'styled-components'
 
 export const breakpoints = {
   xs: '320px',
-  sm: '400px',
+  sm: '420px',
   md: '768px',
   lg: '1280px',
   xl: '1440px',
@@ -13,6 +13,7 @@ export const widthAtLeast = {
   sm: `(min-width: ${breakpoints.sm})`,
   md: `(min-width: ${breakpoints.md})`,
   lg: `(min-width: ${breakpoints.lg})`,
+  xl: `(min-width: ${breakpoints.xl})`,
 }
 
 export const primary = '#222'

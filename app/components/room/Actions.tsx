@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ReactElement } from 'react'
 
 const SVGs = {
   register:
@@ -22,11 +23,16 @@ const IconButton = styled(Button)<{ typeOf: 'register' | 'contact' }>`
     width: 72px;
   }
 `
-const Main = styled.div``
-export const Actions = () => (
-  <Main>
-    <IconButton typeOf="register">Перейти</IconButton>
-    <IconButton typeOf="contact">Чат с менеджером</IconButton>
-    <Button>Привязать счет</Button>
-  </Main>
-)
+const Main = styled.div`
+  grid-area: actions;
+`
+type Props = { className?: string }
+export const Actions = ({ className }: Props): ReactElement => {
+  return (
+    <Main className={className}>
+      <IconButton typeOf="register">Перейти</IconButton>
+      <IconButton typeOf="contact">Чат с менеджером</IconButton>
+      <Button>Привязать счет</Button>
+    </Main>
+  )
+}

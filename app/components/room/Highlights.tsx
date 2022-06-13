@@ -17,7 +17,8 @@ const i18n = {
 const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  row-gap: 4px;
+  row-gap: 8px;
+  grid-area: highlights;
 `
 const HighlightOut = styled.div<{ color: string }>`
   min-height: 60px;

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { useLocale } from '~/components/Locale'
+import { ReactElement } from 'react'
 
 const i18n = {
   title: {
@@ -16,6 +17,8 @@ const i18n = {
 }
 
 const Main = styled.div`
+  grid-area: ratings;
+  gap: 26px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +68,8 @@ const Values = styled.div`
   align-items: center;
   gap: 10px;
 `
-export const Ratings = ({ ratings, className }: { ratings: number; className?: string }) => {
+type Props = { ratings: number; className?: string }
+export const Ratings = ({ ratings, className }: Props): ReactElement => {
   const locale = useLocale()
   const highlighted = ratings > 2.5
   return (

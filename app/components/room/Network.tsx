@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { secondaryDark } from '~/styles/styles'
+import { ReactElement } from 'react'
 
 const Main = styled.div`
   border: 1px solid #343848;
@@ -10,15 +11,19 @@ const Main = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  grid-area: network;
 `
 const Image = styled.img``
 const Title = styled.span`
   color: ${secondaryDark};
   font-size: 14px;
 `
-export const Network = () => (
-  <Main>
-    <Image alt="gg-network" src="/fake/ico-gg-network.svg" width="20px" height="20px" />
-    <Title>GG Network</Title>
-  </Main>
-)
+type Props = { className?: string }
+export const Network = ({ className }: Props): ReactElement => {
+  return (
+    <Main className={className}>
+      <Image alt="gg-network" src="/fake/ico-gg-network.svg" width="20px" height="20px" />
+      <Title>GG Network</Title>
+    </Main>
+  )
+}

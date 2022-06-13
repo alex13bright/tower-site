@@ -1,15 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
 import { backgroundDark, primaryDark } from '~/styles/styles'
 import { Ratings } from '~/components/room/Ratings'
 import { Network } from '~/components/room/Network'
 import { Highlights } from '~/components/room/Highlights'
 import { Actions } from '~/components/room/Actions'
-
-const box = css`
-  background-color: #9e76cc;
-  border: 1px solid #c837ab;
-`
+import { Logo } from '~/components/room/Logo'
+import { ReactElement } from 'react'
 
 const Main = styled.div`
   color: ${primaryDark};
@@ -17,55 +14,39 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 0 20px;
+  padding: 0 26px;
 
   display: grid;
+  grid-template-areas:
+    '. network .'
+    '. logo .'
+    '. ratings .'
+    'highlights highlights highlights'
+    '. actions .';
+  grid-template-columns: 24px 1fr 24px;
   grid-template-rows: auto 140px 60px auto repeat(4, auto) 60px;
-  place-items: center center;
 `
-const StyledRatings = styled(Ratings)`
-  place-self: normal;
+const GridNetwork = styled(Network)`
+  justify-self: center;
 `
-const StyledHighlights = styled(Highlights)`
-  justify-self: normal;
-`
-const Features = styled.div`
-  width: 100%;
-  height: 200px;
-  ${box};
+const GridLogo = styled(Logo)`
+  place-self: center;
 `
 
-const DetailedRatings = styled.div`
-  width: 100%;
-  height: 280px;
-  ${box};
-`
-const Advantages = styled.div`
-  width: 100%;
-  height: 277px;
-  ${box};
-  border-top: 1px solid #343848;
-`
-const NavTabs = styled.div`
-  width: 183px;
-  height: 52px;
-  ${box};
-  place-self: end start;
-`
-
-export const Header = () => {
+type Props = { className?: string }
+export const Header = ({ className }: Props): ReactElement => {
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
-      <Main>
-        <Network />
-        <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
-        <StyledRatings ratings={4.3} />
-        <StyledHighlights bonus="100% до $600" rakeback="60%" />
+      <Main className={className}>
+        <GridNetwork />
+        <GridLogo />
+        <Ratings ratings={4.3} />
+        <Highlights bonus="100% до $600" rakeback="60%" />
         <Actions />
-        <Features />
-        <Advantages />
-        <DetailedRatings />
-        <NavTabs />
+        {/*<Features />*/}
+        {/*<Advantages />*/}
+        {/*<DetailedRatings />*/}
+        {/*<NavTabs />*/}
       </Main>
     </StickyMarker>
   )
