@@ -26,14 +26,17 @@ const Main = styled.div`
   grid-template-columns: 24px 1fr 24px;
   grid-template-rows: auto 140px 60px auto repeat(4, auto) 60px;
 `
+
 const GridNetwork = styled(Network)`
   justify-self: center;
 `
+
 const GridLogo = styled(Logo)`
   place-self: center;
 `
 
 type Props = { className?: string }
+
 export const Header = ({ className }: Props): ReactElement => {
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">

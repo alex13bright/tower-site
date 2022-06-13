@@ -13,12 +13,16 @@ const Main = styled.div`
   align-items: center;
   grid-area: network;
 `
+
 const Image = styled.img``
+
 const Title = styled.span`
   color: ${secondaryDark};
   font-size: 14px;
 `
+
 type Props = { className?: string }
+
 export const Network = ({ className }: Props): ReactElement => {
   return (
     <Main className={className}>

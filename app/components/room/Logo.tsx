@@ -5,6 +5,7 @@ const Image = styled.img`
   grid-area: logo;
 `
 type Props = { className?: string }
+
 export const Logo = ({ className }: Props): ReactElement => {
   return (
     <Image
