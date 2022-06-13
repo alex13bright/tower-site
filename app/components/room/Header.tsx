@@ -54,6 +54,7 @@ const Advantages = styled.div`
   width: 100%;
   height: 277px;
   ${box};
+  border-top: 1px solid #343848;
 `
 const Actions = styled.div`
   width: 100%;
@@ -64,6 +65,7 @@ const NavTabs = styled.div`
   width: 183px;
   height: 52px;
   ${box};
+  place-self: end start;
 `
 
 export const Header = () => {
@@ -74,10 +76,10 @@ export const Header = () => {
         <Logo />
         <Ratings />
         <Highlights />
+        <Actions>Actions</Actions>
         <Features />
         <Advantages />
         <DetailedRatings />
-        <Actions />
         <NavTabs />
       </Layout>
     </StickyMarker>
