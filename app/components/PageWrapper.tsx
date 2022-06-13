@@ -9,8 +9,8 @@ const OuterBox = styled.div<{ as?: KnownTags }>`
 `
 const InnerBox = styled.div`
   width: 100%;
-  min-width: ${breakpoints.mobile};
-  max-width: ${breakpoints.desktop};
+  min-width: ${breakpoints.xs};
+  max-width: ${breakpoints.lg};
 `
 type Props = {
   as?: KnownTags

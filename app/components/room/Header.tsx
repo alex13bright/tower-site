@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
-import { backgroundFirst, backgroundSecond } from '~/styles/styles'
+import { color50, color51, secondaryDark } from '~/styles/styles'
 
 const box = css`
   background-color: #9e76cc;
@@ -9,21 +9,30 @@ const box = css`
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: repeat(4, 60px) repeat(4, auto) 60px;
-  background: linear-gradient(0deg, ${backgroundFirst}, ${backgroundSecond} 67.71%);
+  grid-template-rows: 40px repeat(3, 60px) repeat(4, auto) 60px;
+  background: linear-gradient(0deg, ${color50}, ${color51} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   place-items: start center;
 `
-const Network = styled.div`
-  width: 104px;
-  height: 20px;
-  ${box};
+const NetworkBox = styled.div`
   border: 1px solid #343848;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-top: 0;
+  padding: 8px 10px;
 `
+const NetworkImage = styled.img``
+const NetworkTitle = styled.span`
+  color: ${secondaryDark};
+  font-size: 10px;
+`
+const Network = () => (
+  <NetworkBox>
+    <NetworkImage alt="gg-network" src="/fake/ico-gg-network.svg" width="20px" height="20px" />
+    <NetworkTitle>GG Network</NetworkTitle>
+  </NetworkBox>
+)
 const Logo = styled.div`
   width: 210px;
   height: 60px;

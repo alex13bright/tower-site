@@ -15,12 +15,11 @@ import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
 import { permanentRedirect } from '~/core/permanentReidrect'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
-import globalStylesUrl from '~/styles/globalStyles.css'
 import { PageLayout } from '~/components/PageLayout'
-
+import { GlobalStyles } from '~/styles/GlobalStyles'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
-  { rel: 'stylesheet', href: globalStylesUrl },
+  { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
 ]
 
 export const meta: MetaFunction = () => ({
@@ -65,6 +64,7 @@ const Document = ({ locale, children }: DocumentProps) => (
     </head>
     <body>
       {children}
+      <GlobalStyles />
       <ScrollRestoration />
       <Scripts />
       <LiveReload />

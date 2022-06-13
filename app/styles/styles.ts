@@ -1,24 +1,47 @@
 import { css } from 'styled-components'
 
 export const breakpoints = {
-  mobile: '320px',
-  tablet: '768px',
-  laptop: '1280px',
-  desktop: '1440px',
+  xs: '320px',
+  sm: '768px',
+  md: '1280px',
+  lg: '1440px',
 }
 
 export const widthAtLeast = {
-  mobile: `(min-width: ${breakpoints.mobile})`,
-  tablet: `(min-width: ${breakpoints.tablet})`,
-  laptop: `(min-width: ${breakpoints.laptop})`,
-  desktop: `(min-width: ${breakpoints.desktop})`,
+  xs: `(min-width: ${breakpoints.xs})`,
+  sm: `(min-width: ${breakpoints.sm})`,
+  md: `(min-width: ${breakpoints.md})`,
+  lg: `(min-width: ${breakpoints.lg})`,
 }
 
-export const primary = '#ccc'
-export const backgroundFirst = '#20222c'
-export const backgroundSecond = '#2b2e3b'
+export const primary = '#222'
+export const secondary = '#555'
+export const background = '#fff'
+
+export const primaryDark = '#fff'
+export const secondaryDark = '#999'
+export const backgroundDark = ['#20222c', '#2b2e3b']
+
+export const color1 = '#222'
+export const color2 = '#555'
+export const color3 = '#243238'
+export const color4 = '#fff'
+export const color5 = '#ccc'
+export const color6 = '#999'
+export const color7 = '#e5e5e5'
+export const color10 = '#777'
+export const color11 = '#e9e9e9'
+export const color12 = '#dfdede'
+export const color50 = '#20222c'
+export const color51 = '#2b2e3b'
+export const color100 = '#008be2'
+export const color101 = '#007bff'
+export const color200 = '#eb5757'
+export const color201 = '#ff4151'
+export const color202 = '#ee3c4b'
+export const color300 = '#70ac30'
 
 export const pageMainBlock = css`
-  color: ${primary};
-  background-image: linear-gradient(${backgroundSecond} 47.41%, ${backgroundFirst});
+  color: ${color5};
+  background-image: linear-gradient(${color51} 47.41%, ${color50});
 `
