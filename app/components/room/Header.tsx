@@ -63,8 +63,7 @@ export const Header = () => {
       <Main>
         <Network />
         <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
-        <StyledRatings ratings={5} />
-
+        <StyledRatings ratings={2.3} />
         <StyledHighlights
           bonus="100% до $600 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam doloribus eaque earum, error in molestias? A amet assumenda autem commodi deleniti dolore ea error et eum ex harum id, mollitia numquam obcaecati omnis perferendis quidem tempora voluptas voluptatem, voluptatum? Culpa ex laboriosam molestias nam nulla possimus. Dignissimos, harum, tempora."
           rakeback="60%"
