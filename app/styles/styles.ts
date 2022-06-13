@@ -2,9 +2,10 @@ import { css } from 'styled-components'
 
 export const breakpoints = {
   xs: '320px',
-  sm: '768px',
-  md: '1280px',
-  lg: '1440px',
+  sm: '400px',
+  md: '768px',
+  lg: '1280px',
+  xl: '1440px',
 }
 
 export const widthAtLeast = {

@@ -17,11 +17,7 @@ const HighlightIn = styled.div`
   gap: 4px;
   height: 100%;
 `
-const Name = styled.span`
-  display: block;
-  font-size: 14px;
-  line-height: 14px;
-`
+const Name = styled.span``
 const Value = styled.span`
   color: ${({ color }) => color};
   font-size: 18px;

@@ -1,10 +1,13 @@
 import styled from 'styled-components'
-import { secondaryDark } from '~/styles/styles'
+import { secondaryDark, widthAtLeast } from '~/styles/styles'
 
 const Main = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  @media ${widthAtLeast.sm} {
+    justify-content: space-between;
+  }
 `
 const Mixer = styled.div`
   display: grid;
@@ -32,18 +35,37 @@ const Text = ({ ratings, highlighted }: { ratings: number; highlighted: boolean 
 const Unit = styled.span<{ highlighted: boolean }>`
   color: ${({ highlighted }) => (highlighted ? 'rgba(254, 184, 60, 0.5)' : secondaryDark)};
 `
+const Title = styled.div`
+  display: none;
+  @media ${widthAtLeast.sm} {
+    display: block;
+    color: #e5e5e5;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  } ;
+`
+const Values = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
 export const Ratings = ({ ratings, className }: { ratings: number; className?: string }) => {
   const highlighted = ratings > 2.5
   return (
     <Main className={className}>
-      <Mixer>
-        <Stars number={5} highlighted={false} />
-        <Stars number={Math.round(ratings)} highlighted={true} />
-      </Mixer>
-      <Number>
-        <Text ratings={ratings} highlighted={highlighted} />
-        <Unit highlighted={highlighted}>/5</Unit>
-      </Number>
+      <Title>Editor's rating</Title>
+      <Values>
+        <Mixer>
+          <Stars number={5} highlighted={false} />
+          <Stars number={Math.round(ratings)} highlighted={true} />
+        </Mixer>
+        <Number>
+          <Text ratings={ratings} highlighted={highlighted} />
+          <Unit highlighted={highlighted}>/5</Unit>
+        </Number>
+      </Values>
     </Main>
   )
 }

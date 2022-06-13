@@ -16,6 +16,7 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding: 20px;
 
   display: grid;
   grid-template-rows: 55px repeat(2, 60px) auto repeat(4, auto) 60px;
@@ -23,10 +24,10 @@ const Main = styled.div`
 `
 const StyledRatings = styled(Ratings)`
   align-self: center;
+  width: 100%;
 `
 const StyledHighlights = styled(Highlights)`
   width: 100%;
-  padding: 20px;
 `
 const Features = styled.div`
   width: 100%;
@@ -64,10 +65,7 @@ export const Header = () => {
         <Network />
         <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
         <StyledRatings ratings={2.3} />
-        <StyledHighlights
-          bonus="100% до $600 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam doloribus eaque earum, error in molestias? A amet assumenda autem commodi deleniti dolore ea error et eum ex harum id, mollitia numquam obcaecati omnis perferendis quidem tempora voluptas voluptatem, voluptatum? Culpa ex laboriosam molestias nam nulla possimus. Dignissimos, harum, tempora."
-          rakeback="60%"
-        />
+        <StyledHighlights bonus="100% до $600" rakeback="60%" />
         <Actions>Actions</Actions>
         <Features />
         <Advantages />
