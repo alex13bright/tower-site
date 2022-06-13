@@ -7,7 +7,7 @@ const i18n = {
   title: {
     en: `Editor's rating`,
     ru: 'Наш рейтинг',
-    es: 'Calificación del editor',
+    es: `Calificación del_editor`,
   },
   rakeback: {
     en: 'Rakeback',
@@ -67,7 +67,7 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 50px;
+  column-gap: 58px;
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
   }
