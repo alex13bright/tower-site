@@ -48,7 +48,7 @@ const Title = styled.div`
   display: none;
   @media ${widthAtLeast.sm} {
     display: block;
-    width: min-content;
+    //width: min-content;
     color: ${secondaryDark};
     padding-top: 3px;
     font-size: 14px;
@@ -67,6 +67,7 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 50px;
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
   }
