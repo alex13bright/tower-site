@@ -1,59 +1,35 @@
 import styled, { css } from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
-import { color50, color51, secondaryDark } from '~/styles/styles'
+import { backgroundDark, primaryDark } from '~/styles/styles'
+import { Ratings } from '~/components/room/Ratings'
+import { Network } from '~/components/room/Network'
+import { Highlights } from '~/components/room/Highlights'
 
 const box = css`
   background-color: #9e76cc;
   border: 1px solid #c837ab;
 `
 
-const Layout = styled.div`
-  display: grid;
-  grid-template-rows: 40px repeat(3, 60px) repeat(4, auto) 60px;
-  background: linear-gradient(0deg, ${color50}, ${color51} 67.71%);
+const Main = styled.div`
+  color: ${primaryDark};
+  font-size: 16px;
+  background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+
+  display: grid;
+  grid-template-rows: 55px repeat(2, 60px) auto repeat(4, auto) 60px;
   place-items: start center;
 `
-const NetworkBox = styled.div`
-  border: 1px solid #343848;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-top: 0;
-  padding: 8px 10px;
-`
-const NetworkImage = styled.img``
-const NetworkTitle = styled.span`
-  color: ${secondaryDark};
-  font-size: 10px;
-`
-const Network = () => (
-  <NetworkBox>
-    <NetworkImage alt="gg-network" src="/fake/ico-gg-network.svg" width="20px" height="20px" />
-    <NetworkTitle>GG Network</NetworkTitle>
-  </NetworkBox>
-)
-const Logo = styled.div`
-  width: 210px;
-  height: 60px;
-  ${box};
+const PositionedRatings = styled(Ratings)`
+  align-self: center;
 `
 const Features = styled.div`
   width: 100%;
   height: 200px;
   ${box};
 `
-const Highlights = styled.div`
-  width: 100%;
-  height: 60px;
-  ${box};
-`
-const Ratings = styled.div`
-  width: 191px;
-  height: 26px;
-  ${box};
-  align-self: center;
-`
+
 const DetailedRatings = styled.div`
   width: 100%;
   height: 280px;
@@ -80,17 +56,21 @@ const NavTabs = styled.div`
 export const Header = () => {
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
-      <Layout>
+      <Main>
         <Network />
-        <Logo />
-        <Ratings />
-        <Highlights />
+        <img alt="ggpoker-logo" src="/fake/ggpoker-logo.svg" width="210px" height="60px" />
+        <PositionedRatings ratings={4.8} />
+
+        <Highlights
+          bonus="100% до $600 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias atque aut harum mollitia numquam, perferendis qui sit. Accusantium, aliquam aliquid blanditiis commodi cum debitis dicta distinctio dolorem ducimus eaque eveniet illo impedit ipsam, iste iure iusto libero molestias, non nostrum pariatur perspiciatis quidem quis ratione repudiandae sunt totam unde."
+          rakeback="60%"
+        />
         <Actions>Actions</Actions>
         <Features />
         <Advantages />
         <DetailedRatings />
         <NavTabs />
-      </Layout>
+      </Main>
     </StickyMarker>
   )
 }

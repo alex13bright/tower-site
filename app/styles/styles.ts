@@ -20,7 +20,7 @@ export const background = '#fff'
 
 export const primaryDark = '#fff'
 export const secondaryDark = '#999'
-export const backgroundDark = ['#20222c', '#2b2e3b']
+export const backgroundDark = { start: '#20222c', end: '#2b2e3b' }
 
 export const color1 = '#222'
 export const color2 = '#555'
