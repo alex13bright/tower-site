@@ -39,13 +39,7 @@ export const Highlights = ({ bonus, rakeback, className }: Props) => (
     <HighlightOut color="#eb5757">
       <HighlightIn>
         <Name>Бонус</Name>
-        <Value color="#eb5757">
-          {bonus} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias atque
-          aut harum mollitia numquam, perferendis qui sit. Accusantium, aliquam aliquid blanditiis
-          commodi cum debitis dicta distinctio dolorem ducimus eaque eveniet illo impedit ipsam,
-          iste iure iusto libero molestias, non nostrum pariatur perspiciatis quidem quis ratione
-          repudiandae sunt totam unde.
-        </Value>
+        <Value color="#eb5757">{bonus}</Value>
       </HighlightIn>
     </HighlightOut>
     <HighlightOut color="#008be2">
