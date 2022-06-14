@@ -39,27 +39,18 @@ const button = css`
   text-align: center;
   font-size: 18px;
   line-height: 22px;
+  border-radius: 4px;
 `
 
 const Button = styled.button`
   ${button};
+  background: transparent;
+  border: 2px solid hsla(0, 0%, 89.8%, 0.8);
 `
 
 const IconButton = styled.button<{ kind: 'register' | 'contact' }>`
   ${button};
-  &::after {
-    background-image: url(${({ kind }) => SVGs[kind]});
-    background-position: 100%;
-    background-repeat: no-repeat;
-    content: '';
-    height: 68px;
-    margin-top: -34px;
-    opacity: 0.1;
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    width: 72px;
-  }
+  background-color: ${({ kind }) => (kind === 'register' ? '#ee3c4b' : '#70ac30')};
 `
 
 const ReForm = styled(Form)`

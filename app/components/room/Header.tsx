@@ -22,9 +22,9 @@ const Main = styled.div`
     '. logo .'
     '. ratings .'
     'highlights highlights highlights'
-    '. actions .';
+    'actions actions actions';
   grid-template-columns: 24px 1fr 24px;
-  grid-template-rows: auto 140px 60px auto repeat(4, auto) 60px;
+  grid-template-rows: auto 140px 60px repeat(2, auto);
 `
 
 const GridNetwork = styled(Network)`
@@ -35,6 +35,9 @@ const GridLogo = styled(Logo)`
   place-self: center;
 `
 
+const GridAction = styled(Actions)`
+  margin: 30px 0;
+`
 type Props = { className?: string }
 
 export const Header = ({ className }: Props): ReactElement => {
@@ -45,7 +48,7 @@ export const Header = ({ className }: Props): ReactElement => {
         <GridLogo />
         <Ratings ratings={4.3} />
         <Highlights bonus="100% до $600" rakeback="60%" />
-        <Actions />
+        <GridAction />
         {/*<Features />*/}
         {/*<Advantages />*/}
         {/*<DetailedRatings />*/}
