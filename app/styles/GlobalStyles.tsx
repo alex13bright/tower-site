@@ -15,4 +15,8 @@ export const GlobalStyles = createGlobalStyle`
     color: ${primary};
     font-family: 'Proxima Nova';
   }
+
+  a {
+    text-decoration: none;
+  }
 `

@@ -24,7 +24,8 @@ const Main = styled.div`
     'highlights highlights highlights'
     'actions actions actions';
   grid-template-columns: 24px 1fr 24px;
-  grid-template-rows: auto 140px 60px repeat(2, auto);
+  grid-template-rows: auto 100px auto repeat(2, auto);
+  gap: 20px;
 `
 
 const GridNetwork = styled(Network)`
