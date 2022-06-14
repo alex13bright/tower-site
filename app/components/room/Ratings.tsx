@@ -18,12 +18,15 @@ const i18n: I18n<Trans> = {
   },
 }
 
-const StarsBar = styled.div<{ number: number; highlighted: boolean }>`
+const StarsBar = styled.div.attrs({ ratings: 5, isBright: false })<{
+  ratings: number
+  isBright: boolean
+}>`
   grid-area: content;
   background-image: url(/images/ratings-star.svg);
   background-repeat: repeat-x;
-  width: ${({ number }) => number * 24}px;
-  background-position: 0 ${({ highlighted }) => (highlighted ? 0 : '100%')};
+  width: ${({ ratings }) => Math.round(ratings) * 24}px;
+  background-position: 0 ${({ isBright }) => (isBright ? 0 : '100%')};
   height: 16px;
 `
 
@@ -32,14 +35,14 @@ const Stars = styled.div`
   grid-template-areas: 'content';
 `
 
-const NumberValue = styled.span<{ highlighted: boolean }>`
-  color: ${({ highlighted }) => (highlighted ? 'rgb(254, 184, 60)' : secondaryDark)};
+const NumberValue = styled.span<{ isBright: boolean }>`
+  color: ${({ isBright }) => (isBright ? 'rgb(254, 184, 60)' : secondaryDark)};
   font-size: 24px;
   font-weight: 700;
 `
 
-const NumberUnit = styled.span<{ highlighted: boolean }>`
-  color: ${({ highlighted }) => (highlighted ? 'rgba(254, 184, 60, 0.5)' : secondaryDark)};
+const NumberUnit = styled.span<{ isBright: boolean }>`
+  color: ${({ isBright }) => (isBright ? 'rgba(254, 184, 60, 0.5)' : secondaryDark)};
 `
 
 const Number = styled.span`
@@ -78,18 +81,18 @@ type Props = { ratings: number; className?: string }
 
 export const Ratings = ({ ratings, className }: Props): ReactElement => {
   const localized = useLocalized<Trans>(i18n)
-  const highlighted = ratings > 2.5
+  const isBright = ratings > 2.5
   return (
     <Main className={className}>
       <Title>{localized.title}</Title>
       <Values>
         <Stars>
-          <StarsBar number={5} highlighted={false} />
-          <StarsBar number={Math.round(ratings)} highlighted={true} />
+          <StarsBar />
+          <StarsBar ratings={ratings} isBright={true} />
         </Stars>
         <Number>
-          <NumberValue highlighted={highlighted}>{ratings.toFixed(1)}</NumberValue>
-          <NumberUnit highlighted={highlighted}>/5</NumberUnit>
+          <NumberValue isBright={isBright}>{ratings.toFixed(1)}</NumberValue>
+          <NumberUnit isBright={isBright}>/5</NumberUnit>
         </Number>
       </Values>
     </Main>
