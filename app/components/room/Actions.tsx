@@ -1,5 +1,29 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
+import { I18n, useLocalized } from '~/core/utils'
+
+type Trans = {
+  register: string
+  contact: string
+  tagAccount: string
+}
+const i18n: I18n<Trans> = {
+  en: {
+    register: 'Sign up',
+    contact: 'Contact us',
+    tagAccount: 'Tag your account',
+  },
+  ru: {
+    register: 'Перейти',
+    contact: 'Чат с менеджером',
+    tagAccount: 'Привязать счет',
+  },
+  es: {
+    register: 'Registro',
+    contact: 'Contáctanos',
+    tagAccount: 'Registra tu cuenta',
+  },
+}
 
 const SVGs = {
   register:
@@ -10,9 +34,9 @@ const SVGs = {
 
 const Button = styled.button``
 
-const IconButton = styled(Button)<{ typeOf: 'register' | 'contact' }>`
+const IconButton = styled(Button)<{ kind: 'register' | 'contact' }>`
   &::after {
-    background-image: url(${({ typeOf }) => SVGs[typeOf]});
+    background-image: url(${({ kind }) => SVGs[kind]});
     background-position: 100%;
     background-repeat: no-repeat;
     content: '';
@@ -25,17 +49,20 @@ const IconButton = styled(Button)<{ typeOf: 'register' | 'contact' }>`
     width: 72px;
   }
 `
+
 const Main = styled.div`
   grid-area: actions;
 `
+
 type Props = { className?: string }
 
 export const Actions = ({ className }: Props): ReactElement => {
+  const localized = useLocalized<Trans>(i18n)
   return (
     <Main className={className}>
-      <IconButton typeOf="register">Перейти</IconButton>
-      <IconButton typeOf="contact">Чат с менеджером</IconButton>
-      <Button>Привязать счет</Button>
+      <IconButton kind="register">{localized.register}</IconButton>
+      <IconButton kind="contact">{localized.contact}</IconButton>
+      <Button>{localized.tagAccount}</Button>
     </Main>
   )
 }
