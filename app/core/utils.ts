@@ -1,4 +1,4 @@
-import { Locale } from '~/components/Locale'
+import { Locale, useLocale } from '~/components/Locale'
 
 export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)
@@ -38,3 +38,6 @@ export const getCountryFromRequest = async (request: Request) => {
 }
 
 export const getRequestGeo = () => {}
+
+export type I18n<Trans> = { en: Trans; ru: Trans; es: Trans }
+export const useLocalized = <Trans>(i18n: I18n<Trans>): Trans => i18n[useLocale()]

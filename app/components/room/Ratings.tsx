@@ -1,18 +1,20 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
-import { useLocale } from '~/components/Locale'
 import { ReactElement } from 'react'
+import { I18n, useLocalized } from '~/core/utils'
 
-const i18n = {
-  title: {
-    en: `Editor's rating`,
-    ru: 'Наш рейтинг',
-    es: `Calificación del_editor`,
+type Trans = {
+  title: string
+}
+const i18n: I18n<Trans> = {
+  en: {
+    title: `Editor's rating`,
   },
-  rakeback: {
-    en: 'Rakeback',
-    ru: 'Рейкбек',
-    es: 'Rakeback',
+  ru: {
+    title: 'Наш рейтинг',
+  },
+  es: {
+    title: 'Calificación del_editor',
   },
 }
 
@@ -48,7 +50,6 @@ const Title = styled.div`
   display: none;
   @media ${widthAtLeast.sm} {
     display: block;
-    //width: min-content;
     color: ${secondaryDark};
     padding-top: 3px;
     font-size: 14px;
@@ -76,11 +77,11 @@ const Main = styled.div`
 type Props = { ratings: number; className?: string }
 
 export const Ratings = ({ ratings, className }: Props): ReactElement => {
-  const locale = useLocale()
+  const localized = useLocalized<Trans>(i18n)
   const highlighted = ratings > 2.5
   return (
     <Main className={className}>
-      <Title>{i18n.title[locale]}</Title>
+      <Title>{localized.title}</Title>
       <Values>
         <Stars>
           <StarsBar number={5} highlighted={false} />

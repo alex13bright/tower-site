@@ -1,16 +1,22 @@
 import styled from 'styled-components'
-import { useLocale } from '~/components/Locale'
+import { I18n, useLocalized } from '~/core/utils'
 
-const i18n = {
-  bonus: {
-    en: 'Bonus',
-    ru: 'Бонус',
-    es: 'Bono',
+type Trans = {
+  bonus: string
+  rakeback: string
+}
+const i18n: I18n<Trans> = {
+  en: {
+    bonus: 'Bonus',
+    rakeback: 'Rakeback',
   },
-  rakeback: {
-    en: 'Rakeback',
-    ru: 'Рейкбек',
-    es: 'Rakeback',
+  ru: {
+    bonus: 'Бонус',
+    rakeback: 'Рейкбек',
+  },
+  es: {
+    bonus: 'Bono',
+    rakeback: 'Rakeback',
   },
 }
 
@@ -47,18 +53,18 @@ type Props = {
   className?: string
 }
 export const Highlights = ({ bonus, rakeback, className }: Props) => {
-  const locale = useLocale()
+  const localized = useLocalized<Trans>(i18n)
   return (
     <Main className={className}>
       <HighlightOut color="#eb5757">
         <HighlightIn>
-          <Name>{i18n.bonus[locale]}</Name>
+          <Name>{localized.bonus}</Name>
           <Value color="#eb5757">{bonus}</Value>
         </HighlightIn>
       </HighlightOut>
       <HighlightOut color="#008be2">
         <HighlightIn>
-          <Name>{i18n.rakeback[locale]}</Name>
+          <Name>{localized.rakeback}</Name>
           <Value color="#008be2">{rakeback}</Value>
         </HighlightIn>
       </HighlightOut>
