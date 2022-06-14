@@ -4,6 +4,7 @@ import { I18n, useLocalized } from '~/core/utils'
 import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
 import { actionsSVGs } from '~/styles/SVGs'
+import { background, primary, primaryAction, secondaryAction } from '~/styles/styles'
 
 type Trans = {
   register: string
@@ -32,6 +33,7 @@ const button = css`
   color: inherit;
   padding: 14px;
   text-align: center;
+  font-family: 'Proxima Nova Sb';
   font-size: 18px;
   line-height: 22px;
   border-radius: 4px;
@@ -41,7 +43,11 @@ const button = css`
 
 const iconButton = css<{ kind: 'register' | 'contact' }>`
   ${button};
-  background-color: ${({ kind }) => (kind === 'register' ? '#ee3c4b' : '#70ac30')};
+  background-color: ${({ kind }) => (kind === 'register' ? primaryAction() : secondaryAction())};
+  &:hover {
+    background-color: ${({ kind }) =>
+      kind === 'register' ? primaryAction(true) : secondaryAction(true)};
+  }
   &::after {
     background-image: url(${({ kind }) => actionsSVGs[kind]});
     background-position: 100%;
@@ -72,6 +78,11 @@ const TagButton = styled.button`
   ${button};
   background: transparent;
   border: 2px solid hsla(0, 0%, 89.8%, 0.8);
+  &:hover {
+    color: ${primary};
+    background-color: ${background};
+    border-color: ${background};
+  }
 `
 
 const ReForm = styled(Form)`

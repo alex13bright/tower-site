@@ -24,6 +24,9 @@ export const primaryDark = '#fff'
 export const secondaryDark = '#999'
 export const backgroundDark = { start: '#20222c', end: '#2b2e3b' }
 
+export const primaryAction = (hover = false) => `rgba(238, 60, 75, ${hover ? '0.9' : '1'})`
+export const secondaryAction = (hover = false) => `rgba(112, 172, 48, ${hover ? '0.9' : '1'})`
+
 export const headerFooterBlock = css`
   color: ${secondaryDark};
   background-image: linear-gradient(${backgroundDark.end} 47.41%, ${backgroundDark.start});
