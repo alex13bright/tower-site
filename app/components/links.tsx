@@ -1,18 +1,9 @@
-import { ReactNode } from 'react'
+import { AnchorHTMLAttributes, ReactElement } from 'react'
 
-type ExternalLinkProps = {
-  className?: string
-  children: ReactNode
-  href: string
-}
-export const ExternalLink = ({ className, children, href }: ExternalLinkProps) => {
+export const ExternalLink = (props: AnchorHTMLAttributes<unknown>): ReactElement => {
   return (
-    <a className={className} href={href} target="_blank" rel="noreferer nofollow noopener">
-      {children}
+    <a {...props} target="_blank" rel="noreferer nofollow noopener">
+      {props.children}
     </a>
   )
 }
-// export const ExternalLink = styled.a.attrs({
-//   target: '_blank',
-//   rel: 'nofollow noopener',
-// })

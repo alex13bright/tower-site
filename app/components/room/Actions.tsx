@@ -5,6 +5,7 @@ import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
 import { actionsSVGs } from '~/styles/SVGs'
 import { background, primary, primaryAction, secondaryAction } from '~/styles/styles'
+import chroma from 'chroma-js'
 
 type Trans = {
   register: string
@@ -41,17 +42,10 @@ const button = css`
   overflow: hidden;
 `
 
-const iconButton = css<{ kind: 'register' | 'contact' }>`
+const iconButton = css`
   ${button};
-  background-color: ${({ kind }) => (kind === 'register' ? primaryAction() : secondaryAction())};
-  &:hover {
-    background-color: ${({ kind }) =>
-      kind === 'register' ? primaryAction(true) : secondaryAction(true)};
-  }
   &::after {
-    background-image: url(${({ kind }) => actionsSVGs[kind]});
     background-position: 100%;
-    background-position-y: ${({ kind }) => (kind === 'register' ? '100%' : '50%')};
     background-repeat: no-repeat;
     content: '';
     height: 68px;
@@ -64,15 +58,26 @@ const iconButton = css<{ kind: 'register' | 'contact' }>`
   }
 `
 
-const RegisterButton = styled(ExternalLink).attrs({
-  kind: 'register',
-})`
+const RegisterButton = styled(ExternalLink)`
   ${iconButton};
+  background-color: ${primaryAction};
+  &:hover {
+    background-color: ${chroma(primaryAction).darken(0.1).hex()};
+  }
+  &::after {
+    background-image: url(${actionsSVGs.register});
+  }
 `
-const ContactButton = styled.button.attrs({
-  kind: 'contact',
-})`
+const ContactButton = styled.button`
   ${iconButton};
+  background-color: ${secondaryAction};
+  &:hover {
+    background-color: ${chroma(secondaryAction).darken(0.1).hex()};
+  }
+  &::after {
+    background-image: url(${actionsSVGs.contact});
+    background-position-y: 50%;
+  }
 `
 const TagButton = styled.button`
   ${button};
@@ -98,7 +103,7 @@ const Main = styled.div`
 type Props = { className?: string }
 
 export const Actions = ({ className }: Props): ReactElement => {
-  const localized = useLocalized<Trans>(i18n)
+  const localized = useLocalized(i18n)
   return (
     <Main className={className}>
       <ReForm>

@@ -20,17 +20,22 @@ const i18n: I18n<Trans> = {
   },
 }
 
-const Main = styled.div`
+const Main = styled.table`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
   grid-area: highlights;
 `
-const HighlightOut = styled.div<{ color: string }>`
+
+const Tbody = styled.tbody`
+  display: contents;
+`
+
+const HighlightOut = styled.tr<{ color: string }>`
   min-height: 60px;
   filter: drop-shadow(-4px 0 0 ${({ color }) => color});
 `
-const HighlightIn = styled.div`
+const HighlightIn = styled.td`
   background: #343848;
   clip-path: polygon(calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%, 0 0);
   padding: 9px 28px 9px 40px;
@@ -39,7 +44,9 @@ const HighlightIn = styled.div`
   gap: 4px;
   height: 100%;
 `
+
 const Name = styled.span``
+
 const Value = styled.span`
   color: ${({ color }) => color};
   font-size: 18px;
@@ -47,27 +54,31 @@ const Value = styled.span`
   line-height: 18px;
   height: 100%;
 `
+
 type Props = {
   bonus: string
   rakeback: string
   className?: string
 }
+
 export const Highlights = ({ bonus, rakeback, className }: Props) => {
-  const localized = useLocalized<Trans>(i18n)
+  const localized = useLocalized(i18n)
   return (
     <Main className={className}>
-      <HighlightOut color="#eb5757">
-        <HighlightIn>
-          <Name>{localized.bonus}</Name>
-          <Value color="#eb5757">{bonus}</Value>
-        </HighlightIn>
-      </HighlightOut>
-      <HighlightOut color="#008be2">
-        <HighlightIn>
-          <Name>{localized.rakeback}</Name>
-          <Value color="#008be2">{rakeback}</Value>
-        </HighlightIn>
-      </HighlightOut>
+      <Tbody>
+        <HighlightOut color="#eb5757">
+          <HighlightIn>
+            <Name>{localized.bonus}</Name>
+            <Value color="#eb5757">{bonus}</Value>
+          </HighlightIn>
+        </HighlightOut>
+        <HighlightOut color="#008be2">
+          <HighlightIn>
+            <Name>{localized.rakeback}</Name>
+            <Value color="#008be2">{rakeback}</Value>
+          </HighlightIn>
+        </HighlightOut>
+      </Tbody>
     </Main>
   )
 }

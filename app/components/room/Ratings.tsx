@@ -14,7 +14,7 @@ const i18n: I18n<Trans> = {
     title: 'Наш рейтинг',
   },
   es: {
-    title: 'Calificación del_editor',
+    title: 'Calificación del editor',
   },
 }
 
