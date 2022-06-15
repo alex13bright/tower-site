@@ -31,9 +31,9 @@ const Tbody = styled.tbody`
   display: contents;
 `
 
-const HighlightOut = styled.tr<{ color: string }>`
+const HighlightOut = styled.tr<{ $color: string }>`
   min-height: 60px;
-  filter: drop-shadow(-4px 0 0 ${({ color }) => color});
+  filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
 `
 const HighlightIn = styled.td`
   background: #343848;
@@ -47,8 +47,8 @@ const HighlightIn = styled.td`
 
 const Name = styled.span``
 
-const Value = styled.span`
-  color: ${({ color }) => color};
+const Value = styled.span<{ $color: string }>`
+  color: ${({ $color }) => $color};
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
@@ -66,16 +66,16 @@ export const Highlights = ({ bonus, rakeback, className }: Props) => {
   return (
     <Main className={className}>
       <Tbody>
-        <HighlightOut color="#eb5757">
+        <HighlightOut $color="#eb5757">
           <HighlightIn>
             <Name>{localized.bonus}</Name>
-            <Value color="#eb5757">{bonus}</Value>
+            <Value $color="#eb5757">{bonus}</Value>
           </HighlightIn>
         </HighlightOut>
-        <HighlightOut color="#008be2">
+        <HighlightOut $color="#008be2">
           <HighlightIn>
             <Name>{localized.rakeback}</Name>
-            <Value color="#008be2">{rakeback}</Value>
+            <Value $color="#008be2">{rakeback}</Value>
           </HighlightIn>
         </HighlightOut>
       </Tbody>
