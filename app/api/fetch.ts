@@ -1,7 +1,7 @@
-import { Locale } from '~/core/types'
 import qs from 'qs'
 import config from '~/config'
 import { ApiListResponse, Room } from '~/api/types'
+import { Locale } from '~/components/Locale'
 
 const { apiEndPoint } = config
 

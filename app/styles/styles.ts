@@ -1,22 +1,33 @@
 import { css } from 'styled-components'
 
 export const breakpoints = {
-  mobile: '320px',
-  tablet: '768px',
-  laptop: '1280px',
-  desktop: '1440px',
+  xs: '320px',
+  sm: '460px',
+  md: '768px',
+  lg: '1280px',
+  xl: '1440px',
 }
 
 export const widthAtLeast = {
-  mobile: `(min-width: ${breakpoints.mobile})`,
-  tablet: `(min-width: ${breakpoints.tablet})`,
-  laptop: `(min-width: ${breakpoints.laptop})`,
-  desktop: `(min-width: ${breakpoints.desktop})`,
+  xs: `(min-width: ${breakpoints.xs})`,
+  sm: `(min-width: ${breakpoints.sm})`,
+  md: `(min-width: ${breakpoints.md})`,
+  lg: `(min-width: ${breakpoints.lg})`,
+  xl: `(min-width: ${breakpoints.xl})`,
 }
 
-export const primary = '#ccc'
+export const primary = '#222'
+export const secondary = '#555'
+export const background = '#fff'
 
-export const pageMainBlock = css`
-  color: ${primary};
-  background-image: linear-gradient(#2b2e3b 47.41%, #20222c);
+export const primaryDark = '#fff'
+export const secondaryDark = '#999'
+export const backgroundDark = { start: '#20222c', end: '#2b2e3b' }
+
+export const primaryAction = '#ee3c4b'
+export const secondaryAction = '#70ac30'
+
+export const headerFooterBlock = css`
+  color: ${secondaryDark};
+  background-image: linear-gradient(${backgroundDark.end} 47.41%, ${backgroundDark.start});
 `

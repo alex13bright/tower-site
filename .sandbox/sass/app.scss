@@ -1,4 +1,4 @@
-@import '../fonts/ProximaNova/styles.css';
+@import '../../public/fonts/ProximaNova/styles.css';
 @import 'bootstrap/scss/bootstrap-reboot';
 
 $grid-columns:      12;
@@ -29,8 +29,8 @@ $grid-breakpoints: (
 
 @import 'variables';
 
-@import 'elements/vip-payments-advantages.scss';
-@import 'elements/filters-common-styles.scss';
+@import 'elements/vip-payments-advantages';
+@import 'elements/filters-common-styles';
 
 body {
 	-webkit-font-smoothing: antialiased;

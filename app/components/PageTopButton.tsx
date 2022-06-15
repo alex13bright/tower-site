@@ -19,7 +19,7 @@ const StyledButton = styled.button<{ isActive: boolean }>`
   &:hover {
     outline: 0;
   }
-  @media ${widthAtLeast.tablet} {
+  @media ${widthAtLeast.sm} {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   }
 `

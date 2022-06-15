@@ -8,7 +8,7 @@ export const permanentRedirect = async (request: Request): Promise<void> => {
   const url = new URL(request.url)
   const hostName = url.hostname
   const subNames = hostName.split('.')
-  if (subNames[0] === 'www') {
+  if (subNames[0] === 'www' || subNames[0] === 'en') {
     subNames.shift()
     url.hostname = subNames.join('.')
     throwRedirect(url.toString())

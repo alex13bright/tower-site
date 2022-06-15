@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node'
-import { Locale } from '~/core/types'
 import {
   Links,
   LiveReload,
@@ -15,12 +14,12 @@ import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
 import { permanentRedirect } from '~/core/permanentReidrect'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
-import globalStylesUrl from '~/styles/globalStyles.css'
 import { PageLayout } from '~/components/PageLayout'
-
+import { GlobalStyles } from '~/styles/GlobalStyles'
+import { Locale, LocaleContext, useLocale } from '~/components/Locale'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
-  { rel: 'stylesheet', href: globalStylesUrl },
+  { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
 ]
 
 export const meta: MetaFunction = () => ({
@@ -41,33 +40,38 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export default function Root() {
-  const { locale } = useLoaderData()
+  const { locale } = useLoaderData<LoaderData>()
   return (
-    <Document locale={locale}>
-      <PageLayout>
-        <Outlet />
-      </PageLayout>
-    </Document>
+    <LocaleContext locale={locale}>
+      <Document>
+        <PageLayout>
+          <Outlet />
+        </PageLayout>
+      </Document>
+    </LocaleContext>
   )
 }
 
 type DocumentProps = {
-  locale: Locale
   children: ReactNode
 }
-const Document = ({ locale, children }: DocumentProps) => (
-  <html lang={locale}>
-    <head>
-      <Meta />
-      <DynamicLinks />
-      <Links />
-      {typeof document === 'undefined' ? '__STYLES__' : null}
-    </head>
-    <body>
-      {children}
-      <ScrollRestoration />
-      <Scripts />
-      <LiveReload />
-    </body>
-  </html>
-)
+const Document = ({ children }: DocumentProps) => {
+  const locale = useLocale()
+  return (
+    <html lang={locale}>
+      <head>
+        <Meta />
+        <DynamicLinks />
+        <Links />
+        {typeof document === 'undefined' ? '__STYLES__' : null}
+      </head>
+      <body>
+        {children}
+        <GlobalStyles />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
