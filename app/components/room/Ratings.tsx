@@ -80,7 +80,7 @@ const Main = styled.div`
 type Props = { ratings: number; className?: string }
 
 export const Ratings = ({ ratings, className }: Props): ReactElement => {
-  const localized = useLocalized<Trans>(i18n)
+  const localized = useLocalized(i18n)
   const isBright = ratings > 2.5
   return (
     <Main className={className}>
@@ -88,7 +88,7 @@ export const Ratings = ({ ratings, className }: Props): ReactElement => {
       <Values>
         <Stars>
           <StarsBar />
-          <StarsBar ratings={ratings} isBright={true} />
+          <StarsBar ratings={ratings} isBright />
         </Stars>
         <Number>
           <NumberValue isBright={isBright}>{ratings.toFixed(1)}</NumberValue>

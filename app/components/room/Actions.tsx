@@ -3,7 +3,6 @@ import { ReactElement } from 'react'
 import { I18n, useLocalized } from '~/core/utils'
 import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
-import { actionsSVGs } from '~/styles/SVGs'
 import { background, primary, primaryAction, secondaryAction } from '~/styles/styles'
 import chroma from 'chroma-js'
 
@@ -65,7 +64,7 @@ const RegisterButton = styled(ExternalLink)`
     background-color: ${chroma(primaryAction).darken(0.1).hex()};
   }
   &::after {
-    background-image: url(${actionsSVGs.register});
+    background-image: url(/images/arrow.svg);
   }
 `
 const ContactButton = styled.button`
@@ -75,7 +74,7 @@ const ContactButton = styled.button`
     background-color: ${chroma(secondaryAction).darken(0.1).hex()};
   }
   &::after {
-    background-image: url(${actionsSVGs.contact});
+    background-image: url(/images/question.svg);
     background-position-y: 50%;
   }
 `
