@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { useSize } from '~/custom-hooks/useSize'
 
 const Main = styled.div`
   display: grid;
@@ -32,21 +33,13 @@ type Props = {
 export function Spoiler({ height, children }: Props): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
-  useEffect(() => {
-    if (ref.current === null) throw new Error(`ref can't be null`)
-    const _refCurrent = ref.current
-    const Observer = new ResizeObserver((entries) => {
-      const [entry] = entries
-      setIsButtonHidden(entry.contentRect.height === height)
-    })
-    Observer.observe(ref.current)
-    return () => {
-      Observer.unobserve(_refCurrent)
-    }
-  }, [height, ref, setIsButtonHidden])
+  const [isPressed, setIsPressed] = useState<boolean>(false)
+
+  const size = useSize(ref)
+  useEffect(() => setIsButtonHidden(size.height === height), [height, size, setIsButtonHidden])
 
   const heightString = height + 'px'
-  const [isPressed, setIsPressed] = useState<boolean>(false)
+
   const activeHeight = isPressed ? 'auto' : heightString
   return (
     <Main>
