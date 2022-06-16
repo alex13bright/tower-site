@@ -51,7 +51,7 @@ export const Header = ({ className }: Props): ReactElement => {
   const networkTitle = 'GG Network'
   const networkLogo = '/fake/ico-gg-network.svg'
   const logo = '/fake/ggpoker-logo.svg'
-  const roomType = 'roomType'
+  const roomType = 'Licensed'
   const license = 'United Kingdom'
   const payments: Payment[] = [
     'visa',

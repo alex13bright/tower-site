@@ -61,7 +61,7 @@ const Row = styled.tr`
   align-items: start;
   column-gap: 10px;
   grid-template-areas: 'name line value';
-  grid-template-columns: auto minmax(30px, 1fr) auto;
+  grid-template-columns: auto minmax(40px, 1fr) auto;
   &::after {
     grid-area: line;
     background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);
