@@ -35,7 +35,7 @@ export function HowDoWeRate({ isVisible, setIsVisible }: Props): ReactElement {
               information about the owners and player reviews from our website and specialized
               forums.
             </Body>
-          </Item>{' '}
+          </Item>
           <Item>
             <Header>Reliability</Header>
             <Body>
@@ -45,7 +45,7 @@ export function HowDoWeRate({ isVisible, setIsVisible }: Props): ReactElement {
               information about the owners and player reviews from our website and specialized
               forums.
             </Body>
-          </Item>{' '}
+          </Item>
           <Item>
             <Header>Reliability</Header>
             <Body>
