@@ -65,8 +65,12 @@ export const Header = ({ className }: Props): ReactElement => {
   const ratings = 4.3
   const bonus = '100% до $600'
   const rakeback = '60%'
-  const networkTitle = 'GG Network'
-  const networkLogo = '/fake/ico-gg-network.svg'
+  const network = {
+    name: 'gg_network',
+    title: 'GG Network',
+    logo: '/fake/ico-gg-network.svg',
+  }
+  const title = 'GG Poker'
   const logo = '/fake/ggpoker-logo.svg'
   const roomType = 'Licensed'
   const license = 'United Kingdom'
@@ -95,8 +99,8 @@ export const Header = ({ className }: Props): ReactElement => {
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
-        <GridNetwork title={networkTitle} logo={networkLogo} />
-        <GridLogo title={networkTitle} logo={logo} />
+        <GridNetwork {...network} />
+        <GridLogo title={title} logo={logo} />
         <GridRatings ratings={ratings} />
         <GridHighlights bonus={bonus} rakeback={rakeback} />
         <GridAction />
