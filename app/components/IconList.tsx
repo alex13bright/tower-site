@@ -4,7 +4,7 @@ import { ReactElement } from 'react'
 const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   justify-content: end;
   align-items: start;
 `
@@ -32,7 +32,7 @@ export function IconList<ItemType extends string>({
     <List>
       {children.map((item) => (
         <Item key={item} title={item}>
-          <Image alt={item} src={urlFn(item)} width="40px" height="20px" />
+          <Image alt={item} src={urlFn(item)} />
         </Item>
       ))}
     </List>

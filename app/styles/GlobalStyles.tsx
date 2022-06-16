@@ -28,4 +28,11 @@ export const GlobalStyles = createGlobalStyle`
   li {
     list-style-type: none;
   }
+
+  button {
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
 `
