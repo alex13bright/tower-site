@@ -18,7 +18,7 @@ const i18n: I18n<Trans> = {
   },
 }
 
-const StarsBar = styled.div.attrs({ ratings: 5, isBright: false })<{
+const StarsBar = styled.div<{
   ratings: number
   isBright: boolean
 }>`
@@ -26,7 +26,7 @@ const StarsBar = styled.div.attrs({ ratings: 5, isBright: false })<{
   background-image: url(/images/ratings-star.svg);
   background-repeat: repeat-x;
   width: ${({ ratings }) => Math.round(ratings) * 24}px;
-  background-position: 0 ${({ isBright }) => (isBright ? 0 : '100%')};
+  background-position-y: ${({ isBright }) => (isBright ? 0 : '100%')};
   height: 16px;
 `
 
@@ -87,8 +87,8 @@ export const Ratings = ({ ratings, className }: Props): ReactElement => {
       <Title>{localized.title}</Title>
       <Values>
         <Stars>
-          <StarsBar />
-          <StarsBar ratings={ratings} isBright />
+          <StarsBar ratings={5} isBright={false} />
+          <StarsBar ratings={ratings} isBright={true} />
         </Stars>
         <Number>
           <NumberValue isBright={isBright}>{ratings.toFixed(1)}</NumberValue>
