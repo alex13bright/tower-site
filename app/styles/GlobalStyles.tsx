@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { primary } from '~/styles/styles'
+import { primary, proximaNova } from '~/styles/styles'
 export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     color: ${primary};
-    font-family: 'Proxima Nova',serif;
+    font-family: ${proximaNova};
   }
 
   a {

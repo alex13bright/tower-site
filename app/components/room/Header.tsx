@@ -14,6 +14,7 @@ import { Device, Payment } from '~/core/types'
 const Main = styled.div`
   color: ${primaryDark};
   font-size: 16px;
+  line-height: 20px;
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;

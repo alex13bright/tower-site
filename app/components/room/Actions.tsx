@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 import { I18n, useLocalized } from '~/core/utils'
 import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
-import { background, primary, primaryAction, secondaryAction } from '~/styles/styles'
+import { background, primary, primaryAction, proximaNovaSb, secondaryAction } from '~/styles/styles'
 import chroma from 'chroma-js'
 
 type Trans = {
@@ -33,7 +33,7 @@ const button = css`
   color: inherit;
   padding: 14px;
   text-align: center;
-  font-family: 'Proxima Nova Sb';
+  font-family: ${proximaNovaSb};
   font-size: 18px;
   line-height: 22px;
   border-radius: 4px;

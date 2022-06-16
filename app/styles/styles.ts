@@ -1,5 +1,8 @@
 import { css } from 'styled-components'
 
+export const proximaNova = `'Proxima Nova',serif`
+export const proximaNovaSb = `'Proxima Nova Sb',serif`
+
 export const breakpoints = {
   xs: '320px',
   sm: '460px',

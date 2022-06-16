@@ -1,18 +1,14 @@
 import styled from 'styled-components'
-import { secondaryDark } from '~/styles/styles'
+import { proximaNovaSb, secondaryDark } from '~/styles/styles'
 
 export const Name = styled.td`
   grid-area: name;
   color: #e5e5e5;
   display: flex;
-  font-size: 16px;
-  line-height: 20px;
 `
 export const Value = styled.td`
   grid-area: value;
-  font-family: 'Proxima Nova Sb', serif;
-  font-size: 16px;
-  line-height: 20px;
+  font-family: ${proximaNovaSb};
 `
 
 export const Row = styled.tr`
@@ -42,10 +38,10 @@ export const Title = styled.caption`
   display: block;
   color: ${secondaryDark};
   text-align: start;
-  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 12px;
   line-height: 20px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 `
 
