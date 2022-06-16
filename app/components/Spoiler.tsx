@@ -6,23 +6,23 @@ const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr 0;
   align-items: start;
-  position: relative;
 `
 
 const Container = styled.div<{ activeHeight: string }>`
   overflow: hidden;
-  height: ${({ activeHeight }) => activeHeight};
+  max-height: ${({ activeHeight }) => activeHeight};
 `
 const Content = styled.div``
-const Button = styled.button<{ $isHidden: boolean; $height: string; isPressed: boolean }>`
+const Button = styled.button<{ $isHidden: boolean; isPressed: boolean }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'block')};
-  margin-top: 2px;
-  margin-left: 2px;
+  margin-top: 1px;
+  margin-left: 1px;
   width: 20px;
-  height: ${({ $height }) => $height};
+  height: 20px;
   aspect-ratio: 1 / 1;
   background: url(/images/arrow-down.svg) no-repeat 50%;
   ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
+  align-self: end;
 `
 
 type Props = {
@@ -36,9 +36,13 @@ export function Spoiler({ height, children }: Props): ReactElement {
   const [isPressed, setIsPressed] = useState<boolean>(false)
 
   const size = useSize(ref)
-  useEffect(() => setIsButtonHidden(size.height === height), [height, size, setIsButtonHidden])
+  const maxHeight = Math.min(height, size.height)
+  useEffect(
+    () => setIsButtonHidden(size.height === maxHeight),
+    [maxHeight, size, setIsButtonHidden]
+  )
 
-  const heightString = height + 'px'
+  const heightString = maxHeight + 'px'
 
   const activeHeight = isPressed ? 'auto' : heightString
   return (
@@ -48,7 +52,6 @@ export function Spoiler({ height, children }: Props): ReactElement {
       </Container>
       <Button
         $isHidden={isButtonHidden}
-        $height={heightString}
         isPressed={isPressed}
         onClick={() => setIsPressed(!isPressed)}
       ></Button>

@@ -11,7 +11,7 @@ export type Device = typeof devices[number]
 export const payments = [
   'american-express',
   'astropay',
-  'bangkok-bank-white',
+  'bangkok-bank',
   'bitcoin',
   'cashfree',
   'ecopayz',

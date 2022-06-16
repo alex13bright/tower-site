@@ -127,7 +127,7 @@ export const Features = ({
         <Row>
           <Name>{localized.payments}</Name>
           <Value>
-            <Spoiler height={20}>
+            <Spoiler height={80}>
               <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
             </Spoiler>
           </Value>

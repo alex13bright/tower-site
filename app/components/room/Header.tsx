@@ -27,11 +27,12 @@ const Main = styled.div`
     'actions actions actions'
     'features features features';
   grid-template-columns: 24px 1fr 24px;
-  grid-template-rows: auto 100px auto repeat(2, auto);
+  grid-template-rows: auto 60px auto repeat(2, auto);
   row-gap: 20px;
 `
 
 const GridNetwork = styled(Network)`
+  align-self: start;
   justify-self: center;
 `
 
@@ -61,6 +62,9 @@ export const Header = ({ className }: Props): ReactElement => {
     'american-express',
     'ecopayz',
     'cashfree',
+    'bangkok-bank',
+    'paypal',
+    'webmoney',
   ]
   const devices: Device[] = ['IOS', 'macOS']
   const country = 'Thailand'
