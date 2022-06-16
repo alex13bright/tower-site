@@ -3,9 +3,11 @@ import { ReactElement } from 'react'
 import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
 import { accent, secondaryDark } from '~/styles/styles'
+import chroma from 'chroma-js'
 
 type Trans = {
   title: string
+  info: string
   reliability: string
   bonusesPromotions: string
   gameSelection: string
@@ -17,6 +19,7 @@ type Trans = {
 const i18n: I18n<Trans> = {
   en: {
     title: 'Our ratings',
+    info: 'How do we rate?',
     reliability: 'Reliability',
     bonusesPromotions: 'Bonuses and promotions',
     gameSelection: 'Game selection',
@@ -26,6 +29,7 @@ const i18n: I18n<Trans> = {
   },
   ru: {
     title: '',
+    info: 'How do we rate?',
     reliability: 'Reliability',
     bonusesPromotions: 'Bonuses and promotions',
     gameSelection: 'Game selection',
@@ -35,6 +39,7 @@ const i18n: I18n<Trans> = {
   },
   es: {
     title: '',
+    info: 'How do we rate?',
     reliability: 'Reliability',
     bonusesPromotions: 'Bonuses and promotions',
     gameSelection: 'Game selection',
@@ -78,6 +83,16 @@ const ReTable = styled(Table)`
   padding: 24px 0;
 `
 
+const TitleRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+const Info = styled.button`
+  border-bottom: 1px solid ${chroma(accent).darken(0.5).hex()};
+  font-size: 12px;
+  color: ${chroma(accent).darken(0.5).hex()};
+`
+
 type Props = {
   data: {
     reliability: number
@@ -102,7 +117,10 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
   } = data
   return (
     <ReTable className={className}>
-      <Title>{localized.title}</Title>
+      <TitleRow>
+        <Title>{localized.title}</Title>
+        <Info>{localized.info}</Info>
+      </TitleRow>
       <Content>
         <Row>
           <ReName kind="reliability">{localized.reliability}</ReName>
