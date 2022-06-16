@@ -21,6 +21,7 @@ export const widthAtLeast = {
 
 export const primary = '#222'
 export const secondary = '#555'
+export const accent = '#008be2'
 export const background = '#fff'
 
 export const primaryDark = '#fff'

@@ -12,7 +12,8 @@ import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
 
 export const headerBlock = css`
-  padding: 0 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 `
 
 const Main = styled.div`

@@ -2,6 +2,7 @@ import { I18n, useLocalized } from '~/core/utils'
 import { ReactElement } from 'react'
 import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
+import { accent, secondaryDark } from '~/styles/styles'
 
 type Trans = {
   title: string
@@ -15,7 +16,7 @@ type Trans = {
 
 const i18n: I18n<Trans> = {
   en: {
-    title: '',
+    title: 'Our ratings',
     reliability: 'Reliability',
     bonusesPromotions: 'Bonuses and promotions',
     gameSelection: 'Game selection',
@@ -58,14 +59,14 @@ const ReName = styled(Name)<{ kind: string }>`
 const ReValue = styled(Value)`
   display: flex;
   align-items: baseline;
-  color: #008be2;
+  color: ${accent};
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 1px;
   height: 20px;
   &::after {
     content: '/5';
-    color: #777;
+    color: ${secondaryDark};
     font-size: 12px;
     letter-spacing: 1px;
   }
@@ -74,6 +75,7 @@ const ReValue = styled(Value)`
 const ReTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
+  padding: 24px 0;
 `
 
 type Props = {
