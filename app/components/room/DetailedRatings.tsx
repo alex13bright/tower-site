@@ -2,7 +2,7 @@ import { I18n, useLocalized } from '~/core/utils'
 import { ReactElement } from 'react'
 import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
-import { accent, secondaryDark } from '~/styles/styles'
+import { accent, primaryDark, proximaNovaSb, secondaryDark } from '~/styles/styles'
 import chroma from 'chroma-js'
 
 type Trans = {
@@ -53,6 +53,8 @@ const ReName = styled(Name)<{ kind: string }>`
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 20px;
+  color: ${primaryDark};
+  font-family: ${proximaNovaSb};
   &::before {
     width: 20px;
     height: 20px;
