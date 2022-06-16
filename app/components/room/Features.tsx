@@ -42,23 +42,21 @@ const i18n: I18n<Trans> = {
 }
 
 type Props = {
-  roomType: string
-  license: string
-  payments: Payment[]
-  devices: Device[]
-  country: string
+  data: {
+    roomType: string
+    license: string
+    payments: Payment[]
+    devices: Device[]
+    country: string
+  }
+  className?: string
 }
 
-export const Features = ({
-  roomType,
-  license,
-  payments,
-  devices,
-  country,
-}: Props): ReactElement => {
+export const Features = ({ data, className }: Props): ReactElement => {
+  const { roomType, license, payments, devices, country } = data
   const localized = useLocalized(i18n)
   return (
-    <Table>
+    <Table className={className}>
       <Title>{localized.title}</Title>
       <Content>
         <Row>

@@ -8,6 +8,7 @@ import { Actions } from '~/components/room/Actions'
 import { Logo } from '~/components/room/Logo'
 import { ReactElement } from 'react'
 import { Features } from '~/components/room/Features'
+import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
 
 const Main = styled.div`
@@ -25,9 +26,10 @@ const Main = styled.div`
     '. ratings .'
     'highlights highlights highlights'
     'actions actions actions'
-    'features features features';
+    'features features features'
+    'detailed detailed detailed';
   grid-template-columns: 24px 1fr 24px;
-  grid-template-rows: auto 60px auto repeat(2, auto);
+  grid-template-rows: repeat(7, auto);
   row-gap: 20px;
 `
 
@@ -39,10 +41,17 @@ const GridNetwork = styled(Network)`
 const GridLogo = styled(Logo)`
   place-self: center;
 `
-
 const GridAction = styled(Actions)`
   margin: 30px 0;
 `
+
+const GridFeatures = styled(Features)`
+  grid-area: features;
+`
+const GridDetailedRatings = styled(DetailedRatings)`
+  grid-area: detailed;
+`
+
 type Props = { className?: string }
 
 export const Header = ({ className }: Props): ReactElement => {
@@ -66,6 +75,14 @@ export const Header = ({ className }: Props): ReactElement => {
     'paypal',
     'webmoney',
   ]
+  const detailedRatings = {
+    reliability: 4.5,
+    bonusesPromotions: 4.5,
+    gameSelection: 4.5,
+    casualPlayers: 4.5,
+    softwareConvenience: 4.5,
+    depositsWithdrawals: 4.5,
+  }
   const devices: Device[] = ['IOS', 'macOS']
   const country = 'Thailand'
   return (
@@ -76,15 +93,9 @@ export const Header = ({ className }: Props): ReactElement => {
         <Ratings ratings={ratings} />
         <Highlights bonus={bonus} rakeback={rakeback} />
         <GridAction />
-        <Features
-          roomType={roomType}
-          license={license}
-          payments={payments}
-          devices={devices}
-          country={country}
-        />
+        <GridFeatures data={{ roomType, license, payments, devices, country }} />
         {/*<Advantages />*/}
-        {/*<DetailedRatings />*/}
+        <GridDetailedRatings data={detailedRatings} />
         {/*<NavTabs />*/}
       </Main>
     </StickyMarker>

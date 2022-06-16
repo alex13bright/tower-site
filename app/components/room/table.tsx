@@ -50,7 +50,6 @@ export const Title = styled.caption`
 `
 
 export const Table = styled.table`
-  grid-area: features;
   display: grid;
   row-gap: 16px;
 `
