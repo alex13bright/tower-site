@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     color: ${primary};
-    font-family: 'Proxima Nova';
+    font-family: 'Proxima Nova',serif;
   }
 
   a {

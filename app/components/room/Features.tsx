@@ -1,10 +1,9 @@
 import { I18n, useLocalized } from '~/core/utils'
 import { ReactElement } from 'react'
-import styled from 'styled-components'
 import { Device, Payment } from '~/core/types'
-import { secondaryDark } from '~/styles/styles'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
+import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
 
 type Trans = {
   title: string
@@ -42,60 +41,6 @@ const i18n: I18n<Trans> = {
   },
 }
 
-const Name = styled.td`
-  grid-area: name;
-  color: #e5e5e5;
-  display: flex;
-  font-size: 16px;
-  line-height: 20px;
-`
-const Value = styled.td`
-  grid-area: value;
-  font-family: 'Proxima Nova Sb';
-  font-size: 16px;
-  line-height: 20px;
-`
-
-const Row = styled.tr`
-  display: grid;
-  align-items: start;
-  column-gap: 10px;
-  grid-template-areas: 'name line value';
-  grid-template-columns: auto minmax(40px, 1fr) auto;
-  &::after {
-    grid-area: line;
-    background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);
-    background-position-y: 12px;
-    background-repeat: repeat-x;
-    background-size: 3px 1px;
-    height: 100%;
-    content: '';
-  }
-`
-
-const Table = styled.tbody`
-  display: grid;
-  row-gap: 16px;
-  align-items: center;
-`
-
-const Title = styled.caption`
-  display: block;
-  color: ${secondaryDark};
-  text-align: start;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 20px;
-  text-transform: uppercase;
-`
-
-const Main = styled.table`
-  grid-area: features;
-  display: grid;
-  row-gap: 16px;
-`
-
 type Props = {
   roomType: string
   license: string
@@ -113,9 +58,9 @@ export const Features = ({
 }: Props): ReactElement => {
   const localized = useLocalized(i18n)
   return (
-    <Main>
+    <Table>
       <Title>{localized.title}</Title>
-      <Table>
+      <Content>
         <Row>
           <Name>{localized.roomType}</Name>
           <Value>{roomType}</Value>
@@ -142,7 +87,7 @@ export const Features = ({
           <Name>{localized.country}</Name>
           <Value>{country}</Value>
         </Row>
-      </Table>
-    </Main>
+      </Content>
+    </Table>
   )
 }
