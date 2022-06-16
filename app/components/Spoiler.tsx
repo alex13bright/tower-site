@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr 0;
-  align-items: center;
+  align-items: start;
   position: relative;
 `
 
