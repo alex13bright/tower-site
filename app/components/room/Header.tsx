@@ -53,7 +53,15 @@ export const Header = ({ className }: Props): ReactElement => {
   const logo = '/fake/ggpoker-logo.svg'
   const roomType = 'roomType'
   const license = 'United Kingdom'
-  const payments: Payment[] = ['visa', 'skrill', 'yandex-money']
+  const payments: Payment[] = [
+    'visa',
+    'skrill',
+    'yandex-money',
+    'astropay',
+    'american-express',
+    'ecopayz',
+    'cashfree',
+  ]
   const devices: Device[] = ['IOS', 'macOS']
   const country = 'Thailand'
   return (

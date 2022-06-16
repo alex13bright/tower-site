@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Device, Payment } from '~/core/types'
 import { secondaryDark } from '~/styles/styles'
 import { IconList } from '~/components/IconList'
+import { Spoiler } from '~/components/Spoiler'
 
 type Trans = {
   title: string
@@ -60,7 +61,7 @@ const Row = styled.tr`
   align-items: center;
   column-gap: 10px;
   grid-template-areas: 'name line value';
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(30px, 1fr) auto;
   &::after {
     grid-area: line;
     background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);
@@ -126,7 +127,11 @@ export const Features = ({
         </Row>
         <Row>
           <Name>{localized.payments}</Name>
-          <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
+          <Value>
+            <Spoiler height="20px">
+              <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
+            </Spoiler>
+          </Value>
         </Row>
         <Row>
           <Name>{localized.devices}</Name>
