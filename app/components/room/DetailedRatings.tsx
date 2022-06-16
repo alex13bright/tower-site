@@ -1,9 +1,10 @@
 import { I18n, useLocalized } from '~/core/utils'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
 import { accent, primaryDark, proximaNovaSb, secondaryDark } from '~/styles/styles'
 import chroma from 'chroma-js'
+import { HowDoWeRate } from '~/components/room/HowDoWeRate'
 
 type Trans = {
   title: string
@@ -117,38 +118,42 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
     softwareConvenience,
     depositsWithdrawals,
   } = data
+  const [isVisible, setIsVisible] = useState<boolean>(true)
   return (
-    <ReTable className={className}>
-      <TitleRow>
-        <Title>{localized.title}</Title>
-        <Info>{localized.info}</Info>
-      </TitleRow>
-      <Content>
-        <Row>
-          <ReName kind="reliability">{localized.reliability}</ReName>
-          <ReValue>{reliability}</ReValue>
-        </Row>
-        <Row>
-          <ReName kind="bonusesPromotions">{localized.bonusesPromotions}</ReName>
-          <ReValue>{bonusesPromotions}</ReValue>
-        </Row>
-        <Row>
-          <ReName kind="gameSelection">{localized.gameSelection}</ReName>
-          <ReValue>{gameSelection}</ReValue>
-        </Row>
-        <Row>
-          <ReName kind="casualPlayers">{localized.casualPlayers}</ReName>
-          <ReValue>{casualPlayers}</ReValue>
-        </Row>
-        <Row>
-          <ReName kind="softwareConvenience">{localized.softwareConvenience}</ReName>
-          <ReValue>{softwareConvenience}</ReValue>
-        </Row>
-        <Row>
-          <ReName kind="depositsWithdrawals">{localized.depositsWithdrawals}</ReName>
-          <ReValue>{depositsWithdrawals}</ReValue>
-        </Row>
-      </Content>
-    </ReTable>
+    <>
+      <HowDoWeRate isVisible={isVisible} setIsVisible={setIsVisible} />
+      <ReTable className={className}>
+        <TitleRow>
+          <Title>{localized.title}</Title>
+          <Info onClick={() => setIsVisible(true)}>{localized.info}</Info>
+        </TitleRow>
+        <Content>
+          <Row>
+            <ReName kind="reliability">{localized.reliability}</ReName>
+            <ReValue>{reliability}</ReValue>
+          </Row>
+          <Row>
+            <ReName kind="bonusesPromotions">{localized.bonusesPromotions}</ReName>
+            <ReValue>{bonusesPromotions}</ReValue>
+          </Row>
+          <Row>
+            <ReName kind="gameSelection">{localized.gameSelection}</ReName>
+            <ReValue>{gameSelection}</ReValue>
+          </Row>
+          <Row>
+            <ReName kind="casualPlayers">{localized.casualPlayers}</ReName>
+            <ReValue>{casualPlayers}</ReValue>
+          </Row>
+          <Row>
+            <ReName kind="softwareConvenience">{localized.softwareConvenience}</ReName>
+            <ReValue>{softwareConvenience}</ReValue>
+          </Row>
+          <Row>
+            <ReName kind="depositsWithdrawals">{localized.depositsWithdrawals}</ReName>
+            <ReValue>{depositsWithdrawals}</ReValue>
+          </Row>
+        </Content>
+      </ReTable>
+    </>
   )
 }
