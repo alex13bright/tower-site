@@ -1,4 +1,4 @@
-import { Locale } from '~/core/types'
+import { Locale } from '~/components/Locale'
 
 export type Pagination = {
   page: number

@@ -21,13 +21,17 @@ const Title = styled.span`
   font-size: 14px;
 `
 
-type Props = { className?: string }
+type Props = {
+  className?: string
+  title: string
+  logo: string
+}
 
-export const Network = ({ className }: Props): ReactElement => {
+export const Network = ({ className, title, logo }: Props): ReactElement => {
   return (
     <Main className={className}>
-      <Image alt="gg-network" src="/fake/ico-gg-network.svg" width="20px" height="20px" />
-      <Title>GG Network</Title>
+      <Image alt={`${title.toLowerCase()}-logo`} src={logo} width="20px" height="20px" />
+      <Title>{title}</Title>
     </Main>
   )
 }

@@ -4,16 +4,14 @@ import { ReactElement } from 'react'
 const Image = styled.img`
   grid-area: logo;
 `
-type Props = { className?: string }
+type Props = {
+  className?: string
+  title: string
+  logo: string
+}
 
-export const Logo = ({ className }: Props): ReactElement => {
+export const Logo = ({ className, title, logo }: Props): ReactElement => {
   return (
-    <Image
-      className={className}
-      alt="ggpoker-logo"
-      src="/fake/ggpoker-logo.svg"
-      width="210px"
-      height="60px"
-    />
+    <Image className={className} alt={`${title}-logo`} src={logo} width="210px" height="60px" />
   )
 }
