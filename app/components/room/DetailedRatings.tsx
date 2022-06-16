@@ -20,7 +20,7 @@ const i18n: I18n<Trans> = {
     bonusesPromotions: 'Bonuses and promotions',
     gameSelection: 'Game selection',
     casualPlayers: 'Casual players',
-    softwareConvenience: 'Convenience of the software',
+    softwareConvenience: 'Convenience of the_software',
     depositsWithdrawals: 'Deposits and withdrawals',
   },
   ru: {
@@ -43,8 +43,31 @@ const i18n: I18n<Trans> = {
   },
 }
 
-const ReName = styled(Name)`
+const ReName = styled(Name)<{ kind: string }>`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 20px;
   &::before {
+    width: 20px;
+    height: 20px;
+    content: '';
+    background-image: url('/images/ratings/${({ kind }) => kind}.svg');
+    background-repeat: no-repeat;
+  }
+`
+const ReValue = styled(Value)`
+  display: flex;
+  align-items: baseline;
+  color: #008be2;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  height: 20px;
+  &::after {
+    content: '/5';
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 `
 
@@ -75,28 +98,28 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
       <Title>{localized.title}</Title>
       <Content>
         <Row>
-          <ReName>{localized.reliability}</ReName>
-          <Value>{reliability}</Value>
+          <ReName kind="reliability">{localized.reliability}</ReName>
+          <ReValue>{reliability}</ReValue>
         </Row>
         <Row>
-          <ReName>{localized.bonusesPromotions}</ReName>
-          <Value>{bonusesPromotions}</Value>
+          <ReName kind="bonusesPromotions">{localized.bonusesPromotions}</ReName>
+          <ReValue>{bonusesPromotions}</ReValue>
         </Row>
         <Row>
-          <ReName>{localized.gameSelection}</ReName>
-          <Value>{gameSelection}</Value>
+          <ReName kind="gameSelection">{localized.gameSelection}</ReName>
+          <ReValue>{gameSelection}</ReValue>
         </Row>
         <Row>
-          <ReName>{localized.casualPlayers}</ReName>
-          <Value>{casualPlayers}</Value>
+          <ReName kind="casualPlayers">{localized.casualPlayers}</ReName>
+          <ReValue>{casualPlayers}</ReValue>
         </Row>
         <Row>
-          <ReName>{localized.softwareConvenience}</ReName>
-          <Value>{softwareConvenience}</Value>
+          <ReName kind="softwareConvenience">{localized.softwareConvenience}</ReName>
+          <ReValue>{softwareConvenience}</ReValue>
         </Row>
         <Row>
-          <ReName>{localized.depositsWithdrawals}</ReName>
-          <Value>{depositsWithdrawals}</Value>
+          <ReName kind="depositsWithdrawals">{localized.depositsWithdrawals}</ReName>
+          <ReValue>{depositsWithdrawals}</ReValue>
         </Row>
       </Content>
     </Table>
