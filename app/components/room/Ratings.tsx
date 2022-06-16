@@ -67,7 +67,6 @@ const Values = styled.div`
 `
 
 const Main = styled.div`
-  grid-area: ratings;
   display: flex;
   justify-content: center;
   align-items: center;

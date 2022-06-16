@@ -94,7 +94,6 @@ const ReForm = styled(Form)`
 `
 
 const Main = styled.div`
-  grid-area: actions;
   display: grid;
   gap: 20px;
 `

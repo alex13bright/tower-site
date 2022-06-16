@@ -24,7 +24,6 @@ const Main = styled.table`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
-  grid-area: highlights;
 `
 
 const Tbody = styled.tbody`

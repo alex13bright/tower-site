@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
 import { backgroundDark, primaryDark } from '~/styles/styles'
 import { Ratings } from '~/components/room/Ratings'
@@ -11,6 +11,10 @@ import { Features } from '~/components/room/Features'
 import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
 
+export const headerBlock = css`
+  padding: 0 24px;
+`
+
 const Main = styled.div`
   color: ${primaryDark};
   font-size: 16px;
@@ -18,18 +22,9 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 0 26px 26px 26px;
 
   display: grid;
-  grid-template-areas:
-    '. network .'
-    '. logo .'
-    '. ratings .'
-    'highlights highlights highlights'
-    'actions actions actions'
-    'features features features'
-    'detailed detailed detailed';
-  grid-template-columns: 24px 1fr 24px;
+  grid-template-columns: 1fr;
   grid-template-rows: repeat(7, auto);
   row-gap: 20px;
 `
@@ -37,20 +32,30 @@ const Main = styled.div`
 const GridNetwork = styled(Network)`
   align-self: start;
   justify-self: center;
+  ${headerBlock};
 `
 
 const GridLogo = styled(Logo)`
   place-self: center;
+  ${headerBlock};
 `
+const GridRatings = styled(Ratings)`
+  ${headerBlock};
+`
+const GridHighlights = styled(Highlights)`
+  ${headerBlock};
+`
+
 const GridAction = styled(Actions)`
   margin: 30px 0;
+  ${headerBlock};
 `
 
 const GridFeatures = styled(Features)`
-  grid-area: features;
+  ${headerBlock};
 `
 const GridDetailedRatings = styled(DetailedRatings)`
-  grid-area: detailed;
+  ${headerBlock};
 `
 
 type Props = { className?: string }
@@ -91,8 +96,8 @@ export const Header = ({ className }: Props): ReactElement => {
       <Main className={className}>
         <GridNetwork title={networkTitle} logo={networkLogo} />
         <GridLogo title={networkTitle} logo={logo} />
-        <Ratings ratings={ratings} />
-        <Highlights bonus={bonus} rakeback={rakeback} />
+        <GridRatings ratings={ratings} />
+        <GridHighlights bonus={bonus} rakeback={rakeback} />
         <GridAction />
         <GridFeatures data={{ roomType, license, payments, devices, country }} />
         {/*<Advantages />*/}

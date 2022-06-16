@@ -11,7 +11,6 @@ const Main = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  grid-area: network;
 `
 
 const Image = styled.img``

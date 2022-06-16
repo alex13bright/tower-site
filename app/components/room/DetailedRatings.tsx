@@ -71,6 +71,11 @@ const ReValue = styled(Value)`
   }
 `
 
+const ReTable = styled(Table)`
+  background: #2c2f3c;
+  border-radius: 10px;
+`
+
 type Props = {
   data: {
     reliability: number
@@ -94,7 +99,7 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
     depositsWithdrawals,
   } = data
   return (
-    <Table className={className}>
+    <ReTable className={className}>
       <Title>{localized.title}</Title>
       <Content>
         <Row>
@@ -122,6 +127,6 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
           <ReValue>{depositsWithdrawals}</ReValue>
         </Row>
       </Content>
-    </Table>
+    </ReTable>
   )
 }

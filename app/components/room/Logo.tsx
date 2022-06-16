@@ -1,9 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 
-const Image = styled.img`
-  grid-area: logo;
-`
+const Image = styled.img``
 type Props = {
   className?: string
   title: string
