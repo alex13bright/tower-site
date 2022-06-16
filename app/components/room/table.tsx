@@ -34,7 +34,7 @@ export const Content = styled.tbody`
   align-items: center;
 `
 
-export const Title = styled.caption`
+export const Caption = styled.caption`
   display: block;
   color: ${secondaryDark};
   text-align: start;

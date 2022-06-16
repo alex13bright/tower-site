@@ -12,8 +12,6 @@ export const useIntersectionEffect = (): void => {
     const Observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
-        const { isIntersecting, intersectionRatio } = entry
-        console.log(isIntersecting, intersectionRatio)
       },
       {
         root: rootRef.current,

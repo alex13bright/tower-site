@@ -1,6 +1,6 @@
 import { I18n, useLocalized } from '~/core/utils'
 import { ReactElement, useState } from 'react'
-import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
 import { accent, primaryDark, proximaNovaSb, secondaryDark } from '~/styles/styles'
 import chroma from 'chroma-js'
@@ -86,10 +86,12 @@ const ReTable = styled(Table)`
   padding: 24px 0;
 `
 
-const TitleRow = styled.div`
+const ReCaption = styled(Caption)`
   display: flex;
   justify-content: space-between;
 `
+
+const Title = styled.div``
 const Info = styled.button`
   border-bottom: 1px solid ${chroma(accent).darken(0.5).hex()};
   font-size: 12px;
@@ -123,10 +125,10 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
     <>
       <HowDoWeRate isVisible={isVisible} setIsVisible={setIsVisible} />
       <ReTable className={className}>
-        <TitleRow>
+        <ReCaption>
           <Title>{localized.title}</Title>
           <Info onClick={() => setIsVisible(true)}>{localized.info}</Info>
-        </TitleRow>
+        </ReCaption>
         <Content>
           <Row>
             <ReName kind="reliability">{localized.reliability}</ReName>

@@ -2,8 +2,9 @@ import { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
 import styled from 'styled-components'
 import { background, primary } from '~/styles/styles'
 import { Cross } from '~/components/Cross'
+import { PageWrapper } from '~/components/PageWrapper'
 
-const Container = styled.main<{ isVisible: boolean }>`
+const Container = styled(PageWrapper)<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? 'grid' : 'none')};
   position: fixed;
   width: 100%;
@@ -18,19 +19,21 @@ const Container = styled.main<{ isVisible: boolean }>`
 `
 
 const Content = styled.div`
+  height: 100%;
   cursor: initial;
   color: ${primary};
   background-color: ${background};
   border-radius: 10px;
   box-shadow: 0 15px 50px rgb(0 0 0 / 50%);
   position: relative;
+  padding: 45px 30px;
 `
 
 const ReCross = styled(Cross)`
   position: absolute;
-  top: 30px;
-  right: 30px;
-  opacity: 0.5;
+  top: 15px;
+  right: 15px;
+  opacity: 0.3;
 `
 
 type Props = {
@@ -42,9 +45,9 @@ type Props = {
 export function ModalWindow({ children, isVisible, setIsVisible }: Props): ReactElement {
   const handleClick = () => setIsVisible(false)
   return (
-    <Container isVisible={isVisible} onClick={handleClick}>
+    <Container isVisible={isVisible} onClick={handleClick} forwardedAs="main">
       <Content onClick={(e) => e.stopPropagation()}>
-        <ReCross length={30} depth={4} onClick={handleClick} color="#555" />
+        <ReCross length={15} depth={2} onClick={handleClick} color="#555" />
         {children}
       </Content>
     </Container>

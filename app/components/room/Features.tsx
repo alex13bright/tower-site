@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 import { Device, Payment } from '~/core/types'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
-import { Table, Title, Content, Row, Name, Value } from '~/components/room/table'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
 
 type Trans = {
   title: string
@@ -57,7 +57,7 @@ export const Features = ({ data, className }: Props): ReactElement => {
   const localized = useLocalized(i18n)
   return (
     <Table className={className}>
-      <Title>{localized.title}</Title>
+      <Caption>{localized.title}</Caption>
       <Content>
         <Row>
           <Name>{localized.roomType}</Name>
