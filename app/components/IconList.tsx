@@ -15,7 +15,6 @@ const Item = styled.li`
 `
 
 const Image = styled.img`
-  aspect-ratio: auto;
   height: 20px;
 `
 
