@@ -14,11 +14,11 @@ const Container = styled.div<{ isVisible: boolean }>`
   cursor: pointer;
   background: rgba(34, 34, 34, 0.5);
   padding: 20px;
-  grid-template-rows: 1fr;
   place-items: center;
 `
 
 const Content = styled.div`
+  width: 100%;
   height: 100%;
   cursor: initial;
   color: ${primary};
@@ -26,11 +26,18 @@ const Content = styled.div`
   border-radius: 10px;
   box-shadow: 0 15px 50px rgb(0 0 0 / 50%);
   position: relative;
-  padding: 45px 30px;
+  padding: 45px 13px 15px 30px;
   min-width: ${breakpoints.xs};
   max-width: ${breakpoints.md};
+  overflow: hidden;
 `
-
+const ScrollArea = styled.div`
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+`
 const ReCross = styled(Cross)`
   position: absolute;
   top: 15px;
@@ -50,7 +57,7 @@ export function ModalWindow({ children, isVisible, setIsVisible }: Props): React
     <Container isVisible={isVisible} onClick={handleClick}>
       <Content onClick={(e) => e.stopPropagation()}>
         <ReCross length={15} depth={2} onClick={handleClick} color="#555" />
-        {children}
+        <ScrollArea>{children}</ScrollArea>
       </Content>
     </Container>
   )
