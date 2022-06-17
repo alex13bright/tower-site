@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
-export const useSize = (ref: MutableRefObject<HTMLDivElement | null>) => {
+export const useSize = (ref: MutableRefObject<HTMLElement | null>) => {
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   useEffect(() => {
     if (ref.current === null) throw new Error(`ref can't be null`)

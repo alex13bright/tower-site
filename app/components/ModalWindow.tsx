@@ -63,7 +63,7 @@ export function ModalWindow({ children, isVisible, setIsVisible }: Props): React
   return (
     <Container isVisible={isVisible} onClick={handleClick}>
       <Content onClick={(e) => e.stopPropagation()}>
-        <ReCross length={15} depth={2} onClick={handleClick} color={secondary} />
+        <ReCross size={15} depth={2} onClick={handleClick} color={secondary} />
         <ScrollArea>
           <ScrollAreaContent>{children}</ScrollAreaContent>
         </ScrollArea>

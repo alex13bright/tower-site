@@ -10,7 +10,7 @@ const crossLine = css<{ lineLength: number; depth: number; color: string }>`
 `
 
 const Main = styled.button<{
-  length: number
+  size: number
   depth: number
   lineLength: number
   offset: number
@@ -20,8 +20,8 @@ const Main = styled.button<{
   display: grid;
   grid-template-areas: 'mixer';
   align-items: center;
-  width: ${({ length }) => length}px;
-  height: ${({ length }) => length}px;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   &::before {
     ${crossLine};
     transform: translateX(${({ offset }) => -offset}px) rotate(-45deg);
@@ -33,22 +33,22 @@ const Main = styled.button<{
 `
 
 type Props = {
-  length: number
+  size: number
   depth: number
   color: string
   className?: string
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
-export function Cross({ length, depth, className, onClick, color }: Props): ReactElement {
-  const lineLength = length / Math.sin(Math.PI / 4)
-  const offset = (lineLength - length) / 2
+export function Cross({ size, depth, className, onClick, color }: Props): ReactElement {
+  const lineLength = size / Math.sin(Math.PI / 4)
+  const offset = (lineLength - size) / 2
   return (
     <Main
       onClick={onClick}
       className={className}
       color={color}
-      length={length}
+      size={size}
       depth={depth}
       lineLength={lineLength}
       offset={offset}
