@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
 import { headerBlock } from '~/components/room/styles'
 import { Link } from '@remix-run/react'
-import { accent, backgroundDark } from '~/styles/styles'
+import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
 import chroma from 'chroma-js'
 
 const itemStyles = css`
@@ -30,12 +30,21 @@ const NotLink = styled.span`
   color: ${accent};
 `
 const Item = styled.li``
-
-const List = styled.ul`
+const amountToColumns = (amount: number): number => {
+  if (amount % 2 === 0) return 2
+  if (amount > 4) return 1
+  return amount
+}
+const List = styled.ul<{ amount: number }>`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   padding: 5px;
   gap: 5px;
+  @media ${widthAtLeast.sm} {
+    grid-template-columns: repeat(${({ amount }) => amountToColumns(amount)}, 1fr);
+  }
+  @media ${widthAtLeast.md} {
+    grid-template-columns: repeat(${({ amount }) => amount}, 1fr);
+  }
 `
 
 const Main = styled.div`
@@ -57,7 +66,7 @@ type Props = {
 export function NavButtons({ links }: Props): ReactElement {
   return (
     <Main>
-      <List>
+      <List amount={links.length}>
         {links.map(({ url, title, isActive = false }, i) => (
           <Item key={i}>
             {isActive ? <NotLink>{title}</NotLink> : <ReLink to={url}>{title}</ReLink>}

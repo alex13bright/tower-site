@@ -94,8 +94,8 @@ export const Header = ({ className }: Props): ReactElement => {
   const devices: Device[] = ['IOS', 'macOS']
   const country = 'Thailand'
   const navLinks: LinkType[] = [
-    { url: '/rakeback-deals/ggpoker-review', title: 'Review', isActive: true },
-    { url: '/rakeback-deals/ggpoker-download', title: 'Download' },
+    { url: '/rakeback-deals/ggpoker-review', title: 'Review' },
+    { url: '/rakeback-deals/ggpoker-download', title: 'Download', isActive: true },
     { url: '/rakeback-deals/ggpoker-club', title: 'Club' },
     { url: '/rakeback-deals/ggpoker-forum', title: 'Forum' },
   ]
