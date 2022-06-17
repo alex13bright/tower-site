@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/styles'
+import { headerBlock, headerTitle } from '~/components/room/roomStyles'
 
 const StarsBar = styled.div<{
   ratings: number

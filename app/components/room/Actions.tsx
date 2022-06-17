@@ -11,7 +11,7 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import chroma from 'chroma-js'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 
 const button = css`
   color: inherit;

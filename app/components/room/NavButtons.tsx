@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 import { Link } from '@remix-run/react'
 import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
 import chroma from 'chroma-js'

@@ -2,9 +2,9 @@ import { ReactElement } from 'react'
 import { Device, Payment } from '~/core/types'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 
 type Props = {
   data: {

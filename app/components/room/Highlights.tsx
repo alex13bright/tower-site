@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 
 const Main = styled.table`

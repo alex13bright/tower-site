@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 import { widthAtLeast } from '~/styles/styles'
 
 const Image = styled.img`

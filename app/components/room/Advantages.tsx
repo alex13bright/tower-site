@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/styles'
+import { headerBlock, headerTitle } from '~/components/room/roomStyles'
 import { border, widthAtLeast } from '~/styles/styles'
 
 const Item = styled.li`

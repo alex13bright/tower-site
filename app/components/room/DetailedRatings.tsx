@@ -1,10 +1,10 @@
 import { ReactElement, useState } from 'react'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
 import styled from 'styled-components'
 import { accent, primaryDark, proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/HowDoWeRate'
-import { headerBlock } from '~/components/room/styles'
+import { headerBlock } from '~/components/room/roomStyles'
 
 const ReName = styled(Name)<{ kind: string }>`
   display: grid;
