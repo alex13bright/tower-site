@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { proximaNovaSb } from '~/styles/styles'
-import { headerBlock, headerTitle } from '~/components/room/styles'
+import { headerTitle } from '~/components/room/styles'
 
 export const Name = styled.td`
   grid-area: name;
@@ -44,6 +44,4 @@ export const Caption = styled.caption`
 export const Table = styled.table`
   display: grid;
   row-gap: 16px;
-
-  ${headerBlock};
 `

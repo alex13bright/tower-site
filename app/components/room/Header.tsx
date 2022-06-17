@@ -11,7 +11,7 @@ import { Features } from '~/components/room/Features'
 import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
-import { NavButtons } from '~/components/room/NavButtons'
+import { LinkType, NavButtons } from '~/components/room/NavButtons'
 
 const Main = styled.div`
   color: ${primaryDark};
@@ -71,6 +71,12 @@ export const Header = ({ className }: Props): ReactElement => {
   }
   const devices: Device[] = ['IOS', 'macOS']
   const country = 'Thailand'
+  const navLinks: LinkType[] = [
+    { url: '/rakeback-deals/ggpoker-review', title: 'Review', isActive: true },
+    // { url: '/rakeback-deals/ggpoker-download', title: 'Download Download Download' },
+    { url: '/rakeback-deals/ggpoker-club', title: 'Club' },
+    { url: '/rakeback-deals/ggpoker-forum', title: 'Forum' },
+  ]
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
@@ -82,7 +88,7 @@ export const Header = ({ className }: Props): ReactElement => {
         <Features data={{ roomType, license, payments, devices, country }} />
         <Advantages data={advantages} />
         <DetailedRatings data={detailedRatings} />
-        <NavButtons />
+        <NavButtons links={navLinks} />
       </Main>
     </StickyMarker>
   )

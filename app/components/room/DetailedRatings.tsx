@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { accent, primaryDark, proximaNovaSb, secondaryDark } from '~/styles/styles'
 import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/HowDoWeRate'
+import { headerBlock } from '~/components/room/styles'
 
 const ReName = styled(Name)<{ kind: string }>`
   display: grid;
@@ -39,6 +40,8 @@ const ReTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
   padding: 30px 0;
+
+  ${headerBlock};
 `
 
 const ReCaption = styled(Caption)`

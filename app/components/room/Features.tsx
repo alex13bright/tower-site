@@ -3,6 +3,8 @@ import { Device, Payment } from '~/core/types'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
+import styled from 'styled-components'
+import { headerBlock } from '~/components/room/styles'
 
 type Props = {
   data: {
@@ -15,10 +17,14 @@ type Props = {
   className?: string
 }
 
+const Main = styled(Table)`
+  ${headerBlock};
+`
+
 export const Features = ({ data, className }: Props): ReactElement => {
   const { roomType, license, payments, devices, country } = data
   return (
-    <Table className={className}>
+    <Main className={className}>
       <Caption>Characteristics</Caption>
       <Content>
         <Row>
@@ -48,6 +54,6 @@ export const Features = ({ data, className }: Props): ReactElement => {
           <Value>{country}</Value>
         </Row>
       </Content>
-    </Table>
+    </Main>
   )
 }
