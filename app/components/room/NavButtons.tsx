@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { headerBlock } from '~/components/room/styles'
 import { Link } from '@remix-run/react'
 import { accent, backgroundDark } from '~/styles/styles'
+import chroma from 'chroma-js'
 
 const itemStyles = css`
   padding: 10px;
@@ -16,9 +17,12 @@ const itemStyles = css`
 
 const ReLink = styled(Link)`
   ${itemStyles};
-  background-color: ${accent};
-  color: ${backgroundDark.start};
   font-weight: bold;
+  color: ${backgroundDark.start};
+  background-color: ${accent};
+  &:hover {
+    background-color: ${chroma(accent).darken(0.1).hex()};
+  }
 `
 
 const NotLink = styled.span`
