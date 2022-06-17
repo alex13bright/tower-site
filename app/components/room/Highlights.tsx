@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { headerBlock } from '~/components/room/styles'
-import { border, widthAtLeast } from '~/styles/styles'
+import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 
 const Main = styled.table`
   display: grid;
@@ -57,16 +57,16 @@ export const Highlights = ({ bonus, rakeback, className }: Props) => {
   return (
     <Main className={className}>
       <Tbody>
-        <HighlightOut $color="#eb5757">
+        <HighlightOut $color={primaryAction}>
           <HighlightIn>
             <Name>Bonus</Name>
-            <Value $color="#eb5757">{bonus}</Value>
+            <Value $color={primaryAction}>{bonus}</Value>
           </HighlightIn>
         </HighlightOut>
-        <HighlightOut $color="#008be2">
+        <HighlightOut $color={accent}>
           <HighlightIn>
             <Name>Rakeback</Name>
-            <Value $color="#008be2">{rakeback}</Value>
+            <Value $color={accent}>{rakeback}</Value>
           </HighlightIn>
         </HighlightOut>
       </Tbody>

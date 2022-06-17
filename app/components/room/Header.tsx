@@ -40,8 +40,8 @@ const Main = styled.div`
       'network .'
       'logo ratings'
       'highlights highlights'
-      'actions actions'
       'features advantages'
+      'actions actions'
       'detailed detailed'
       'nav nav';
     grid-template-columns: 1fr 1fr;

@@ -39,10 +39,14 @@ const ReValue = styled(Value)`
 const ReTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
   ${headerBlock};
   grid-area: detailed;
+  @media ${widthAtLeast.md} {
+    margin-top: 30px;
+  }
 `
 
 const ReCaption = styled(Caption)`

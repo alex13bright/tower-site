@@ -85,7 +85,6 @@ const Main = styled.div`
   grid-area: actions;
 
   @media ${widthAtLeast.md} {
-    margin-top: 30px;
     grid-template-columns: 1fr 1fr;
   }
 `
