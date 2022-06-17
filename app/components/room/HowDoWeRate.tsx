@@ -8,7 +8,9 @@ const Caption = styled.h1`
 const List = styled.ul``
 const Item = styled.li``
 const Header = styled.h2``
-const Body = styled.p``
+const Body = styled.p`
+  text-align: justify;
+`
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
