@@ -6,7 +6,7 @@ export const proximaNovaSb = `'Proxima Nova Sb',serif`
 export const breakpoints = {
   xs: 320,
   sm: 460,
-  md: 768,
+  md: 468,
   lg: 1280,
   xl: 1440,
 }
