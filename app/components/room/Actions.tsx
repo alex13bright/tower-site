@@ -1,33 +1,9 @@
 import styled, { css } from 'styled-components'
 import { ReactElement } from 'react'
-import { I18n, useLocalized } from '~/core/utils'
 import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
 import { background, primary, primaryAction, proximaNovaSb, secondaryAction } from '~/styles/styles'
 import chroma from 'chroma-js'
-
-type Trans = {
-  register: string
-  contact: string
-  tagAccount: string
-}
-const i18n: I18n<Trans> = {
-  en: {
-    register: 'Sign up',
-    contact: 'Contact us',
-    tagAccount: 'Tag your account',
-  },
-  ru: {
-    register: 'Перейти',
-    contact: 'Чат с менеджером',
-    tagAccount: 'Привязать счет',
-  },
-  es: {
-    register: 'Registro',
-    contact: 'Contáctanos',
-    tagAccount: 'Registra tu cuenta',
-  },
-}
 
 const button = css`
   color: inherit;
@@ -101,13 +77,12 @@ const Main = styled.div`
 type Props = { className?: string }
 
 export const Actions = ({ className }: Props): ReactElement => {
-  const localized = useLocalized(i18n)
   return (
     <Main className={className}>
       <ReForm>
-        <RegisterButton href="/out.com">{localized.register}</RegisterButton>
-        <ContactButton>{localized.contact}</ContactButton>
-        <TagButton>{localized.tagAccount}</TagButton>
+        <RegisterButton href="/out.com">Sign up</RegisterButton>
+        <ContactButton>Contact us</ContactButton>
+        <TagButton>Tag your account</TagButton>
       </ReForm>
     </Main>
   )

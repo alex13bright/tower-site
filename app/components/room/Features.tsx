@@ -1,45 +1,8 @@
-import { I18n, useLocalized } from '~/core/utils'
 import { ReactElement } from 'react'
 import { Device, Payment } from '~/core/types'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
-
-type Trans = {
-  title: string
-  roomType: string
-  license: string
-  payments: string
-  devices: string
-  country: string
-}
-
-const i18n: I18n<Trans> = {
-  en: {
-    title: 'Characteristics',
-    roomType: 'RoomType',
-    license: 'License',
-    payments: 'Payments',
-    devices: 'Devices',
-    country: 'Country',
-  },
-  ru: {
-    title: '',
-    roomType: '',
-    license: '',
-    payments: '',
-    devices: '',
-    country: '',
-  },
-  es: {
-    title: '',
-    roomType: '',
-    license: '',
-    payments: '',
-    devices: '',
-    country: '',
-  },
-}
 
 type Props = {
   data: {
@@ -54,21 +17,20 @@ type Props = {
 
 export const Features = ({ data, className }: Props): ReactElement => {
   const { roomType, license, payments, devices, country } = data
-  const localized = useLocalized(i18n)
   return (
     <Table className={className}>
-      <Caption>{localized.title}</Caption>
+      <Caption>Characteristics</Caption>
       <Content>
         <Row>
-          <Name>{localized.roomType}</Name>
+          <Name>Room type</Name>
           <Value>{roomType}</Value>
         </Row>
         <Row>
-          <Name>{localized.license}</Name>
+          <Name>License</Name>
           <Value>{license}</Value>
         </Row>
         <Row>
-          <Name>{localized.payments}</Name>
+          <Name>Payments</Name>
           <Value>
             <Spoiler height={80}>
               <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
@@ -76,13 +38,13 @@ export const Features = ({ data, className }: Props): ReactElement => {
           </Value>
         </Row>
         <Row>
-          <Name>{localized.devices}</Name>
+          <Name>Devices</Name>
           <Value>
             <IconList urlFn={(i) => `/images/devices/${i}.svg`}>{devices}</IconList>
           </Value>
         </Row>
         <Row>
-          <Name>{localized.country}</Name>
+          <Name>Country</Name>
           <Value>{country}</Value>
         </Row>
       </Content>

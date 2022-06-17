@@ -1,24 +1,4 @@
 import styled from 'styled-components'
-import { I18n, useLocalized } from '~/core/utils'
-
-type Trans = {
-  bonus: string
-  rakeback: string
-}
-const i18n: I18n<Trans> = {
-  en: {
-    bonus: 'Bonus',
-    rakeback: 'Rakeback',
-  },
-  ru: {
-    bonus: 'Бонус',
-    rakeback: 'Рейкбек',
-  },
-  es: {
-    bonus: 'Bono',
-    rakeback: 'Rakeback',
-  },
-}
 
 const Main = styled.table`
   display: grid;
@@ -61,19 +41,18 @@ type Props = {
 }
 
 export const Highlights = ({ bonus, rakeback, className }: Props) => {
-  const localized = useLocalized(i18n)
   return (
     <Main className={className}>
       <Tbody>
         <HighlightOut $color="#eb5757">
           <HighlightIn>
-            <Name>{localized.bonus}</Name>
+            <Name>Bonus</Name>
             <Value $color="#eb5757">{bonus}</Value>
           </HighlightIn>
         </HighlightOut>
         <HighlightOut $color="#008be2">
           <HighlightIn>
-            <Name>{localized.rakeback}</Name>
+            <Name>Rakeback</Name>
             <Value $color="#008be2">{rakeback}</Value>
           </HighlightIn>
         </HighlightOut>

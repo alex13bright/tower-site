@@ -1,22 +1,6 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { I18n, useLocalized } from '~/core/utils'
-
-type Trans = {
-  title: string
-}
-const i18n: I18n<Trans> = {
-  en: {
-    title: `Editor's rating`,
-  },
-  ru: {
-    title: 'Наш рейтинг',
-  },
-  es: {
-    title: 'Calificación del editor',
-  },
-}
 
 const StarsBar = styled.div<{
   ratings: number
@@ -79,11 +63,10 @@ const Main = styled.div`
 type Props = { ratings: number; className?: string }
 
 export const Ratings = ({ ratings, className }: Props): ReactElement => {
-  const localized = useLocalized(i18n)
   const isBright = ratings > 2.5
   return (
     <Main className={className}>
-      <Title>{localized.title}</Title>
+      <Title>Editor's rating</Title>
       <Values>
         <Stars>
           <StarsBar ratings={5} isBright={false} />
