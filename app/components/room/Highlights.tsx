@@ -13,6 +13,7 @@ const Main = styled.table`
 
   @media ${widthAtLeast.md} {
     grid-template-columns: repeat(2, 1fr);
+    grid-area: auto;
   }
 `
 

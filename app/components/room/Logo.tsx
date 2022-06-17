@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { headerBlock } from '~/components/room/styles'
+import { widthAtLeast } from '~/styles/styles'
 
 const Image = styled.img`
   place-self: center;
@@ -9,6 +10,10 @@ const Image = styled.img`
   grid-area: logo;
   height: 60px;
   width: auto;
+
+  @media ${widthAtLeast.md} {
+    grid-area: auto;
+  }
 `
 type Props = {
   className?: string

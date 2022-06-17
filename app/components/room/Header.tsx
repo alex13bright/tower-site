@@ -16,8 +16,8 @@ import { LinkType, NavButtons } from '~/components/room/NavButtons'
 const LogoHighlightWrapper = styled.div`
   display: contents;
   @media ${widthAtLeast.md} {
-    display: flex;
     grid-area: logo-highlights;
+    display: flex;
     justify-content: space-between;
   }
 `
