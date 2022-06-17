@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
-import { backgroundDark, primaryDark } from '~/styles/styles'
+import { backgroundDark, primaryDark, widthAtLeast } from '~/styles/styles'
 import { Ratings } from '~/components/room/Ratings'
 import { Network } from '~/components/room/Network'
 import { Highlights } from '~/components/room/Highlights'
@@ -13,6 +13,14 @@ import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
 import { LinkType, NavButtons } from '~/components/room/NavButtons'
 
+const LogoHighlightWrapper = styled.div`
+  display: contents;
+  @media ${widthAtLeast.md} {
+    display: flex;
+    grid-area: logo-highlights;
+    justify-content: space-between;
+  }
+`
 const Main = styled.div`
   color: ${primaryDark};
   font-size: 16px;
@@ -23,9 +31,31 @@ const Main = styled.div`
   padding-bottom: 30px;
 
   display: grid;
+  grid-template-areas:
+    'network'
+    'logo'
+    'ratings'
+    'highlights'
+    'actions'
+    'features'
+    'advantages'
+    'detailed'
+    'nav';
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(7, auto);
   row-gap: 30px;
+
+  @media ${widthAtLeast.md} {
+    grid-template-areas:
+      'network .'
+      'logo-highlights logo-highlights'
+      'ratings ratings'
+      'features advantages'
+      'detailed detailed'
+      'actions actions'
+      'nav nav';
+    grid-template-columns: 1fr 1fr;
+    padding: 0 20px;
+  }
 `
 
 type Props = { className?: string }
@@ -82,9 +112,11 @@ export const Header = ({ className }: Props): ReactElement => {
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
         <Network {...network} />
-        <Logo title={title} logo={logo} />
+        <LogoHighlightWrapper>
+          <Logo title={title} logo={logo} />
+          <Highlights bonus={bonus} rakeback={rakeback} />
+        </LogoHighlightWrapper>
         <Ratings ratings={ratings} />
-        <Highlights bonus={bonus} rakeback={rakeback} />
         <Actions />
         <Features data={{ roomType, license, payments, devices, country }} />
         <Advantages data={advantages} />

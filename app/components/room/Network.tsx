@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { secondaryDark } from '~/styles/styles'
+import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { headerBlock } from '~/components/room/styles'
 
 const Main = styled.a`
   cursor: pointer;
-  border: 1px solid #343848;
+  border: 1px solid ${border};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-top: 0;
@@ -17,6 +17,11 @@ const Main = styled.a`
   align-self: start;
   justify-self: center;
   ${headerBlock};
+  grid-area: network;
+
+  @media ${widthAtLeast.md} {
+    place-self: start;
+  }
 `
 
 const Image = styled.img``

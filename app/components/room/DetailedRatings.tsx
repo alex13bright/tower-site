@@ -42,6 +42,7 @@ const ReTable = styled(Table)`
   padding: 30px 0;
 
   ${headerBlock};
+  grid-area: detailed;
 `
 
 const ReCaption = styled(Caption)`

@@ -1,12 +1,17 @@
 import styled from 'styled-components'
 import { headerBlock } from '~/components/room/styles'
+import { border, widthAtLeast } from '~/styles/styles'
 
 const Main = styled.table`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
+  @media ${widthAtLeast.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   ${headerBlock};
+  grid-area: highlights;
 `
 
 const Tbody = styled.tbody`
@@ -18,7 +23,7 @@ const HighlightOut = styled.tr<{ $color: string }>`
   filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
 `
 const HighlightIn = styled.td`
-  background: #343848;
+  background: ${border};
   clip-path: polygon(calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%, 0 0);
   padding: 9px 28px 9px 40px;
   display: flex;

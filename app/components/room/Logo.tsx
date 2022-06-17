@@ -5,6 +5,9 @@ import { headerBlock } from '~/components/room/styles'
 const Image = styled.img`
   place-self: center;
   ${headerBlock};
+  grid-area: logo;
+  height: 60px;
+  width: auto;
 `
 type Props = {
   className?: string
@@ -13,7 +16,5 @@ type Props = {
 }
 
 export const Logo = ({ className, title, logo }: Props): ReactElement => {
-  return (
-    <Image className={className} alt={`${title}-logo`} src={logo} width="210px" height="60px" />
-  )
+  return <Image className={className} alt={`${title}-logo`} src={logo} />
 }

@@ -19,6 +19,7 @@ type Props = {
 
 const Main = styled(Table)`
   ${headerBlock};
+  grid-area: features;
 `
 
 export const Features = ({ data, className }: Props): ReactElement => {

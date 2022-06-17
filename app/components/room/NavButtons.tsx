@@ -41,6 +41,7 @@ const List = styled.ul`
 const Main = styled.div`
   display: grid;
   ${headerBlock};
+  grid-area: nav;
 `
 
 export type LinkType = {

@@ -28,6 +28,8 @@ export const primaryDark = '#fff'
 export const secondaryDark = '#999'
 export const backgroundDark = { start: '#20222c', end: '#2b2e3b' }
 
+export const border = '#343848'
+
 export const primaryAction = '#ee3c4b'
 export const secondaryAction = '#70ac30'
 

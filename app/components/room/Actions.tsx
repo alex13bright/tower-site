@@ -75,6 +75,7 @@ const Main = styled.div`
   gap: 20px;
 
   ${headerBlock};
+  grid-area: actions;
 `
 
 type Props = { className?: string }

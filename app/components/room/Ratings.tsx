@@ -58,6 +58,7 @@ const Main = styled.div`
   }
 
   ${headerBlock};
+  grid-area: ratings;
 `
 
 type Props = { ratings: number; className?: string }
