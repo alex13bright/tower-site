@@ -36,15 +36,13 @@ export function Spoiler({ height, children }: Props): ReactElement {
   const [isPressed, setIsPressed] = useState<boolean>(false)
 
   const size = useSize(ref)
-  const maxHeight = Math.min(height, size.height)
+  const heightLimit = Math.min(height, size.height)
   useEffect(
-    () => setIsButtonHidden(size.height === maxHeight),
-    [maxHeight, size, setIsButtonHidden]
+    () => setIsButtonHidden(size.height === heightLimit),
+    [heightLimit, size, setIsButtonHidden]
   )
 
-  const heightString = maxHeight + 'px'
-
-  const activeHeight = isPressed ? 'auto' : heightString
+  const activeHeight = isPressed ? 'auto' : heightLimit + 'px'
   return (
     <Main>
       <Container activeHeight={activeHeight}>
