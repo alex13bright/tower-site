@@ -40,6 +40,7 @@ const List = styled.ul`
 
 const Main = styled.div`
   display: grid;
+  margin-top: 30px;
   ${headerBlock};
   grid-area: nav;
 `

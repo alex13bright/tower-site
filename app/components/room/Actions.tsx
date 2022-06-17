@@ -2,7 +2,14 @@ import styled, { css } from 'styled-components'
 import { ReactElement } from 'react'
 import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
-import { background, primary, primaryAction, proximaNovaSb, secondaryAction } from '~/styles/styles'
+import {
+  background,
+  primary,
+  primaryAction,
+  proximaNovaSb,
+  secondaryAction,
+  widthAtLeast,
+} from '~/styles/styles'
 import chroma from 'chroma-js'
 import { headerBlock } from '~/components/room/styles'
 
@@ -76,6 +83,11 @@ const Main = styled.div`
 
   ${headerBlock};
   grid-area: actions;
+
+  @media ${widthAtLeast.md} {
+    margin-top: 30px;
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 type Props = { className?: string }

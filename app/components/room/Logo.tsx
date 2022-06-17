@@ -4,6 +4,7 @@ import { headerBlock } from '~/components/room/styles'
 
 const Image = styled.img`
   place-self: center;
+  margin: 30px 0;
   ${headerBlock};
   grid-area: logo;
   height: 60px;

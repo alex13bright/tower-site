@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerBlock } from '~/components/room/styles'
 
 const Main = styled.a`
   cursor: pointer;
@@ -16,11 +15,11 @@ const Main = styled.a`
 
   align-self: start;
   justify-self: center;
-  ${headerBlock};
   grid-area: network;
 
   @media ${widthAtLeast.md} {
     place-self: start;
+    margin-left: 24px;
   }
 `
 

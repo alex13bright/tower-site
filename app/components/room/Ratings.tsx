@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { secondaryDark, widthAtLeast } from '~/styles/styles'
+import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/styles'
 
@@ -53,12 +53,15 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   column-gap: 58px;
-  @media ${widthAtLeast.sm} {
-    justify-content: space-between;
-  }
 
   ${headerBlock};
   grid-area: ratings;
+
+  @media ${widthAtLeast.sm} {
+    justify-content: space-between;
+    padding-bottom: 30px;
+    border-bottom: 1px solid ${border};
+  }
 `
 
 type Props = { ratings: number; className?: string }

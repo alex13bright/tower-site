@@ -33,6 +33,10 @@ export const GlobalStyles = createGlobalStyle`
   li {
     list-style-type: none;
   }
+  table, caption, tbody, tr, td {
+    margin: 0;
+    padding: 0;
+  }
 
   button {
     outline: none;

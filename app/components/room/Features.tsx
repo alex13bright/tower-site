@@ -18,6 +18,8 @@ type Props = {
 }
 
 const Main = styled(Table)`
+  padding-top: 30px;
+  padding-bottom: 30px;
   ${headerBlock};
   grid-area: features;
 `
@@ -39,7 +41,7 @@ export const Features = ({ data, className }: Props): ReactElement => {
         <Row>
           <Name>Payments</Name>
           <Value>
-            <Spoiler height={80}>
+            <Spoiler height={20}>
               <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
             </Spoiler>
           </Value>

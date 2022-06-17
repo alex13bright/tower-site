@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/table'
 import styled from 'styled-components'
-import { accent, primaryDark, proximaNovaSb, secondaryDark } from '~/styles/styles'
+import { accent, primaryDark, proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/HowDoWeRate'
 import { headerBlock } from '~/components/room/styles'
@@ -49,6 +49,12 @@ const ReCaption = styled(Caption)`
   display: flex;
   justify-content: space-between;
 `
+const ReContent = styled(Content)`
+  @media ${widthAtLeast.md} {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 60px;
+  }
+`
 
 const Title = styled.div``
 const Info = styled.button`
@@ -87,7 +93,7 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
           <Title>Our ratings</Title>
           <Info onClick={() => setIsVisible(true)}>How do we rate?</Info>
         </ReCaption>
-        <Content>
+        <ReContent>
           <Row>
             <ReName kind="reliability">Reliability</ReName>
             <ReValue>{reliability}</ReValue>
@@ -112,7 +118,7 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
             <ReName kind="depositsWithdrawals">Deposits and withdrawals</ReName>
             <ReValue>{depositsWithdrawals}</ReValue>
           </Row>
-        </Content>
+        </ReContent>
       </ReTable>
     </>
   )

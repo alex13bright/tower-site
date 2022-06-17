@@ -42,7 +42,6 @@ const Main = styled.div`
     'detailed'
     'nav';
   grid-template-columns: 1fr;
-  row-gap: 30px;
 
   @media ${widthAtLeast.md} {
     grid-template-areas:
@@ -54,7 +53,7 @@ const Main = styled.div`
       'actions actions'
       'nav nav';
     grid-template-columns: 1fr 1fr;
-    padding: 0 20px;
+    align-items: start;
   }
 `
 

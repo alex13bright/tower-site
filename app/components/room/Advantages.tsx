@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/styles'
-import { border } from '~/styles/styles'
+import { border, widthAtLeast } from '~/styles/styles'
 
 const Item = styled.li`
   display: flex;
@@ -26,10 +26,19 @@ const Main = styled.div`
   display: grid;
   row-gap: 16px;
   border-top: 1px solid ${border};
-  padding: 30px 0 0 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
   ${headerBlock};
   grid-area: advantages;
+
+  @media ${widthAtLeast} {
+    border-top: none;
+    border-left: 1px solid ${border};
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 30px;
+  }
 `
 
 type Props = {
