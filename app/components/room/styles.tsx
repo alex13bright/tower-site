@@ -8,3 +8,8 @@ export const headerTitle = css`
   letter-spacing: 1px;
   text-transform: uppercase;
 `
+
+export const headerBlock = css`
+  padding-left: 24px;
+  padding-right: 24px;
+`

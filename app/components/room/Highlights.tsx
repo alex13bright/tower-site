@@ -1,9 +1,12 @@
 import styled from 'styled-components'
+import { headerBlock } from '~/components/room/styles'
 
 const Main = styled.table`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
+
+  ${headerBlock};
 `
 
 const Tbody = styled.tbody`

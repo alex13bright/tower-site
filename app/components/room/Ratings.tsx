@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerTitle } from '~/components/room/styles'
+import { headerBlock, headerTitle } from '~/components/room/styles'
 
 const StarsBar = styled.div<{
   ratings: number
@@ -56,6 +56,8 @@ const Main = styled.div`
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
   }
+
+  ${headerBlock};
 `
 
 type Props = { ratings: number; className?: string }

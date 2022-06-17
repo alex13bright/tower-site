@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { StickyMarker } from '~/components/Sticky'
 import { backgroundDark, primaryDark } from '~/styles/styles'
 import { Ratings } from '~/components/room/Ratings'
@@ -11,11 +11,7 @@ import { Features } from '~/components/room/Features'
 import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
-
-export const headerBlock = css`
-  padding-left: 24px;
-  padding-right: 24px;
-`
+import { NavButtons } from '~/components/room/NavButtons'
 
 const Main = styled.div`
   color: ${primaryDark};
@@ -29,37 +25,6 @@ const Main = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: repeat(7, auto);
   row-gap: 30px;
-`
-
-const GridNetwork = styled(Network)`
-  align-self: start;
-  justify-self: center;
-  ${headerBlock};
-`
-
-const GridLogo = styled(Logo)`
-  place-self: center;
-  ${headerBlock};
-`
-const GridRatings = styled(Ratings)`
-  ${headerBlock};
-`
-const GridHighlights = styled(Highlights)`
-  ${headerBlock};
-`
-
-const GridAction = styled(Actions)`
-  ${headerBlock};
-`
-
-const GridAdvantages = styled(Advantages)`
-  ${headerBlock};
-`
-const GridFeatures = styled(Features)`
-  ${headerBlock};
-`
-const GridDetailedRatings = styled(DetailedRatings)`
-  ${headerBlock};
 `
 
 type Props = { className?: string }
@@ -109,15 +74,15 @@ export const Header = ({ className }: Props): ReactElement => {
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
-        <GridNetwork {...network} />
-        <GridLogo title={title} logo={logo} />
-        <GridRatings ratings={ratings} />
-        <GridHighlights bonus={bonus} rakeback={rakeback} />
-        <GridAction />
-        <GridFeatures data={{ roomType, license, payments, devices, country }} />
-        <GridAdvantages data={advantages} />
-        <GridDetailedRatings data={detailedRatings} />
-        {/*<NavTabs />*/}
+        <Network {...network} />
+        <Logo title={title} logo={logo} />
+        <Ratings ratings={ratings} />
+        <Highlights bonus={bonus} rakeback={rakeback} />
+        <Actions />
+        <Features data={{ roomType, license, payments, devices, country }} />
+        <Advantages data={advantages} />
+        <DetailedRatings data={detailedRatings} />
+        <NavButtons />
       </Main>
     </StickyMarker>
   )

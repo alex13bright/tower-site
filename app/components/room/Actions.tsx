@@ -4,6 +4,7 @@ import { Form } from '@remix-run/react'
 import { ExternalLink } from '~/components/links'
 import { background, primary, primaryAction, proximaNovaSb, secondaryAction } from '~/styles/styles'
 import chroma from 'chroma-js'
+import { headerBlock } from '~/components/room/styles'
 
 const button = css`
   color: inherit;
@@ -72,6 +73,8 @@ const ReForm = styled(Form)`
 const Main = styled.div`
   display: grid;
   gap: 20px;
+
+  ${headerBlock};
 `
 
 type Props = { className?: string }

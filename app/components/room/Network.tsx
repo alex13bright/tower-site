@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { secondaryDark } from '~/styles/styles'
 import { ReactElement } from 'react'
+import { headerBlock } from '~/components/room/styles'
 
 const Main = styled.a`
   cursor: pointer;
@@ -12,6 +13,10 @@ const Main = styled.a`
   display: flex;
   gap: 8px;
   align-items: center;
+
+  align-self: start;
+  justify-self: center;
+  ${headerBlock};
 `
 
 const Image = styled.img``

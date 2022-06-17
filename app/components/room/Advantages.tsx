@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerTitle } from '~/components/room/styles'
+import { headerBlock, headerTitle } from '~/components/room/styles'
 
 const Item = styled.li`
   display: flex;
@@ -26,6 +26,8 @@ const Main = styled.div`
   row-gap: 16px;
   border-top: 1px solid #343848;
   padding: 30px 0 0 0;
+
+  ${headerBlock};
 `
 
 type Props = {

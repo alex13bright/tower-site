@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
+import { headerBlock } from '~/components/room/styles'
 
-const Image = styled.img``
+const Image = styled.img`
+  place-self: center;
+  ${headerBlock};
+`
 type Props = {
   className?: string
   title: string
