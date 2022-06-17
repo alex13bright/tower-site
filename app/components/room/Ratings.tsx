@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
+import { headerTitle } from '~/components/room/styles'
 
 const StarsBar = styled.div<{
   ratings: number
@@ -36,12 +37,9 @@ const Number = styled.span`
 const Title = styled.div`
   display: none;
   @media ${widthAtLeast.sm} {
-    display: block;
-    color: ${secondaryDark};
     padding-top: 3px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: block;
+    ${headerTitle};
   } ;
 `
 const Values = styled.div`

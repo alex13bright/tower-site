@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { proximaNovaSb, secondaryDark } from '~/styles/styles'
+import { proximaNovaSb } from '~/styles/styles'
+import { headerTitle } from '~/components/room/styles'
 
 export const Name = styled.td`
   grid-area: name;
@@ -36,13 +37,8 @@ export const Content = styled.tbody`
 
 export const Caption = styled.caption`
   display: block;
-  color: ${secondaryDark};
   text-align: start;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 20px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  ${headerTitle};
 `
 
 export const Table = styled.table`

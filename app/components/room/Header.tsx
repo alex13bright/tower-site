@@ -10,6 +10,7 @@ import { ReactElement } from 'react'
 import { Features } from '~/components/room/Features'
 import { DetailedRatings } from '~/components/room/DetailedRatings'
 import { Device, Payment } from '~/core/types'
+import { Advantages } from '~/components/room/Advantages'
 
 export const headerBlock = css`
   padding-left: 24px;
@@ -52,6 +53,9 @@ const GridAction = styled(Actions)`
   ${headerBlock};
 `
 
+const GridAdvantages = styled(Advantages)`
+  ${headerBlock};
+`
 const GridFeatures = styled(Features)`
   ${headerBlock};
 `
@@ -86,6 +90,13 @@ export const Header = ({ className }: Props): ReactElement => {
     'paypal',
     'webmoney',
   ]
+  const advantages = [
+    `World's largest poker room`,
+    `Millionaire monthly promotions`,
+    `Action across all stakes and games`,
+    `WSOP Online partner`,
+    `Unmatchable MTT grid`,
+  ]
   const detailedRatings = {
     reliability: 4.5,
     bonusesPromotions: 4.5,
@@ -105,7 +116,7 @@ export const Header = ({ className }: Props): ReactElement => {
         <GridHighlights bonus={bonus} rakeback={rakeback} />
         <GridAction />
         <GridFeatures data={{ roomType, license, payments, devices, country }} />
-        {/*<Advantages />*/}
+        <GridAdvantages data={advantages} />
         <GridDetailedRatings data={detailedRatings} />
         {/*<NavTabs />*/}
       </Main>
