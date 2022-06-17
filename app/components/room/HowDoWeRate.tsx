@@ -12,6 +12,7 @@ const List = styled.ul`
 
 const Item = styled.li<{ kind: string }>`
   display: grid;
+  row-gap: 12px;
   grid-template-columns: 36px 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
@@ -23,7 +24,8 @@ const Item = styled.li<{ kind: string }>`
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('images/ratings/${({ kind }) => kind}');
+    background-image: url('/images/ratings/${({ kind }) => kind}.svg');
+    background-repeat: no-repeat;
   }
 `
 const Header = styled.h2`

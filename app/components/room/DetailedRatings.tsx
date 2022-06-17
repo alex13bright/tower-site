@@ -74,7 +74,7 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
     softwareConvenience,
     depositsWithdrawals,
   } = data
-  const [isVisible, setIsVisible] = useState<boolean>(true)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   return (
     <>
       <HowDoWeRate isVisible={isVisible} setIsVisible={setIsVisible} />

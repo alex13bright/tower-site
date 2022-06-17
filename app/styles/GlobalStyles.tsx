@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${proximaNova};
   }
 
+  h1 {
+    line-height: 1em;
+  }
+
   a {
     text-decoration: none;
   }
