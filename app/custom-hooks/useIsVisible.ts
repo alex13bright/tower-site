@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
-export const useIsVisible = (ref: MutableRefObject<HTMLDivElement | null>): boolean => {
+export const useIsVisible = (ref: MutableRefObject<HTMLElement | null>): boolean => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   useEffect(() => {
     if (ref.current === null) throw new Error(`ref can't be null`)

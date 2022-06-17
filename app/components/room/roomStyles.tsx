@@ -34,10 +34,10 @@ export const Row = styled.tr`
   &::after {
     grid-area: line;
     background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);
-    background-position-y: 12px;
+    background-position-y: 10px;
     background-repeat: repeat-x;
     background-size: 3px 1px;
-    height: 100%;
+    height: 20px;
     content: '';
   }
 `

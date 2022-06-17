@@ -35,7 +35,7 @@ type Props = {
 export function Spoiler({ height, children }: Props): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
-  const [isPressed, setIsPressed] = useState<boolean>(false)
+  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
 
   const size = useSize(ref)
   const heightLimit = Math.min(height, size.height)
@@ -44,7 +44,7 @@ export function Spoiler({ height, children }: Props): ReactElement {
     [heightLimit, size, setIsButtonHidden]
   )
 
-  const activeHeight = isPressed ? 'auto' : heightLimit + 'px'
+  const activeHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
   return (
     <Main>
       <Container activeHeight={activeHeight}>
@@ -52,8 +52,8 @@ export function Spoiler({ height, children }: Props): ReactElement {
       </Container>
       <Button
         $isHidden={isButtonHidden}
-        isPressed={isPressed}
-        onClick={() => setIsPressed(!isPressed)}
+        isPressed={isButtonPressed}
+        onClick={() => setIsButtonPressed(!isButtonPressed)}
       ></Button>
     </Main>
   )

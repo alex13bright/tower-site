@@ -16,7 +16,7 @@ type Props = {
   as?: KnownTags
   className?: string
   children?: ReactNode
-  onClick?: MouseEventHandler<HTMLDivElement>
+  onClick?: MouseEventHandler<HTMLElement>
 }
 
 export const PageWrapper = ({ className, as, children }: Props): ReactElement => {
