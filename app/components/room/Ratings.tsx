@@ -63,9 +63,7 @@ const Main = styled.div`
   }
   @media ${widthAtLeast.md} {
     flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    //align-self: center;
+    gap: 3px;
   }
 `
 

@@ -5,14 +5,14 @@ import { widthAtLeast } from '~/styles/styles'
 
 const Image = styled.img`
   place-self: center;
-  margin: 30px 0;
+  margin: 15px 0;
   ${headerBlock};
   grid-area: logo;
   height: 60px;
   width: auto;
 
   @media ${widthAtLeast.md} {
-    height: 100px;
+    height: 60px;
     margin: 10px;
   }
 `
