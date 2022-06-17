@@ -24,6 +24,8 @@ const Title = styled.span`
 const Main = styled.div`
   display: grid;
   row-gap: 16px;
+  border-top: 1px solid #343848;
+  padding: 30px 0 0 0;
 `
 
 type Props = {

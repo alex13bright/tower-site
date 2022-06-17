@@ -28,7 +28,7 @@ const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(7, auto);
-  row-gap: 20px;
+  row-gap: 30px;
 `
 
 const GridNetwork = styled(Network)`
@@ -49,7 +49,6 @@ const GridHighlights = styled(Highlights)`
 `
 
 const GridAction = styled(Actions)`
-  margin: 30px 0;
   ${headerBlock};
 `
 

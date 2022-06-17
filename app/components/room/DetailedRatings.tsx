@@ -38,7 +38,7 @@ const ReValue = styled(Value)`
 const ReTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
-  padding: 24px 0;
+  padding: 30px 0;
 `
 
 const ReCaption = styled(Caption)`
