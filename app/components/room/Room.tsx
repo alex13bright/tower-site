@@ -10,6 +10,7 @@ const Layout = styled.section`
     padding-right: 24px;
   }
 `
+
 export const Room = () => {
   return (
     <Layout>

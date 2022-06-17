@@ -20,6 +20,7 @@ const ReName = styled(Name)<{ kind: string }>`
     background-repeat: no-repeat;
   }
 `
+
 const ReValue = styled(Value)`
   display: flex;
   align-items: baseline;
@@ -53,6 +54,7 @@ const ReCaption = styled(Caption)`
   display: flex;
   justify-content: space-between;
 `
+
 const ReContent = styled(Content)`
   @media ${widthAtLeast.md} {
     grid-template-columns: 1fr 1fr;
@@ -61,6 +63,7 @@ const ReContent = styled(Content)`
 `
 
 const Title = styled.div``
+
 const Info = styled.button`
   border-bottom: 1px solid ${chroma(accent).darken(0.5).hex()};
   font-size: 12px;

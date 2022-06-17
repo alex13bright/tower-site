@@ -15,13 +15,16 @@ const Item = styled.li`
     content: '';
   }
 `
+
 const List = styled.ul`
   display: grid;
   row-gap: 16px;
 `
+
 const Title = styled.span`
   ${headerTitle};
 `
+
 const Main = styled.div`
   display: grid;
   row-gap: 16px;

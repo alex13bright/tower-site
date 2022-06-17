@@ -15,7 +15,9 @@ import { omit } from 'lodash'
 type State = {
   [id: string]: MutableRefObject<unknown>
 }
+
 type ContextType = [State, Dispatch<SetStateAction<State>>]
+
 const Context = createContext<ContextType | null>(null)
 
 export const RefsContext = ({ children }: { children?: ReactNode }): ReactElement => {

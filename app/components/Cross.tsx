@@ -8,6 +8,7 @@ const crossLine = css<{ lineLength: number; depth: number; color: string }>`
   height: ${({ depth }) => depth}px;
   background: ${({ color }) => color};
 `
+
 const Main = styled.button<{
   length: number
   depth: number

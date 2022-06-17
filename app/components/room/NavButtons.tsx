@@ -29,12 +29,15 @@ const NotLink = styled.span`
   ${itemStyles};
   color: ${accent};
 `
+
 const Item = styled.li``
+
 const amountToColumns = (amount: number): number => {
   if (amount % 2 === 0) return 2
   if (amount > 4) return 1
   return amount
 }
+
 const List = styled.ul<{ amount: number }>`
   display: grid;
   padding: 5px;

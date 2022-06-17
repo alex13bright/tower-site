@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const Caption = styled.h1`
   text-align: center;
 `
+
 const List = styled.ul`
   display: grid;
   row-gap: 16px;
@@ -28,13 +29,16 @@ const Item = styled.li<{ kind: string }>`
     background-repeat: no-repeat;
   }
 `
+
 const Header = styled.h2`
   grid-area: header;
 `
+
 const Body = styled.p`
   grid-area: body;
   text-align: justify;
 `
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;

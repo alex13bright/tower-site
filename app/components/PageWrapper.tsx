@@ -18,6 +18,7 @@ type Props = {
   children?: ReactNode
   onClick?: MouseEventHandler<HTMLDivElement>
 }
+
 export const PageWrapper = ({ className, as, children }: Props): ReactElement => {
   return (
     <OuterBox className={className} as={as}>

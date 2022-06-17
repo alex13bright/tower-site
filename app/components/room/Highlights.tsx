@@ -27,6 +27,7 @@ const HighlightOut = styled.tr<{ $color: string }>`
   min-height: 60px;
   filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
 `
+
 const HighlightIn = styled.td`
   background: ${border};
   clip-path: polygon(calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%, 0 0);

@@ -13,11 +13,13 @@ export const headerBlock = css`
   padding-left: 24px;
   padding-right: 24px;
 `
+
 export const Name = styled.td`
   grid-area: name;
   color: #e5e5e5;
   display: flex;
 `
+
 export const Value = styled.td`
   grid-area: value;
   font-family: ${proximaNovaSb};

@@ -1,6 +1,6 @@
-import { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
+import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react'
 import styled from 'styled-components'
-import { background, breakpoints, primary } from '~/styles/styles'
+import { background, breakpoints, primary, secondary } from '~/styles/styles'
 import { Cross } from '~/components/Cross'
 
 const ReCross = styled(Cross)`
@@ -56,11 +56,14 @@ type Props = {
 }
 
 export function ModalWindow({ children, isVisible, setIsVisible }: Props): ReactElement {
-  const handleClick = () => setIsVisible(false)
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation() // I'm not sure do I need that. For some reason this click does not propagate
+    setIsVisible(false)
+  }
   return (
     <Container isVisible={isVisible} onClick={handleClick}>
       <Content onClick={(e) => e.stopPropagation()}>
-        <ReCross length={15} depth={2} onClick={handleClick} color="#555" />
+        <ReCross length={15} depth={2} onClick={handleClick} color={secondary} />
         <ScrollArea>
           <ScrollAreaContent>{children}</ScrollAreaContent>
         </ScrollArea>

@@ -42,6 +42,7 @@ const Title = styled.div`
     ${headerTitle};
   }
 `
+
 const Values = styled.div`
   display: flex;
   align-items: center;

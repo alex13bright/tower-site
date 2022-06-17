@@ -12,7 +12,9 @@ const Container = styled.div<{ activeHeight: string }>`
   overflow: hidden;
   max-height: ${({ activeHeight }) => activeHeight};
 `
+
 const Content = styled.div``
+
 const Button = styled.button<{ $isHidden: boolean; isPressed: boolean }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'block')};
   margin-top: 1px;

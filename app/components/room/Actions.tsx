@@ -51,6 +51,7 @@ const RegisterButton = styled(ExternalLink)`
     background-image: url(/images/arrow.svg);
   }
 `
+
 const ContactButton = styled.button`
   ${iconButton};
   background-color: ${secondaryAction};
@@ -62,6 +63,7 @@ const ContactButton = styled.button`
     background-position-y: 50%;
   }
 `
+
 const TagButton = styled.button`
   ${button};
   background: transparent;

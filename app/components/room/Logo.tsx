@@ -16,6 +16,7 @@ const Image = styled.img`
     margin: 10px;
   }
 `
+
 type Props = {
   className?: string
   title: string
