@@ -6,14 +6,16 @@ const Main = styled.table`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
   ${headerBlock};
   grid-area: highlights;
 
   @media ${widthAtLeast.md} {
     grid-template-columns: repeat(2, 1fr);
-    grid-area: auto;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 `
 

@@ -12,7 +12,7 @@ const Image = styled.img`
   width: auto;
 
   @media ${widthAtLeast.md} {
-    height: 50%;
+    height: 70%;
     width: auto;
     margin: 0;
   }

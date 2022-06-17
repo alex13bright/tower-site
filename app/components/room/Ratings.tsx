@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
+import { secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/styles'
 
@@ -59,8 +59,7 @@ const Main = styled.div`
 
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
-    padding-bottom: 30px;
-    //border-bottom: 1px solid ${border};
+    align-self: center;
   }
 `
 

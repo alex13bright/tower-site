@@ -13,14 +13,6 @@ import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
 import { LinkType, NavButtons } from '~/components/room/NavButtons'
 
-const RatingsHighlightWrapper = styled.div`
-  display: contents;
-  @media ${widthAtLeast.md} {
-    grid-area: ratings-highlights;
-    display: flex;
-    flex-direction: column;
-  }
-`
 const Main = styled.div`
   color: ${primaryDark};
   font-size: 16px;
@@ -46,7 +38,8 @@ const Main = styled.div`
   @media ${widthAtLeast.md} {
     grid-template-areas:
       'network .'
-      'logo ratings-highlights'
+      'logo ratings'
+      'highlights highlights'
       'features advantages'
       'detailed detailed'
       'actions actions'
@@ -111,10 +104,8 @@ export const Header = ({ className }: Props): ReactElement => {
       <Main className={className}>
         <Network {...network} />
         <Logo title={title} logo={logo} />
-        <RatingsHighlightWrapper>
-          <Highlights bonus={bonus} rakeback={rakeback} />
-          <Ratings ratings={ratings} />
-        </RatingsHighlightWrapper>
+        <Highlights bonus={bonus} rakeback={rakeback} />
+        <Ratings ratings={ratings} />
         <Actions />
         <Features data={{ roomType, license, payments, devices, country }} />
         <Advantages data={advantages} />
