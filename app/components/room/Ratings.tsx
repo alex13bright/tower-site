@@ -40,7 +40,7 @@ const Title = styled.div`
     padding-top: 3px;
     display: block;
     ${headerTitle};
-  } ;
+  }
 `
 const Values = styled.div`
   display: flex;
@@ -60,6 +60,12 @@ const Main = styled.div`
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
     align-self: center;
+  }
+  @media ${widthAtLeast.md} {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    //align-self: center;
   }
 `
 
