@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
 import { headerBlock } from '~/components/room/styles'
 import { Link } from '@remix-run/react'
-import { accent } from '~/styles/styles'
+import { accent, backgroundDark } from '~/styles/styles'
 
 const itemStyles = css`
   padding: 10px;
@@ -17,16 +17,19 @@ const itemStyles = css`
 const ReLink = styled(Link)`
   ${itemStyles};
   background-color: ${accent};
+  color: ${backgroundDark.start};
+  font-weight: bold;
 `
 
 const NotLink = styled.span`
   ${itemStyles};
+  color: ${accent};
 `
 const Item = styled.li``
 
 const List = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   padding: 5px;
   gap: 5px;
 `

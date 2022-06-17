@@ -20,6 +20,7 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding-bottom: 30px;
 
   display: grid;
   grid-template-columns: 1fr;
@@ -73,7 +74,7 @@ export const Header = ({ className }: Props): ReactElement => {
   const country = 'Thailand'
   const navLinks: LinkType[] = [
     { url: '/rakeback-deals/ggpoker-review', title: 'Review', isActive: true },
-    // { url: '/rakeback-deals/ggpoker-download', title: 'Download Download Download' },
+    { url: '/rakeback-deals/ggpoker-download', title: 'Download' },
     { url: '/rakeback-deals/ggpoker-club', title: 'Club' },
     { url: '/rakeback-deals/ggpoker-forum', title: 'Forum' },
   ]
