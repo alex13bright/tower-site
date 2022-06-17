@@ -32,7 +32,7 @@ const Main = styled.div`
   ${headerBlock};
   grid-area: advantages;
 
-  @media ${widthAtLeast} {
+  @media ${widthAtLeast.md} {
     border-top: none;
     border-left: 1px solid ${border};
     padding-top: 0;

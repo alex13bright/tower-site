@@ -35,15 +35,14 @@ const HighlightIn = styled.td`
   flex-direction: column;
   gap: 4px;
   height: 100%;
+  font-weight: bold;
+  font-size: 18px;
 `
 
 const Name = styled.span``
 
 const Value = styled.span<{ $color: string }>`
   color: ${({ $color }) => $color};
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 18px;
   height: 100%;
 `
 
