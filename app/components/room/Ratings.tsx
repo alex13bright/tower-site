@@ -60,7 +60,7 @@ const Main = styled.div`
   @media ${widthAtLeast.sm} {
     justify-content: space-between;
     padding-bottom: 30px;
-    border-bottom: 1px solid ${border};
+    //border-bottom: 1px solid ${border};
   }
 `
 

@@ -12,7 +12,9 @@ const Image = styled.img`
   width: auto;
 
   @media ${widthAtLeast.md} {
-    grid-area: auto;
+    height: 50%;
+    width: auto;
+    margin: 0;
   }
 `
 type Props = {

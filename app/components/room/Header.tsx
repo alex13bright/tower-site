@@ -13,12 +13,12 @@ import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
 import { LinkType, NavButtons } from '~/components/room/NavButtons'
 
-const LogoHighlightWrapper = styled.div`
+const RatingsHighlightWrapper = styled.div`
   display: contents;
   @media ${widthAtLeast.md} {
-    grid-area: logo-highlights;
+    grid-area: ratings-highlights;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
 `
 const Main = styled.div`
@@ -46,8 +46,7 @@ const Main = styled.div`
   @media ${widthAtLeast.md} {
     grid-template-areas:
       'network .'
-      'logo-highlights logo-highlights'
-      'ratings ratings'
+      'logo ratings-highlights'
       'features advantages'
       'detailed detailed'
       'actions actions'
@@ -111,11 +110,11 @@ export const Header = ({ className }: Props): ReactElement => {
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
         <Network {...network} />
-        <LogoHighlightWrapper>
-          <Logo title={title} logo={logo} />
+        <Logo title={title} logo={logo} />
+        <RatingsHighlightWrapper>
           <Highlights bonus={bonus} rakeback={rakeback} />
-        </LogoHighlightWrapper>
-        <Ratings ratings={ratings} />
+          <Ratings ratings={ratings} />
+        </RatingsHighlightWrapper>
         <Actions />
         <Features data={{ roomType, license, payments, devices, country }} />
         <Advantages data={advantages} />
