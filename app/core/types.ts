@@ -1,4 +1,7 @@
 import { Locale } from '~/components/Locale'
+import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
+
+export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
 export type Geo = {
   locale: Locale

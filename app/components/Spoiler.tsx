@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useSize } from '~/custom-hooks/useSize'
+import { Css } from '~/core/types'
 
 const Main = styled.div`
   display: grid;
@@ -15,7 +16,7 @@ const Container = styled.div<{ activeHeight: string }>`
 
 const Content = styled.div``
 
-const Button = styled.button<{ $isHidden: boolean; isPressed: boolean }>`
+const Button = styled.button<{ $isHidden: boolean; isPressed: boolean; $styles: Css<{}> }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'block')};
   margin-top: 1px;
   margin-left: 1px;
@@ -23,17 +24,19 @@ const Button = styled.button<{ $isHidden: boolean; isPressed: boolean }>`
   height: 20px;
   aspect-ratio: 1 / 1;
   background: url(/images/arrow-down.svg) no-repeat 50%;
-  ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
   align-self: end;
+  ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
+  ${({ $styles }) => `${$styles}`};
 `
 
 type Props = {
   className?: string
   height: number
   children: ReactNode
+  buttonStyles?: Css<{}>
 }
 
-export function Spoiler({ className, height, children }: Props): ReactElement {
+export function Spoiler({ className, height, children, buttonStyles = '' }: Props): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
@@ -55,6 +58,7 @@ export function Spoiler({ className, height, children }: Props): ReactElement {
         $isHidden={isButtonHidden}
         isPressed={isButtonPressed}
         onClick={() => setIsButtonPressed(!isButtonPressed)}
+        $styles={buttonStyles}
       ></Button>
     </Main>
   )
