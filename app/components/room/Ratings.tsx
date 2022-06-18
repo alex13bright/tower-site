@@ -66,6 +66,9 @@ const Main = styled.div`
     flex-direction: column;
     gap: 3px;
   }
+  @media ${widthAtLeast.lg} {
+    flex-direction: row;
+  }
 `
 
 type Props = { ratings: number; className?: string }

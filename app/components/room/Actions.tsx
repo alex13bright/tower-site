@@ -23,6 +23,10 @@ const button = css`
   border-radius: 4px;
   position: relative;
   overflow: hidden;
+  @media ${widthAtLeast.lg} {
+    padding: 10px;
+    width: 260px;
+  }
 `
 
 const iconButton = css`
@@ -87,7 +91,13 @@ const Main = styled.div`
   grid-area: actions;
 
   @media ${widthAtLeast.md} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${widthAtLeast.lg} {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-self: start;
   }
 `
 

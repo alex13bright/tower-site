@@ -1,7 +1,14 @@
 import { ReactElement, useState } from 'react'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
 import styled from 'styled-components'
-import { accent, primaryDark, proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
+import {
+  accent,
+  border,
+  primaryDark,
+  proximaNovaSb,
+  secondaryDark,
+  widthAtLeast,
+} from '~/styles/styles'
 import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/HowDoWeRate'
 import { headerBlock } from '~/components/room/roomStyles'
@@ -48,6 +55,10 @@ const ReTable = styled(Table)`
   @media ${widthAtLeast.md} {
     margin-top: 30px;
   }
+  @media ${widthAtLeast.md} {
+    margin-top: 0;
+    border-top: 1px solid ${border};
+  }
 `
 
 const ReCaption = styled(Caption)`
@@ -59,6 +70,9 @@ const ReContent = styled(Content)`
   @media ${widthAtLeast.md} {
     grid-template-columns: 1fr 1fr;
     column-gap: 60px;
+  }
+  @media ${widthAtLeast.lg} {
+    grid-template-columns: 1fr;
   }
 `
 

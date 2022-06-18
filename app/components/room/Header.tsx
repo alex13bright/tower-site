@@ -13,6 +13,16 @@ import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
 import { LinkType, NavButtons } from '~/components/room/NavButtons'
 
+const LogoHighlightsSpan = styled.div`
+  display: contents;
+  @media ${widthAtLeast.lg} {
+    grid-area: logo-highlights;
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+  }
+`
 const Main = styled.div`
   color: ${primaryDark};
   font-size: 16px;
@@ -45,6 +55,16 @@ const Main = styled.div`
       'detailed detailed'
       'nav nav';
     grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  @media ${widthAtLeast.lg} {
+    grid-template-areas:
+      'network . .'
+      'logo-highlights logo-highlights ratings'
+      'features advantages detailed'
+      'actions actions actions'
+      'nav nav nav';
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
   }
 `
@@ -103,8 +123,10 @@ export const Header = ({ className }: Props): ReactElement => {
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
         <Network {...network} />
-        <Logo title={title} logo={logo} />
-        <Highlights bonus={bonus} rakeback={rakeback} />
+        <LogoHighlightsSpan>
+          <Logo title={title} logo={logo} />
+          <Highlights bonus={bonus} rakeback={rakeback} />
+        </LogoHighlightsSpan>
         <Ratings ratings={ratings} />
         <Actions />
         <Features data={{ roomType, license, payments, devices, country }} />
