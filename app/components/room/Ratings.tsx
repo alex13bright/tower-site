@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { secondaryDark, widthAtLeast } from '~/styles/styles'
+import { proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/roomStyles'
 
@@ -36,10 +36,14 @@ const Number = styled.span`
 
 const Title = styled.div`
   display: none;
+
   @media ${widthAtLeast.sm} {
     padding-top: 3px;
     display: block;
     ${headerTitle};
+    color: #e5e5e5;
+    font-weight: normal;
+    font-family: ${proximaNovaSb};
   }
 `
 
