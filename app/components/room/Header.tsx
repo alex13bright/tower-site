@@ -9,9 +9,8 @@ import { Logo } from '~/components/room/Logo'
 import { ReactElement } from 'react'
 import { Features } from '~/components/room/Features'
 import { DetailedRatings } from '~/components/room/DetailedRatings'
-import { Device, Payment } from '~/core/types'
 import { Advantages } from '~/components/room/Advantages'
-import { LinkType, NavButtons } from '~/components/room/NavButtons'
+import { NavButtons } from '~/components/room/NavButtons'
 
 const LogoHighlightsSpan = styled.div`
   display: contents;
@@ -72,67 +71,20 @@ const Main = styled.div`
 type Props = { className?: string }
 
 export const Header = ({ className }: Props): ReactElement => {
-  const ratings = 4.3
-  const bonus = '100% до $600'
-  const rakeback = '60%'
-  const network = {
-    name: 'gg_network',
-    title: 'GG Network',
-    logo: '/fake/ico-gg-network.svg',
-  }
-  const title = 'GG Poker'
-  const logo = '/fake/ggpoker-logo.svg'
-  const roomType = 'Licensed'
-  const license = 'United Kingdom'
-  const payments: Payment[] = [
-    'visa',
-    'skrill',
-    'yandex-money',
-    'astropay',
-    'american-express',
-    'ecopayz',
-    'cashfree',
-    'bangkok-bank',
-    'paypal',
-    'webmoney',
-  ]
-  const advantages = [
-    `World's largest poker room`,
-    `Millionaire monthly promotions`,
-    `Action across all stakes and games`,
-    `WSOP Online partner`,
-    `Unmatchable MTT grid`,
-  ]
-  const detailedRatings = {
-    reliability: 4.5,
-    bonusesPromotions: 4.5,
-    gameSelection: 4.5,
-    casualPlayers: 4.5,
-    softwareConvenience: 4.5,
-    depositsWithdrawals: 4.5,
-  }
-  const devices: Device[] = ['IOS', 'macOS']
-  const country = 'Thailand'
-  const navLinks: LinkType[] = [
-    { url: '/rakeback-deals/ggpoker-review', title: 'Review' },
-    { url: '/rakeback-deals/ggpoker-download', title: 'Download', isActive: true },
-    { url: '/rakeback-deals/ggpoker-club', title: 'Club' },
-    { url: '/rakeback-deals/ggpoker-forum', title: 'Forum' },
-  ]
   return (
     <StickyMarker isVisibleKey="isMarkerVisible">
       <Main className={className}>
-        <Network {...network} />
+        <Network />
         <LogoHighlightsSpan>
-          <Logo title={title} logo={logo} />
-          <Highlights bonus={bonus} rakeback={rakeback} />
+          <Logo />
+          <Highlights />
         </LogoHighlightsSpan>
-        <Ratings ratings={ratings} />
+        <Ratings />
         <Actions />
-        <Features data={{ roomType, license, payments, devices, country }} />
-        <Advantages data={advantages} />
-        <DetailedRatings data={detailedRatings} />
-        <NavButtons links={navLinks} />
+        <Features />
+        <Advantages />
+        <DetailedRatings />
+        <NavButtons />
       </Main>
     </StickyMarker>
   )

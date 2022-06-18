@@ -1,6 +1,6 @@
 import { MetaFunction, LoaderFunction, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { Pagination, Room } from '~/api/types'
+import { Pagination, RoomType } from '~/api/types'
 import { DynamicLinksFunction } from 'remix-utils'
 import { getLocaleFromRequest } from '~/core/utils'
 import { fetchRoomList } from '~/api/fetch'
@@ -21,7 +21,7 @@ const dynamicLinks: DynamicLinksFunction<LoaderData> = ({ data }) => {
 }
 
 type LoaderData = {
-  data: Room[]
+  data: RoomType[]
   meta: {
     pagination: Pagination
   }

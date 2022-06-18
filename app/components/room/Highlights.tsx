@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { headerBlock } from '~/components/room/roomStyles'
 import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Main = styled.table`
   display: grid;
@@ -48,12 +50,12 @@ const Value = styled.span<{ $color: string }>`
 `
 
 type Props = {
-  bonus: string
-  rakeback: string
   className?: string
 }
 
-export const Highlights = ({ bonus, rakeback, className }: Props) => {
+export const Highlights = ({ className }: Props) => {
+  const data: LoaderData = useLoaderData()
+  const { bonus, rakeback } = data.room
   return (
     <Main className={className}>
       <Tbody>

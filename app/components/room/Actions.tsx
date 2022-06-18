@@ -92,10 +92,11 @@ const Main = styled.div`
 
   @media ${widthAtLeast.md} {
     grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 30px;
   }
   @media ${widthAtLeast.lg} {
     margin-top: 30px;
-    margin-bottom: 30px;
+
     grid-template-columns: repeat(3, 1fr);
     justify-self: start;
   }

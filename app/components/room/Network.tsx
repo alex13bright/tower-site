@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Main = styled.a`
   cursor: pointer;
@@ -32,12 +34,11 @@ const Title = styled.span`
 
 type Props = {
   className?: string
-  name: string
-  title: string
-  logo: string
 }
 
-export const Network = ({ className, name, title, logo }: Props): ReactElement => {
+export const Network = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
+  const { name, title, logo } = data.room.network
   return (
     <Main className={className} href={`/network/${name}`}>
       <Image alt={`${title.toLowerCase()}-logo`} src={logo} width="20px" height="20px" />

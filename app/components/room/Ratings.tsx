@@ -2,15 +2,17 @@ import styled from 'styled-components'
 import { proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/roomStyles'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const StarsBar = styled.div<{
-  ratings: number
+  rating: number
   isBright: boolean
 }>`
   grid-area: content;
   background-image: url(/images/ratings-star.svg);
   background-repeat: repeat-x;
-  width: ${({ ratings }) => Math.round(ratings) * 24}px;
+  width: ${({ rating }) => Math.round(rating) * 24}px;
   background-position-y: ${({ isBright }) => (isBright ? 0 : '100%')};
   height: 16px;
 `
@@ -75,20 +77,26 @@ const Main = styled.div`
   }
 `
 
-type Props = { ratings: number; className?: string }
+type Props = {
+  className?: string
+}
 
-export const Ratings = ({ ratings, className }: Props): ReactElement => {
-  const isBright = ratings > 2.5
+export const Ratings = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
+  const { ratings } = data.room
+  const values = Object.values(ratings)
+  const rating: number = values.reduce((sum, rating) => sum + rating, 0) / values.length
+  const isBright = rating > 2.5
   return (
     <Main className={className}>
       <Title>Editor's rating</Title>
       <Values>
         <Stars>
-          <StarsBar ratings={5} isBright={false} />
-          <StarsBar ratings={ratings} isBright={true} />
+          <StarsBar rating={5} isBright={false} />
+          <StarsBar rating={rating} isBright={true} />
         </Stars>
         <Number>
-          <NumberValue isBright={isBright}>{ratings.toFixed(1)}</NumberValue>
+          <NumberValue isBright={isBright}>{rating.toFixed(1)}</NumberValue>
           <NumberUnit isBright={isBright}>/5</NumberUnit>
         </Number>
       </Values>

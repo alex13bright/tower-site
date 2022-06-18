@@ -1,9 +1,10 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
 import { headerBlock } from '~/components/room/roomStyles'
-import { Link } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
 import chroma from 'chroma-js'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const itemStyles = css`
   padding: 10px;
@@ -57,20 +58,16 @@ const Main = styled.div`
   grid-area: nav;
 `
 
-export type LinkType = {
-  title: string
-  url: string
-  isActive?: boolean
-}
-
 type Props = {
-  links: LinkType[]
+  className?: string
 }
-export function NavButtons({ links }: Props): ReactElement {
+export function NavButtons({ className }: Props): ReactElement {
+  const data: LoaderData = useLoaderData()
+  const { navs } = data.room
   return (
-    <Main>
-      <List amount={links.length}>
-        {links.map(({ url, title, isActive = false }, i) => (
+    <Main className={className}>
+      <List amount={navs.length}>
+        {navs.map(({ url, title, isActive = false }, i) => (
           <Item key={i}>
             {isActive ? <NotLink>{title}</NotLink> : <ReLink to={url}>{title}</ReLink>}
           </Item>

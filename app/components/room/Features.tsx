@@ -1,21 +1,11 @@
 import { ReactElement } from 'react'
-import { Device, Payment } from '~/core/types'
 import { IconList } from '~/components/IconList'
 import { Spoiler } from '~/components/Spoiler'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
 import styled from 'styled-components'
 import { headerBlock } from '~/components/room/roomStyles'
-
-type Props = {
-  data: {
-    roomType: string
-    license: string
-    payments: Payment[]
-    devices: Device[]
-    country: string
-  }
-  className?: string
-}
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Main = styled(Table)`
   padding-top: 30px;
@@ -24,8 +14,13 @@ const Main = styled(Table)`
   grid-area: features;
 `
 
-export const Features = ({ data, className }: Props): ReactElement => {
-  const { roomType, license, payments, devices, country } = data
+type Props = {
+  className?: string
+}
+
+export const Features = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
+  const { roomType, license, payments, devices, country } = data.room
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>

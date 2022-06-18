@@ -12,6 +12,8 @@ import {
 import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/HowDoWeRate'
 import { headerBlock } from '~/components/room/roomStyles'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { useLoaderData } from '@remix-run/react'
 
 const ReName = styled(Name)<{ kind: string }>`
   display: grid;
@@ -85,18 +87,11 @@ const Info = styled.button`
 `
 
 type Props = {
-  data: {
-    reliability: number
-    bonusesPromotions: number
-    gameSelection: number
-    casualPlayers: number
-    softwareConvenience: number
-    depositsWithdrawals: number
-  }
   className?: string
 }
 
-export const DetailedRatings = ({ data, className }: Props): ReactElement => {
+export const DetailedRatings = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
   const {
     reliability,
     bonusesPromotions,
@@ -104,7 +99,7 @@ export const DetailedRatings = ({ data, className }: Props): ReactElement => {
     casualPlayers,
     softwareConvenience,
     depositsWithdrawals,
-  } = data
+  } = data.room.ratings
   const [isVisible, setIsVisible] = useState<boolean>(false)
   return (
     <>

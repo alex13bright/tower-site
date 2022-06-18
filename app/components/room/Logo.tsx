@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { headerBlock } from '~/components/room/roomStyles'
 import { widthAtLeast } from '~/styles/styles'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Image = styled.img`
   place-self: center;
@@ -19,10 +21,10 @@ const Image = styled.img`
 
 type Props = {
   className?: string
-  title: string
-  logo: string
 }
 
-export const Logo = ({ className, title, logo }: Props): ReactElement => {
+export const Logo = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
+  const { title, logo } = data.room
   return <Image className={className} alt={`${title}-logo`} src={logo} />
 }

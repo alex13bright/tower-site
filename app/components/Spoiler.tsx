@@ -28,11 +28,12 @@ const Button = styled.button<{ $isHidden: boolean; isPressed: boolean }>`
 `
 
 type Props = {
+  className?: string
   height: number
   children: ReactNode
 }
 
-export function Spoiler({ height, children }: Props): ReactElement {
+export function Spoiler({ className, height, children }: Props): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
@@ -46,7 +47,7 @@ export function Spoiler({ height, children }: Props): ReactElement {
 
   const activeHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
   return (
-    <Main>
+    <Main className={className}>
       <Container activeHeight={activeHeight}>
         <Content ref={ref}>{children}</Content>
       </Container>

@@ -12,7 +12,7 @@ export type ApiListResponse<T> = {
     pagination: Pagination
   }
 }
-export type Network = {
+export type NetworkType = {
   data: {
     id: number
     attributes: {
@@ -22,11 +22,11 @@ export type Network = {
       publishedAt: string
       // rooms: { data: Room[] };
       locale: Locale
-      localizations?: { data: Network[] }
+      localizations?: { data: NetworkType[] }
     }
   }
 }
-export type Room = {
+export type RoomType = {
   id: number
   attributes: {
     name: string
@@ -34,11 +34,11 @@ export type Room = {
     updatedAt: string
     publishedAt: string
     locale: Locale
-    localizations?: { data: Room[] }
+    localizations?: { data: RoomType[] }
     main: {
       id: string
       network: {
-        data: Network[]
+        data: NetworkType[]
       }
     }
   }

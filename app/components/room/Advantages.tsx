@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/roomStyles'
 import { border, widthAtLeast } from '~/styles/styles'
+import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { useLoaderData } from '@remix-run/react'
 
 const Item = styled.li`
   display: flex;
@@ -45,16 +47,17 @@ const Main = styled.div`
 `
 
 type Props = {
-  data: string[]
   className?: string
 }
 
-export const Advantages = ({ data, className }: Props): ReactElement => {
+export const Advantages = ({ className }: Props): ReactElement => {
+  const data: LoaderData = useLoaderData()
+  const { advantages } = data.room
   return (
     <Main className={className}>
       <Title>Key facts</Title>
       <List>
-        {data.map((item, i) => (
+        {advantages.map((item, i) => (
           <Item key={i}>{item}</Item>
         ))}
       </List>
