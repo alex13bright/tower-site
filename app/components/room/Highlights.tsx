@@ -4,7 +4,7 @@ import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
-const Main = styled.table`
+const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: 8px;
@@ -21,16 +21,16 @@ const Main = styled.table`
   }
 `
 
-const Tbody = styled.tbody`
+const Content = styled.table`
   display: contents;
 `
 
-const HighlightOut = styled.tr<{ $color: string }>`
+const Outer = styled.tbody<{ $color: string }>`
   min-height: 60px;
   filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
 `
 
-const HighlightIn = styled.td`
+const Inner = styled.tr`
   background: ${border};
   clip-path: polygon(calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%, 0 0);
   padding: 9px 28px 9px 40px;
@@ -42,9 +42,9 @@ const HighlightIn = styled.td`
   font-size: 18px;
 `
 
-const Name = styled.span``
+const Name = styled.td``
 
-const Value = styled.span<{ $color: string }>`
+const Value = styled.td<{ $color: string }>`
   color: ${({ $color }) => $color};
   height: 100%;
 `
@@ -58,20 +58,20 @@ export const Highlights = ({ className }: Props) => {
   const { bonus, rakeback } = data.room
   return (
     <Main className={className}>
-      <Tbody>
-        <HighlightOut $color={primaryAction}>
-          <HighlightIn>
+      <Content>
+        <Outer $color={primaryAction}>
+          <Inner>
             <Name>Bonus</Name>
             <Value $color={primaryAction}>{bonus}</Value>
-          </HighlightIn>
-        </HighlightOut>
-        <HighlightOut $color={accent}>
-          <HighlightIn>
+          </Inner>
+        </Outer>
+        <Outer $color={accent}>
+          <Inner>
             <Name>Rakeback</Name>
             <Value $color={accent}>{rakeback}</Value>
-          </HighlightIn>
-        </HighlightOut>
-      </Tbody>
+          </Inner>
+        </Outer>
+      </Content>
     </Main>
   )
 }
