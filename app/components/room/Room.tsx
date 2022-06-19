@@ -4,6 +4,7 @@ import { BreadCrumbs } from '~/components/BreadCrumbs'
 import { widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { Toc } from '~/components/room/Toc'
+import { FakeContent } from '~/components/styled/FakeContent'
 
 const Layout = styled.section`
   @media ${widthAtLeast.md} {
@@ -20,6 +21,7 @@ export const Room = (): ReactElement => {
       <Header />
       <Content>
         <Toc />
+        <FakeContent height="1000px">Room</FakeContent>
       </Content>
     </Layout>
   )

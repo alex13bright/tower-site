@@ -21,6 +21,7 @@ export const widthAtLeast = {
 
 export const primary = '#222'
 export const secondary = '#555'
+export const tertiary = '#e5e5e5'
 export const accent = '#008be2'
 export const background = '#fff'
 
@@ -36,4 +37,11 @@ export const secondaryAction = '#70ac30'
 export const headerFooterBlock = css`
   color: ${secondaryDark};
   background-image: linear-gradient(${backgroundDark.end} 47.41%, ${backgroundDark.start});
+`
+
+export const pseudoAbsolute = css`
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 99;
 `

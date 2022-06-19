@@ -1,4 +1,4 @@
-import { proximaNovaSb, secondaryDark } from '~/styles/styles'
+import { proximaNovaSb, secondaryDark, tertiary } from '~/styles/styles'
 import styled, { css } from 'styled-components'
 
 export const headerTitle = css`
@@ -16,7 +16,7 @@ export const headerBlock = css`
 
 export const Name = styled.td`
   grid-area: name;
-  color: #e5e5e5;
+  color: ${tertiary};
   display: flex;
 `
 
