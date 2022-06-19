@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
-import { Spoiler } from '~/components/room/Spoiler'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
-import { accent, proximaNovaSb, pseudoAbsolute, tertiary } from '~/styles/styles'
+import { accent, proximaNovaSb, pseudoAbsolute, tertiary, widthAtLeast } from '~/styles/styles'
+import { Button, Container, useSpoiler } from '~/components/Spoiler'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -11,6 +11,7 @@ const Anchor = styled.a`
   font-style: normal;
   line-height: 18px;
 `
+
 const Item = styled.li`
   color: ${accent};
   padding: 0 0 15px 15px;
@@ -43,6 +44,7 @@ const Item = styled.li`
 const List = styled.ul`
   padding: 16px 0;
 `
+
 const Title = styled.div`
   color: #243238;
   font-size: 16px;
@@ -50,26 +52,30 @@ const Title = styled.div`
   font-style: normal;
   font-weight: bold;
 `
-const Content = styled.div``
-const Main = styled.nav`
-  margin-top: 40px;
-  margin-bottom: 40px;
+
+const ReButton = styled(Button)`
+  background: url(/images/arrow-down-dark.svg) no-repeat 50%;
+  width: 20px;
+  height: 20px;
 `
 
-const ReSpoiler = styled(Spoiler)`
+const TitleButtonSpan = styled.div`
   display: flex;
-  position: relative;
-  margin-top: 16px;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+`
+
+const Main = styled.nav`
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
-  padding: 16px 20px;
-`
+  cursor: pointer;
+  padding: 16px 24px;
 
-const buttonStyles = css`
-  background: url(/images/arrow-down-dark.svg) no-repeat 50%;
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  @media ${widthAtLeast.md} {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `
 
 type Props = {
@@ -79,20 +85,23 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
+  const { ref, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(0)
+
   return (
-    <Main className={className}>
-      <ReSpoiler height={36}>
-        <Content>
-          <Title>Contents</Title>
-          <List>
-            {toc.map(({ title, anchor }) => (
-              <Item key={anchor}>
-                <Anchor href={'#' + anchor}>{title}</Anchor>
-              </Item>
-            ))}
-          </List>
-        </Content>
-      </ReSpoiler>
+    <Main ref={ref} className={className}>
+      <TitleButtonSpan onClick={toggle}>
+        <Title>Contents</Title>
+        <ReButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
+      </TitleButtonSpan>
+      <Container _ref={ref} maxHeight={maxHeight}>
+        <List>
+          {toc.map(({ title, anchor }) => (
+            <Item key={anchor}>
+              <Anchor href={'#' + anchor}>{title}</Anchor>
+            </Item>
+          ))}
+        </List>
+      </Container>
     </Main>
   )
 }

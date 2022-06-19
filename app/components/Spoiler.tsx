@@ -17,7 +17,7 @@ type SpoilerContextType = {
   maxHeight: string
   isButtonHidden: boolean
   isButtonPressed: boolean
-  handleClick: () => void
+  toggle: () => void
 }
 const Context = createContext<SpoilerContextType | null>(null)
 export const useSpoilerContext = () => {
@@ -35,13 +35,13 @@ type SpoilerButtonProps = {
   className?: string
 }
 export const SpoilerButton = ({ children, className }: SpoilerButtonProps) => {
-  const { isButtonHidden, isButtonPressed, handleClick } = useSpoilerContext()
+  const { isButtonHidden, isButtonPressed, toggle } = useSpoilerContext()
   return (
     <Button
       className={className}
       isHidden={isButtonHidden}
       isPressed={isButtonPressed}
-      onClick={handleClick}
+      onClick={toggle}
     >
       {children}
     </Button>
@@ -56,18 +56,28 @@ type ContainerProps = {
   _ref: MutableRefObject<HTMLDivElement | null>
   maxHeight: string
   children: ReactNode
+  className?: string
 }
-export const Container = ({ _ref, maxHeight, children }: ContainerProps): ReactElement => {
+export const Container = ({
+  _ref,
+  maxHeight,
+  children,
+  className,
+}: ContainerProps): ReactElement => {
   return (
-    <Box maxHeight={maxHeight}>
+    <Box maxHeight={maxHeight} className={className}>
       <div ref={_ref}>{children}</div>
     </Box>
   )
 }
-export const SpoilerContainer = ({ children }: { children: ReactNode }): ReactElement => {
+type SpoilerContainerProps = {
+  children: ReactNode
+  className?: string
+}
+export const SpoilerContainer = ({ children, className }: SpoilerContainerProps): ReactElement => {
   const { ref, maxHeight } = useSpoilerContext()
   return (
-    <Container _ref={ref} maxHeight={maxHeight}>
+    <Container _ref={ref} maxHeight={maxHeight} className={className}>
       {children}
     </Container>
   )
@@ -84,8 +94,8 @@ export const useSpoiler = (height: number): SpoilerContextType => {
     setIsButtonHidden(size.height === heightLimit)
   }, [heightLimit, size, setIsButtonHidden])
   const maxHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
-  const handleClick = () => setIsButtonPressed((isButtonPressed) => !isButtonPressed)
-  return { ref, maxHeight, isButtonHidden, isButtonPressed, handleClick }
+  const toggle = () => setIsButtonPressed((isButtonPressed) => !isButtonPressed)
+  return { ref, maxHeight, isButtonHidden, isButtonPressed, toggle }
 }
 
 type Props = {
@@ -93,10 +103,10 @@ type Props = {
   children: ReactNode
 }
 export function SpoilerContext({ height, children }: Props): ReactElement {
-  const { ref, maxHeight, isButtonHidden, isButtonPressed, handleClick } = useSpoiler(height)
+  const { ref, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(height)
   const memo = useMemo(
-    () => ({ ref, maxHeight, isButtonHidden, isButtonPressed, handleClick }),
-    [ref, maxHeight, isButtonHidden, isButtonPressed, handleClick]
+    () => ({ ref, maxHeight, isButtonHidden, isButtonPressed, toggle }),
+    [ref, maxHeight, isButtonHidden, isButtonPressed, toggle]
   )
   return <Context.Provider value={memo}>{children}</Context.Provider>
 }

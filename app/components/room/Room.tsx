@@ -3,7 +3,7 @@ import { Header } from '~/components/room/Header'
 import { BreadCrumbs } from '~/components/BreadCrumbs'
 import { widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { Toc } from '~/components/room/Toc'
+import { Toc } from '~/components/Toc'
 import { FakeContent } from '~/components/styled/FakeContent'
 
 const Layout = styled.section`

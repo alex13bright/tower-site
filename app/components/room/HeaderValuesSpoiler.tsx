@@ -22,14 +22,14 @@ type Props = {
   height: number
   children: ReactNode
 }
-export function Spoiler({ className, height, children }: Props): ReactElement {
-  const { ref, maxHeight, isButtonHidden, isButtonPressed, handleClick } = useSpoiler(height)
+export function HeaderValuesSpoiler({ className, height, children }: Props): ReactElement {
+  const { ref, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(height)
   return (
     <Main className={className}>
       <Container _ref={ref} maxHeight={maxHeight}>
         {children}
       </Container>
-      <ReButton isHidden={isButtonHidden} isPressed={isButtonPressed} onClick={handleClick} />
+      <ReButton isHidden={isButtonHidden} isPressed={isButtonPressed} onClick={toggle} />
     </Main>
   )
 }

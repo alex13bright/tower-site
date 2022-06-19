@@ -2,10 +2,10 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { FakeContent } from './styled/FakeContent'
 import { PageWrapper } from './PageWrapper'
-import { headerFooterBlock } from '~/styles/styles'
+import { headerFooterColor } from '~/styles/styles'
 
 const FooterPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'footer' })`
-  ${headerFooterBlock};
+  ${headerFooterColor};
 `
 
 export const PageFooter = (): ReactElement => {

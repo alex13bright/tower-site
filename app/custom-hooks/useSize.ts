@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useState } from 'react'
 export const useSize = (ref: MutableRefObject<HTMLElement | null>) => {
   const [size, setSize] = useState<{ width: number; height: number }>({ width: -1, height: -1 })
   useEffect(() => {
-    if (ref.current === null) throw new Error(`ref can't be null`)
+    if (ref.current === null) throw new Error(`ref is not used on any element`)
     const _refCurrent = ref.current
     const Observer = new ResizeObserver((entries) => {
       const [entry] = entries
