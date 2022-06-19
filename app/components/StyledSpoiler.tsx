@@ -36,7 +36,12 @@ type Props = {
   buttonStyles?: Css<{}>
 }
 
-export function Spoiler({ className, height, children, buttonStyles = '' }: Props): ReactElement {
+export function StyledSpoiler({
+  className,
+  height,
+  children,
+  buttonStyles = '',
+}: Props): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { IconList } from '~/components/IconList'
-import { Spoiler } from '~/components/Spoiler'
+import { StyledSpoiler } from '~/components/StyledSpoiler'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
 import styled from 'styled-components'
 import { headerBlock } from '~/components/room/roomStyles'
@@ -36,9 +36,9 @@ export const Features = ({ className }: Props): ReactElement => {
         <Row>
           <Name>Payments</Name>
           <Value>
-            <Spoiler height={20}>
+            <StyledSpoiler height={20}>
               <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
-            </Spoiler>
+            </StyledSpoiler>
           </Value>
         </Row>
         <Row>
