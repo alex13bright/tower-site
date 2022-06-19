@@ -26,7 +26,7 @@ const ReLink = styled(Link)`
   }
 `
 
-const NotLink = styled.span`
+const ActiveLink = styled.span`
   ${itemStyles};
   color: ${accent};
 `
@@ -69,7 +69,7 @@ export function NavButtons({ className }: Props): ReactElement {
       <List amount={navs.length}>
         {navs.map(({ url, title, isActive = false }, i) => (
           <Item key={i}>
-            {isActive ? <NotLink>{title}</NotLink> : <ReLink to={url}>{title}</ReLink>}
+            {isActive ? <ActiveLink>{title}</ActiveLink> : <ReLink to={url}>{title}</ReLink>}
           </Item>
         ))}
       </List>

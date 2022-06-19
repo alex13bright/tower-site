@@ -43,7 +43,7 @@ export const roomData: RoomType = {
   devices: ['IOS', 'macOS'],
   navs: [
     { url: '/rakeback-deals/ggpoker-review', title: 'Review' },
-    { url: '/rakeback-deals/ggpoker-download', title: 'Download' },
+    { url: '/rakeback-deals/ggpoker-download', title: 'Download', isActive: true },
     { url: '/rakeback-deals/ggpoker-club', title: 'Club' },
     { url: '/rakeback-deals/ggpoker-forum', title: 'Forum' },
   ],
@@ -98,7 +98,7 @@ export const roomData: RoomType = {
     },
     {
       title: `FAQ`,
-      anchor: `FAQ_`,
+      anchor: `FAQ`,
     },
   ],
 }
