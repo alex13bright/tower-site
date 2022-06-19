@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { StyledSpoiler } from '~/components/StyledSpoiler'
+import { Spoiler } from '~/components/room/Spoiler'
 import styled, { css } from 'styled-components'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
@@ -56,7 +56,7 @@ const Main = styled.nav`
   margin-bottom: 40px;
 `
 
-const ReSpoiler = styled(StyledSpoiler)`
+const ReSpoiler = styled(Spoiler)`
   display: flex;
   position: relative;
   margin-top: 16px;
@@ -81,7 +81,7 @@ export function Toc({ className }: Props): ReactElement {
   const { toc } = data.room
   return (
     <Main className={className}>
-      <ReSpoiler height={36} buttonStyles={buttonStyles}>
+      <ReSpoiler height={36}>
         <Content>
           <Title>Contents</Title>
           <List>
