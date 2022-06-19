@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
 export const useSize = (ref: MutableRefObject<HTMLElement | null>) => {
-  const [size, setSize] = useState<{ width: number; height: number }>({ width: -1, height: -1 })
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null)
   useEffect(() => {
     if (ref.current === null) throw new Error(`ref is not used on any element`)
     const _refCurrent = ref.current

@@ -89,8 +89,9 @@ export const useSpoiler = (height: number): SpoilerContextType => {
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
 
   const size = useSize(ref)
-  const heightLimit = size.height < 0 ? height : Math.min(height, size.height)
+  const heightLimit = size === null ? height : Math.min(height, size.height)
   useEffect(() => {
+    if (size === null) return
     setIsButtonHidden(size.height === heightLimit)
   }, [heightLimit, size, setIsButtonHidden])
   const maxHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
