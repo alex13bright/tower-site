@@ -2,7 +2,14 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
-import { accent, proximaNovaSb, pseudoAbsolute, tertiary, widthAtLeast } from '~/styles/styles'
+import {
+  accent,
+  proximaNovaSb,
+  pseudoAbsolute,
+  secondaryDark,
+  tertiary,
+  widthAtLeast,
+} from '~/styles/styles'
 import { Button, Container, useSpoiler } from '~/components/Spoiler'
 
 const Anchor = styled.a`
@@ -12,14 +19,12 @@ const Anchor = styled.a`
   line-height: 18px;
 `
 
-const Item = styled.li`
-  color: ${accent};
+const Item = styled.li<{ unmarked: boolean }>`
   padding: 0 0 15px 15px;
   position: relative;
   &::before {
     ${pseudoAbsolute};
-    background: #c4c4c4;
-    border: 2px solid #fff;
+    z-index: 2;
     border-radius: 50%;
     left: 0;
     top: 3px;
@@ -28,10 +33,7 @@ const Item = styled.li`
   }
   &::after {
     ${pseudoAbsolute};
-    background: ${tertiary};
-    left: 4px;
-    top: 5px;
-    width: 1px;
+    z-index: 1;
     height: 100%;
   }
   &:last-child {
@@ -41,6 +43,34 @@ const Item = styled.li`
     }
   }
 `
+
+const UnmarkedItem = styled(Item)`
+  color: ${accent};
+  &::before {
+    background: #c4c4c4;
+    border: 2px solid #fff;
+  }
+  &::after {
+    background: ${tertiary};
+    top: 5px;
+    left: 4px;
+    width: 1px;
+  }
+`
+const MarkedItem = styled(Item)`
+  color: ${secondaryDark};
+  &::before {
+    background: #fff;
+    border: 2px solid #ccc;
+  }
+  &::after {
+    background: #ccc;
+    top: 5px;
+    left: 3px;
+    width: 3px;
+  }
+`
+
 const List = styled.ul`
   padding: 16px 0;
 `
@@ -64,12 +94,12 @@ const TitleButtonSpan = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 36px;
+  cursor: pointer;
 `
 
 const Main = styled.nav`
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
-  cursor: pointer;
   padding: 16px 24px;
 
   @media ${widthAtLeast.md} {
@@ -96,9 +126,9 @@ export function Toc({ className }: Props): ReactElement {
       <Container _ref={ref} maxHeight={maxHeight}>
         <List>
           {toc.map(({ title, anchor }) => (
-            <Item key={anchor}>
+            <UnmarkedItem key={anchor} unmarked={false}>
               <Anchor href={'#' + anchor}>{title}</Anchor>
-            </Item>
+            </UnmarkedItem>
           ))}
         </List>
       </Container>
