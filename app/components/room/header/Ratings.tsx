@@ -10,7 +10,7 @@ const StarsBar = styled.div<{
   isBright: boolean
 }>`
   grid-area: content;
-  background-image: url(/images/ratings-star.svg);
+  background-image: url(/images/rest/ratings-star.svg);
   background-repeat: repeat-x;
   width: ${({ rating }) => Math.round(rating) * 24}px;
   background-position-y: ${({ isBright }) => (isBright ? 0 : '100%')};
@@ -39,7 +39,7 @@ const Number = styled.span`
 const Title = styled.div`
   display: none;
 
-  @media ${widthAtLeast.sm} {
+  @media screen and ${widthAtLeast.sm} {
     padding-top: 3px;
     display: block;
     ${headerTitle};
@@ -64,15 +64,15 @@ const Main = styled.div`
   ${headerBlock};
   grid-area: ratings;
 
-  @media ${widthAtLeast.sm} {
+  @media screen and ${widthAtLeast.sm} {
     justify-content: space-between;
     align-self: center;
   }
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     flex-direction: column;
     gap: 3px;
   }
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     flex-direction: row;
   }
 `

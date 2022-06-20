@@ -19,7 +19,7 @@ const Main = styled.a`
   justify-self: center;
   grid-area: network;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     place-self: start;
     margin-left: 24px;
   }

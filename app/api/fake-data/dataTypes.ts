@@ -1,7 +1,4 @@
 import { Locale } from '~/components/root/Locale'
-import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
-
-export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
 export type Geo = {
   locale: Locale
@@ -78,4 +75,11 @@ export type RoomType = {
   devices: Device[]
   navs: LinkType[]
   toc: TocType
+  pageMeta: PageMetaType
+}
+
+export type PageMetaType = {
+  author: string
+  created: string
+  updated: string
 }

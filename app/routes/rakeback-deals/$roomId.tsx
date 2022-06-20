@@ -1,7 +1,7 @@
 import { Room } from '~/components/room/Room'
 import { json, LoaderFunction } from '@remix-run/node'
-import { roomData } from '~/fake-data/roomFakeData'
-import { RoomType } from '~/core/types'
+import { roomData } from '~/api/fake-data/roomData'
+import { RoomType } from '~/api/fake-data/dataTypes'
 export type LoaderData = { room: RoomType }
 
 export const loader: LoaderFunction = async () => {

@@ -14,7 +14,7 @@ import { NavButtons } from '~/components/room/header/NavButtons'
 
 const LogoHighlightsSpan = styled.div`
   display: contents;
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     grid-area: logo-highlights;
     display: flex;
     justify-content: start;
@@ -44,7 +44,7 @@ const Main = styled.div`
     'nav';
   grid-template-columns: 1fr;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     grid-template-areas:
       'network .'
       'logo ratings'
@@ -56,7 +56,7 @@ const Main = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     grid-template-areas:
       'network . .'
       'logo-highlights logo-highlights ratings'

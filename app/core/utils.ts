@@ -1,4 +1,7 @@
 import { Locale, useLocale } from '~/components/root/Locale'
+import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
+
+export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
 export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)

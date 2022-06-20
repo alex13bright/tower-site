@@ -14,7 +14,7 @@ const Main = styled.div`
   ${headerBlock};
   grid-area: highlights;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     grid-template-columns: repeat(2, 1fr);
     padding-top: 0;
     padding-bottom: 0;

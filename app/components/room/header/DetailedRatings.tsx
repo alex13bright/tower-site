@@ -54,10 +54,10 @@ const ReTable = styled(Table)`
 
   ${headerBlock};
   grid-area: detailed;
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     margin-top: 30px;
   }
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     margin-top: 0;
     border-top: 1px solid ${border};
   }
@@ -69,11 +69,11 @@ const ReCaption = styled(Caption)`
 `
 
 const ReContent = styled(Content)`
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     grid-template-columns: 1fr 1fr;
     column-gap: 60px;
   }
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     grid-template-columns: 1fr;
   }
 `

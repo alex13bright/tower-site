@@ -23,7 +23,7 @@ const button = css`
   border-radius: 4px;
   position: relative;
   overflow: hidden;
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     padding: 10px;
     width: 260px;
   }
@@ -48,22 +48,26 @@ const iconButton = css`
 const RegisterButton = styled(ExternalLink)`
   ${iconButton};
   background-color: ${primaryAction};
+
   &:hover {
     background-color: ${chroma(primaryAction).darken(0.1).hex()};
   }
+
   &::after {
-    background-image: url(/images/arrow.svg);
+    background-image: url(/images/rest/arrow.svg);
   }
 `
 
 const ContactButton = styled.button`
   ${iconButton};
   background-color: ${secondaryAction};
+
   &:hover {
     background-color: ${chroma(secondaryAction).darken(0.1).hex()};
   }
+
   &::after {
-    background-image: url(/images/question.svg);
+    background-image: url(/images/rest/question.svg);
     background-position-y: 50%;
   }
 `
@@ -90,11 +94,11 @@ const Main = styled.div`
   ${headerBlock};
   grid-area: actions;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     grid-template-columns: repeat(2, 1fr);
     margin-bottom: 30px;
   }
-  @media ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.lg} {
     margin-top: 30px;
 
     grid-template-columns: repeat(3, 1fr);

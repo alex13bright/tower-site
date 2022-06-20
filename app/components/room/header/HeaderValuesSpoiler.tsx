@@ -13,7 +13,7 @@ export const ReButton = styled(Button)`
   margin-left: 1px;
   width: 20px;
   height: 20px;
-  background: url(/images/arrow-down.svg) no-repeat 50%;
+  background: url(/images/rest/arrow-down.svg) no-repeat 50%;
   align-self: end;
 `
 

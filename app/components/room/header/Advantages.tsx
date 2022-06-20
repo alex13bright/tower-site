@@ -9,10 +9,11 @@ const Item = styled.li`
   display: flex;
   justify-content: start;
   column-gap: 20px;
+
   &::before {
     width: 20px;
     height: 20px;
-    background-image: url('/images/corona.svg');
+    background-image: url('/images/rest/corona.svg');
     background-repeat: no-repeat;
     content: '';
   }
@@ -37,7 +38,7 @@ const Main = styled.div`
   ${headerBlock};
   grid-area: advantages;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     border-top: none;
     border-left: 1px solid ${border};
     padding-top: 0;

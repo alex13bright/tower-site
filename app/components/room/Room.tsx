@@ -4,15 +4,17 @@ import { BreadCrumbs } from '~/components/ui/BreadCrumbs'
 import { widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { Toc } from '~/components/room/review/Toc'
-import { FakeContent } from '~/components/styled/FakeContent'
+import { PageMeta } from '~/components/common/pageMetas'
 
 const Layout = styled.section`
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     padding: 24px;
   }
 `
 
-const Content = styled.article``
+const Content = styled.article`
+  position: relative;
+`
 
 export const Room = (): ReactElement => {
   return (
@@ -21,7 +23,7 @@ export const Room = (): ReactElement => {
       <Header />
       <Content>
         <Toc />
-        <FakeContent height="1000px">Room</FakeContent>
+        <PageMeta />
       </Content>
     </Layout>
   )

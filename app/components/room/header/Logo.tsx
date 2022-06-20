@@ -13,7 +13,7 @@ const Image = styled.img`
   height: 60px;
   width: auto;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     height: 60px;
     margin: 10px;
   }

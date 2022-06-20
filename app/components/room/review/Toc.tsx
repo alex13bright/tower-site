@@ -84,7 +84,7 @@ const Title = styled.div`
 `
 
 const ReButton = styled(Button)`
-  background: url(/images/arrow-down-dark.svg) no-repeat 50%;
+  background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
   width: 20px;
   height: 20px;
 `
@@ -102,9 +102,14 @@ const Main = styled.nav`
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
   padding: 16px 24px;
 
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  @media screen and ${widthAtLeast.lg} {
+    position: sticky;
+    top: 0;
+    left: 0;
   }
 `
 
@@ -126,9 +131,9 @@ export function Toc({ className }: Props): ReactElement {
       <Container _ref={ref} maxHeight={maxHeight}>
         <List>
           {toc.map(({ title, anchor }) => (
-            <UnmarkedItem key={anchor} unmarked={false}>
+            <MarkedItem key={anchor} unmarked={false}>
               <Anchor href={'#' + anchor}>{title}</Anchor>
-            </UnmarkedItem>
+            </MarkedItem>
           ))}
         </List>
       </Container>

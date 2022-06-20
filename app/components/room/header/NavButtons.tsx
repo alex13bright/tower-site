@@ -43,10 +43,10 @@ const List = styled.ul<{ amount: number }>`
   display: grid;
   padding: 5px;
   gap: 5px;
-  @media ${widthAtLeast.sm} {
+  @media screen and ${widthAtLeast.sm} {
     grid-template-columns: repeat(${({ amount }) => amountToColumns(amount)}, 1fr);
   }
-  @media ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.md} {
     grid-template-columns: repeat(${({ amount }) => amount}, 1fr);
   }
 `

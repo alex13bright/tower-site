@@ -1,4 +1,4 @@
-import { RoomType } from '~/core/types'
+import { RoomType } from '~/api/fake-data/dataTypes'
 
 export const roomData: RoomType = {
   title: 'GG Poker',
@@ -101,4 +101,9 @@ export const roomData: RoomType = {
       anchor: `FAQ`,
     },
   ],
+  pageMeta: {
+    author: 'Rodion Longa',
+    created: '09.10.2017',
+    updated: '02.02.2022',
+  },
 }

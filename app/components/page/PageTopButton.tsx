@@ -14,12 +14,14 @@ const StyledButton = styled.button<{ isActive: boolean }>`
   z-index: 100;
   border-radius: 50%;
   box-shadow: 0 19px 38px 0 #22242b;
-  background: #2b88c9 url(/images/page-top.svg) no-repeat center;
+  background: #2b88c9 url(/images/rest/page-top.svg) no-repeat center;
   display: none;
+
   &:hover {
     outline: 0;
   }
-  @media ${widthAtLeast.md} {
+
+  @media screen and ${widthAtLeast.md} {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   }
 `
