@@ -1,4 +1,9 @@
-import { Locale, useLocale } from '~/components/Locale'
+import { Locale, useLocale } from '~/components/root/Locale'
+import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
+import { RatingsType } from '~/api/fake-data/dataTypes'
+import chroma from 'chroma-js'
+
+export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
 export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)
@@ -12,12 +17,11 @@ const getLocaleFromHeaders = (headers: Headers) => {
   const acceptLanguages = headers.get('Accept-Language')
   if (acceptLanguages) {
     const [locale] = acceptLanguages.split(',')
-    if (locale === 'en' || locale === 'ru') {
+    if (locale === 'en' || locale === 'ru' || locale === 'es') {
       return locale
     }
   }
-  return 'en'
-  // throw new Error(`can't get locale out of 'Accept-Language' request header`);
+  throw new Error(`can't get locale out of 'Accept-Language' request header`)
 }
 
 export const getLocaleFromRequest = (request: Request): Locale => {
@@ -41,3 +45,11 @@ export const getRequestGeo = () => {}
 
 export type I18n<Trans> = { en: Trans; ru: Trans; es: Trans }
 export const useLocalized = <Trans>(i18n: I18n<Trans>): Trans => i18n[useLocale()]
+
+export const calcRating = (ratings: RatingsType): number => {
+  const values = Object.values(ratings)
+  return values.reduce((sum, rating) => sum + rating, 0) / values.length
+}
+
+export const darken = (color: string, intensity: number): string =>
+  chroma(color).darken(intensity).hex()

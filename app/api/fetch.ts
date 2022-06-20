@@ -1,11 +1,11 @@
 import qs from 'qs'
 import config from '~/config'
-import { ApiListResponse, Room } from '~/api/types'
-import { Locale } from '~/components/Locale'
+import { ApiListResponse, RoomType } from '~/api/apiTypes'
+import { Locale } from '~/components/root/Locale'
 
 const { apiEndPoint } = config
 
-export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListResponse<Room>> => {
+export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListResponse<RoomType>> => {
   const query = qs.stringify(
     {
       locale,
@@ -17,7 +17,7 @@ export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListRespo
   )
   const apiUrl = `${apiEndPoint}/rooms/?${query}`
   const apiResponse = await fetch(apiUrl)
-  return (await apiResponse.json()) as ApiListResponse<Room>
+  return (await apiResponse.json()) as ApiListResponse<RoomType>
   // if (!areRoomsValidate(rooms)) return null
 
   // const referralLinksQuery = qs.stringify(
