@@ -37,14 +37,14 @@ export const Features = ({ className }: Props): ReactElement => {
           <Name>Payments</Name>
           <Value>
             <HeaderValuesSpoiler height={20}>
-              <IconList urlFn={(i) => `/images/payments/${i}-white.svg`}>{payments}</IconList>
+              <IconList list={payments} urlFn={(i) => `/images/payments/${i}-white.svg`} />
             </HeaderValuesSpoiler>
           </Value>
         </Row>
         <Row>
           <Name>Devices</Name>
           <Value>
-            <IconList urlFn={(i) => `/images/devices/${i}.svg`}>{devices}</IconList>
+            <IconList list={devices} urlFn={(i) => `/images/devices/${i}.svg`} />
           </Value>
         </Row>
         <Row>
