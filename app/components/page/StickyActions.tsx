@@ -57,7 +57,7 @@ const StickyBox = styled.div<{ isVisible: boolean }>`
   background-color: grey;
 `
 
-export const Sticky = ({ children }: { children: ReactNode }) => {
+export const StickyActions = ({ children }: { children: ReactNode }) => {
   const [state] = useStickyContext()
   const isVisible = !state.isFooterVisible && !state.isMarkerVisible
   return <StickyBox isVisible={isVisible}>{children}</StickyBox>

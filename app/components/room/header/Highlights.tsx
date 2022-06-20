@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/roomStyles'
+import { headerBlock } from '~/components/room/header/headerStyles'
 import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'

@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react'
-import { Button, Container, useSpoiler } from '~/components/Spoiler'
+import { Button, Container, useSpoiler } from '~/components/ui/Spoiler'
 import styled from 'styled-components'
 
 const Main = styled.div`

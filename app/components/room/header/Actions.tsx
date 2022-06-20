@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { ReactElement } from 'react'
 import { Form } from '@remix-run/react'
-import { ExternalLink } from '~/components/links'
+import { ExternalLink } from '~/components/ui/ExternalLink'
 import {
   background,
   primary,
@@ -11,7 +11,7 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import chroma from 'chroma-js'
-import { headerBlock } from '~/components/room/roomStyles'
+import { headerBlock } from '~/components/room/header/headerStyles'
 
 const button = css`
   color: inherit;

@@ -10,7 +10,7 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { Button, Container, useSpoiler } from '~/components/Spoiler'
+import { Button, Container, useSpoiler } from '~/components/ui/Spoiler'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};

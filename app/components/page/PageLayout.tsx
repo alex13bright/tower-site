@@ -1,11 +1,11 @@
 import { ReactNode, ReactElement } from 'react'
 
 import styled from 'styled-components'
-import { PageHeader } from '~/components/PageHeader'
-import { PageFooter } from '~/components/PageFooter'
-import { PageTopButton } from '~/components/PageTopButton'
-import { PageWrapper } from '~/components/PageWrapper'
-import { StickyContext, Sticky, StickyMarker } from '~/components/Sticky'
+import { PageHeader } from '~/components/page/PageHeader'
+import { PageFooter } from '~/components/page/PageFooter'
+import { PageTopButton } from '~/components/page/PageTopButton'
+import { PageWrapper } from '~/components/page/PageWrapper'
+import { StickyContext, StickyActions, StickyMarker } from '~/components/page/StickyActions'
 import { FakeContent } from '~/components/styled/FakeContent'
 
 export const Page = styled.div`
@@ -22,9 +22,9 @@ export const PageLayout = ({ children }: Props): ReactElement => {
         <PageHeader />
         <PageWrapper as="main">
           {children}
-          <Sticky>
+          <StickyActions>
             <FakeContent>STICKY ACTION PANEL</FakeContent>
-          </Sticky>
+          </StickyActions>
         </PageWrapper>
         <StickyMarker isVisibleKey="isFooterVisible">
           <PageFooter />

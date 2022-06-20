@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { FakeContent } from './styled/FakeContent'
+import { FakeContent } from '../styled/FakeContent'
 import { PageWrapper } from './PageWrapper'
 import { headerFooterColor } from '~/styles/styles'
 

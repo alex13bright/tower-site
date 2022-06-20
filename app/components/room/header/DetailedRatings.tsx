@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import {
   accent,
@@ -10,8 +10,8 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import chroma from 'chroma-js'
-import { HowDoWeRate } from '~/components/room/HowDoWeRate'
-import { headerBlock } from '~/components/room/roomStyles'
+import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
+import { headerBlock } from '~/components/room/header/headerStyles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { Header } from '~/components/room/Header'
-import { BreadCrumbs } from '~/components/BreadCrumbs'
+import { Header } from '~/components/room/header/Header'
+import { BreadCrumbs } from '~/components/ui/BreadCrumbs'
 import { widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { Toc } from '~/components/Toc'
+import { Toc } from '~/components/room/review/Toc'
 import { FakeContent } from '~/components/styled/FakeContent'
 
 const Layout = styled.section`

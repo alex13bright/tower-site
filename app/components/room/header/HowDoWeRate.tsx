@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction } from 'react'
-import { ModalWindow } from '~/components/ModalWindow'
+import { ModalWindow } from '~/components/root/ModalWindow'
 import styled from 'styled-components'
 
 const Caption = styled.h1`

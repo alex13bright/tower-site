@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/roomStyles'
+import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 

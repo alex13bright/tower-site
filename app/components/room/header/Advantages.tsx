@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/roomStyles'
+import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
 import { border, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'

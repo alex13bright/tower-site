@@ -1,7 +1,7 @@
 import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react'
 import styled from 'styled-components'
 import { background, breakpoints, primary, secondary } from '~/styles/styles'
-import { Cross } from '~/components/Cross'
+import { Cross } from '~/components/ui/Cross'
 
 const ReCross = styled(Cross)`
   position: absolute;

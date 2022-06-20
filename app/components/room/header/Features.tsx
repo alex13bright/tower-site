@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
-import { IconList } from '~/components/IconList'
-import { HeaderValuesSpoiler } from '~/components/room/HeaderValuesSpoiler'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/roomStyles'
+import { IconList } from '~/components/ui/IconList'
+import { HeaderValuesSpoiler } from '~/components/room/header/HeaderValuesSpoiler'
+import { Table, Caption, Content, Row, Name, Value } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/roomStyles'
+import { headerBlock } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 

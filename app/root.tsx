@@ -14,9 +14,9 @@ import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
 import { permanentRedirect } from '~/core/permanentReidrect'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
-import { PageLayout } from '~/components/PageLayout'
+import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
-import { Locale, LocaleContext, useLocale } from '~/components/Locale'
+import { Locale, LocaleContext, useLocale } from '~/components/root/Locale'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },

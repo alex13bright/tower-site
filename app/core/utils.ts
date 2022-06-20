@@ -1,4 +1,4 @@
-import { Locale, useLocale } from '~/components/Locale'
+import { Locale, useLocale } from '~/components/root/Locale'
 
 export const fakeUse = (...rest: any[]) => {
   rest.forEach((r) => r)
