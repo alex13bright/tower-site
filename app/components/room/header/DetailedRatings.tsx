@@ -9,13 +9,13 @@ import {
   secondaryDark,
   widthAtLeast,
 } from '~/styles/styles'
-import chroma from 'chroma-js'
 import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
 import { headerBlock } from '~/components/room/header/headerStyles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
+import { darken } from '~/core/utils'
 
-const ReName = styled(Name)<{ kind: string }>`
+const StyledName = styled(Name)<{ kind: string }>`
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 20px;
@@ -30,7 +30,7 @@ const ReName = styled(Name)<{ kind: string }>`
   }
 `
 
-const ReValue = styled(Value)`
+const StyledValue = styled(Value)`
   display: flex;
   align-items: baseline;
   color: ${accent};
@@ -46,7 +46,7 @@ const ReValue = styled(Value)`
   }
 `
 
-const ReTable = styled(Table)`
+const StyledTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
   padding-top: 30px;
@@ -63,12 +63,12 @@ const ReTable = styled(Table)`
   }
 `
 
-const ReCaption = styled(Caption)`
+const StyledCaption = styled(Caption)`
   display: flex;
   justify-content: space-between;
 `
 
-const ReContent = styled(Content)`
+const StyledContent = styled(Content)`
   @media screen and ${widthAtLeast.md} {
     grid-template-columns: 1fr 1fr;
     column-gap: 60px;
@@ -81,9 +81,9 @@ const ReContent = styled(Content)`
 const Title = styled.div``
 
 const Info = styled.button`
-  border-bottom: 1px solid ${chroma(accent).darken(0.5).hex()};
-  font-size: 12px;
-  color: ${chroma(accent).darken(0.5).hex()};
+  border-bottom: 1px solid ${darken(accent, 1)};
+  font-size: 14px;
+  color: ${darken(accent, 0.3)};
 `
 
 type Props = {
@@ -104,38 +104,38 @@ export const DetailedRatings = ({ className }: Props): ReactElement => {
   return (
     <>
       <HowDoWeRate isVisible={isVisible} setIsVisible={setIsVisible} />
-      <ReTable className={className}>
-        <ReCaption>
+      <StyledTable className={className}>
+        <StyledCaption>
           <Title>Our ratings</Title>
           <Info onClick={() => setIsVisible(true)}>How do we rate?</Info>
-        </ReCaption>
-        <ReContent>
+        </StyledCaption>
+        <StyledContent>
           <Row>
-            <ReName kind="reliability">Reliability</ReName>
-            <ReValue>{reliability}</ReValue>
+            <StyledName kind="reliability">Reliability</StyledName>
+            <StyledValue>{reliability}</StyledValue>
           </Row>
           <Row>
-            <ReName kind="bonusesPromotions">Bonuses and promotions</ReName>
-            <ReValue>{bonusesPromotions}</ReValue>
+            <StyledName kind="bonusesPromotions">Bonuses and promotions</StyledName>
+            <StyledValue>{bonusesPromotions}</StyledValue>
           </Row>
           <Row>
-            <ReName kind="gameSelection">Game selection</ReName>
-            <ReValue>{gameSelection}</ReValue>
+            <StyledName kind="gameSelection">Game selection</StyledName>
+            <StyledValue>{gameSelection}</StyledValue>
           </Row>
           <Row>
-            <ReName kind="casualPlayers">Casual players</ReName>
-            <ReValue>{casualPlayers}</ReValue>
+            <StyledName kind="casualPlayers">Casual players</StyledName>
+            <StyledValue>{casualPlayers}</StyledValue>
           </Row>
           <Row>
-            <ReName kind="softwareConvenience">Convenience of the_software</ReName>
-            <ReValue>{softwareConvenience}</ReValue>
+            <StyledName kind="softwareConvenience">Convenience of the_software</StyledName>
+            <StyledValue>{softwareConvenience}</StyledValue>
           </Row>
           <Row>
-            <ReName kind="depositsWithdrawals">Deposits and withdrawals</ReName>
-            <ReValue>{depositsWithdrawals}</ReValue>
+            <StyledName kind="depositsWithdrawals">Deposits and withdrawals</StyledName>
+            <StyledValue>{depositsWithdrawals}</StyledValue>
           </Row>
-        </ReContent>
-      </ReTable>
+        </StyledContent>
+      </StyledTable>
     </>
   )
 }

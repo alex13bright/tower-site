@@ -1,6 +1,6 @@
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { PageMeta } from '~/components/common/pageMetas'
+import { PageMeta } from '~/components/common/PageMeta'
 
 const Main = styled.div``
 

@@ -4,6 +4,7 @@ import { ReactElement } from 'react'
 import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { calcRating } from '~/core/utils'
 
 const StarsBar = styled.div<{
   rating: number
@@ -84,8 +85,7 @@ type Props = {
 export const Ratings = ({ className }: Props): ReactElement => {
   const data: LoaderData = useLoaderData()
   const { ratings } = data.room
-  const values = Object.values(ratings)
-  const rating: number = values.reduce((sum, rating) => sum + rating, 0) / values.length
+  const rating = calcRating(ratings)
   const isBright = rating > 2.5
   return (
     <Main className={className}>

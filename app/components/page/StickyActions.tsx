@@ -39,11 +39,11 @@ type StickyMarkerProps = {
 
 export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [_, setState] = useStickyContext()
+  const [_, stickyContextSetState] = useStickyContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
-    setState((state) => ({ ...state, [isVisibleKey]: isVisible }))
-  }, [isVisibleKey, isVisible, setState])
+    stickyContextSetState((state) => ({ ...state, [isVisibleKey]: isVisible }))
+  }, [isVisibleKey, isVisible, stickyContextSetState])
   return <div ref={ref}>{children}</div>
 }
 

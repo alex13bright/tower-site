@@ -5,7 +5,6 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -13,7 +12,7 @@ import styled from 'styled-components'
 import { useSize } from '~/custom-hooks/useSize'
 
 type SpoilerContextType = {
-  ref: MutableRefObject<HTMLDivElement | null>
+  containerRef: MutableRefObject<HTMLDivElement | null>
   maxHeight: string
   isButtonHidden: boolean
   isButtonPressed: boolean
@@ -26,7 +25,7 @@ export const useSpoilerContext = () => {
   return context
 }
 
-export const Button = styled.button<{ isHidden: boolean; isPressed: boolean }>`
+export const UtilityButton = styled.button<{ isHidden: boolean; isPressed: boolean }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
 `
@@ -34,17 +33,17 @@ type SpoilerButtonProps = {
   children: ReactNode
   className?: string
 }
-export const SpoilerButton = ({ children, className }: SpoilerButtonProps) => {
+export const UtilitySpoilerButton = ({ children, className }: SpoilerButtonProps) => {
   const { isButtonHidden, isButtonPressed, toggle } = useSpoilerContext()
   return (
-    <Button
+    <UtilityButton
       className={className}
       isHidden={isButtonHidden}
       isPressed={isButtonPressed}
       onClick={toggle}
     >
       {children}
-    </Button>
+    </UtilityButton>
   )
 }
 
@@ -53,20 +52,20 @@ const Box = styled.div<{ maxHeight: string }>`
   max-height: ${({ maxHeight }) => maxHeight};
 `
 type ContainerProps = {
-  _ref: MutableRefObject<HTMLDivElement | null>
+  containerRef: MutableRefObject<HTMLDivElement | null>
   maxHeight: string
   children: ReactNode
   className?: string
 }
 export const Container = ({
-  _ref,
+  containerRef,
   maxHeight,
   children,
   className,
 }: ContainerProps): ReactElement => {
   return (
     <Box maxHeight={maxHeight} className={className}>
-      <div ref={_ref}>{children}</div>
+      <div ref={containerRef}>{children}</div>
     </Box>
   )
 }
@@ -75,20 +74,20 @@ type SpoilerContainerProps = {
   className?: string
 }
 export const SpoilerContainer = ({ children, className }: SpoilerContainerProps): ReactElement => {
-  const { ref, maxHeight } = useSpoilerContext()
+  const { containerRef, maxHeight } = useSpoilerContext()
   return (
-    <Container _ref={ref} maxHeight={maxHeight} className={className}>
+    <Container containerRef={containerRef} maxHeight={maxHeight} className={className}>
       {children}
     </Container>
   )
 }
 
 export const useSpoiler = (height: number): SpoilerContextType => {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [isButtonHidden, setIsButtonHidden] = useState<boolean>(true)
-  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [isButtonHidden, setIsButtonHidden] = useState(true)
+  const [isButtonPressed, setIsButtonPressed] = useState(false)
 
-  const size = useSize(ref)
+  const size = useSize(containerRef)
   const heightLimit = size === null ? height : Math.min(height, size.height)
   useEffect(() => {
     if (size === null) return
@@ -96,7 +95,7 @@ export const useSpoiler = (height: number): SpoilerContextType => {
   }, [heightLimit, size, setIsButtonHidden])
   const maxHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
   const toggle = () => setIsButtonPressed((isButtonPressed) => !isButtonPressed)
-  return { ref, maxHeight, isButtonHidden, isButtonPressed, toggle }
+  return { containerRef, maxHeight, isButtonHidden, isButtonPressed, toggle }
 }
 
 type Props = {
@@ -104,10 +103,6 @@ type Props = {
   children: ReactNode
 }
 export function SpoilerContext({ height, children }: Props): ReactElement {
-  const { ref, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(height)
-  const memo = useMemo(
-    () => ({ ref, maxHeight, isButtonHidden, isButtonPressed, toggle }),
-    [ref, maxHeight, isButtonHidden, isButtonPressed, toggle]
-  )
-  return <Context.Provider value={memo}>{children}</Context.Provider>
+  const context = useSpoiler(height)
+  return <Context.Provider value={context}>{children}</Context.Provider>
 }

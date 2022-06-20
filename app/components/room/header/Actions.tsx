@@ -10,8 +10,8 @@ import {
   secondaryAction,
   widthAtLeast,
 } from '~/styles/styles'
-import chroma from 'chroma-js'
 import { headerBlock } from '~/components/room/header/headerStyles'
+import { darken } from '~/core/utils'
 
 const button = css`
   color: inherit;
@@ -50,7 +50,7 @@ const RegisterButton = styled(ExternalLink)`
   background-color: ${primaryAction};
 
   &:hover {
-    background-color: ${chroma(primaryAction).darken(0.1).hex()};
+    background-color: ${darken(primaryAction, 0.1)};
   }
 
   &::after {
@@ -63,7 +63,7 @@ const ContactButton = styled.button`
   background-color: ${secondaryAction};
 
   &:hover {
-    background-color: ${chroma(secondaryAction).darken(0.1).hex()};
+    background-color: ${darken(secondaryAction, 0.1)};
   }
 
   &::after {
@@ -83,7 +83,7 @@ const TagButton = styled.button`
   }
 `
 
-const ReForm = styled(Form)`
+const StyledForm = styled(Form)`
   display: contents;
 `
 
@@ -111,11 +111,11 @@ type Props = { className?: string }
 export const Actions = ({ className }: Props): ReactElement => {
   return (
     <Main className={className}>
-      <ReForm>
+      <StyledForm>
         <RegisterButton href="/out.com">Sign up</RegisterButton>
         <ContactButton>Contact us</ContactButton>
         <TagButton>Tag your account</TagButton>
-      </ReForm>
+      </StyledForm>
     </Main>
   )
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MouseEventHandler, ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { breakpoints } from '~/styles/styles'
 
 type KnownTags = keyof JSX.IntrinsicElements
@@ -16,7 +16,6 @@ type Props = {
   as?: KnownTags
   className?: string
   children?: ReactNode
-  onClick?: MouseEventHandler<HTMLElement>
 }
 
 export const PageWrapper = ({ className, as, children }: Props): ReactElement => {

@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 import { headerBlock } from '~/components/room/header/headerStyles'
 import { Link, useLoaderData } from '@remix-run/react'
 import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
-import chroma from 'chroma-js'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { darken } from '~/core/utils'
 
 const itemStyles = css`
   padding: 10px;
@@ -16,13 +16,13 @@ const itemStyles = css`
   height: 100%;
 `
 
-const ReLink = styled(Link)`
+const StyledLink = styled(Link)`
   ${itemStyles};
   font-weight: bold;
   color: ${backgroundDark.start};
   background-color: ${accent};
   &:hover {
-    background-color: ${chroma(accent).darken(0.1).hex()};
+    background-color: ${darken(accent, 0.1)};
   }
 `
 
@@ -69,7 +69,11 @@ export function NavButtons({ className }: Props): ReactElement {
       <List amount={navs.length}>
         {navs.map(({ url, title, isActive = false }, i) => (
           <Item key={i}>
-            {isActive ? <ActiveLink>{title}</ActiveLink> : <ReLink to={url}>{title}</ReLink>}
+            {isActive ? (
+              <ActiveLink>{title}</ActiveLink>
+            ) : (
+              <StyledLink to={url}>{title}</StyledLink>
+            )}
           </Item>
         ))}
       </List>

@@ -10,7 +10,7 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { Button, Container, useSpoiler } from '~/components/ui/Spoiler'
+import { UtilityButton, Container, useSpoiler } from '~/components/ui/Spoiler'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -83,7 +83,7 @@ const Title = styled.div`
   font-weight: bold;
 `
 
-const ReButton = styled(Button)`
+const StyledButton = styled(UtilityButton)`
   background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
   width: 20px;
   height: 20px;
@@ -120,15 +120,15 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
-  const { ref, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(0)
+  const { containerRef, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(0)
 
   return (
-    <Main ref={ref} className={className}>
+    <Main ref={containerRef} className={className}>
       <TitleButtonSpan onClick={toggle}>
         <Title>Contents</Title>
-        <ReButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
+        <StyledButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
       </TitleButtonSpan>
-      <Container _ref={ref} maxHeight={maxHeight}>
+      <Container containerRef={containerRef} maxHeight={maxHeight}>
         <List>
           {toc.map(({ title, anchor }) => (
             <MarkedItem key={anchor} unmarked={false}>

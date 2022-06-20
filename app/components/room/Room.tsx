@@ -4,7 +4,7 @@ import { BreadCrumbs } from '~/components/ui/BreadCrumbs'
 import { widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { Toc } from '~/components/room/review/Toc'
-import { PageMeta } from '~/components/common/pageMetas'
+import { Review } from '~/components/room/review/Review'
 
 const Layout = styled.section`
   @media screen and ${widthAtLeast.md} {
@@ -23,7 +23,7 @@ export const Room = (): ReactElement => {
       <Header />
       <Content>
         <Toc />
-        <PageMeta />
+        <Review />
       </Content>
     </Layout>
   )
