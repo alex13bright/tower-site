@@ -1,6 +1,5 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { Link, useLoaderData } from '@remix-run/react'
 import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
@@ -54,7 +53,6 @@ const List = styled.ul<{ amount: number }>`
 const Main = styled.div`
   display: grid;
   margin-top: 30px;
-  ${headerBlock};
   grid-area: nav;
 `
 

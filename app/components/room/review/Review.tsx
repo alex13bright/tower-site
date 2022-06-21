@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { PageMeta } from '~/components/common/PageMeta'
+import { PageMeta } from '~/components/room/review/PageMeta'
 
 const Main = styled.div``
 

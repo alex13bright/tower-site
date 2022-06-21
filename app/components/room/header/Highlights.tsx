@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
@@ -11,7 +10,6 @@ const Main = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
 
-  ${headerBlock};
   grid-area: highlights;
 
   @media screen and ${widthAtLeast.md} {

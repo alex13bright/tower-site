@@ -9,11 +9,6 @@ export const headerTitle = css`
   text-transform: uppercase;
 `
 
-export const headerBlock = css`
-  padding-left: 24px;
-  padding-right: 24px;
-`
-
 export const Name = styled.td`
   grid-area: name;
   color: ${tertiary};

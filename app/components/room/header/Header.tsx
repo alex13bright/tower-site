@@ -29,6 +29,11 @@ const Main = styled.div`
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 30px;
 
   display: grid;
@@ -45,6 +50,8 @@ const Main = styled.div`
   grid-template-columns: 1fr;
 
   @media screen and ${widthAtLeast.md} {
+    margin-left: 0;
+    margin-right: 0;
     grid-template-areas:
       'network .'
       'logo ratings'

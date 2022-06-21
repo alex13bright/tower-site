@@ -10,7 +10,6 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 import { darken } from '~/core/utils'
@@ -49,10 +48,10 @@ const StyledValue = styled(Value)`
 const StyledTable = styled(Table)`
   background: #2c2f3c;
   border-radius: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 30px 20px;
 
-  ${headerBlock};
   grid-area: detailed;
   @media screen and ${widthAtLeast.md} {
     margin-top: 30px;

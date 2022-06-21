@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
+import { headerTitle } from '~/components/room/header/headerStyles'
 import { border, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
@@ -35,7 +35,6 @@ const Main = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
 
-  ${headerBlock};
   grid-area: advantages;
 
   @media screen and ${widthAtLeast.md} {
@@ -43,6 +42,7 @@ const Main = styled.div`
     border-left: 1px solid ${border};
     padding-top: 0;
     padding-bottom: 0;
+    padding-left: 20px;
     margin-top: 30px;
   }
 `

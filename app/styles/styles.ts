@@ -34,11 +34,6 @@ export const border = '#343848'
 export const primaryAction = '#ee3c4b'
 export const secondaryAction = '#70ac30'
 
-export const headerFooterColor = css`
-  color: ${secondaryDark};
-  background-image: linear-gradient(${backgroundDark.end} 47.41%, ${backgroundDark.start});
-`
-
 export const pseudoAbsolute = css`
   content: '';
   display: block;

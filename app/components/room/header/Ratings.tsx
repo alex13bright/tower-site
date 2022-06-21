@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
+import { headerTitle } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { calcRating } from '~/core/utils'
@@ -61,8 +61,6 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   column-gap: 58px;
-
-  ${headerBlock};
   grid-area: ratings;
 
   @media screen and ${widthAtLeast.sm} {

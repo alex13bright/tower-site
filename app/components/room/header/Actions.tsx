@@ -10,7 +10,6 @@ import {
   secondaryAction,
   widthAtLeast,
 } from '~/styles/styles'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { darken } from '~/core/utils'
 
 const button = css`
@@ -91,7 +90,6 @@ const Main = styled.div`
   display: grid;
   gap: 20px;
 
-  ${headerBlock};
   grid-area: actions;
 
   @media screen and ${widthAtLeast.md} {

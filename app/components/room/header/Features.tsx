@@ -3,15 +3,18 @@ import { IconList } from '~/components/ui/IconList'
 import { HeaderValuesSpoiler } from '~/components/room/header/HeaderValuesSpoiler'
 import { Table, Caption, Content, Row, Name, Value } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { widthAtLeast } from '~/styles/styles'
 
 const Main = styled(Table)`
   padding-top: 30px;
   padding-bottom: 30px;
-  ${headerBlock};
   grid-area: features;
+
+  @media screen and ${widthAtLeast.md} {
+    padding-right: 20px;
+  }
 `
 
 type Props = {

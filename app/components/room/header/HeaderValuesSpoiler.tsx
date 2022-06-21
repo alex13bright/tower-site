@@ -9,8 +9,6 @@ const Main = styled.div`
 `
 
 export const StyledButton = styled(UtilityButton)`
-  margin-top: 1px;
-  margin-left: 1px;
   width: 20px;
   height: 20px;
   background: url(/images/rest/arrow-down.svg) no-repeat 50%;

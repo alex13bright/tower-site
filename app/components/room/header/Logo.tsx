@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
@@ -8,7 +7,6 @@ import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 const Image = styled.img`
   place-self: center;
   margin: 15px 0;
-  ${headerBlock};
   grid-area: logo;
   height: 60px;
   width: auto;
