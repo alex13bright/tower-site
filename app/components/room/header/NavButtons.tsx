@@ -95,6 +95,10 @@ const List = styled.ul<{ length: number }>`
     grid-template-columns: repeat(${({ length }) => (length == 3 ? 3 : 2)}, 1fr);
   }
 
+  @media screen and ${widthAtLeast.md} {
+    grid-template-columns: repeat(${({ length }) => length}, 1fr);
+  }
+
   @media screen and ${widthAtLeast.lg} {
     display: flex;
     justify-items: start;
