@@ -117,9 +117,10 @@ const Main = styled.nav`
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
 
+  ${expandOnParentSides(contentSidePaddingSize.xs)};
   padding-top: 16px;
   padding-bottom: 16px;
-  ${expandOnParentSides(contentSidePaddingSize.xs)};
+  margin-bottom: 40px;
 
   @media screen and ${widthAtLeast.md} {
     ${cancelSideMargins};

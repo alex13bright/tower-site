@@ -4,12 +4,18 @@ import { proximaNovaSb, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
-const Title = styled.div``
+const Title = styled.div`
+    color: ${secondary};
+    font-size: 12px;
+    opacity: 0.5;
+  }
+`
 const Value = styled.div``
 
 const Span = styled.div`
   display: flex;
   flex-direction: column;
+  justify-items: start;
 
   @media screen and ${widthAtLeast.lg} {
     flex-direction: row;
@@ -17,10 +23,8 @@ const Span = styled.div`
 `
 
 const PageMetaItem = styled.span<{ kind: string }>`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 8px;
-  place-items: center;
+  display: flex;
+  column-gap: 8px;
 
   color: ${secondary};
   font-family: ${proximaNovaSb};
@@ -41,9 +45,9 @@ const PageMetaItem = styled.span<{ kind: string }>`
 `
 
 const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  column-gap: 30px;
+  display: flex;
+  column-gap: 16px;
+  margin-bottom: 32px;
 `
 
 type Props = {
@@ -62,12 +66,15 @@ export const PageMeta = ({ className }: Props): ReactElement => {
       </PageMetaItem>
       <PageMetaItem kind="created">
         <Span>
-          Created
-          {pageMeta.created}
+          <Title>Created</Title>
+          <Value>{pageMeta.created}</Value>
         </Span>
       </PageMetaItem>
       <PageMetaItem kind="updated">
-        <Span>Updated {pageMeta.updated}</Span>
+        <Span>
+          <Title>Updated</Title>
+          <Value>{pageMeta.updated}</Value>
+        </Span>
       </PageMetaItem>
     </Main>
   )
