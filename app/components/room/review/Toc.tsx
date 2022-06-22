@@ -124,7 +124,6 @@ const Main = styled.nav`
 
   @media screen and ${widthAtLeast.md} {
     ${cancelSideMargins};
-    margin-top: 20px;
     margin-bottom: 20px;
   }
   @media screen and ${widthAtLeast.lg} {

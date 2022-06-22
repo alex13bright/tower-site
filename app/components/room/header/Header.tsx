@@ -64,6 +64,7 @@ const Main = styled.div`
   grid-template-columns: 1fr;
 
   @media screen and ${widthAtLeast.md} {
+    margin-bottom: 40px;
     grid-template-areas:
       'network .'
       'logo ratings'
