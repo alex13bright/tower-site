@@ -93,7 +93,8 @@ const StyledForm = styled(Form)`
 const Main = styled.div`
   grid-area: actions;
   display: grid;
-  gap: ${contentSidePaddingSize.xs};
+  column-gap: ${contentSidePaddingSize.xs};
+  row-gap: calc(${contentSidePaddingSize.xs} / 2);
 
   @media screen and ${widthAtLeast.md} {
     column-gap: ${sidePaddingSize.md};

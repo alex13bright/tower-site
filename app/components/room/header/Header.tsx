@@ -43,7 +43,6 @@ const Main = styled.div`
     padding-right: ${sidePaddingSize.lg};
   }
 
-  padding-bottom: 30px;
   color: ${primaryDark};
   font-size: 16px;
   line-height: 20px;
