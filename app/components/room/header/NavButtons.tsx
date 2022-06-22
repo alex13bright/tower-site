@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { Link, useLoaderData } from '@remix-run/react'
 import {
   accent,
+  background,
   backgroundDark,
   proximaNovaSb,
   sidePaddings,
@@ -31,10 +32,18 @@ const itemStyles = css`
     mix-blend-mode: normal;
     padding: 16px 28px;
     white-space: nowrap;
+    border-bottom: none;
+    border-radius: 0;
   }
 `
-
-const StyledLink = styled(Link)`
+const firstCss = css`
+  border-top-left-radius: 4px;
+`
+const lastCss = css`
+  border-right: none;
+  border-top-right-radius: 4px;
+`
+const StyledLink = styled(Link)<{ isFirst: boolean; isLast: boolean }>`
   ${itemStyles};
   font-weight: bold;
   color: ${backgroundDark.start};
@@ -45,47 +54,57 @@ const StyledLink = styled(Link)`
 
   @media screen and ${widthAtLeast.lg} {
     border: none;
-    border-radius: 0;
-    border-right: 1px solid ${tertiary};
-
+    color: #555;
     background: #f1efef;
+    border-right: 1px solid ${tertiary};
+    ${({ isFirst }) => isFirst && firstCss};
+    ${({ isLast }) => isLast && lastCss};
+
+    &:hover {
+      background-color: #e9e9e9;
+    }
   }
 `
 
 const ActiveLink = styled.span`
   ${itemStyles};
   color: ${accent};
-`
 
-const Item = styled.li`
   @media screen and ${widthAtLeast.lg} {
-    &:last-child {
-      border-top-right-radius: 20px;
-    }
+    background: ${background};
+
+    border: 3px solid ${accent};
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transform: scale(1.1) translateY(-2px);
+    color: #243238;
+    font-weight: bold;
   }
 `
 
-const amountToColumns = (amount: number): number => {
-  if (amount % 2 === 0) return 2
-  if (amount > 4) return 1
-  return amount
+const Item = styled.li``
+
+const lengthToColumns = (length: number): number => {
+  if (length % 2 === 0) return 2
+  if (length > 4) return 1
+  return length
 }
 
-const List = styled.ul<{ amount: number }>`
+const List = styled.ul<{ length: number }>`
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr;
 
   @media screen and ${widthAtLeast.sm} {
-    grid-template-columns: repeat(${({ amount }) => amountToColumns(amount)}, 1fr);
+    grid-template-columns: repeat(${({ length }) => lengthToColumns(length)}, 1fr);
   }
 
   @media screen and ${widthAtLeast.md} {
-    grid-template-columns: repeat(${({ amount }) => amount}, 1fr);
+    grid-template-columns: repeat(${({ length }) => length}, 1fr);
   }
 
   @media screen and ${widthAtLeast.lg} {
-    overflow-x: auto;
     display: flex;
     justify-items: start;
     gap: 0;
@@ -108,15 +127,18 @@ type Props = {
 export function NavButtons({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { navs } = data.room
+  const navsLength = navs.length
   return (
     <Main className={className}>
-      <List amount={navs.length}>
+      <List length={navsLength}>
         {navs.map(({ url, title, isActive = false }, i) => (
           <Item key={i}>
             {isActive ? (
               <ActiveLink>{title}</ActiveLink>
             ) : (
-              <StyledLink to={url}>{title}</StyledLink>
+              <StyledLink to={url} isFirst={i === 0} isLast={navsLength === i + 1}>
+                {title}
+              </StyledLink>
             )}
           </Item>
         ))}
