@@ -4,6 +4,8 @@ import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 import {
   accent,
+  cancelSideMargins,
+  expandOnParentSides,
   proximaNovaSb,
   pseudoAbsolute,
   secondaryDark,
@@ -11,6 +13,7 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { UtilityButton, Container, useSpoiler } from '~/components/ui/Spoiler'
+import { contentSidePaddingSize } from '~/components/page/pageStyles'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -75,6 +78,11 @@ const List = styled.ul`
   padding: 16px 0;
 `
 
+const StyledContainer = styled(Container)`
+  @media screen and ${widthAtLeast.lg} {
+    max-height: 100%;
+  }
+`
 const Title = styled.div`
   color: #243238;
   font-size: 16px;
@@ -87,6 +95,10 @@ const StyledButton = styled(UtilityButton)`
   background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
   width: 20px;
   height: 20px;
+
+  @media screen and ${widthAtLeast.lg} {
+    display: none;
+  }
 `
 
 const TitleButtonSpan = styled.div`
@@ -95,18 +107,27 @@ const TitleButtonSpan = styled.div`
   align-items: center;
   height: 36px;
   cursor: pointer;
+
+  @media screen and ${widthAtLeast.lg} {
+    pointer-events: none;
+  }
 `
 
 const Main = styled.nav`
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
-  padding: 16px 24px;
+
+  padding-top: 16px;
+  padding-bottom: 16px;
+  ${expandOnParentSides(contentSidePaddingSize.xs)};
 
   @media screen and ${widthAtLeast.md} {
+    ${cancelSideMargins};
     margin-top: 20px;
     margin-bottom: 20px;
   }
   @media screen and ${widthAtLeast.lg} {
+    grid-area: toc;
     position: sticky;
     top: 0;
     left: 0;
@@ -128,7 +149,7 @@ export function Toc({ className }: Props): ReactElement {
         <Title>Contents</Title>
         <StyledButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
       </TitleButtonSpan>
-      <Container containerRef={containerRef} maxHeight={maxHeight}>
+      <StyledContainer containerRef={containerRef} maxHeight={maxHeight}>
         <List>
           {toc.map(({ title, anchor }) => (
             <MarkedItem key={anchor} unmarked={false}>
@@ -136,7 +157,7 @@ export function Toc({ className }: Props): ReactElement {
             </MarkedItem>
           ))}
         </List>
-      </Container>
+      </StyledContainer>
     </Main>
   )
 }

@@ -6,6 +6,7 @@ import {
   background,
   backgroundDark,
   proximaNovaSb,
+  secondary,
   sidePaddings,
   tertiary,
   widthAtLeast,
@@ -54,7 +55,7 @@ const StyledLink = styled(Link)<{ isFirst: boolean; isLast: boolean }>`
 
   @media screen and ${widthAtLeast.lg} {
     border: none;
-    color: #555;
+    color: ${secondary};
     background: #f1efef;
     border-right: 1px solid ${tertiary};
     ${({ isFirst }) => isFirst && firstCss};
