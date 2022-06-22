@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { proximaNovaSb, secondaryDark, widthAtLeast } from '~/styles/styles'
+import { proximaNovaSb, secondaryDark, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
-import { headerTitle } from '~/components/room/header/headerStyles'
+import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { calcRating } from '~/core/utils'
@@ -37,6 +37,12 @@ const Number = styled.span`
   font-feature-settings: 'tnum' on, 'lnum' on;
 `
 
+const Values = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
 const Title = styled.div`
   display: none;
 
@@ -50,20 +56,15 @@ const Title = styled.div`
   }
 `
 
-const Values = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`
-
 const Main = styled.div`
+  grid-area: ratings;
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 58px;
-  grid-area: ratings;
+  column-gap: 60px;
 
   @media screen and ${widthAtLeast.sm} {
+    ${sidePaddings(sidePaddingSize.md)};
     justify-content: space-between;
     align-self: center;
   }
@@ -72,6 +73,7 @@ const Main = styled.div`
     gap: 3px;
   }
   @media screen and ${widthAtLeast.lg} {
+    ${sidePaddings(sidePaddingSize.lg)};
     flex-direction: row;
   }
 `

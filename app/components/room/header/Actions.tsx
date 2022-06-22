@@ -11,6 +11,8 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { darken } from '~/core/utils'
+import { sidePaddingSize } from '~/components/room/header/headerStyles'
+import { contentSidePaddingSize } from '~/components/page/pageStyles'
 
 const button = css`
   color: inherit;
@@ -75,6 +77,7 @@ const TagButton = styled.button`
   ${button};
   background: transparent;
   border: 2px solid hsla(0, 0%, 89.8%, 0.8);
+  padding: 12px;
   &:hover {
     color: ${primary};
     background-color: ${background};
@@ -87,16 +90,17 @@ const StyledForm = styled(Form)`
 `
 
 const Main = styled.div`
-  display: grid;
-  gap: 20px;
-
   grid-area: actions;
+  display: grid;
+  gap: ${contentSidePaddingSize.xs};
 
   @media screen and ${widthAtLeast.md} {
+    gap: ${sidePaddingSize.md};
     grid-template-columns: repeat(2, 1fr);
     margin-bottom: 30px;
   }
   @media screen and ${widthAtLeast.lg} {
+    gap: ${sidePaddingSize.lg};
     margin-top: 30px;
 
     grid-template-columns: repeat(3, 1fr);

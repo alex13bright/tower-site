@@ -5,15 +5,13 @@ import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Image = styled.img`
+  grid-area: logo;
   place-self: center;
   margin: 15px 0;
-  grid-area: logo;
   height: 60px;
-  width: auto;
 
   @media screen and ${widthAtLeast.md} {
-    height: 60px;
-    margin: 10px;
+    justify-self: start;
   }
 `
 

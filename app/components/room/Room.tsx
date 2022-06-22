@@ -4,9 +4,10 @@ import { BreadCrumbs } from '~/components/ui/BreadCrumbs'
 import { ReactElement } from 'react'
 import { Toc } from '~/components/room/review/Toc'
 import { Review } from '~/components/room/review/Review'
+import { contentSidePadding } from '~/components/page/pageStyles'
 
 const Layout = styled.section`
-  padding: 20px;
+  ${contentSidePadding};
 `
 
 const Content = styled.article`
@@ -18,10 +19,10 @@ export const Room = (): ReactElement => {
     <Layout>
       <BreadCrumbs />
       <Header />
-      <Content>
-        <Toc />
-        <Review />
-      </Content>
+      {/*<Content>*/}
+      {/*  <Toc />*/}
+      {/*  <Review />*/}
+      {/*</Content>*/}
     </Layout>
   )
 }

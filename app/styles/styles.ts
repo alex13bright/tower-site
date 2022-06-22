@@ -40,3 +40,19 @@ export const pseudoAbsolute = css`
   position: absolute;
   z-index: 99;
 `
+
+export const sidePaddings = (size: string) => css`
+  padding-left: ${size};
+  padding-right: ${size};
+`
+
+export const cancelSideMargins = css`
+  margin-left: 0;
+  margin-right: 0;
+`
+export const expandOnParentSides = (size: string) => css`
+  margin-left: -${size};
+  margin-right: -${size};
+  padding-left: ${size};
+  padding-right: ${size};
+`

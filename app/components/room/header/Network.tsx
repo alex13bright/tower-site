@@ -4,7 +4,17 @@ import { ReactElement } from 'react'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
+const Image = styled.img``
+
+const Title = styled.span`
+  color: ${secondaryDark};
+  font-size: 14px;
+`
+
 const Main = styled.a`
+  grid-area: network;
+  justify-self: center;
+  align-self: start;
   cursor: pointer;
   border: 1px solid ${border};
   border-bottom-left-radius: 4px;
@@ -13,23 +23,10 @@ const Main = styled.a`
   padding: 8px 10px;
   display: flex;
   gap: 8px;
-  align-items: center;
-
-  align-self: start;
-  justify-self: center;
-  grid-area: network;
 
   @media screen and ${widthAtLeast.md} {
-    place-self: start;
-    margin-left: 24px;
+    justify-self: start;
   }
-`
-
-const Image = styled.img``
-
-const Title = styled.span`
-  color: ${secondaryDark};
-  font-size: 14px;
 `
 
 type Props = {

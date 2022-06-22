@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerTitle } from '~/components/room/header/headerStyles'
-import { border, widthAtLeast } from '~/styles/styles'
+import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
+import { border, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
@@ -33,7 +33,7 @@ const Main = styled.div`
   row-gap: 16px;
   border-top: 1px solid ${border};
   padding-top: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
 
   grid-area: advantages;
 
@@ -41,9 +41,12 @@ const Main = styled.div`
     border-top: none;
     border-left: 1px solid ${border};
     padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 20px;
     margin-top: 30px;
+    padding-left: ${sidePaddingSize.md};
+  }
+
+  @media screen and ${widthAtLeast.lg} {
+    ${sidePaddings(sidePaddingSize.lg)};
   }
 `
 

@@ -1,7 +1,15 @@
 import { ReactElement } from 'react'
 import { IconList } from '~/components/ui/IconList'
 import { HeaderValuesSpoiler } from '~/components/room/header/HeaderValuesSpoiler'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/header/headerStyles'
+import {
+  Table,
+  Caption,
+  Content,
+  Row,
+  Name,
+  Value,
+  sidePaddingSize,
+} from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
@@ -13,7 +21,11 @@ const Main = styled(Table)`
   grid-area: features;
 
   @media screen and ${widthAtLeast.md} {
-    padding-right: 20px;
+    padding-right: ${sidePaddingSize.md};
+  }
+
+  @media screen and ${widthAtLeast.lg} {
+    padding-right: ${sidePaddingSize.lg};
   }
 `
 

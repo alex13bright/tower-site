@@ -3,29 +3,11 @@ import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  row-gap: 8px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+const Name = styled.td``
 
-  grid-area: highlights;
-
-  @media screen and ${widthAtLeast.md} {
-    grid-template-columns: repeat(2, 1fr);
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-`
-
-const Content = styled.table`
-  display: contents;
-`
-
-const Outer = styled.tbody<{ $color: string }>`
-  min-height: 60px;
-  filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
+const Value = styled.td<{ $color: string }>`
+  color: ${({ $color }) => $color};
+  height: 100%;
 `
 
 const Inner = styled.tr`
@@ -40,11 +22,27 @@ const Inner = styled.tr`
   font-size: 18px;
 `
 
-const Name = styled.td``
+const Outer = styled.tbody<{ $color: string }>`
+  min-height: 60px;
+  filter: drop-shadow(-4px 0 0 ${({ $color }) => $color});
+`
 
-const Value = styled.td<{ $color: string }>`
-  color: ${({ $color }) => $color};
-  height: 100%;
+const Main = styled.table`
+  padding-left: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  row-gap: 8px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  grid-area: highlights;
+
+  @media screen and ${widthAtLeast.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and ${widthAtLeast.lg} {
+    padding-bottom: 0;
+  }
 `
 
 type Props = {
@@ -56,20 +54,18 @@ export const Highlights = ({ className }: Props) => {
   const { bonus, rakeback } = data.room
   return (
     <Main className={className}>
-      <Content>
-        <Outer $color={primaryAction}>
-          <Inner>
-            <Name>Bonus</Name>
-            <Value $color={primaryAction}>{bonus}</Value>
-          </Inner>
-        </Outer>
-        <Outer $color={accent}>
-          <Inner>
-            <Name>Rakeback</Name>
-            <Value $color={accent}>{rakeback}</Value>
-          </Inner>
-        </Outer>
-      </Content>
+      <Outer $color={primaryAction}>
+        <Inner>
+          <Name>Bonus</Name>
+          <Value $color={primaryAction}>{bonus}</Value>
+        </Inner>
+      </Outer>
+      <Outer $color={accent}>
+        <Inner>
+          <Name>Rakeback</Name>
+          <Value $color={accent}>{rakeback}</Value>
+        </Inner>
+      </Outer>
     </Main>
   )
 }

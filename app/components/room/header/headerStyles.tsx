@@ -1,6 +1,11 @@
 import { proximaNovaSb, secondaryDark, tertiary } from '~/styles/styles'
 import styled, { css } from 'styled-components'
 
+export const sidePaddingSize = {
+  md: '28px',
+  lg: '28px',
+}
+
 export const headerTitle = css`
   color: ${secondaryDark};
   font-size: 12px;
@@ -29,7 +34,7 @@ export const Row = styled.tr`
   &::after {
     grid-area: line;
     background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);
-    background-position-y: 10px;
+    background-position-y: 50%;
     background-repeat: repeat-x;
     background-size: 3px 1px;
     height: 20px;

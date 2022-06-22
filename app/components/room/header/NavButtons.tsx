@@ -40,8 +40,8 @@ const amountToColumns = (amount: number): number => {
 
 const List = styled.ul<{ amount: number }>`
   display: grid;
-  padding: 5px;
   gap: 5px;
+  grid-template-columns: 1fr;
   @media screen and ${widthAtLeast.sm} {
     grid-template-columns: repeat(${({ amount }) => amountToColumns(amount)}, 1fr);
   }
@@ -51,9 +51,9 @@ const List = styled.ul<{ amount: number }>`
 `
 
 const Main = styled.div`
+  grid-area: nav;
   display: grid;
   margin-top: 30px;
-  grid-area: nav;
 `
 
 type Props = {

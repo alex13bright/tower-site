@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import { StickyMarker } from '~/components/page/StickyActions'
-import { backgroundDark, primaryDark, widthAtLeast } from '~/styles/styles'
+import {
+  backgroundDark,
+  cancelSideMargins,
+  expandOnParentSides,
+  primaryDark,
+  widthAtLeast,
+} from '~/styles/styles'
 import { Ratings } from '~/components/room/header/Ratings'
 import { Network } from '~/components/room/header/Network'
 import { Highlights } from '~/components/room/header/Highlights'
@@ -11,6 +17,8 @@ import { Features } from '~/components/room/header/Features'
 import { DetailedRatings } from '~/components/room/header/DetailedRatings'
 import { Advantages } from '~/components/room/header/Advantages'
 import { NavButtons } from '~/components/room/header/NavButtons'
+import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { sidePaddingSize } from '~/components/room/header/headerStyles'
 
 const LogoHighlightsSpan = styled.div`
   display: contents;
@@ -23,18 +31,25 @@ const LogoHighlightsSpan = styled.div`
   }
 `
 const Main = styled.div`
+  ${expandOnParentSides(contentSidePaddingSize.xs)};
+
+  @media screen and ${widthAtLeast.md} {
+    ${cancelSideMargins};
+    padding-left: ${sidePaddingSize.md};
+    padding-right: ${sidePaddingSize.md};
+  }
+  @media screen and ${widthAtLeast.xl} {
+    padding-left: ${sidePaddingSize.lg};
+    padding-right: ${sidePaddingSize.lg};
+  }
+
+  padding-bottom: 30px;
   color: ${primaryDark};
   font-size: 16px;
   line-height: 20px;
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-
-  margin-left: -20px;
-  margin-right: -20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 30px;
 
   display: grid;
   grid-template-areas:
@@ -50,8 +65,6 @@ const Main = styled.div`
   grid-template-columns: 1fr;
 
   @media screen and ${widthAtLeast.md} {
-    margin-left: 0;
-    margin-right: 0;
     grid-template-areas:
       'network .'
       'logo ratings'
