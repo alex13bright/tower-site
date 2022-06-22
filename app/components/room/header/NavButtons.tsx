@@ -85,23 +85,13 @@ const ActiveLink = styled.span`
 
 const Item = styled.li``
 
-const lengthToColumns = (length: number): number => {
-  if (length % 2 === 0) return 2
-  if (length > 4) return 1
-  return length
-}
-
 const List = styled.ul<{ length: number }>`
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr;
 
   @media screen and ${widthAtLeast.sm} {
-    grid-template-columns: repeat(${({ length }) => lengthToColumns(length)}, 1fr);
-  }
-
-  @media screen and ${widthAtLeast.md} {
-    grid-template-columns: repeat(${({ length }) => length}, 1fr);
+    grid-template-columns: repeat(${({ length }) => (length == 3 ? 3 : 2)}, 1fr);
   }
 
   @media screen and ${widthAtLeast.lg} {
