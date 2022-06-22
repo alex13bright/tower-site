@@ -84,20 +84,24 @@ const ActiveLink = styled.span`
   }
 `
 
-const Item = styled.li`
-  flex-grow: 1;
-
-  @media screen and ${widthAtLeast.lg} {
-    flex-grow: 0;
-  }
-`
+const Item = styled.li``
 
 const List = styled.ul<{ length: number }>`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 5px;
+  grid-template-columns: 1fr;
+
+  @media screen and ${widthAtLeast.sm} {
+    grid-template-columns: repeat(${({ length }) => (length == 3 ? 3 : 2)}, 1fr);
+  }
+
+  @media screen and ${widthAtLeast.md} {
+    grid-template-columns: repeat(${({ length }) => length}, 1fr);
+  }
 
   @media screen and ${widthAtLeast.lg} {
+    display: flex;
+    justify-items: start;
     gap: 0;
   }
 `
