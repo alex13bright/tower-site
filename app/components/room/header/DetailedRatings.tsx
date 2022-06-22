@@ -63,7 +63,7 @@ const StyledCaption = styled(Caption)`
 `
 
 const StyledContent = styled(Content)`
-  @media screen and ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.xm} {
     grid-template-columns: 1fr 1fr;
     column-gap: calc(2 * ${sidePaddingSize.md});
   }

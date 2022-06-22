@@ -41,6 +41,7 @@ const Main = styled.table`
     grid-template-columns: repeat(2, 1fr);
   }
   @media screen and ${widthAtLeast.lg} {
+    padding-top: 0;
     padding-bottom: 0;
   }
 `

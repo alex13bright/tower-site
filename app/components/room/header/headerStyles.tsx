@@ -2,8 +2,8 @@ import { proximaNovaSb, secondaryDark, tertiary } from '~/styles/styles'
 import styled, { css } from 'styled-components'
 
 export const sidePaddingSize = {
-  md: '28px',
-  lg: '28px',
+  md: '32px',
+  lg: '32px',
 }
 
 export const headerTitle = css`

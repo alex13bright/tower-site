@@ -32,6 +32,7 @@ const button = css`
 
 const iconButton = css`
   ${button};
+
   &::after {
     background-position: 100%;
     background-repeat: no-repeat;
@@ -95,7 +96,8 @@ const Main = styled.div`
   gap: ${contentSidePaddingSize.xs};
 
   @media screen and ${widthAtLeast.md} {
-    gap: ${sidePaddingSize.md};
+    column-gap: ${sidePaddingSize.md};
+    row-gap: calc(${sidePaddingSize.md} / 2);
     grid-template-columns: repeat(2, 1fr);
     margin-bottom: 30px;
   }
