@@ -52,13 +52,13 @@ type Props = {
 
 export const Highlights = ({ className }: Props) => {
   const data: LoaderData = useLoaderData()
-  const { bonus, rakeback } = data.room
+  const { bonusTitle, rakeback } = data.room
   return (
     <Main className={className}>
       <Outer $color={primaryAction}>
         <Inner>
           <Name>Bonus</Name>
-          <Value $color={primaryAction}>{bonus}</Value>
+          <Value $color={primaryAction}>{bonusTitle}</Value>
         </Inner>
       </Outer>
       <Outer $color={accent}>

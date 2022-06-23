@@ -62,8 +62,10 @@ export type NetworkType = {
 
 export type RoomType = {
   title: string
-  bonus: string
+  bonusTitle: string
   rakeback: string
+  deposit: string
+  maxBonus: string
   logo: string
   roomType: string
   license: string
@@ -76,6 +78,8 @@ export type RoomType = {
   navs: LinkType[]
   toc: TocType
   pageMeta: PageMetaType
+  squareLogo: string
+  bonusCode: string
 }
 
 export type PageMetaType = {
