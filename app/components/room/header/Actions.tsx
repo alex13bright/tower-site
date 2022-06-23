@@ -38,8 +38,8 @@ export const Actions = ({ className }: Props): ReactElement => {
     <Main className={className}>
       <StyledForm>
         <SignUpButton href="/out.com" />
-        <ContactButton>Contact us</ContactButton>
-        <TagButton>Tag your account</TagButton>
+        <ContactButton />
+        <TagButton />
       </StyledForm>
     </Main>
   )

@@ -8,8 +8,9 @@ import {
   secondaryAction,
   widthAtLeast,
 } from '~/styles/styles'
-import { ExternalLink, LinkProps } from '~/components/ui/ExternalLink'
+import { ExternalLink } from '~/components/ui/ExternalLink'
 import { darken } from '~/core/utils'
+import { AnchorProps, ButtonProps } from '~/core/types'
 
 const button = css`
   color: ${primaryDark};
@@ -57,11 +58,11 @@ const SignUpButtonStyle = styled(ExternalLink)`
   }
 `
 
-export const SignUpButton = (props: LinkProps) => {
+export const SignUpButton = (props: Omit<AnchorProps, 'children'>) => {
   return <SignUpButtonStyle {...props}>Sign up</SignUpButtonStyle>
 }
 
-export const ContactButton = styled.button`
+const StyledContactButton = styled.button`
   ${iconButton};
   background-color: ${secondaryAction};
 
@@ -75,7 +76,11 @@ export const ContactButton = styled.button`
   }
 `
 
-export const TagButton = styled.button`
+export const ContactButton = (props: Omit<ButtonProps, 'children'>) => {
+  return <StyledContactButton {...props}>Start chat</StyledContactButton>
+}
+
+export const StyledTagButton = styled.button`
   ${button};
   background: transparent;
   border: 2px solid hsla(0, 0%, 89.8%, 0.8);
@@ -86,3 +91,7 @@ export const TagButton = styled.button`
     border-color: ${background};
   }
 `
+
+export const TagButton = (props: Omit<ButtonProps, 'children'>) => {
+  return <StyledTagButton {...props}>Tag your account</StyledTagButton>
+}
