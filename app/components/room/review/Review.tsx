@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { PageMeta } from '~/components/room/review/PageMeta'
 import { Paragraph } from '~/components/room/review/Paragraph'
 import { ContentLink, H1, H2, List, ListItem } from '~/components/common/commonStyles'
-import { BonusFeed } from '~/components/common/BonusFeed '
+import { BonusFeed } from '~/components/common/BonusFeed'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 

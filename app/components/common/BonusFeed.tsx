@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { accent, proximaNovaSb, secondaryAction, secondaryDark } from '~/styles/styles'
 import { base64InlineSvg, copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
+import { SignUpButton } from '~/components/common/actionButton'
 
 const Logo = styled.img`
   height: 100%;
@@ -48,8 +49,6 @@ const Item = styled.li`
   font-family: ${proximaNovaSb};
 `
 const List = styled.ul``
-
-const Button = styled.button``
 
 const BonusCodeTitle = styled.div`
   color: ${secondaryDark};
@@ -151,7 +150,7 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
             <BonusCodeValue>{bonusCode}</BonusCodeValue>
           </BonusCode>
         </Tooltip>
-        <Button />
+        <SignUpButton />
       </Action>
     </Main>
   )
