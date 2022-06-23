@@ -80,7 +80,7 @@ const List = styled.ul`
 
 const StyledContainer = styled(Container)`
   @media screen and ${widthAtLeast.lg} {
-    max-height: 100%;
+    max-height: initial;
   }
 `
 const Title = styled.div`
@@ -131,6 +131,10 @@ const Main = styled.nav`
     position: sticky;
     top: 0;
     left: 0;
+    height: min-content;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
   }
 `
 

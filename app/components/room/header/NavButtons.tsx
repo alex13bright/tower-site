@@ -31,7 +31,7 @@ const itemStyles = css`
     letter-spacing: -0.1px;
     line-height: 20px;
     mix-blend-mode: normal;
-    padding: 16px 28px;
+    padding: 12px 36px;
     white-space: nowrap;
     border-bottom: none;
     border-radius: 0;
@@ -74,7 +74,7 @@ const ActiveLink = styled.span`
   @media screen and ${widthAtLeast.lg} {
     background: ${background};
 
-    border: 3px solid ${accent};
+    border: 1px solid ${secondary};
     border-bottom: none;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;

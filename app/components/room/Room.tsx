@@ -6,6 +6,7 @@ import { Toc } from '~/components/room/review/Toc'
 import { Review } from '~/components/room/review/Review'
 import { contentSidePadding } from '~/components/page/pageStyles'
 import { widthAtLeast } from '~/styles/styles'
+import { FakeContent } from '~/components/styled/FakeContent'
 
 const Layout = styled.section`
   ${contentSidePadding};
@@ -18,13 +19,16 @@ const Content = styled.article`
     display: grid;
     grid-template-areas: 'toc . .';
 
-    grid-column-gap: 24px;
-    -moz-column-gap: 24px;
     column-gap: 24px;
     grid-template-columns: [left-part] minmax(184px, 2fr) [central-part] minmax(704px, 7fr) [right-part] minmax(
         288px,
         3fr
       );
+  }
+
+  @media screen and ${widthAtLeast.xl} {
+    column-gap: 56px;
+    grid-template-columns: [left-part] auto [central-part] 742px [right-part] 326px;
   }
 `
 
@@ -37,6 +41,7 @@ export const Room = (): ReactElement => {
         <Toc />
         <Review />
       </Content>
+      <FakeContent height="1000px">FC</FakeContent>
     </Layout>
   )
 }
