@@ -2,6 +2,7 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { accent, proximaNovaSb, secondaryDark } from '~/styles/styles'
 import { copyToClip } from '~/core/browserUtilities'
+import { Tooltip } from '~/components/ui/Tooltip'
 
 const BonusCodeTitle = styled.div`
   color: ${secondaryDark};
@@ -44,10 +45,12 @@ export const BonusFeed = ({ className }: Props): ReactElement => {
   const bonusCode = 'WPDEALS'
   return (
     <Main className={className}>
-      <BonusCode onClick={() => copyToClip(bonusCode)}>
-        <BonusCodeTitle>Bonus-code</BonusCodeTitle>
-        <BonusCodeValue>{bonusCode}</BonusCodeValue>
-      </BonusCode>
+      <Tooltip message="Copied to the clipboard">
+        <BonusCode onClick={() => copyToClip(bonusCode)}>
+          <BonusCodeTitle>Bonus-code</BonusCodeTitle>
+          <BonusCodeValue>{bonusCode}</BonusCodeValue>
+        </BonusCode>
+      </Tooltip>
     </Main>
   )
 }
