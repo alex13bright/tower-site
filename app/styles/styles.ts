@@ -21,7 +21,7 @@ export const widthAtLeast = {
   xl: `(min-width: ${breakpoints.xl}px)`,
 }
 
-export const primary = '#222'
+export const primary = '#000'
 export const secondary = '#555'
 export const tertiary = '#e5e5e5'
 export const accent = '#008be2'
