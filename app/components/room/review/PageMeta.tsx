@@ -16,8 +16,9 @@ const Span = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: start;
+  column-gap: 4px;
 
-  @media screen and ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.md} {
     flex-direction: row;
   }
 `
