@@ -9,7 +9,7 @@ export const sidePaddingSize = {
 export const headerTitle = css`
   color: ${secondaryDark};
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
 `

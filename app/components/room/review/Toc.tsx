@@ -88,7 +88,7 @@ const Title = styled.div`
   font-size: 16px;
   line-height: 36px;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
 `
 
 const StyledButton = styled(UtilityButton)`

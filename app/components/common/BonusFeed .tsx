@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { accent, proximaNovaSb, secondaryDark } from '~/styles/styles'
+import { accent, proximaNovaSb, secondaryAction, secondaryDark } from '~/styles/styles'
 import { base64InlineSvg, copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 
@@ -8,14 +8,45 @@ const Logo = styled.img`
   height: 100%;
   aspect-ratio: 1 / 1;
 `
-const HeaderInfoTitle = styled.div``
-const HeaderInfoValue = styled.div``
+const HeaderInfoTitle = styled.div`
+  color: ${secondaryAction};
+  border-color: ${secondaryAction};
+  border: 1px solid ${secondaryAction};
+  border-radius: 100px;
+  font-size: 11px;
+  line-height: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+  padding: 4px 8px 3px;
+  text-transform: uppercase;
+`
+const HeaderInfoValue = styled.div`
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+`
+
 const HeaderInfo = styled.div``
 const Header = styled.div``
 
-const Title = styled.div``
-const Value = styled.div``
-const Item = styled.li``
+const Title = styled.span`
+  color: #777;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+`
+const Value = styled.span`
+  color: #243238;
+  flex: 0 0 33.3%;
+  font-size: 16px;
+  line-height: 22px;
+`
+const Item = styled.li`
+  font-family: ${proximaNovaSb};
+`
 const List = styled.ul``
 
 const Button = styled.button``
@@ -28,7 +59,7 @@ const BonusCodeTitle = styled.div`
 `
 
 const BonusCodeValue = styled.div`
-  font-weight: bold;
+  font-weight: 700;
 `
 
 const BonusCode = styled.div`

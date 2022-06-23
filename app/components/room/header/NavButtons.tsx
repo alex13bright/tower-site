@@ -46,7 +46,7 @@ const lastCss = css`
 `
 const StyledLink = styled(Link)<{ isFirst: boolean; isLast: boolean }>`
   ${itemStyles};
-  font-weight: bold;
+  font-weight: 700;
   color: ${backgroundDark.start};
   background-color: ${accent};
   &:hover {
@@ -80,7 +80,7 @@ const ActiveLink = styled.span`
     border-top-right-radius: 4px;
     transform: scale(1.1) translateY(-2px);
     color: #243238;
-    font-weight: bold;
+    font-weight: 700;
   }
 `
 

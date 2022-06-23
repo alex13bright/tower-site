@@ -18,7 +18,7 @@ const Inner = styled.tr`
   flex-direction: column;
   gap: 4px;
   height: 100%;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
 `
 
