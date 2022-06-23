@@ -87,20 +87,38 @@ const BonusCode = styled.div`
 const Action = styled.div``
 
 const DetailsTitle = styled.div`
-  display: flex;
-  justify-content: start;
-  column-gap: 3px;
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
+  grid-area: title;
   background: #fafafa;
-  border: solid #e9e9e9;
-  border-width: 1px 1px 2px;
-  padding: 8px 20px;
+  border-bottom: 1px dashed #aaa;
 
-  &::before {
-    background: url('/images/rest/more.svg') no-repeat center;
+  &:hover {
+    border: none;
   }
 `
-const DetailsContent = styled.div``
-const Details = styled.div``
+const DetailsContent = styled.div`
+  grid-area: content;
+`
+const Details = styled.div`
+  color: #777;
+  padding: 20px 0;
+  display: grid;
+  column-gap: 4px;
+  row-gap: 20px;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: 'icon title' 'content content';
+  place-items: center start;
+
+  &::before {
+    grid-area: icon;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url('/images/rest/more-down.svg') no-repeat center;
+  }
+`
 
 const Main = styled.div``
 
@@ -150,8 +168,21 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
             <BonusCodeValue>{bonusCode}</BonusCodeValue>
           </BonusCode>
         </Tooltip>
-        <SignUpButton />
+        {/*<SignUpButton />*/}
       </Action>
+      <Details>
+        <DetailsTitle>More</DetailsTitle>
+        <DetailsContent>
+          GGPoker divides its welcome package into two promotions: a first deposit bonus and the
+          Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for your
+          first deposit at GGPoker: 100% matched bonus up to $600: paid in $5 chunks for every $20
+          net rake (please check PVI rake), 90 days wagering time; Up to $100 in cash and free
+          tickets: all rewards will expire after 30 days Highlights: The minimum deposit is $20 All
+          raked games contribute to the Match Bonus. Spin & Gold Insurance and All-in Insurance do
+          not contribute The Match Bonus is excellent for deposits from $100. If you plan to deposit
+          less, choose the free tickets offer.
+        </DetailsContent>
+      </Details>
     </Main>
   )
 }
