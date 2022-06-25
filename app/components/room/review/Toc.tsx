@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
@@ -12,8 +12,8 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { UtilityButton } from '~/components/ui/Spoiler'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { useFold } from '~/custom-hooks/useFold'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -91,17 +91,7 @@ const Title = styled.div`
   font-weight: 700;
 `
 
-const StyledButton = styled(UtilityButton)`
-  background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
-  width: 20px;
-  height: 20px;
-
-  @media screen and ${widthAtLeast.lg} {
-    display: none;
-  }
-`
-
-const TitleButtonSpan = styled.div`
+const TitleButton = styled.div<{ isPressed: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,6 +100,18 @@ const TitleButtonSpan = styled.div`
 
   @media screen and ${widthAtLeast.lg} {
     pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
+    background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
+    width: 20px;
+    height: 20px;
+
+    @media screen and ${widthAtLeast.lg} {
+      display: none;
+    }
   }
 `
 
@@ -145,19 +147,12 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
-
-  const [isFolded, setIsFolded] = useState(false)
-
+  const { isFolded, toggle } = useFold()
   return (
     <Main className={className}>
-      <TitleButtonSpan
-        onClick={() => {
-          setIsFolded((isFolded) => !isFolded)
-        }}
-      >
+      <TitleButton onClick={toggle} isPressed={isFolded}>
         <Title>Contents</Title>
-        <StyledButton isPressed={isFolded} isHidden={false} />
-      </TitleButtonSpan>
+      </TitleButton>
       <List isVisible={isFolded}>
         {toc.map(({ title, anchor }) => (
           <MarkedItem key={anchor} unmarked={false}>

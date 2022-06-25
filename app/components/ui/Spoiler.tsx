@@ -1,25 +1,8 @@
-import {
-  createContext,
-  MutableRefObject,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
 import styled from 'styled-components'
-import { useSize } from '~/custom-hooks/useSize'
+import { createContext, MutableRefObject, ReactElement, ReactNode, useContext } from 'react'
+import { SpoilerType, useSpoiler } from '~/custom-hooks/useSpoiler'
 
-type SpoilerContextType = {
-  containerRef: MutableRefObject<HTMLDivElement | null>
-  maxHeight: string
-  toggle: () => void
-  isButtonHidden: boolean
-  isButtonPressed: boolean
-  contentHeight: null | number
-}
-const Context = createContext<SpoilerContextType | null>(null)
+const Context = createContext<SpoilerType | null>(null)
 export const useSpoilerContext = () => {
   const context = useContext(Context)
   if (context === null) throw new Error('context is not found')
@@ -81,24 +64,6 @@ export const SpoilerContainer = ({ children, className }: SpoilerContainerProps)
       {children}
     </Container>
   )
-}
-
-export const useSpoiler = (height: number): SpoilerContextType => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const [isButtonHidden, setIsButtonHidden] = useState(true)
-  const [isButtonPressed, setIsButtonPressed] = useState(false)
-  const [contentHeight, setContentHeight] = useState<null | number>(null)
-
-  const size = useSize(containerRef)
-  if (size !== null && size.height !== contentHeight) setContentHeight(size.height)
-  const heightLimit = size === null ? height : Math.min(height, size.height)
-  useEffect(() => {
-    if (size === null) return
-    setIsButtonHidden(size.height === heightLimit)
-  }, [heightLimit, size, setIsButtonHidden])
-  const maxHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
-  const toggle = () => setIsButtonPressed((isButtonPressed) => !isButtonPressed)
-  return { containerRef, maxHeight, toggle, isButtonHidden, isButtonPressed, contentHeight }
 }
 
 type Props = {

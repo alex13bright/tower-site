@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from 'react'
-import { UtilityButton, Container, useSpoiler } from '~/components/ui/Spoiler'
+import { UtilityButton, Container } from '~/components/ui/Spoiler'
 import styled from 'styled-components'
+import { useSpoiler } from '~/custom-hooks/useSpoiler'
 
 const Main = styled.div`
   display: grid;
