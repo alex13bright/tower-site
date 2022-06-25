@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import styled from 'styled-components'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
@@ -12,7 +12,7 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { UtilityButton, Container, useSpoiler } from '~/components/ui/Spoiler'
+import { UtilityButton } from '~/components/ui/Spoiler'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 
 const Anchor = styled.a`
@@ -74,15 +74,15 @@ const MarkedItem = styled(Item)`
   }
 `
 
-const List = styled.ul`
+const List = styled.ul<{ isVisible: boolean }>`
   padding: 16px 0;
-`
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 
-const StyledContainer = styled(Container)`
   @media screen and ${widthAtLeast.lg} {
-    max-height: initial;
+    display: block;
   }
 `
+
 const Title = styled.div`
   color: #243238;
   font-size: 16px;
@@ -145,23 +145,26 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
-  const { containerRef, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(0)
+
+  const [isFolded, setIsFolded] = useState(false)
 
   return (
-    <Main ref={containerRef} className={className}>
-      <TitleButtonSpan onClick={toggle}>
+    <Main className={className}>
+      <TitleButtonSpan
+        onClick={() => {
+          setIsFolded((isFolded) => !isFolded)
+        }}
+      >
         <Title>Contents</Title>
-        <StyledButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
+        <StyledButton isPressed={isFolded} isHidden={false} />
       </TitleButtonSpan>
-      <StyledContainer containerRef={containerRef} maxHeight={maxHeight}>
-        <List>
-          {toc.map(({ title, anchor }) => (
-            <MarkedItem key={anchor} unmarked={false}>
-              <Anchor href={'#' + anchor}>{title}</Anchor>
-            </MarkedItem>
-          ))}
-        </List>
-      </StyledContainer>
+      <List isVisible={isFolded}>
+        {toc.map(({ title, anchor }) => (
+          <MarkedItem key={anchor} unmarked={false}>
+            <Anchor href={'#' + anchor}>{title}</Anchor>
+          </MarkedItem>
+        ))}
+      </List>
     </Main>
   )
 }
