@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react'
-import { UtilityButton, Container } from '~/components/ui/Spoiler'
+import { ToggleFoldButton, Container } from '~/components/ui/Spoiler'
 import styled from 'styled-components'
 import { useSpoiler } from '~/custom-hooks/useSpoiler'
 
@@ -9,7 +9,7 @@ const Main = styled.div`
   align-items: start;
 `
 
-export const StyledButton = styled(UtilityButton)`
+export const StyledButton = styled(ToggleFoldButton)`
   width: 20px;
   height: 20px;
   background: url(/images/rest/arrow-down.svg) no-repeat 50%;

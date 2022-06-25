@@ -15,7 +15,7 @@ import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
 import { Container, useSpoiler } from '~/components/ui/Spoiler'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { LI, P, UL } from '~/components/common/commonStyles'
+import { LI, P, UL } from '~/components/common/common'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 
 const Logo = styled.img`

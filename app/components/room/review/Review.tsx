@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { PageMeta } from '~/components/room/review/PageMeta'
-import { ContentLink, H1, H2, UL, LI, P } from '~/components/common/commonStyles'
+import { ContentLink, H1, H2, UL, LI, P } from '~/components/common/common'
 import { BonusFeed } from '~/components/common/BonusFeed'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'

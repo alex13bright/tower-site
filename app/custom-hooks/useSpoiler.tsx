@@ -1,5 +1,29 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import { useSize } from '~/custom-hooks/useSize'
+import styled from 'styled-components'
+
+const ContainerBox = styled.div<{ maxHeight: string }>`
+  overflow: hidden;
+  max-height: ${({ maxHeight }) => maxHeight};
+`
+type ContainerProps = {
+  containerRef: MutableRefObject<HTMLDivElement | null>
+  maxHeight: string
+  children: ReactNode
+  className?: string
+}
+export const Container = ({
+  containerRef,
+  maxHeight,
+  children,
+  className,
+}: ContainerProps): ReactElement => {
+  return (
+    <ContainerBox maxHeight={maxHeight} className={className}>
+      <div ref={containerRef}>{children}</div>
+    </ContainerBox>
+  )
+}
 
 export type SpoilerType = {
   containerRef: MutableRefObject<HTMLDivElement | null>

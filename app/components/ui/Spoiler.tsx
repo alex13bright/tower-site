@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { createContext, MutableRefObject, ReactElement, ReactNode, useContext } from 'react'
-import { SpoilerType, useSpoiler } from '~/custom-hooks/useSpoiler'
+import { createContext, ReactElement, ReactNode, useContext } from 'react'
+import { Container, SpoilerType, useSpoiler } from '~/custom-hooks/useSpoiler'
+import { ToggleFoldButton } from '~/components/ui/ToggleFoldButton'
 
 const Context = createContext<SpoilerType | null>(null)
 export const useSpoilerContext = () => {
@@ -9,50 +9,24 @@ export const useSpoilerContext = () => {
   return context
 }
 
-export const UtilityButton = styled.button<{ isHidden: boolean; isPressed: boolean }>`
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
-  ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
-`
 type SpoilerButtonProps = {
   children: ReactNode
   className?: string
 }
-export const UtilitySpoilerButton = ({ children, className }: SpoilerButtonProps) => {
+export const SpoilerButton = ({ children, className }: SpoilerButtonProps) => {
   const { isButtonHidden, isButtonPressed, toggle } = useSpoilerContext()
   return (
-    <UtilityButton
+    <ToggleFoldButton
       className={className}
       isHidden={isButtonHidden}
       isPressed={isButtonPressed}
       onClick={toggle}
     >
       {children}
-    </UtilityButton>
+    </ToggleFoldButton>
   )
 }
 
-const Box = styled.div<{ maxHeight: string }>`
-  overflow: hidden;
-  max-height: ${({ maxHeight }) => maxHeight};
-`
-type ContainerProps = {
-  containerRef: MutableRefObject<HTMLDivElement | null>
-  maxHeight: string
-  children: ReactNode
-  className?: string
-}
-export const Container = ({
-  containerRef,
-  maxHeight,
-  children,
-  className,
-}: ContainerProps): ReactElement => {
-  return (
-    <Box maxHeight={maxHeight} className={className}>
-      <div ref={containerRef}>{children}</div>
-    </Box>
-  )
-}
 type SpoilerContainerProps = {
   children: ReactNode
   className?: string
