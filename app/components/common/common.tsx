@@ -67,7 +67,7 @@ export const LI = styled.li`
     background: url('/images/rest/list-item.svg') no-repeat 50%;
     content: '';
     position: absolute;
-    top: 7px;
+    top: 6px;
     left: 5px;
     display: block;
     width: 10px;
