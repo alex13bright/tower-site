@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
+import { ReactElement, ReactNode } from 'react'
 
 export const H1 = styled.h1`
   font-size: 32px;
@@ -26,27 +27,40 @@ export const H2 = styled.h2`
   }
 `
 
+const StyledP = styled.p`
+  color: inherit;
+  background: inherit;
+`
+
+type PProps = {
+  children: ReactNode
+  className?: string
+}
+
+export const P = ({ children, className }: PProps): ReactElement => {
+  return <StyledP className={className}>{children}</StyledP>
+}
+
 export const ContentLink = styled(Link)`
   color: ${accent};
   text-decoration: underline;
   background-color: transparent;
 `
 
-export const List = styled.ul`
+export const UL = styled.ul`
   list-style-position: outside;
   list-style-type: none;
   margin: 0 0 40px;
   padding: 0;
 `
 
-export const ListItem = styled.li`
-  color: #222;
+export const LI = styled.li`
+  color: inherit;
+  background: inherit;
   font-size: 17px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 21px;
   margin-bottom: 15px;
-  padding: 0 0 0 45px;
+  padding-left: 25px;
   position: relative;
 
   &::before {
@@ -54,7 +68,7 @@ export const ListItem = styled.li`
     content: '';
     position: absolute;
     top: 7px;
-    left: 10px;
+    left: 5px;
     display: block;
     width: 10px;
     height: 9px;

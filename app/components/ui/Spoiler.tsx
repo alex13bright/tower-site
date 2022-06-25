@@ -14,9 +14,10 @@ import { useSize } from '~/custom-hooks/useSize'
 type SpoilerContextType = {
   containerRef: MutableRefObject<HTMLDivElement | null>
   maxHeight: string
+  toggle: () => void
   isButtonHidden: boolean
   isButtonPressed: boolean
-  toggle: () => void
+  contentHeight: null | number
 }
 const Context = createContext<SpoilerContextType | null>(null)
 export const useSpoilerContext = () => {
@@ -86,8 +87,10 @@ export const useSpoiler = (height: number): SpoilerContextType => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [isButtonHidden, setIsButtonHidden] = useState(true)
   const [isButtonPressed, setIsButtonPressed] = useState(false)
+  const [contentHeight, setContentHeight] = useState<null | number>(null)
 
   const size = useSize(containerRef)
+  if (size !== null && size.height !== contentHeight) setContentHeight(size.height)
   const heightLimit = size === null ? height : Math.min(height, size.height)
   useEffect(() => {
     if (size === null) return
@@ -95,7 +98,7 @@ export const useSpoiler = (height: number): SpoilerContextType => {
   }, [heightLimit, size, setIsButtonHidden])
   const maxHeight = isButtonPressed ? 'auto' : heightLimit + 'px'
   const toggle = () => setIsButtonPressed((isButtonPressed) => !isButtonPressed)
-  return { containerRef, maxHeight, isButtonHidden, isButtonPressed, toggle }
+  return { containerRef, maxHeight, toggle, isButtonHidden, isButtonPressed, contentHeight }
 }
 
 type Props = {

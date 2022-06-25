@@ -51,6 +51,8 @@ export const sidePaddings = (size: string) => css`
 export const cancelSideMargins = css`
   margin-left: 0;
   margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 `
 export const expandOnParentSides = (size: string) => css`
   margin-left: -${size};
