@@ -17,11 +17,11 @@ const Value = styled.div`
 
 const PageMetaItem = styled.span<{ kind: string }>`
   display: grid;
-  grid-template-areas: 'icon title' 'value value';
+  grid-template-areas: 'icon title' '. value';
   grid-template-columns: 12px auto;
   grid-template-rows: 17px auto;
   gap: 4px;
-  place-items: center start;
+  place-items: start;
 
   color: ${secondary};
   font-family: ${proximaNovaSb};
@@ -31,6 +31,7 @@ const PageMetaItem = styled.span<{ kind: string }>`
 
   &::before {
     grid-area: icon;
+    place-self: center start;
     content: '';
     width: 12px;
     height: 12px;
@@ -42,7 +43,8 @@ const PageMetaItem = styled.span<{ kind: string }>`
 `
 
 const Main = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 16px;
   margin-bottom: 32px;
 `
@@ -57,7 +59,7 @@ export const PageMeta = ({ className }: Props): ReactElement => {
     <Main className={className}>
       <PageMetaItem kind="author">
         <Title>Author</Title>
-        <Value>{pageMeta.author} sdf sdf sdfdsfs dfd ssdf sdf </Value>
+        <Value>{pageMeta.author}</Value>
       </PageMetaItem>
       <PageMetaItem kind="created">
         <Title>Created</Title>
