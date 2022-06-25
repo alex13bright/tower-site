@@ -5,10 +5,9 @@ const TooltipBox = styled.div`
   color: #fff;
   background: rgba(0, 0, 0, 0.5);
   font-size: 12px;
-  line-height: 1em;
   padding: 5px;
   position: absolute;
-  top: -25px;
+  top: -45px;
   right: 0;
   border-radius: 4px;
 `

@@ -42,7 +42,13 @@ const HeaderInfoValue = styled.div`
 `
 
 const HeaderInfo = styled.div``
-const Header = styled.div``
+const Header = styled.div`
+  display: flex;
+  justify-content: start;
+  column-gap: 20px;
+  height: 52px;
+  margin-bottom: 16px;
+`
 
 const Title = styled.span`
   color: #777;
@@ -50,7 +56,6 @@ const Title = styled.span`
   line-height: 16px;
   letter-spacing: 0.3px;
   text-transform: uppercase;
-  margin-bottom: 4px;
 `
 const Value = styled.span`
   color: #243238;
@@ -60,26 +65,50 @@ const Value = styled.span`
 `
 const Item = styled.li`
   font-family: ${proximaNovaSb};
+  display: grid;
+  row-gap: 4px;
+  border-left: 1px solid #e9e9e9;
+  ${sidePaddings('10px')};
 `
-const List = styled.ul``
+const List = styled.ul`
+  display: flex;
+  margin-bottom: 16px;
+
+  & li:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+`
+
+const StyledTooltip = styled(Tooltip)`
+  display: flex;
+  justify-content: stretch;
+`
 
 const BonusCodeTitle = styled.div`
   color: ${secondaryDark};
   text-transform: uppercase;
   font-family: ${proximaNovaSb};
   font-size: 10px;
+  line-height: 1em;
+  text-align: center;
 `
 
 const BonusCodeValue = styled.div`
   font-weight: 700;
+  text-align: center;
 `
 
 const BonusCode = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  row-gap: 2px;
   cursor: pointer;
   position: relative;
   background: #fafafa;
   border: 1px dashed hsla(0, 0%, 46.7%, 0.5);
-  padding: 4px 0;
+  padding: 4px 20px;
 
   &:hover {
     border: 1px dashed ${accent};
@@ -97,7 +126,11 @@ const BonusCode = styled.div`
   }
 `
 
-const Action = styled.div``
+const Action = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
 
 const DetailsTitleText = styled.span`
   font-size: 12px;
@@ -205,12 +238,12 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
         </Item>
       </List>
       <Action>
-        <Tooltip message="Copied to the clipboard">
+        <StyledTooltip message="Copied to the clipboard">
           <BonusCode onClick={() => copyToClip(bonusCode)}>
             <BonusCodeTitle>Bonus-code</BonusCodeTitle>
             <BonusCodeValue>{bonusCode}</BonusCodeValue>
           </BonusCode>
-        </Tooltip>
+        </StyledTooltip>
         <SignUpButton />
       </Action>
       <Details>

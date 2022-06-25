@@ -16,7 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${primary};
     background-color: ${background};
     font-size: 17px;
-    line-height: 1.5em;
+    line-height: 1em;
   }
 
   h1, h2 {
@@ -24,6 +24,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   p {
+    font-size: 17px;
+    line-height: 1.4em;
     margin: 0 0 20px;
     overflow: hidden;
   }
