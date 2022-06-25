@@ -44,7 +44,7 @@ const lastCss = css`
   border-right: none;
   border-top-right-radius: 4px;
 `
-const StyledLink = styled(Link)<{ isFirst: boolean; isLast: boolean }>`
+const StyledLink = styled(Link)<{ $isFirst: boolean; $isLast: boolean }>`
   ${itemStyles};
   font-weight: 700;
   color: ${backgroundDark.start};
@@ -58,8 +58,8 @@ const StyledLink = styled(Link)<{ isFirst: boolean; isLast: boolean }>`
     color: ${secondary};
     background: #f1efef;
     border-right: 1px solid ${tertiary};
-    ${({ isFirst }) => isFirst && firstCss};
-    ${({ isLast }) => isLast && lastCss};
+    ${({ $isFirst }) => $isFirst && firstCss};
+    ${({ $isLast }) => $isLast && lastCss};
 
     &:hover {
       background-color: #e9e9e9;
@@ -131,7 +131,7 @@ export function NavButtons({ className }: Props): ReactElement {
             {isActive ? (
               <ActiveLink>{title}</ActiveLink>
             ) : (
-              <StyledLink to={url} isFirst={i === 0} isLast={navsLength === i + 1}>
+              <StyledLink to={url} $isFirst={i === 0} $isLast={navsLength === i + 1}>
                 {title}
               </StyledLink>
             )}
