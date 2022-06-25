@@ -13,10 +13,10 @@ import {
 import { base64InlineSvg, copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
-import { Container, useSpoiler } from '~/components/ui/Spoiler'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { LI, P, UL } from '~/components/common/common'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
+import { useFold } from '~/custom-hooks/useFold'
 
 const Logo = styled.img`
   height: 100%;
@@ -132,7 +132,7 @@ const Action = styled.div`
   gap: 20px;
 `
 
-const DetailsTitleText = styled.span`
+const DetailsToggleButtonTitle = styled.span`
   font-size: 12px;
   line-height: 16px;
   height: 16px;
@@ -144,7 +144,9 @@ const DetailsTitleText = styled.span`
     border: none;
   }
 `
-const DetailsTitle = styled.span<{ isPressed: boolean }>`
+
+const DetailsToggleButton = styled.span<{ isPressed: boolean }>`
+  user-select: none;
   cursor: pointer;
   display: flex;
   column-gap: 4px;
@@ -161,9 +163,8 @@ const DetailsTitle = styled.span<{ isPressed: boolean }>`
   }
 `
 
-const StyledContainer = styled(Container)``
-
-const DetailsContent = styled.div`
+const DetailsContent = styled.div<{ isHidden: boolean }>`
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   margin-top: 20px;
   grid-area: content;
 
@@ -213,7 +214,7 @@ type Props = {
 
 export const BonusFeed = ({ data, className }: Props): ReactElement => {
   const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data
-  const { containerRef, maxHeight, isButtonPressed, toggle } = useSpoiler(0)
+  const { isFolded, toggle } = useFold()
   return (
     <Main className={className}>
       <Header>
@@ -247,37 +248,35 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
         <SignUpButton />
       </Action>
       <Details>
-        <DetailsTitle onClick={toggle} isPressed={isButtonPressed}>
-          <DetailsTitleText>Details</DetailsTitleText>
-        </DetailsTitle>
-        <StyledContainer containerRef={containerRef} maxHeight={maxHeight}>
-          <DetailsContent>
-            <P>
-              GGPoker divides its welcome package into two promotions: a first deposit bonus and the
-              Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for
-              your first deposit at GGPoker:
-            </P>
+        <DetailsToggleButton onClick={toggle} isPressed={isFolded}>
+          <DetailsToggleButtonTitle>Details</DetailsToggleButtonTitle>
+        </DetailsToggleButton>
+        <DetailsContent isHidden={isFolded}>
+          <P>
+            GGPoker divides its welcome package into two promotions: a first deposit bonus and the
+            Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for your
+            first deposit at GGPoker:
+          </P>
+          <UL>
+            <LI>
+              100% matched bonus up to $600: paid in $5 chunks for every $20 net rake (please check
+              PVI rake), 90 days wagering time;
+            </LI>
+            <LI>Up to $100 in cash and free tickets: all rewards will expire after 30 days</LI>
+            <P>Highlights:</P>
             <UL>
+              <LI>The minimum deposit is $20</LI>
               <LI>
-                100% matched bonus up to $600: paid in $5 chunks for every $20 net rake (please
-                check PVI rake), 90 days wagering time;
+                All raked games contribute to the Match Bonus. Spin & Gold Insurance and All-in
+                Insurance do not contribute
               </LI>
-              <LI>Up to $100 in cash and free tickets: all rewards will expire after 30 days</LI>
-              <P>Highlights:</P>
-              <UL>
-                <LI>The minimum deposit is $20</LI>
-                <LI>
-                  All raked games contribute to the Match Bonus. Spin & Gold Insurance and All-in
-                  Insurance do not contribute
-                </LI>
-                <LI>
-                  The Match Bonus is excellent for deposits from $100. If you plan to deposit less,
-                  choose the free tickets offer.
-                </LI>
-              </UL>
+              <LI>
+                The Match Bonus is excellent for deposits from $100. If you plan to deposit less,
+                choose the free tickets offer.
+              </LI>
             </UL>
-          </DetailsContent>
-        </StyledContainer>
+          </UL>
+        </DetailsContent>
       </Details>
     </Main>
   )

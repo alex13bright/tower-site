@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react'
-import { ToggleFoldButton, Container } from '~/components/ui/Spoiler'
 import styled from 'styled-components'
-import { useSpoiler } from '~/custom-hooks/useSpoiler'
+import { Container, useSpoiler } from '~/custom-hooks/useSpoiler'
+import { ToggleFoldButton } from '~/components/ui/ToggleFoldButton'
 
 const Main = styled.div`
   display: grid;

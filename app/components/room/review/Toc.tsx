@@ -74,9 +74,9 @@ const MarkedItem = styled(Item)`
   }
 `
 
-const List = styled.ul<{ isVisible: boolean }>`
+const List = styled.ul<{ isHidden: boolean }>`
   padding: 16px 0;
-  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
 
   @media screen and ${widthAtLeast.lg} {
     display: block;
@@ -153,7 +153,7 @@ export function Toc({ className }: Props): ReactElement {
       <TitleButton onClick={toggle} isPressed={isFolded}>
         <Title>Contents</Title>
       </TitleButton>
-      <List isVisible={isFolded}>
+      <List isHidden={isFolded}>
         {toc.map(({ title, anchor }) => (
           <MarkedItem key={anchor} unmarked={false}>
             <Anchor href={'#' + anchor}>{title}</Anchor>
