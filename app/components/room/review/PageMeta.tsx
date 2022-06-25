@@ -1,40 +1,36 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { proximaNovaSb, secondary, widthAtLeast } from '~/styles/styles'
+import { proximaNovaSb, secondary } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
 const Title = styled.div`
+    grid-area: title;
     color: ${secondary};
     font-size: 12px;
     opacity: 0.5;
   }
 `
-const Value = styled.div``
-
-const Span = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-items: start;
-  column-gap: 4px;
-
-  @media screen and ${widthAtLeast.md} {
-    flex-direction: row;
-  }
+const Value = styled.div`
+  grid-area: value;
 `
 
 const PageMetaItem = styled.span<{ kind: string }>`
-  display: flex;
-  column-gap: 8px;
+  display: grid;
+  grid-template-areas: 'icon title' 'value value';
+  grid-template-columns: 12px auto;
+  grid-template-rows: 17px auto;
+  gap: 4px;
+  place-items: center start;
 
   color: ${secondary};
   font-family: ${proximaNovaSb};
   letter-spacing: -0.2px;
   font-size: 12px;
   opacity: 0.8;
-  white-space: nowrap;
 
   &::before {
+    grid-area: icon;
     content: '';
     width: 12px;
     height: 12px;
@@ -60,22 +56,16 @@ export const PageMeta = ({ className }: Props): ReactElement => {
   return (
     <Main className={className}>
       <PageMetaItem kind="author">
-        <Span>
-          <Title>Author</Title>
-          <Value>{pageMeta.author}</Value>
-        </Span>
+        <Title>Author</Title>
+        <Value>{pageMeta.author} sdf sdf sdfdsfs dfd ssdf sdf </Value>
       </PageMetaItem>
       <PageMetaItem kind="created">
-        <Span>
-          <Title>Created</Title>
-          <Value>{pageMeta.created}</Value>
-        </Span>
+        <Title>Created</Title>
+        <Value>{pageMeta.created}</Value>
       </PageMetaItem>
       <PageMetaItem kind="updated">
-        <Span>
-          <Title>Updated</Title>
-          <Value>{pageMeta.updated}</Value>
-        </Span>
+        <Title>Updated</Title>
+        <Value>{pageMeta.updated}</Value>
       </PageMetaItem>
     </Main>
   )
