@@ -9,10 +9,12 @@ import { widthAtLeast } from '~/styles/styles'
 import { FakeContent } from '~/components/styled/FakeContent'
 
 const Layout = styled.section`
+  display: grid;
   ${contentSidePadding};
 `
 
 const Content = styled.article`
+  display: grid;
   position: relative;
 
   @media screen and ${widthAtLeast.lg} {

@@ -9,8 +9,8 @@ import { StickyContext, StickyActions, StickyMarker } from '~/components/page/St
 import { FakeContent } from '~/components/styled/FakeContent'
 
 export const Page = styled.div`
-  min-height: 100vh;
   display: grid;
+  min-height: 100vh;
   grid-template-rows: auto 1fr auto;
 `
 type Props = { children: ReactNode }

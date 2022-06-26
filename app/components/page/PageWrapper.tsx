@@ -1,19 +1,19 @@
 import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
 import { breakpoints } from '~/styles/styles'
+import { AsType } from '~/core/types'
 
-type KnownTags = keyof JSX.IntrinsicElements
-const OuterBox = styled.div<{ as?: KnownTags }>`
+const OuterBox = styled.div<{ as?: AsType }>`
   display: flex;
   justify-content: center;
 `
 const InnerBox = styled.div`
-  width: 100%;
+  display: grid;
   min-width: ${breakpoints.xs}px;
   max-width: ${breakpoints.xl}px;
 `
 type Props = {
-  as?: KnownTags
+  as?: AsType
   className?: string
   children?: ReactNode
 }
