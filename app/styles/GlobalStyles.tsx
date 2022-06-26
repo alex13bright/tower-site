@@ -27,7 +27,6 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 17px;
     line-height: 1.4em;
     margin: 0 0 20px;
-    overflow: hidden;
   }
 
   a {

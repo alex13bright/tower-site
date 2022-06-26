@@ -1,11 +1,14 @@
 import { ReactElement, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
+import { contentSidePaddingSize } from '~/components/page/pageStyles'
 
 const tdCss = css`
   padding: 12px 16px;
 `
 
-export const Table = styled.table``
+export const Table = styled.table`
+  width: 100%;
+`
 export const TBody = styled.tbody`
   & :nth-child(odd) td {
     background: linear-gradient(0deg, #f4f4f4, #f4f4f4),
@@ -34,17 +37,43 @@ export const TD = styled.td`
   color: #222;
 `
 
-const Main = styled.div``
+const Main = styled.div`
+  margin-left: -${contentSidePaddingSize.xs};
+  margin-right: -${contentSidePaddingSize.xs};
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 50px;
+  background-color: coral;
+`
 
 type Props = {
   children?: ReactNode
   className?: string
 }
 
+const Test = styled.div`
+  width: 2000px;
+  display: flex;
+  justify-content: space-between;
+
+  &::before {
+    content: '1';
+  }
+  &::after {
+    content: '2';
+  }
+`
+
 export const ExpandableTable = ({ children, className }: Props): ReactElement => {
   return (
     <Main>
-      <Table className={className}>
+      <Test>1</Test>
+    </Main>
+  )
+}
+
+/*
+<Table className={className}>
         <TBody>
           <TR>
             <TH>Rank</TH>
@@ -84,6 +113,4 @@ export const ExpandableTable = ({ children, className }: Props): ReactElement =>
           </TR>
         </TBody>
       </Table>
-    </Main>
-  )
-}
+*/
