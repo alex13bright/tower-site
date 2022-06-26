@@ -210,6 +210,7 @@ const Details = styled.div`
 const Main = styled.div`
   display: grid;
   row-gap: 16px;
+  margin-bottom: 30px;
 
   @media screen and ${widthAtLeast.md} {
     grid-template-rows: auto auto auto;
