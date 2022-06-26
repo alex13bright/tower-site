@@ -42,7 +42,7 @@ export const Review = ({ className }: Props): ReactElement => {
       <BonusFeed
         data={{ bonusCode, roomTitle: title, squareLogo, bonusTitle, rakeback, deposit, maxBonus }}
       />
-      <ExpandableTable />
+      <ExpandableTable lessNumber={3} />
     </Main>
   )
 }

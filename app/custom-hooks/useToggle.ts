@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 
-export const useToggle = (initIsFolded = true) => {
-  const [isToggled, setIsToggled] = useState(initIsFolded)
+export const useToggle = (init = false) => {
+  const [isToggled, setIsToggled] = useState(init)
   const toggle = useCallback(() => {
     setIsToggled((isToggled) => !isToggled)
   }, [])

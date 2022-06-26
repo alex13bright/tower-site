@@ -237,7 +237,7 @@ type Props = {
 
 export const BonusFeed = ({ data, className }: Props): ReactElement => {
   const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data
-  const { isToggled, toggle } = useToggle()
+  const { isToggled: isFolded, toggle } = useToggle()
   return (
     <Main className={className}>
       <Header>
@@ -271,10 +271,10 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
         <SignUpButton href="#" />
       </Action>
       <Details>
-        <DetailsToggleButton onClick={toggle} isPressed={isToggled}>
+        <DetailsToggleButton onClick={toggle} isPressed={isFolded}>
           <DetailsToggleTitle>Details</DetailsToggleTitle>
         </DetailsToggleButton>
-        <DetailsContent isHidden={isToggled}>
+        <DetailsContent isHidden={isFolded}>
           <P>
             GGPoker divides its welcome package into two promotions: a first deposit bonus and the
             Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for your

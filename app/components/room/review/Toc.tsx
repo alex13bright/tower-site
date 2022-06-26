@@ -145,13 +145,13 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
-  const { isToggled, toggle } = useToggle()
+  const { isToggled: isFolded, toggle } = useToggle()
   return (
     <Main className={className}>
-      <TitleButton onClick={toggle} isPressed={isToggled}>
+      <TitleButton onClick={toggle} isPressed={isFolded}>
         Contents
       </TitleButton>
-      <List isHidden={isToggled}>
+      <List isHidden={isFolded}>
         {toc.map(({ title, anchor }) => (
           <MarkedItem key={anchor} unmarked={false}>
             <Anchor href={'#' + anchor}>{title}</Anchor>
