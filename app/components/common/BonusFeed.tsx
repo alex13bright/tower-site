@@ -16,10 +16,10 @@ import { SignUpButton } from '~/components/common/actionButton'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { LI, P, UL } from '~/components/common/common'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
-import { useFold } from '~/custom-hooks/useFold'
+import { useToggle } from '~/custom-hooks/useToggle'
 
 const Logo = styled.img`
-  height: 100%;
+  width: 52px;
   aspect-ratio: 1 / 1;
 `
 const HeaderInfoTitle = styled.div`
@@ -28,26 +28,29 @@ const HeaderInfoTitle = styled.div`
   border: 1px solid ${secondaryAction};
   border-radius: 100px;
   font-size: 11px;
-  line-height: 11px;
   font-weight: 600;
   letter-spacing: 0.2px;
-  margin-bottom: 4px;
   padding: 4px 8px 3px;
+  text-align: center;
   text-transform: uppercase;
 `
 const HeaderInfoValue = styled.div`
   font-size: 20px;
-  line-height: 24px;
   font-weight: 600;
 `
 
-const HeaderInfo = styled.div``
+const HeaderInfo = styled.div`
+  display: grid;
+  align-items: center;
+`
 const Header = styled.div`
   display: flex;
   justify-content: start;
   column-gap: 20px;
-  height: 52px;
-  margin-bottom: 16px;
+
+  @media screen and ${widthAtLeast.md} {
+    grid-area: header;
+  }
 `
 
 const Title = styled.span`
@@ -71,18 +74,21 @@ const Item = styled.li`
   ${sidePaddings('10px')};
 `
 const List = styled.ul`
-  display: flex;
-  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
 
   & li:first-child {
     border-left: none;
     padding-left: 0;
   }
+
+  @media screen and ${widthAtLeast.md} {
+    grid-area: list;
+  }
 `
 
 const StyledTooltip = styled(Tooltip)`
-  display: flex;
-  justify-content: stretch;
+  display: grid;
 `
 
 const BonusCodeTitle = styled.div`
@@ -127,16 +133,25 @@ const BonusCode = styled.div`
 `
 
 const Action = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+
+  @media screen and ${widthAtLeast.sm} {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  @media screen and ${widthAtLeast.md} {
+    grid-area: action;
+    grid-template-columns: 1fr;
+  }
 `
 
-const DetailsToggleButtonTitle = styled.span`
+const DetailsToggleTitle = styled.span`
   font-size: 12px;
   line-height: 16px;
-  height: 16px;
-  grid-area: title;
+  align-items: center;
   background: #fafafa;
   border-bottom: 1px dashed #aaa;
 
@@ -145,14 +160,10 @@ const DetailsToggleButtonTitle = styled.span`
   }
 `
 
-const DetailsToggleButton = styled.span<{ isPressed: boolean }>`
-  user-select: none;
-  cursor: pointer;
+const DetailsToggleButton = styled.button<{ isPressed: boolean }>`
   display: flex;
   column-gap: 4px;
-  grid-template-columns: auto 1fr;
-  grid-template-areas: 'icon title' 'content content';
-  place-items: center start;
+  user-select: none;
 
   &::before {
     content: '';
@@ -166,7 +177,6 @@ const DetailsToggleButton = styled.span<{ isPressed: boolean }>`
 const DetailsContent = styled.div<{ isHidden: boolean }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   margin-top: 20px;
-  grid-area: content;
 
   & > p,
   ul,
@@ -178,7 +188,6 @@ const DetailsContent = styled.div<{ isHidden: boolean }>`
 
 const Details = styled.div`
   ${expandOnParentSides(contentSidePaddingSize.xs)};
-  margin-top: 20px;
 
   color: #777;
   padding-top: 8px;
@@ -189,6 +198,7 @@ const Details = styled.div`
   border: 1px solid #e9e9e9;
 
   @media screen and ${widthAtLeast.md} {
+    grid-area: details;
     ${cancelSideMargins};
     ${sidePaddings(sidePaddingSize.md)};
   }
@@ -197,7 +207,19 @@ const Details = styled.div`
   }
 `
 
-const Main = styled.div``
+const Main = styled.div`
+  display: grid;
+  row-gap: 16px;
+
+  @media screen and ${widthAtLeast.md} {
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'header action'
+      'list action'
+      'details details';
+    grid-template-columns: 1fr 180px;
+  }
+`
 
 type Props = {
   data: {
@@ -214,7 +236,7 @@ type Props = {
 
 export const BonusFeed = ({ data, className }: Props): ReactElement => {
   const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data
-  const { isFolded, toggle } = useFold()
+  const { isToggled, toggle } = useToggle()
   return (
     <Main className={className}>
       <Header>
@@ -245,13 +267,13 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
             <BonusCodeValue>{bonusCode}</BonusCodeValue>
           </BonusCode>
         </StyledTooltip>
-        <SignUpButton />
+        <SignUpButton href="#" />
       </Action>
       <Details>
-        <DetailsToggleButton onClick={toggle} isPressed={isFolded}>
-          <DetailsToggleButtonTitle>Details</DetailsToggleButtonTitle>
+        <DetailsToggleButton onClick={toggle} isPressed={isToggled}>
+          <DetailsToggleTitle>Details</DetailsToggleTitle>
         </DetailsToggleButton>
-        <DetailsContent isHidden={isFolded}>
+        <DetailsContent isHidden={isToggled}>
           <P>
             GGPoker divides its welcome package into two promotions: a first deposit bonus and the
             Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for your

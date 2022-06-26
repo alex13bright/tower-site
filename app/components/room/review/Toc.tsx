@@ -13,7 +13,7 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { useFold } from '~/custom-hooks/useFold'
+import { useToggle } from '~/custom-hooks/useToggle'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -83,20 +83,16 @@ const List = styled.ul<{ isHidden: boolean }>`
   }
 `
 
-const Title = styled.div`
-  color: #243238;
-  font-size: 16px;
-  line-height: 36px;
-  font-style: normal;
-  font-weight: 700;
-`
-
-const TitleButton = styled.div<{ isPressed: boolean }>`
+const TitleButton = styled.button<{ isPressed: boolean }>`
+  //width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 36px;
-  cursor: pointer;
+
+  color: #243238;
+  font-size: 16px;
+  font-weight: 700;
 
   @media screen and ${widthAtLeast.lg} {
     pointer-events: none;
@@ -104,10 +100,11 @@ const TitleButton = styled.div<{ isPressed: boolean }>`
 
   &::after {
     content: '';
-    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
-    background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
+    display: block;
     width: 20px;
     height: 20px;
+    background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
+    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
 
     @media screen and ${widthAtLeast.lg} {
       display: none;
@@ -116,6 +113,7 @@ const TitleButton = styled.div<{ isPressed: boolean }>`
 `
 
 const Main = styled.nav`
+  display: grid;
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
 
@@ -147,13 +145,13 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data: LoaderData = useLoaderData()
   const { toc } = data.room
-  const { isFolded, toggle } = useFold()
+  const { isToggled, toggle } = useToggle()
   return (
     <Main className={className}>
-      <TitleButton onClick={toggle} isPressed={isFolded}>
-        <Title>Contents</Title>
+      <TitleButton onClick={toggle} isPressed={isToggled}>
+        Contents
       </TitleButton>
-      <List isHidden={isFolded}>
+      <List isHidden={isToggled}>
         {toc.map(({ title, anchor }) => (
           <MarkedItem key={anchor} unmarked={false}>
             <Anchor href={'#' + anchor}>{title}</Anchor>
