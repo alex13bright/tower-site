@@ -17,6 +17,7 @@ import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { LI, P, UL } from '~/components/common/content'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
+import { useLoaderData } from '@remix-run/react'
 
 const Logo = styled.img`
   width: 52px;
@@ -230,20 +231,12 @@ const Main = styled.div`
 `
 
 type Props = {
-  data: {
-    bonusCode: string
-    roomTitle: string
-    squareLogo: string
-    bonusTitle: string
-    rakeback: string
-    deposit: string
-    maxBonus: string
-  }
   className?: string
 }
 
-export const BonusFeed = ({ data, className }: Props): ReactElement => {
-  const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data
+export const BonusFeed = ({ className }: Props): ReactElement => {
+  const data = useLoaderData()
+  const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data.room
   const { isToggled: isFolded, toggle } = useToggle(true)
   return (
     <Main className={className}>

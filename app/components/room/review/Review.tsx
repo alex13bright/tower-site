@@ -1,10 +1,8 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { PageMeta } from '~/components/room/review/PageMeta'
-import { ContentLink, H1, H2, UL, LI, P } from '~/components/common/common'
+import { ContentLink, H1, H2, UL, LI, P, Img } from '~/components/common/content'
 import { BonusFeed } from '~/components/common/BonusFeed'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
-import { useLoaderData } from '@remix-run/react'
 
 const Main = styled.div`
   display: grid;
@@ -14,8 +12,6 @@ type Props = {
   className?: string
 }
 export const Review = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { bonusCode, title, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data.room
   return (
     <Main className={className}>
       <H1>GG Poker review</H1>
@@ -38,9 +34,8 @@ export const Review = ({ className }: Props): ReactElement => {
         <LI>How can I deposit and start playing?</LI>
       </UL>
       <H2>GG Poker bonuses and promotions</H2>
-      <BonusFeed
-        data={{ bonusCode, roomTitle: title, squareLogo, bonusTitle, rakeback, deposit, maxBonus }}
-      />
+      <BonusFeed />
+      <Img>GGpoker-giunness-record.jpg</Img>
     </Main>
   )
 }

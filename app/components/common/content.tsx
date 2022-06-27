@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
-import { ReactElement } from 'react'
+import { ReactElement, ReactText } from 'react'
 
 const hCss = css`
   line-height: 1.2em;
@@ -97,3 +97,13 @@ export const Figure = ({ image, caption }: FigureProps): ReactElement => {
     </StyledFigure>
   )
 }
+
+type ImageProps = {
+  children: ReactText
+}
+
+export const Img = ({ children: name }: ImageProps): ReactElement => {
+  return <div>{name}</div>
+}
+// ![GGpoker-giunness-record.jpg](http://localhost:1337/uploads/G_Gpoker_giunness_record_ae7dc3d206.jpg)
+// const [title, url] = children.slice(2, -1).split('](')

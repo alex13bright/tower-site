@@ -41,13 +41,12 @@ export const apiFetch = async (
   query: string = ''
 ): Promise<ApiListResponse<RoomType>> => {
   const apiUrl = `${apiEndPoint}/${entity}/?${query}`
+  // console.log(apiUrl)
   const apiResponse = await fetch(apiUrl)
   return (await apiResponse.json()) as ApiListResponse<RoomType>
 }
 
-/*fetchContent('en').then((d) => {
-  console.log(JSON.stringify(d, null, 2))
-})*/
+// fetchContent('en').then((d) => {})
 
 /*
 filters: {
