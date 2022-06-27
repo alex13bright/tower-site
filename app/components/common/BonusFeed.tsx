@@ -237,7 +237,7 @@ type Props = {
 
 export const BonusFeed = ({ data, className }: Props): ReactElement => {
   const { bonusCode, roomTitle, squareLogo, bonusTitle, rakeback, deposit, maxBonus } = data
-  const { isToggled: isFolded, toggle } = useToggle()
+  const { isToggled: isFolded, toggle } = useToggle(true)
   return (
     <Main className={className}>
       <Header>
