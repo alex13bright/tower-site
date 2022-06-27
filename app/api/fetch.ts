@@ -5,7 +5,7 @@ import { Locale } from '~/components/root/Locale'
 
 const { apiEndPoint } = config
 
-export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListResponse<RoomType>> => {
+export const fetchRoomList = async (locale: Locale = 'en') => {
   const query = qs.stringify(
     {
       locale,
@@ -15,33 +15,48 @@ export const fetchRoomList = async (locale: Locale = 'en'): Promise<ApiListRespo
       encode: false,
     }
   )
-  const apiUrl = `${apiEndPoint}/rooms/?${query}`
+  return apiFetch('rooms', query)
+}
+
+export const fetchContent = async (locale: Locale = 'en') => {
+  const query = qs.stringify(
+    {
+      locale,
+      populate: {
+        images: {
+          populate: '*',
+        },
+      },
+    },
+    {
+      encode: false,
+    }
+  )
+
+  return apiFetch('contents', query)
+}
+
+export const apiFetch = async (
+  entity: string,
+  query: string = ''
+): Promise<ApiListResponse<RoomType>> => {
+  const apiUrl = `${apiEndPoint}/${entity}/?${query}`
   const apiResponse = await fetch(apiUrl)
   return (await apiResponse.json()) as ApiListResponse<RoomType>
-  // if (!areRoomsValidate(rooms)) return null
-
-  // const referralLinksQuery = qs.stringify(
-  //   {
-  //     locale,
-  //     populate: {
-  //       Main: {
-  //         populate: '*',
-  //       },
-  //     },
-  //     filters: {
-  //       main: {
-  //         room: {
-  //           id: {
-  //             $eq: 7,
-  //           },
-  //         },
-  //       },
-  //     },
-  //   },
-  //   {
-  //     encode: false,
-  //   },
-  // );
-
-  // return data;
 }
+
+/*fetchContent('en').then((d) => {
+  console.log(JSON.stringify(d, null, 2))
+})*/
+
+/*
+filters: {
+  main: {
+    room: {
+      id: {
+        $eq: 7,
+      },
+    },
+  },
+},
+*/

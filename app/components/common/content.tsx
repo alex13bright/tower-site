@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
+import { ReactElement } from 'react'
 
 const hCss = css`
   line-height: 1.2em;
@@ -78,3 +79,21 @@ export const LI = styled.li`
     height: 9px;
   }
 `
+
+const StyledFigure = styled.figure``
+const FigureImage = styled.img``
+const FigureCaption = styled.figcaption``
+
+type FigureProps = {
+  image: string
+  caption: string
+}
+
+export const Figure = ({ image, caption }: FigureProps): ReactElement => {
+  return (
+    <StyledFigure>
+      <FigureImage />
+      <FigureCaption>{caption}</FigureCaption>
+    </StyledFigure>
+  )
+}

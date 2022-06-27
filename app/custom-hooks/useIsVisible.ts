@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
-export const useIsVisible = (ref: MutableRefObject<HTMLElement | null>): boolean => {
-  const [isVisible, setIsVisible] = useState<boolean>(false)
+export const useIsVisible = (ref: MutableRefObject<HTMLElement | null>): null | boolean => {
+  const [isVisible, setIsVisible] = useState<null | boolean>(null)
   useEffect(() => {
     if (ref.current === null) throw new Error(`ref is not used on any element`)
     const _refCurrent = ref.current

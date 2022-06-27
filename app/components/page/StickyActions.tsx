@@ -22,7 +22,7 @@ type ContextType = [State, Dispatch<SetStateAction<State>>]
 const Context = createContext<ContextType | null>(null)
 
 export const StickyContext = ({ children }: { children?: ReactNode }): ReactElement => {
-  const stateWithSetter = useState<State>({ isMarkerVisible: false, isFooterVisible: false })
+  const stateWithSetter = useState<State>({ isMarkerVisible: true, isFooterVisible: true })
   return <Context.Provider value={stateWithSetter}>{children}</Context.Provider>
 }
 
@@ -42,6 +42,7 @@ export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   const [_, stickyContextSetState] = useStickyContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
+    if (isVisible === null) return
     stickyContextSetState((state) => ({ ...state, [isVisibleKey]: isVisible }))
   }, [isVisibleKey, isVisible, stickyContextSetState])
   return <div ref={ref}>{children}</div>

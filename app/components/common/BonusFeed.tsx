@@ -14,7 +14,7 @@ import { base64InlineSvg, copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { LI, P, UL } from '~/components/common/common'
+import { LI, P, UL } from '~/components/common/content'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 
