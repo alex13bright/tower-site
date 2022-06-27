@@ -5,7 +5,6 @@ import { ContentLink, H1, H2, UL, LI, P } from '~/components/common/common'
 import { BonusFeed } from '~/components/common/BonusFeed'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
-import { ExpandableTable } from '~/components/common/ExpandableTable'
 
 const Main = styled.div`
   display: grid;
@@ -42,7 +41,6 @@ export const Review = ({ className }: Props): ReactElement => {
       <BonusFeed
         data={{ bonusCode, roomTitle: title, squareLogo, bonusTitle, rakeback, deposit, maxBonus }}
       />
-      <ExpandableTable lessNumber={3} />
     </Main>
   )
 }

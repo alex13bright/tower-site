@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { proximaNovaSb, secondary } from '~/styles/styles'
+import { proximaNovaSb, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
@@ -19,7 +19,6 @@ const PageMetaItem = styled.span<{ kind: string }>`
   display: grid;
   grid-template-areas: 'icon title' '. value';
   grid-template-columns: 12px auto;
-  grid-template-rows: 17px auto;
   gap: 4px;
   place-items: start;
 
@@ -28,6 +27,11 @@ const PageMetaItem = styled.span<{ kind: string }>`
   letter-spacing: -0.2px;
   font-size: 12px;
   opacity: 0.8;
+
+  @media screen and ${widthAtLeast.md} {
+    display: flex;
+    align-items: center;
+  }
 
   &::before {
     grid-area: icon;
@@ -39,6 +43,7 @@ const PageMetaItem = styled.span<{ kind: string }>`
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.5;
+    margin-bottom: 1px;
   }
 `
 

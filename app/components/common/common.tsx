@@ -1,20 +1,24 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
-import { ReactElement, ReactNode } from 'react'
+
+const hCss = css`
+  line-height: 1.2em;
+`
 
 export const H1 = styled.h1`
+  ${hCss};
   font-size: 32px;
   margin-bottom: 16px;
 `
 
 export const H2 = styled.h2`
+  ${hCss};
   font-size: 24px;
-  scroll-margin-top: 130px;
-  position: relative;
-  padding-top: 12px;
   margin: 40px 0 20px;
 
+  position: relative;
+  padding-top: 12px;
   &::before {
     background: url('/images/rest/h2-line.svg') no-repeat 50%;
     content: '';
@@ -27,19 +31,19 @@ export const H2 = styled.h2`
   }
 `
 
-const StyledP = styled.p`
-  color: inherit;
-  background: inherit;
+export const H3 = styled.h3`
+  ${hCss};
+  font-size: 20px;
+  margin: 40px 0 20px;
 `
 
-type PProps = {
-  children: ReactNode
-  className?: string
-}
-
-export const P = ({ children, className }: PProps): ReactElement => {
-  return <StyledP className={className}>{children}</StyledP>
-}
+export const P = styled.p`
+  color: inherit;
+  background: inherit;
+  font-size: 17px;
+  line-height: 1.4em;
+  margin: 0 0 20px;
+`
 
 export const ContentLink = styled(Link)`
   color: ${accent};
