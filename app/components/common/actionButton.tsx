@@ -6,7 +6,6 @@ import {
   primaryDark,
   proximaNovaSb,
   secondaryAction,
-  widthAtLeast,
 } from '~/styles/styles'
 import { ExternalLink } from '~/components/ui/ExternalLink'
 import { darken } from '~/core/utils'
@@ -22,10 +21,6 @@ const button = css`
   border-radius: 4px;
   position: relative;
   overflow: hidden;
-  @media screen and ${widthAtLeast.lg} {
-    padding: 10px;
-    width: 260px;
-  }
 `
 
 const iconButton = css`

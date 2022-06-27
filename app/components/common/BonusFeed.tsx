@@ -132,6 +132,11 @@ const BonusCode = styled.div`
   }
 `
 
+const StyledSignUpButton = styled(SignUpButton)`
+  padding: 10px;
+  font-size: 16px;
+`
+
 const Action = styled.div`
   display: grid;
   grid-template-rows: repeat(2, 1fr);
@@ -144,7 +149,9 @@ const Action = styled.div`
 
   @media screen and ${widthAtLeast.md} {
     grid-area: action;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 `
 
@@ -268,7 +275,7 @@ export const BonusFeed = ({ data, className }: Props): ReactElement => {
             <BonusCodeValue>{bonusCode}</BonusCodeValue>
           </BonusCode>
         </StyledTooltip>
-        <SignUpButton href="#" />
+        <StyledSignUpButton href="#" />
       </Action>
       <Details>
         <DetailsToggleButton onClick={toggle} isPressed={isFolded}>

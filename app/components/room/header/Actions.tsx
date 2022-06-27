@@ -1,10 +1,27 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { ReactElement } from 'react'
 import { Form } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { ContactButton, SignUpButton, TagButton } from '~/components/common/actionButton'
+
+const button = css`
+  @media screen and ${widthAtLeast.lg} {
+    padding: 10px;
+    width: 260px;
+  }
+`
+
+const StyledSignUpButton = styled(SignUpButton)`
+  ${button};
+`
+const StyledContactButton = styled(ContactButton)`
+  ${button};
+`
+const StyledTagButton = styled(TagButton)`
+  ${button};
+`
 
 const StyledForm = styled(Form)`
   display: contents;
@@ -37,9 +54,9 @@ export const Actions = ({ className }: Props): ReactElement => {
   return (
     <Main className={className}>
       <StyledForm>
-        <SignUpButton href="/out.com" />
-        <ContactButton />
-        <TagButton />
+        <StyledSignUpButton href="/out.com" />
+        <StyledContactButton />
+        <StyledTagButton />
       </StyledForm>
     </Main>
   )
