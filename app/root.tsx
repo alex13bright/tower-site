@@ -16,8 +16,9 @@ import { permanentRedirect } from '~/core/permanentReidrect'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
 import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
-import { Locale, LocaleContext, useLocale } from '~/components/root/Locale'
+import { LocaleContext, useLocale } from '~/components/root/Locale'
 import { fetchLocaleList } from '~/api/fetch'
+import { Locale } from '~/api/apiTypes'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
@@ -34,6 +35,7 @@ type LoaderData = {
   country: string
 }
 export const loader: LoaderFunction = async ({ request }) => {
+  // await validateHostName()
   await permanentRedirect(request)
   const locale = getLocaleFromRequest(request)
   const country = await getCountryFromRequest(request)

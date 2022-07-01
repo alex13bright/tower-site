@@ -1,7 +1,6 @@
 import qs from 'qs'
 import config from '~/config'
-import { LocaleList } from '~/api/apiTypes'
-import { Locale } from '~/components/root/Locale'
+import { Locale, LocaleList } from '~/api/apiTypes'
 
 const { apiEndPoint } = config
 
