@@ -17,6 +17,7 @@ import normalizeStylesUrl from '~/styles/normalizeStyles.css'
 import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
 import { Locale, LocaleContext, useLocale } from '~/components/root/Locale'
+import { fetchLocaleList } from '~/api/fetch'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },

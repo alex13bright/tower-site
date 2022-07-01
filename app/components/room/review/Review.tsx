@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { PageMeta } from '~/components/room/review/PageMeta'
 import { ContentLink, H1, H2, UL, LI, P, Img } from '~/components/common/content'
 import { BonusFeed } from '~/components/common/BonusFeed'
+import { ExpandableTable } from '~/components/common/ExpandableTable'
 
 const Main = styled.div`
   display: grid;
@@ -22,7 +23,7 @@ export const Review = ({ className }: Props): ReactElement => {
         (read our exclusive interview), the site has become a model to follow in the gaming
         industry, and it will soon become the #1 poker site in the world after winning the GGPoker
         vs PokerStars battle.
-      </P>{' '}
+      </P>
       <P>
         In this thorough review, we will expose all GG Poker secrets and make your life easy before
         signing up by answering the most frequently asked questions:

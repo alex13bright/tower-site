@@ -4,7 +4,7 @@ import { proximaNovaSb, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
-const Title = styled.div`
+const Title = styled.div.attrs({})`
     grid-area: title;
     color: ${secondary};
     font-size: 12px;

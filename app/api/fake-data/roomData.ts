@@ -2,6 +2,7 @@ import { RoomType } from '~/api/fake-data/dataTypes'
 
 export const roomData: RoomType = {
   title: 'GG Poker',
+
   bonusTitle: '100% до $600',
   rakeback: '60%',
   deposit: '+100%',
