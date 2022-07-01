@@ -1,6 +1,6 @@
 import React, { ReactElement, createContext, useContext, ReactNode } from 'react'
 
-export const allLocales = [
+export const locales = [
   'aa',
   'ab',
   'ae',
@@ -186,9 +186,6 @@ export const allLocales = [
   'zh',
   'zu',
 ] as const
-export type AllLocale = typeof allLocales[number]
-
-export const locales = allLocales.filter((locale) => ['en', 'ru', 'es'].includes(locale))
 export type Locale = typeof locales[number]
 
 const Context = createContext<Locale | null>(null)

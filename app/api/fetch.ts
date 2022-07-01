@@ -1,7 +1,7 @@
 import qs from 'qs'
 import config from '~/config'
-import { ApiListResponse, RoomType } from '~/api/apiTypes'
-import { Locale, allLocales } from '~/components/root/Locale'
+import { LocaleList } from '~/api/apiTypes'
+import { Locale } from '~/components/root/Locale'
 
 const { apiEndPoint } = config
 
@@ -12,22 +12,13 @@ export const fetchLocaleList = async () => {
       encode: false,
     }
   )
-  const b = {
-    default: 'en',
-    locales: ['ru', 'es'],
-  }
-  const a = {
-    en: { isDefault: true },
-    ru: { isDefault: false },
-    es: { isDefault: false },
-  }
 
-  const listLocales = await apiFetch('i18n/locales', query)
-  const defaultLocale = listLocales.reduce(
-    (defaultLocale, { code, isDefault }) => (isDefault ? code : defaultLocale),
+  const listLocales = await apiFetch<LocaleList>('i18n/locales', query)
+  const defaultLocale: Locale = listLocales.reduce(
+    (defaultLocale: Locale, { code, isDefault }) => (isDefault ? code : defaultLocale),
     'en'
   )
-  const localeList = listLocales.map(({ code }) => code) as Locale[]
+  const localeList: Locale[] = listLocales.map(({ code }) => code)
   return { defaultLocale, localeList }
 }
 
@@ -65,15 +56,11 @@ export const fetchContent = async (locale: Locale = 'en') => {
   return apiFetch('rooms', query)
 }
 
-export const apiFetch = async (
-  entity: string,
-  query: string = ''
-): Promise<ApiListResponse<RoomType>> => {
-  const queryPart = query === '' ? '' : '?' + query
+export const apiFetch = async <T>(entity: string, query: string): Promise<T> => {
+  const queryPart = query ? '?' + query : ''
   const apiUrl = `${apiEndPoint}/${entity}${queryPart}`
-  console.log(apiUrl)
   const apiResponse = await fetch(apiUrl)
-  return (await apiResponse.json()) as ApiListResponse<RoomType>
+  return (await apiResponse.json()) as T
 }
 
 // fetchContent('en').then((d) => {})

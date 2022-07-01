@@ -1,5 +1,11 @@
 import { Locale } from '~/components/root/Locale'
 
+export type LocaleItem = {
+  code: Locale
+  isDefault: boolean
+}
+export type LocaleList = LocaleItem[]
+
 export type Pagination = {
   page: number
   pageSize: number
@@ -12,6 +18,7 @@ export type ApiListResponse<T> = {
     pagination: Pagination
   }
 }
+
 export type NetworkType = {
   data: {
     id: number
