@@ -69,7 +69,7 @@ export type RoomType = {
   logo: string
   roomType: string
   license: string
-  country: string
+  acceptedCountry: string
   payments: Payment[]
   network: NetworkType
   keyFacts: string[]

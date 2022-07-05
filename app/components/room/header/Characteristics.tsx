@@ -35,7 +35,7 @@ type Props = {
 
 export const Characteristics = ({ className }: Props): ReactElement => {
   const data: LoaderData = useLoaderData()
-  const { roomType, license, payments, devices, country } = data.room
+  const { roomType, license, payments, devices, acceptedCountry } = data.room
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>
@@ -63,8 +63,8 @@ export const Characteristics = ({ className }: Props): ReactElement => {
           </Value>
         </Row>
         <Row>
-          <Name>Country</Name>
-          <Value>{country}</Value>
+          <Name>Accepted country</Name>
+          <Value>{acceptedCountry}</Value>
         </Row>
       </Content>
     </Main>

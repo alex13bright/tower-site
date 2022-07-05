@@ -12,7 +12,7 @@ export const roomData: RoomType = {
   bonusCode: 'WPDEALS',
   roomType: 'Licensed',
   license: 'United Kingdom',
-  country: 'Thailand',
+  acceptedCountry: 'Thailand',
   payments: [
     'visa',
     'skrill',
