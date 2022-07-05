@@ -18,7 +18,7 @@ import { widthAtLeast } from '~/styles/styles'
 const Main = styled(Table)`
   padding-top: 30px;
   padding-bottom: 30px;
-  grid-area: features;
+  grid-area: characteristics;
 
   @media screen and ${widthAtLeast.md} {
     padding-right: ${sidePaddingSize.md};
@@ -33,7 +33,7 @@ type Props = {
   className?: string
 }
 
-export const Features = ({ className }: Props): ReactElement => {
+export const Characteristics = ({ className }: Props): ReactElement => {
   const data: LoaderData = useLoaderData()
   const { roomType, license, payments, devices, country } = data.room
   return (

@@ -13,7 +13,7 @@ import { Highlights } from '~/components/room/header/Highlights'
 import { Actions } from '~/components/room/header/Actions'
 import { Logo } from '~/components/room/header/Logo'
 import { ReactElement } from 'react'
-import { Features } from '~/components/room/header/Features'
+import { Characteristics } from '~/components/room/header/Characteristics'
 import { DetailedRatings } from '~/components/room/header/DetailedRatings'
 import { Advantages } from '~/components/room/header/Advantages'
 import { NavButtons } from '~/components/room/header/NavButtons'
@@ -57,7 +57,7 @@ const Main = styled.div`
     'ratings'
     'highlights'
     'actions'
-    'features'
+    'characteristics'
     'advantages'
     'detailed'
     'nav';
@@ -69,7 +69,7 @@ const Main = styled.div`
       'network .'
       'logo ratings'
       'highlights highlights'
-      'features advantages'
+      'characteristics advantages'
       'actions actions'
       'detailed detailed'
       'nav nav';
@@ -80,7 +80,7 @@ const Main = styled.div`
     grid-template-areas:
       'network . .'
       'logo-highlights logo-highlights ratings'
-      'features advantages detailed'
+      'characteristics advantages detailed'
       'actions actions actions'
       'nav nav nav';
     grid-template-columns: 1fr 1fr 1fr;
@@ -101,7 +101,7 @@ export const Header = ({ className }: Props): ReactElement => {
         </LogoHighlightsSpan>
         <Ratings />
         <Actions />
-        <Features />
+        <Characteristics />
         <Advantages />
         <DetailedRatings />
         <NavButtons />
