@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
-import { ReactElement, ReactText } from 'react'
+import { ReactElement, ReactNode, ReactText } from 'react'
 
 const hCss = css`
   line-height: 1.2em;
@@ -46,11 +46,25 @@ export const P = styled.p`
   margin: 0 0 20px;
 `
 
-export const ContentLink = styled(Link)`
+export const StyledA = styled(Link)`
   color: ${accent};
   text-decoration: underline;
   background-color: transparent;
 `
+type AProps = {
+  href: string
+  target?: string
+  children: ReactNode
+  className?: string
+}
+export const A = ({ children, className, href, ...props }: AProps) => {
+  // const isLocal =
+  return (
+    <StyledA className={className} to={href} {...props} forwardedAs="a">
+      {children}
+    </StyledA>
+  )
+}
 
 export const UL = styled.ul`
   list-style-position: outside;

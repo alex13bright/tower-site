@@ -34,6 +34,7 @@ type LoaderData = {
   locale: Locale
   country: string
 }
+
 export const loader: LoaderFunction = async ({ request }) => {
   // await validateHostName()
   await permanentRedirect(request)

@@ -1,7 +1,7 @@
-import { Locale, useLocale } from '~/components/root/Locale'
 import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
 import { RatingsType } from '~/api/fake-data/dataTypes'
 import chroma from 'chroma-js'
+import { Locale } from '~/api/apiTypes'
 
 export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
@@ -43,8 +43,8 @@ export const getCountryFromRequest = async (request: Request) => {
 
 export const getRequestGeo = () => {}
 
-export type I18n<Trans> = { en: Trans; ru: Trans; es: Trans }
-export const useLocalized = <Trans>(i18n: I18n<Trans>): Trans => i18n[useLocale()]
+// export type I18n<Trans> = { en: Trans; ru: Trans; es: Trans }
+// export const useLocalized = <Trans>(i18n: I18n<Trans>): Trans => i18n[useLocale()]
 
 export const calcRating = (ratings: RatingsType): number => {
   const values = Object.values(ratings)

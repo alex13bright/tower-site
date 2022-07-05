@@ -12,7 +12,7 @@ const redirectToHostname = (url: URL, newHostSubnames: string[]) => {
   throw redirect(url.toString(), { status: 301 })
 }
 
-export const permanentRedirect = async (request: Request): Promise<void | Locale> => {
+export const permanentRedirect = async (request: Request): Promise<Locale> => {
   const url = new URL(request.url)
   const hostName = url.hostname
   const [firstSubname, ...restSubnames] = hostName.split('.')
@@ -22,4 +22,5 @@ export const permanentRedirect = async (request: Request): Promise<void | Locale
   if (locale === defaultLocale) redirectToHostname(url, restSubnames)
   if (locale === null) return defaultLocale
   if (locale !== defaultLocale && localeList.includes(locale)) return locale
+  return locale
 }

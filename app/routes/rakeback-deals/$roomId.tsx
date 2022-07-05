@@ -8,6 +8,7 @@ export const loader: LoaderFunction = async () => {
   const data = { room: roomData }
   return json<LoaderData>(data)
 }
+
 export default function RoomRoute() {
   return <Room />
 }

@@ -1,4 +1,4 @@
-import { Locale } from '~/components/root/Locale'
+import { Locale } from '~/api/apiTypes'
 
 export type Geo = {
   locale: Locale

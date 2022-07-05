@@ -13,6 +13,7 @@ export const fetchLocaleList = async () => {
   )
 
   const listLocales = await apiFetch<LocaleList>('i18n/locales', query)
+
   const defaultLocale: Locale = listLocales.reduce(
     (defaultLocale: Locale, { code, isDefault }) => (isDefault ? code : defaultLocale),
     'en'
@@ -58,8 +59,23 @@ export const fetchContent = async (locale: Locale = 'en') => {
 export const apiFetch = async <T>(entity: string, query: string): Promise<T> => {
   const queryPart = query ? '?' + query : ''
   const apiUrl = `${apiEndPoint}/${entity}${queryPart}`
-  const apiResponse = await fetch(apiUrl)
-  return (await apiResponse.json()) as T
+  try {
+    const apiResponse = await fetch(apiUrl)
+    const response = (await apiResponse.json()) as T
+    // todo check for backend errors like:
+    // response = {
+    //   error: {
+    //     status: 403,
+    //     name: 'ForbiddenError',
+    //     message: 'Forbidden',
+    //     details: {},
+    //   },
+    // }
+    // console.log(JSON.stringify(response, null, 2))
+    return response
+  } catch (error) {
+    throw new Error('cms server connection error')
+  }
 }
 
 // fetchContent('en').then((d) => {})
