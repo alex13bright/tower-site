@@ -15,7 +15,7 @@ import { Logo } from '~/components/room/header/Logo'
 import { ReactElement } from 'react'
 import { Characteristics } from '~/components/room/header/Characteristics'
 import { DetailedRatings } from '~/components/room/header/DetailedRatings'
-import { Advantages } from '~/components/room/header/Advantages'
+import { KeyFacts } from '~/components/room/header/KeyFacts'
 import { NavButtons } from '~/components/room/header/NavButtons'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
@@ -58,7 +58,7 @@ const Main = styled.div`
     'highlights'
     'actions'
     'characteristics'
-    'advantages'
+    'keyFacts'
     'detailed'
     'nav';
   grid-template-columns: 1fr;
@@ -69,7 +69,7 @@ const Main = styled.div`
       'network .'
       'logo ratings'
       'highlights highlights'
-      'characteristics advantages'
+      'characteristics keyFacts'
       'actions actions'
       'detailed detailed'
       'nav nav';
@@ -80,7 +80,7 @@ const Main = styled.div`
     grid-template-areas:
       'network . .'
       'logo-highlights logo-highlights ratings'
-      'characteristics advantages detailed'
+      'characteristics keyFacts detailed'
       'actions actions actions'
       'nav nav nav';
     grid-template-columns: 1fr 1fr 1fr;
@@ -102,7 +102,7 @@ export const Header = ({ className }: Props): ReactElement => {
         <Ratings />
         <Actions />
         <Characteristics />
-        <Advantages />
+        <KeyFacts />
         <DetailedRatings />
         <NavButtons />
       </Main>

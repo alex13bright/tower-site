@@ -25,7 +25,7 @@ export const roomData: RoomType = {
     'paypal',
     'webmoney',
   ],
-  advantages: [
+  keyFacts: [
     `World's largest poker room`,
     `Millionaire monthly promotions`,
     `Action across all stakes and games`,

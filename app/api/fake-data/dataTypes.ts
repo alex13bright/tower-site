@@ -72,7 +72,7 @@ export type RoomType = {
   country: string
   payments: Payment[]
   network: NetworkType
-  advantages: string[]
+  keyFacts: string[]
   ratings: RatingsType
   devices: Device[]
   navs: LinkType[]

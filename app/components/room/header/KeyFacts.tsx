@@ -35,7 +35,7 @@ const Main = styled.div`
   padding-top: 30px;
   margin-bottom: 30px;
 
-  grid-area: advantages;
+  grid-area: keyFacts;
 
   @media screen and ${widthAtLeast.md} {
     border-top: none;
@@ -54,14 +54,14 @@ type Props = {
   className?: string
 }
 
-export const Advantages = ({ className }: Props): ReactElement => {
+export const KeyFacts = ({ className }: Props): ReactElement => {
   const data: LoaderData = useLoaderData()
-  const { advantages } = data.room
+  const { keyFacts } = data.room
   return (
     <Main className={className}>
       <Title>Key facts</Title>
       <List>
-        {advantages.map((item, i) => (
+        {keyFacts.map((item, i) => (
           <Item key={i}>{item}</Item>
         ))}
       </List>
