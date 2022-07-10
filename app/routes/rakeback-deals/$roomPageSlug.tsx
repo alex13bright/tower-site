@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const directus = await getDirectusClient()
 
   const response = await directus.items('rooms').readByQuery({
-    fields: '*, translations.*, translations.pages.*',
+    fields: '*,translations.*,translations.pages.*,translations.pages.type.*',
     filter: {
       // @ts-ignore
       slug: {
@@ -26,7 +26,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       translations: {
         _filter: { languages_code: { _eq: directusLang[lang] } },
         // @ts-ignore
-        pages: { _filter: { id: { _eq: 1 } } },
+        pages: {
+          _filter: { id: { _eq: 1 } },
+        },
       },
     },
   })
