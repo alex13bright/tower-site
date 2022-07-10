@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         _filter: { languages_code: { _eq: directusLang[lang] } },
         // @ts-ignore
         pages: {
-          _filter: { id: { _eq: 1 } },
+          _filter: { title: { _eq: 'en review title' } },
         },
       },
     },
