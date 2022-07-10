@@ -1,11 +1,10 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
+export const langs = ['en', 'ru', 'es'] as const
+export type Lang = typeof langs[number]
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
-export type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>
-export type AsType = keyof JSX.IntrinsicElements
+export const countries = ['usa', 'russia', 'uk', 'spain'] as const
+export type Country = typeof countries[number]
 
-export type Subunion<T, U extends T> = U
-export const narrowType = <T>(array: ReadonlyArray<T>, value: any): T | null => {
-  const index = array.indexOf(value)
-  return index === -1 ? null : array[index]
+export type Locale = {
+  lang: Lang
+  country: Country
 }

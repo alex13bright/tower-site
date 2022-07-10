@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
 import { breakpoints } from '~/styles/styles'
-import { AsType } from '~/core/types'
+import { AsType } from '~/lib/libTypes'
 
 const OuterBox = styled.div<{ as?: AsType }>`
   display: flex;

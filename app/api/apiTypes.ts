@@ -1,8 +1,7 @@
-export const languages = ['en', 'ru', 'es'] as const
-export type Language = typeof languages[number]
-
+export const a = 1
+/*
 export type LocaleItem = {
-  code: Language
+  code: Lang
   isDefault: boolean
 }
 export type LocaleList = LocaleItem[]
@@ -29,7 +28,7 @@ export type NetworkType = {
       updatedAt: string
       publishedAt: string
       // rooms: { data: Room[] };
-      locale: Language
+      locale: Lang
       localizations?: { data: NetworkType[] }
     }
   }
@@ -41,7 +40,7 @@ export type RoomType = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    locale: Language
+    locale: Lang
     localizations?: { data: RoomType[] }
     main: {
       id: string
@@ -51,3 +50,4 @@ export type RoomType = {
     }
   }
 }
+*/

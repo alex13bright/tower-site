@@ -1,6 +1,6 @@
 import qs from 'qs'
 import config from '~/config'
-import { Language, LocaleList } from '~/api/apiTypes'
+import { Lang, LocaleList } from '~/api/apiTypes'
 
 const { apiEndPoint } = config
 
@@ -14,15 +14,15 @@ export const fetchLocaleList = async () => {
 
   const listLocales = await apiFetch<LocaleList>('i18n/locales', query)
 
-  const defaultLocale: Language = listLocales.reduce(
-    (defaultLocale: Language, { code, isDefault }) => (isDefault ? code : defaultLocale),
+  const defaultLocale: Lang = listLocales.reduce(
+    (defaultLocale: Lang, { code, isDefault }) => (isDefault ? code : defaultLocale),
     'en'
   )
-  const localeList: Language[] = listLocales.map(({ code }) => code)
+  const localeList: Lang[] = listLocales.map(({ code }) => code)
   return { defaultLocale, localeList }
 }
 
-export const fetchRoomList = async (locale: Language = 'en') => {
+export const fetchRoomList = async (locale: Lang = 'en') => {
   const query = qs.stringify(
     {
       locale,
@@ -35,7 +35,7 @@ export const fetchRoomList = async (locale: Language = 'en') => {
   return apiFetch('rooms', query)
 }
 
-export const fetchContent = async (locale: Language = 'en') => {
+export const fetchContent = async (locale: Lang = 'en') => {
   const query = qs.stringify(
     {
       locale,

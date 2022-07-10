@@ -11,13 +11,12 @@ import {
 } from '@remix-run/react'
 import { DynamicLinks } from 'remix-utils'
 import { json } from '@remix-run/node'
-import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
-import { permanentRedirect } from '~/core/permanentReidrect'
+import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
 import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
 import { LocaleContext, useLocale } from '~/components/root/Locale'
-import { Language } from '~/api/apiTypes'
+import { Locale } from '~/core/types'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
@@ -30,16 +29,13 @@ export const meta: MetaFunction = () => ({
 })
 
 type LoaderData = {
-  locale: Language
-  country: string
+  locale: Locale
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  // await validateHostName()
-  await permanentRedirect(request)
-  const locale = getLocaleFromRequest(request)
+  const lang = await getLangFromRequest(request)
   const country = await getCountryFromRequest(request)
-  return json<LoaderData>({ locale: locale as Language, country })
+  return json<LoaderData>({ locale: { lang, country } })
 }
 
 export default function Root() {

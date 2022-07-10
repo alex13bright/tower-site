@@ -8,9 +8,12 @@ export type LoaderData = { room: RoomType }
 
 export const loader: LoaderFunction = async () => {
   const directus = await getDirectusClient()
-  const authors = await directus.items('authors').readByQuery({ meta: 'total_count' })
-
-  fs.writeFileSync(`${process.cwd()}/_log.authors.json`, JSON.stringify(authors, null, 2))
+  const response = await directus.items('networks').readByQuery()
+  const networks = response.data
+  if (!networks) throw new Error()
+  const firstNetwork = networks[0]
+  console.log(JSON.stringify(firstNetwork, null, 2))
+  fs.writeFileSync(`${process.cwd()}/_log.authors.json`, JSON.stringify(networks, null, 2))
   const data = { room: roomData }
   return json<LoaderData>(data)
 }

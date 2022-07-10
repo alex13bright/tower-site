@@ -12,3 +12,5 @@ export async function getDirectusClient() {
 
   return directus
 }
+
+// npx directus-typescript-gen --host http://localhost:8055 --email admin@a.com --password yJ7Aa36JK9t8 --typeName Schema --outFile schema.d.ts

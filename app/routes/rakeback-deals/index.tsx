@@ -2,7 +2,7 @@ import { MetaFunction, LoaderFunction, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { Pagination, RoomType } from '~/api/apiTypes'
 import { DynamicLinksFunction } from 'remix-utils'
-import { getLocaleFromRequest } from '~/core/utils'
+import { getLangFromRequest } from '~/core/utils'
 import { fetchRoomList } from '~/api/fetch'
 
 export const meta: MetaFunction = () => {
@@ -27,7 +27,7 @@ type LoaderData = {
   }
 }
 export const loader: LoaderFunction = async ({ request }) => {
-  const locale = getLocaleFromRequest(request)
+  const locale = getLangFromRequest(request)
   const data = await fetchRoomList(locale)
   // if (rooms === null) throw new Error('cant get rooms');
   return json<LoaderData>(data)

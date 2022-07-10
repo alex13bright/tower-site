@@ -1,7 +1,7 @@
 import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
 import { RatingsType } from '~/api/fake-data/dataTypes'
 import chroma from 'chroma-js'
-import { Language } from '~/api/apiTypes'
+import { Country, Lang } from '~/core/types'
 
 export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
@@ -24,14 +24,14 @@ const getLocaleFromHeaders = (headers: Headers) => {
   throw new Error(`can't get locale out of 'Accept-Language' request header`)
 }
 
-export const getLocaleFromRequest = (request: Request): Language => {
+export const getLangFromRequest = async (request: Request): Promise<Lang> => {
   const hostname = new URL(request.url).hostname
   const [first] = hostname.split('.')
   if (first === 'ru' || first === 'es') return first
   return 'en'
 }
 
-export const getCountryFromRequest = async (request: Request) => {
+export const getCountryFromRequest = async (request: Request): Promise<Country> => {
   // const standardHeader = 'x-forwarded-for'
   // const cloudFlareHeader = 'CF-Connecting-IP'
   // const cloudFlareCountryHeader = 'CF-IPCountry'

@@ -1,15 +1,15 @@
 import React, { ReactElement, createContext, useContext, ReactNode } from 'react'
-import { Language } from '~/api/apiTypes'
+import { Lang } from '~/api/apiTypes'
 
-const Context = createContext<Language | null>(null)
+const Context = createContext<Lang | null>(null)
 
-type ContextProps = { locale: Language; children?: ReactNode }
+type ContextProps = { locale: Lang; children?: ReactNode }
 
 export const LocaleContext = ({ locale, children }: ContextProps): ReactElement => {
   return <Context.Provider value={locale}>{children}</Context.Provider>
 }
 
-export const useLocale = (): Language => {
+export const useLocale = (): Lang => {
   const locale = useContext(Context)
   if (locale === null) throw new Error(`LocaleContext is not found`)
   return locale
