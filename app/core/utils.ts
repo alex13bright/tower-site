@@ -3,6 +3,12 @@ import { RatingsType } from '~/api/fake-data/dataTypes'
 import chroma from 'chroma-js'
 import { Country, Lang } from '~/core/types'
 
+export const directusLang = {
+  en: 'en-US',
+  ru: 'ru-RU',
+  es: 'es-ES',
+}
+
 export type Css<T> = FlattenInterpolation<ThemedStyledProps<T, DefaultTheme>> | ''
 
 export const fakeUse = (...rest: any[]) => {
