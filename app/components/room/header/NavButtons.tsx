@@ -121,46 +121,45 @@ type Props = {
 }
 export function NavButtons({ className }: Props): ReactElement {
   const data = useLoaderData()
+  const { roomSlug, pageType } = data
   const [{ pages }] = data.room.translations
   const navs = pages.map((page: components['schemas']['ItemsRoomPages']) => {
-    const { title: metaTitle, type } = page
-
-    // if (
-    //   !(
-    //     typeof type === 'object' &&
-    //     type !== null &&
-    //     type.translations &&
-    //     type.name &&
-    //     !type.translations[0] &&
-    //     typeof type.translations[0] !== 'number' &&
-    //     type.translations[0]?.title
-    //   )
-    // ) {
-    //   throw new Error()
-    // }
-
-    // @ts-ignore
-    const { name, translations } = type
-    // @ts-ignore
-    const [{ title }] = translations
-    return { name, title, metaTitle }
+    const { type } = page
+    if (
+      typeof type !== 'object' ||
+      typeof type?.translations !== 'object' ||
+      typeof type.translations[0] === 'number' ||
+      !type.translations[0]?.title
+    ) {
+      throw new Error()
+    }
+    const { name } = type
+    const [{ title }] = type.translations
+    const isActive = name === pageType
+    const url = `/rakeback-deals/${roomSlug}-${name}`
+    return { url, title, isActive }
   })
   console.log(navs)
   const navsLength = navs.length
   return (
     <Main className={className}>
       <List length={navsLength}>
-        {navs.map(({ url, title, isActive = false }, i) => (
-          <Item key={i}>
-            {isActive ? (
-              <ActiveLink>{title}</ActiveLink>
-            ) : (
-              <StyledLink to={url} $isFirst={i === 0} $isLast={navsLength === i + 1}>
-                {title}
-              </StyledLink>
-            )}
-          </Item>
-        ))}
+        {navs.map(
+          (
+            { url, title, isActive = false }: { url: string; title: string; isActive: boolean },
+            i: number
+          ) => (
+            <Item key={i}>
+              {isActive ? (
+                <ActiveLink>{title}</ActiveLink>
+              ) : (
+                <StyledLink to={url} $isFirst={i === 0} $isLast={navsLength === i + 1}>
+                  {title}
+                </StyledLink>
+              )}
+            </Item>
+          )
+        )}
       </List>
     </Main>
   )

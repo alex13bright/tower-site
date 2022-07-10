@@ -69,7 +69,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
   if (!response.data) throw new Error('no api data')
   const [room] = response.data
-  const data = { room }
+  const data = { room, roomSlug, pageType }
   return json(data)
 }
 
