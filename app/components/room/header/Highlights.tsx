@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { accent, border, primaryAction, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 
 const Name = styled.td``
 
@@ -51,14 +50,15 @@ type Props = {
 }
 
 export const Highlights = ({ className }: Props) => {
-  const data: LoaderData = useLoaderData()
-  const { bonusTitle, rakeback } = data.room
+  const data = useLoaderData()
+  const { translations } = data.room
+  const [{ bonus, rakeback }] = translations
   return (
     <Main className={className}>
       <Outer $color={primaryAction}>
         <Inner>
           <Name>Bonus</Name>
-          <Value $color={primaryAction}>{bonusTitle}</Value>
+          <Value $color={primaryAction}>{bonus}</Value>
         </Inner>
       </Outer>
       <Outer $color={accent}>

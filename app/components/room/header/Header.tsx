@@ -99,12 +99,12 @@ export const Header = ({ className }: Props): ReactElement => {
           <Logo />
           <Highlights />
         </LogoHighlightsSpan>
-        <Ratings />
-        <Actions />
-        <Characteristics />
-        <KeyFacts />
-        <DetailedRatings />
-        <NavButtons />
+        {/*<Ratings />*/}
+        {/*<Actions />*/}
+        {/*<Characteristics />*/}
+        {/*<KeyFacts />*/}
+        {/*<DetailedRatings />*/}
+        {/*<NavButtons />*/}
       </Main>
     </StickyMarker>
   )

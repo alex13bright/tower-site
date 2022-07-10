@@ -2,6 +2,7 @@ import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-co
 import { RatingsType } from '~/api/fake-data/dataTypes'
 import chroma from 'chroma-js'
 import { Country, Lang } from '~/core/types'
+import { directusUrl } from 'app.config'
 
 export const directusLang = {
   en: 'en-US',
@@ -59,3 +60,5 @@ export const calcRating = (ratings: RatingsType): number => {
 
 export const darken = (color: string, intensity: number): string =>
   chroma(color).darken(intensity).hex()
+
+export const cmsPublic = `${directusUrl}/assets/`

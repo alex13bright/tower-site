@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { useLoaderData } from '@remix-run/react'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { cmsPublic } from '~/core/utils'
 
 const Image = styled.img``
 
@@ -34,11 +34,13 @@ type Props = {
 }
 
 export const Network = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { name, title, logo } = data.room.network
+  const data = useLoaderData()
+  const { slug, translations, logo } = data.room.network
+  const [{ title }] = translations
+  const { id, title: alt } = logo
   return (
-    <Main className={className} href={`/network/${name}`}>
-      <Image alt={`${title.toLowerCase()}-logo`} src={logo} width="20px" height="20px" />
+    <Main className={className} href={`/network/${slug}`}>
+      <Image alt={alt} src={cmsPublic + id} width="20px" height="20px" />
       <Title>{title}</Title>
     </Main>
   )

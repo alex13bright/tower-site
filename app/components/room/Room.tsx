@@ -39,10 +39,10 @@ export const Room = (): ReactElement => {
     <Layout>
       <BreadCrumbs />
       <Header />
-      <Content>
-        <Toc />
-        <Review />
-      </Content>
+      {/*<Content>*/}
+      {/*  <Toc />*/}
+      {/*  <Review />*/}
+      {/*</Content>*/}
       <FakeContent height="1000px">FC</FakeContent>
     </Layout>
   )
