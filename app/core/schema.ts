@@ -3,6 +3,11 @@ type Language = {
   name: string
 }
 
+type Country = {
+  id: string
+  sort: number
+}
+
 type Device = {
   id: number
   sort: number
@@ -15,20 +20,17 @@ type Payment = {
   name: string
 }
 
-type RoomTrans = {
+type AuthorTrans = {
   id: number
-  room_page_types_id: number
-  languages_code: string
+  authors_id: string
+  languages_id: string
   title: string
 }
 
-type Room = {
+export type Author = {
   id: string
-  sort: number
   name: string
-  status: string
-  rooms: Room
-  translations: RoomTrans
+  translations: AuthorTrans
 }
 
 type NetworkTrans = {
@@ -43,7 +45,7 @@ type Network = {
   sort: number
   name: string
   status: string
-  rooms: Room
+  rooms: Room[]
   translations: NetworkTrans
 }
 
@@ -75,22 +77,20 @@ type RoomPageType = {
   translations: RoomPageTypeTrans
 }
 
-type Country = {
-  id: string
-  sort: number
-}
-
-type AuthorTrans = {
+type RoomTrans = {
   id: number
-  authors_id: string
-  languages_id: string
+  room_page_types_id: number
+  languages_code: string
   title: string
 }
 
-export type Author = {
+type Room = {
   id: string
+  sort: number
   name: string
-  translations: AuthorTrans
+  status: string
+  rooms: Room
+  translations: RoomTrans
 }
 
 export type Schema = {
