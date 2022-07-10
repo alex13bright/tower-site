@@ -1,7 +1,8 @@
 import { Directus } from '@directus/sdk'
 import { directusUrl, directusStaticToken } from 'app.config'
+import { Schema } from './schema'
 
-const directus = new Directus(directusUrl)
+const directus = new Directus<Schema>(directusUrl)
 
 export async function getDirectusClient() {
   if (await directus.auth.token) return directus

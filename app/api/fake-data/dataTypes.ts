@@ -1,7 +1,7 @@
-import { Locale } from '~/api/apiTypes'
+import { Language } from '~/api/apiTypes'
 
 export type Geo = {
-  locale: Locale
+  locale: Language
   country: string
 }
 

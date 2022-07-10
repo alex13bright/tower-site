@@ -17,8 +17,7 @@ import normalizeStylesUrl from '~/styles/normalizeStyles.css'
 import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
 import { LocaleContext, useLocale } from '~/components/root/Locale'
-import { fetchLocaleList } from '~/api/fetch'
-import { Locale } from '~/api/apiTypes'
+import { Language } from '~/api/apiTypes'
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
@@ -31,7 +30,7 @@ export const meta: MetaFunction = () => ({
 })
 
 type LoaderData = {
-  locale: Locale
+  locale: Language
   country: string
 }
 
@@ -40,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   await permanentRedirect(request)
   const locale = getLocaleFromRequest(request)
   const country = await getCountryFromRequest(request)
-  return json<LoaderData>({ locale: locale as Locale, country })
+  return json<LoaderData>({ locale: locale as Language, country })
 }
 
 export default function Root() {
