@@ -9,7 +9,6 @@
       "user_updated": "80290d5c-b12f-46d0-b6fd-ac39fdba188e",
       "date_updated": "2022-07-10T07:37:40.902Z",
       "name": "GGpoker",
-      "logo": "d7cdbb17-d0c1-43cc-a18c-3d1c3ac2f9b6",
       "square_logo": "8ced3770-4c34-46a0-92ca-a0b5fcb21027",
       "reliability": "5.0",
       "bonuses_promotions": "5.0",
@@ -19,21 +18,60 @@
       "deposits_withdrawals": "5.0",
       "license_country": "UK",
       "network": "2689fdb5-30c5-4251-b167-0e00304a8769",
-      "type": 3,
       "slug": "ggpoker",
       "payments": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
+        {
+          "payments_id": {
+            "name": "visa"
+          }
+        },
+        {
+          "payments_id": {
+            "name": "bitcoin"
+          }
+        },
+        {
+          "payments_id": {
+            "name": "skrill"
+          }
+        },
+        {
+          "payments_id": {
+            "name": "neteller"
+          }
+        },
+        {
+          "payments_id": {
+            "name": "muchbetter"
+          }
+        },
+        {
+          "payments_id": {
+            "name": "usdc"
+          }
+        }
       ],
       "devices": [
-        1,
-        2,
-        3,
-        4
+        {
+          "devices_id": {
+            "name": "ios"
+          }
+        },
+        {
+          "devices_id": {
+            "name": "windows"
+          }
+        },
+        {
+          "devices_id": {
+            "name": "android"
+          }
+        },
+        {
+          "devices_id": {
+            "name": "macos"
+          }
+        }
       ],
       "translations": [
         {
@@ -65,22 +103,51 @@
               "description": null,
               "h1": null,
               "type": {
-                "id": 2,
-                "sort": 2,
-                "name": "download",
                 "translations": [
-                  3,
-                  4
+                  {
+                    "title": "Download"
+                  }
                 ]
               }
             }
           ]
         }
       ],
-      "accepted_countries": [
-        9,
-        10
-      ]
+      "accepted_countries": [],
+      "type": {
+        "name": "licensed",
+        "translations": [
+          {
+            "title": "Licensed"
+          },
+          {
+            "title": "Лицензионный"
+          }
+        ]
+      },
+      "logo": {
+        "id": "d7cdbb17-d0c1-43cc-a18c-3d1c3ac2f9b6",
+        "storage": "local",
+        "filename_disk": "d7cdbb17-d0c1-43cc-a18c-3d1c3ac2f9b6.svg",
+        "filename_download": "ggpoker-logo[1].svg",
+        "title": "Ggpoker Logo[1]",
+        "type": "image/svg+xml",
+        "folder": "8f8f750d-95dd-439e-9f76-34b7d2ba55c2",
+        "uploaded_by": "80290d5c-b12f-46d0-b6fd-ac39fdba188e",
+        "uploaded_on": "2022-07-08T07:53:29.195Z",
+        "modified_by": null,
+        "modified_on": "2022-07-08T07:53:29.209Z",
+        "charset": null,
+        "filesize": "2966",
+        "width": null,
+        "height": null,
+        "duration": null,
+        "embed": null,
+        "description": null,
+        "location": null,
+        "tags": null,
+        "metadata": null
+      }
     }
   ]
 }

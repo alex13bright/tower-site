@@ -44,7 +44,7 @@ export const getCountryFromRequest = async (request: Request): Promise<Country> 
   // const ip = request.headers.get('');
   // freegeoip.net/{format}/{IP_or_hostname}
   fakeUse(request)
-  return 'russia'
+  return 'Russia'
 }
 
 export const getRequestGeo = () => {}

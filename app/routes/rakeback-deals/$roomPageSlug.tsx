@@ -4,7 +4,7 @@ import { roomData } from '~/api/fake-data/roomData'
 import { RoomType } from '~/api/fake-data/dataTypes'
 import { getDirectusClient } from '~/core/directus'
 import * as fs from 'fs'
-import { directusLang, getLangFromRequest } from '~/core/utils'
+import { directusLang, getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 export type LoaderData = { room: RoomType }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -12,10 +12,22 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (roomPageSlug === undefined) throw new Error()
   const [roomSlug, pageType] = roomPageSlug.split('-')
   const lang = await getLangFromRequest(request)
+  const country = await getCountryFromRequest(request)
   const directus = await getDirectusClient()
 
+  const selectFields = [
+    '*',
+    'payments.payments_id.name',
+    'type.name',
+    'type.translations.title',
+    'translations.*',
+    'translations.pages.*',
+    'translations.pages.type.translations.title',
+    'devices.devices_id.name',
+    'logo.*',
+  ]
   const response = await directus.items('rooms').readByQuery({
-    fields: '*,translations.*,translations.pages.*,translations.pages.type.*',
+    fields: selectFields.join(','),
     filter: {
       // @ts-ignore
       slug: {
@@ -23,11 +35,26 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       },
     },
     deep: {
+      accepted_countries: { _filter: { countries_id: { _eq: country } } },
       translations: {
-        _filter: { languages_code: { _eq: directusLang[lang] } },
+        _filter: {
+          languages_code: { _eq: directusLang[lang] },
+          pages: { type: { id: { _eq: 1 } } },
+        },
         // @ts-ignore
         pages: {
-          _filter: { type: { name: { _eq: pageType } } },
+          _filter: {
+            type: {
+              name: { _eq: pageType },
+            },
+          },
+          type: {
+            translations: {
+              _filter: {
+                languages_code: { _eq: directusLang[lang] },
+              },
+            },
+          },
         },
       },
     },
