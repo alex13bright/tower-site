@@ -23,6 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     'type.translations.title',
     'translations.*',
     'translations.pages.*',
+    'translations.pages.type.name',
     'translations.pages.type.translations.title',
     'devices.devices_id.name',
     'logo.id',
@@ -54,7 +55,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         },
         // @ts-ignore
         pages: {
-          _filter: { type: { name: { _eq: pageType } } },
           type: {
             translations: {
               _filter: {

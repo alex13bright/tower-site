@@ -11,9 +11,9 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { darken } from '~/core/utils'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
+import { components } from '~/core/schema'
 
 const itemStyles = css`
   padding: 10px;
@@ -120,8 +120,32 @@ type Props = {
   className?: string
 }
 export function NavButtons({ className }: Props): ReactElement {
-  const data: LoaderData = useLoaderData()
-  const { navs } = data.room
+  const data = useLoaderData()
+  const [{ pages }] = data.room.translations
+  const navs = pages.map((page: components['schemas']['ItemsRoomPages']) => {
+    const { title: metaTitle, type } = page
+
+    // if (
+    //   !(
+    //     typeof type === 'object' &&
+    //     type !== null &&
+    //     type.translations &&
+    //     type.name &&
+    //     !type.translations[0] &&
+    //     typeof type.translations[0] !== 'number' &&
+    //     type.translations[0]?.title
+    //   )
+    // ) {
+    //   throw new Error()
+    // }
+
+    // @ts-ignore
+    const { name, translations } = type
+    // @ts-ignore
+    const [{ title }] = translations
+    return { name, title, metaTitle }
+  })
+  console.log(navs)
   const navsLength = navs.length
   return (
     <Main className={className}>

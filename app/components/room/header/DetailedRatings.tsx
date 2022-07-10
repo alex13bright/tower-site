@@ -21,7 +21,6 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 import { darken } from '~/core/utils'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
@@ -104,15 +103,15 @@ type Props = {
 }
 
 export const DetailedRatings = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
+  const data = useLoaderData()
   const {
     reliability,
-    bonusesPromotions,
-    gameSelection,
-    casualPlayers,
-    softwareConvenience,
-    depositsWithdrawals,
-  } = data.room.ratings
+    bonuses_promotions: bonusesPromotions,
+    game_selection: gameSelection,
+    casual_players: casualPlayers,
+    software_convenience: softwareConvenience,
+    deposits_withdrawals: depositsWithdrawals,
+  } = data.room
   const [isVisible, setIsVisible] = useState<boolean>(false)
   return (
     <>
