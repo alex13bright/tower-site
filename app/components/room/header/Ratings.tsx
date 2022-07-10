@@ -3,7 +3,6 @@ import { proximaNovaSb, secondaryDark, sidePaddings, widthAtLeast } from '~/styl
 import { ReactElement } from 'react'
 import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useLoaderData } from '@remix-run/react'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { calcRating } from '~/core/utils'
 
 const StarsBar = styled.div<{
@@ -83,9 +82,23 @@ type Props = {
 }
 
 export const Ratings = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { ratings } = data.room
-  const rating = calcRating(ratings)
+  const data = useLoaderData()
+  const {
+    reliability,
+    bonuses_promotions,
+    game_selection,
+    casual_players,
+    software_convenience,
+    deposits_withdrawals,
+  } = data.room
+  const rating = calcRating({
+    reliability,
+    bonuses_promotions,
+    game_selection,
+    casual_players,
+    software_convenience,
+    deposits_withdrawals,
+  })
   const isBright = rating > 2.5
   return (
     <Main className={className}>

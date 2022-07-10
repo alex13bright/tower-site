@@ -12,7 +12,6 @@ import {
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { widthAtLeast } from '~/styles/styles'
 
 const Main = styled(Table)`
@@ -34,7 +33,7 @@ type Props = {
 }
 
 export const Characteristics = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
+  const data = useLoaderData()
   const { roomType, license, payments, devices, acceptedCountry } = data.room
   return (
     <Main className={className}>

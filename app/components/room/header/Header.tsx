@@ -99,9 +99,9 @@ export const Header = ({ className }: Props): ReactElement => {
           <Logo />
           <Highlights />
         </LogoHighlightsSpan>
-        {/*<Ratings />*/}
-        {/*<Actions />*/}
-        {/*<Characteristics />*/}
+        <Ratings />
+        <Actions />
+        <Characteristics />
         {/*<KeyFacts />*/}
         {/*<DetailedRatings />*/}
         {/*<NavButtons />*/}

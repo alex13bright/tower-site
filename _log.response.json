@@ -7,7 +7,7 @@
       "user_created": "80290d5c-b12f-46d0-b6fd-ac39fdba188e",
       "date_created": "2022-07-08T04:48:51.284Z",
       "user_updated": "80290d5c-b12f-46d0-b6fd-ac39fdba188e",
-      "date_updated": "2022-07-10T14:16:14.583Z",
+      "date_updated": "2022-07-10T14:27:33.188Z",
       "name": "GGpoker",
       "square_logo": "ec828bb0-5e9c-451b-8c3d-38bacc79c4b8",
       "reliability": "5.0",
@@ -114,7 +114,7 @@
       ],
       "accepted_countries": [],
       "network": {
-        "slug": "gg-network-review",
+        "slug": "gg-network",
         "translations": [
           {
             "title": "GGNetwork"
