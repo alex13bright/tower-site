@@ -102,7 +102,7 @@ export const Header = ({ className }: Props): ReactElement => {
         <Ratings />
         <Actions />
         <Characteristics />
-        {/*<KeyFacts />*/}
+        <KeyFacts />
         {/*<DetailedRatings />*/}
         {/*<NavButtons />*/}
       </Main>

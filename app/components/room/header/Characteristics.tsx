@@ -13,6 +13,7 @@ import {
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
+import { components } from '~/core/schema'
 
 const Main = styled(Table)`
   padding-top: 30px;
@@ -34,7 +35,17 @@ type Props = {
 
 export const Characteristics = ({ className }: Props): ReactElement => {
   const data = useLoaderData()
-  const { roomType, license, payments, devices, acceptedCountry } = data.room
+  const { license_country, accepted_countries } = data.room
+  const roomType = data.room.type.translations[0].title
+  const isCountryAccepted = accepted_countries.length !== 0
+  const payments = data.room.payments.map((p: components['schemas']['ItemsRoomsPayments']) => {
+    if (typeof p.payments_id !== 'object') throw new Error()
+    return p.payments_id?.name
+  })
+  const devices = data.room.devices.map((p: components['schemas']['ItemsRoomsDevices']) => {
+    if (typeof p.devices_id !== 'object') throw new Error()
+    return p.devices_id?.name
+  })
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>
@@ -45,7 +56,7 @@ export const Characteristics = ({ className }: Props): ReactElement => {
         </Row>
         <Row>
           <Name>License</Name>
-          <Value>{license}</Value>
+          <Value>{license_country}</Value>
         </Row>
         <Row>
           <Name>Payments</Name>
@@ -62,8 +73,8 @@ export const Characteristics = ({ className }: Props): ReactElement => {
           </Value>
         </Row>
         <Row>
-          <Name>Accepted country</Name>
-          <Value>{acceptedCountry}</Value>
+          <Name>isCountryAccepted</Name>
+          <Value>{isCountryAccepted}</Value>
         </Row>
       </Content>
     </Main>

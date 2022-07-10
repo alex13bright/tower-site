@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
 import { border, sidePaddings, widthAtLeast } from '~/styles/styles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 
 const Item = styled.li`
@@ -55,13 +54,14 @@ type Props = {
 }
 
 export const KeyFacts = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { keyFacts } = data.room
+  const data = useLoaderData()
+  const [{ key_facts }] = data.room.translations
+  const keyFacts = key_facts.split('\n')
   return (
     <Main className={className}>
       <Title>Key facts</Title>
       <List>
-        {keyFacts.map((item, i) => (
+        {keyFacts.map((item: string, i: number) => (
           <Item key={i}>{item}</Item>
         ))}
       </List>
