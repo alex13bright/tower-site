@@ -9,7 +9,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { DynamicLinks } from 'remix-utils'
+import { DynamicLinks, useRouteData } from 'remix-utils'
 import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
@@ -56,9 +56,14 @@ type DocumentProps = {
 }
 const Document = ({ children }: DocumentProps) => {
   const locale = useLocale()
+  // const { documentMeta } = useRouteData('routes/rakeback-deals/$roomPageSlug')
+  // if (typeof documentMeta !== 'object') throw new Error()
+  // const { title, description } = documentMeta
   return (
     <html lang={locale}>
       <head>
+        {/*<title>{title}</title>*/}
+        {/*<meta name="description" content={description} />*/}
         <Meta />
         <DynamicLinks />
         <Links />

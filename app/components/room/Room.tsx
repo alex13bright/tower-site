@@ -42,17 +42,17 @@ const ContentWrapper = styled.div`
 export const Room = (): ReactElement => {
   return (
     <Layout>
-      <BreadCrumbs />
-      <Header />
-      <Content>
-        <Toc />
-        <ContentWrapper>
-          {/*<ReviewTitle1>GG Poker review</ReviewTitle1>*/}
-          {/*<PageMeta />*/}
-          <Review />
-        </ContentWrapper>
-      </Content>
-      <FakeContent height="1000px">FC</FakeContent>
+      {/*<BreadCrumbs />*/}
+      {/*<Header />*/}
+      {/*<Content>*/}
+      {/*  <Toc />*/}
+      {/*  <ContentWrapper>*/}
+      {/*    /!*<ReviewTitle1>GG Poker review</ReviewTitle1>*!/*/}
+      {/*    /!*<PageMeta />*!/*/}
+      {/*    <Review />*/}
+      {/*  </ContentWrapper>*/}
+      {/*</Content>*/}
+      {/*<FakeContent height="1000px">FC</FakeContent>*/}
     </Layout>
   )
 }
