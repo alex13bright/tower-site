@@ -139,7 +139,6 @@ export function NavButtons({ className }: Props): ReactElement {
     const url = `/rakeback-deals/${roomSlug}-${name}`
     return { url, title, isActive }
   })
-  console.log(navs)
   const navsLength = navs.length
   return (
     <Main className={className}>

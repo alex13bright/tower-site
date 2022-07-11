@@ -7,6 +7,7 @@ import { Review } from '~/components/room/review/Review'
 import { contentSidePadding } from '~/components/page/pageStyles'
 import { widthAtLeast } from '~/styles/styles'
 import { FakeContent } from '~/components/styled/FakeContent'
+import { PageMeta } from '~/components/room/review/PageMeta'
 
 const Layout = styled.section`
   display: grid;
@@ -34,15 +35,23 @@ const Content = styled.article`
   }
 `
 
+const ContentWrapper = styled.div`
+  display: grid;
+`
+
 export const Room = (): ReactElement => {
   return (
     <Layout>
       <BreadCrumbs />
       <Header />
-      {/*<Content>*/}
-      {/*  <Toc />*/}
-      {/*  <Review />*/}
-      {/*</Content>*/}
+      <Content>
+        <Toc />
+        <ContentWrapper>
+          {/*<ReviewTitle1>GG Poker review</ReviewTitle1>*/}
+          {/*<PageMeta />*/}
+          <Review />
+        </ContentWrapper>
+      </Content>
       <FakeContent height="1000px">FC</FakeContent>
     </Layout>
   )

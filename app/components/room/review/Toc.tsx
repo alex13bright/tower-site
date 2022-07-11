@@ -1,6 +1,5 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 import {
   accent,
@@ -142,8 +141,8 @@ type Props = {
 }
 
 export function Toc({ className }: Props): ReactElement {
-  const data: LoaderData = useLoaderData()
-  const { toc } = data.room
+  type Toc = { title: string; anchor: string }
+  const toc: Toc[] = []
   const { isToggled: isUnfolded, toggle } = useToggle(false)
   return (
     <Main className={className}>
@@ -151,7 +150,7 @@ export function Toc({ className }: Props): ReactElement {
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {toc.map(({ title, anchor }) => (
+        {toc.map(({ title, anchor }: Toc) => (
           <MarkedItem key={anchor} unmarked={false}>
             <Anchor href={'#' + anchor}>{title}</Anchor>
           </MarkedItem>
