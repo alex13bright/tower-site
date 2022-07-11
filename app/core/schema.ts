@@ -351,6 +351,20 @@ export interface paths {
     /** Update an existing settings item. */
     patch: operations['updateSingleItemsSettings']
   }
+  '/items/system': {
+    /** List the system items. */
+    get: operations['readItemsSystem']
+    /** Create a new system item. */
+    post: operations['createItemsSystem']
+  }
+  '/items/system/{id}': {
+    /** Retrieve a single system item by unique identifier. */
+    get: operations['readSingleItemsSystem']
+    /** Delete an existing system item. */
+    delete: operations['deleteSingleItemsSystem']
+    /** Update an existing system item. */
+    patch: operations['updateSingleItemsSystem']
+  }
   '/activity': {
     /** Returns a list of activity actions. */
     get: operations['getActivities']
@@ -598,7 +612,7 @@ export interface components {
       id?: number
       authors_id?: (string | components['schemas']['ItemsAuthors']) | null
       languages_id?: (string | components['schemas']['ItemsLanguages']) | null
-      title?: string | null
+      title?: string
     }
     ItemsCountries: {
       id?: string
@@ -611,7 +625,7 @@ export interface components {
     }
     ItemsLanguages: {
       code?: string
-      name?: string | null
+      name?: string
     }
     ItemsNetworks: {
       id?: string
@@ -621,19 +635,19 @@ export interface components {
       date_created?: string | null
       user_updated?: (string | components['schemas']['Users']) | null
       date_updated?: string | null
-      name?: string | null
-      logo?: (string | components['schemas']['Files']) | null
-      slug?: string | null
+      name?: string
+      logo?: string | components['schemas']['Files']
+      slug?: string
       main_accordion?: string
-      translations?: (number | components['schemas']['ItemsNetworksTranslations'])[]
       rooms?: (string | components['schemas']['ItemsRooms'])[]
+      translations?: (number | components['schemas']['ItemsNetworksTranslations'])[]
       main_group?: string
     }
     ItemsNetworksTranslations: {
       id?: number
       networks_id?: (string | components['schemas']['ItemsNetworks']) | null
       languages_code?: (string | components['schemas']['ItemsLanguages']) | null
-      title?: string | null
+      title?: string
       main_accordion?: string
       main_group?: string
     }
@@ -652,7 +666,7 @@ export interface components {
       id?: number
       room_page_types_id?: (number | components['schemas']['ItemsRoomPageTypes']) | null
       languages_code?: (string | components['schemas']['ItemsLanguages']) | null
-      title?: string | null
+      title?: string
     }
     ItemsRoomPages: {
       id?: number
@@ -662,15 +676,15 @@ export interface components {
       date_created?: string | null
       user_updated?: (string | components['schemas']['Users']) | null
       date_updated?: string | null
-      content?: string | null
-      author?: (string | components['schemas']['ItemsAuthors']) | null
-      created?: string | null
-      updated?: string | null
+      content?: string
+      author?: string | components['schemas']['ItemsAuthors']
+      created?: string
+      updated?: string
       type?: (number | components['schemas']['ItemsRoomPageTypes']) | null
       rooms_translation?: (number | components['schemas']['ItemsRoomsTranslations']) | null
-      title?: string | null
-      description?: string | null
       h1?: string | null
+      meta_title?: string | null
+      meta_description?: string | null
       main_accordion?: string
       main_group?: string
       meta_group?: string
@@ -695,18 +709,18 @@ export interface components {
       date_created?: string | null
       user_updated?: (string | components['schemas']['Users']) | null
       date_updated?: string | null
-      name?: string | null
-      logo?: (string | components['schemas']['Files']) | null
-      square_logo?: (string | components['schemas']['Files']) | null
-      reliability?: number | null
-      bonuses_promotions?: number | null
-      game_selection?: number | null
-      casual_players?: number | null
-      software_convenience?: number | null
-      deposits_withdrawals?: number | null
+      name?: string
+      logo?: string | components['schemas']['Files']
+      square_logo?: string | components['schemas']['Files']
+      reliability?: number
+      bonuses_promotions?: number
+      game_selection?: number
+      casual_players?: number
+      software_convenience?: number
+      deposits_withdrawals?: number
       license_country?: (string | components['schemas']['ItemsCountries']) | null
-      network?: (string | components['schemas']['ItemsNetworks']) | null
-      type?: (number | components['schemas']['ItemsRoomTypes']) | null
+      network?: string | components['schemas']['ItemsNetworks']
+      type?: number | components['schemas']['ItemsRoomTypes']
       slug?: string
       payments?: (number | components['schemas']['ItemsRoomsPayments'])[]
       additional_group?: string
@@ -737,7 +751,7 @@ export interface components {
       id?: number
       rooms_id?: (string | components['schemas']['ItemsRooms']) | null
       languages_code?: (string | components['schemas']['ItemsLanguages']) | null
-      title?: string | null
+      title?: string
       rakeback?: string | null
       deposit?: string | null
       max_bonus?: string | null
@@ -750,6 +764,7 @@ export interface components {
       main_group?: string
     }
     ItemsSettings: { [key: string]: any }
+    ItemsSystem: { [key: string]: any }
     Activity: {
       /** Unique identifier for the object. */
       id?: number
@@ -4148,6 +4163,140 @@ export interface operations {
       }
     }
   }
+  /** List the system items. */
+  readItemsSystem: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** A limit on the number of objects that are returned. */
+        limit?: components['parameters']['Limit']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+        /** How many items to skip when fetching data. */
+        offset?: components['parameters']['Offset']
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components['parameters']['Sort']
+        /** Select items in collection by given conditions. */
+        filter?: components['parameters']['Filter']
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components['parameters']['Search']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsSystem'][]
+            meta?: components['x-metadata']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+  }
+  /** Create a new system item. */
+  createItemsSystem: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsSystem'][]
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['ItemsSystem'][]
+          | components['schemas']['ItemsSystem']
+      }
+    }
+  }
+  /** Retrieve a single system item by unique identifier. */
+  readSingleItemsSystem: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsSystem']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Delete an existing system item. */
+  deleteSingleItemsSystem: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: unknown
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Update an existing system item. */
+  updateSingleItemsSystem: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsSystem']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ItemsSystem']
+      }
+    }
+  }
   /** Returns a list of activity actions. */
   getActivities: {
     parameters: {
@@ -6486,4 +6635,5 @@ export type Schema = {
   rooms_payments: components['schemas']['ItemsRoomsPayments']
   rooms_translations: components['schemas']['ItemsRoomsTranslations']
   settings: components['schemas']['ItemsSettings']
+  system: components['schemas']['ItemsSystem']
 }
