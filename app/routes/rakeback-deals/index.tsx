@@ -1,9 +1,9 @@
 import { MetaFunction, LoaderFunction, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { Pagination, RoomType } from '~/api/apiTypes'
+import { Pagination, RoomType } from '~/api/fake-data/apiTypes'
 import { DynamicLinksFunction } from 'remix-utils'
 import { getLangFromRequest } from '~/core/utils'
-import { fetchRoomList } from '~/api/fetch'
+import { fetchRoomList } from '~/api/fake-data/fetch'
 
 export const meta: MetaFunction = () => {
   return {

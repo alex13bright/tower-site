@@ -1,4 +1,4 @@
-import { Lang } from '~/api/apiTypes'
+import { Lang } from '~/api/fake-data/apiTypes'
 
 export type Geo = {
   locale: Lang

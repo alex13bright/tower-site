@@ -3,25 +3,14 @@ import { getDirectusClient } from '~/core/directus'
 import { directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { components } from '~/core/schema'
+import { isItem, Ref, Refs } from '~/api/directusLib'
 
-type EmptyField = undefined | null
-type Field = string | number | EmptyField
-type Item<T> = T | Field
-type Items<T> = T[] | Field
-
-const isObject = <T>(item: Item<T>): item is T => typeof item === 'object' && item !== null
-const narrowToObjectRef = <T>(ref: Item<T>): T => {
-  if (typeof ref !== 'object' || ref === null) throw new Error()
-  return ref
-}
-
-type Authors = components['schemas']['ItemsAuthors']
 type Rooms = components['schemas']['ItemsRooms']
 
-const squeeze = <T>(value: Items<T>): T | null =>
+const squeeze = <T>(value: Refs<T>): T | null =>
   Array.isArray(value) && value.length === 1 ? value[0] : null
 
-const squeezeToObject = <T>(value: Items<T>): T => {
+const squeezeToObject = <T>(value: Refs<T>): T => {
   const squeezed = squeeze(value)
   if (squeezed === null || typeof squeezed !== 'object') throw new Error('error')
   return squeezed
@@ -98,12 +87,12 @@ export const getRoomData = async (
   })
   fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
   const { data: roomsRaw } = response
-  if (!isObject(roomsRaw)) throw new Error('error')
+  if (!isItem(roomsRaw)) throw new Error('error')
   const roomRaw = squeezeToObject<components['schemas']['ItemsRooms']>(roomsRaw)
 
   const { translations, ...roomRest } = roomRaw
   const translationRaw =
-    squeezeToObject<Item<components['schemas']['ItemsRoomsTranslations']>>(translations)
+    squeezeToObject<Ref<components['schemas']['ItemsRoomsTranslations']>>(translations)
 
   if (typeof translationRaw !== 'object') throw new Error('error')
 
