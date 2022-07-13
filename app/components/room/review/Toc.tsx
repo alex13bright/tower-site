@@ -101,7 +101,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
     display: block;
     width: 20px;
     height: 20px;
-    background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
+    background: url(/assets/arrow-down-dark.svg) no-repeat 50%;
     ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
 
     @media screen and ${widthAtLeast.lg} {

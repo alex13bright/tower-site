@@ -12,7 +12,7 @@ const Main = styled.div`
 export const StyledButton = styled(ToggleFoldButton)`
   width: 20px;
   height: 20px;
-  background: url(/images/rest/arrow-down.svg) no-repeat 50%;
+  background: url(/assets/arrow-down.svg) no-repeat 50%;
   align-self: end;
 `
 

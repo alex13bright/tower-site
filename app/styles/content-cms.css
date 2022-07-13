@@ -1,17 +1,17 @@
-#content h1,
-#content h2,
-#content h3,
-#content h4,
-#content h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   line-height: 1.2em !important;
 }
 
-#content h1 {
+h1 {
   font-size: 32px !important;
   margin-bottom: 16px !important;
 }
 
-#content h2 {
+h2 {
   font-size: 24px !important;
   margin: 40px 0 20px !important;
 
@@ -19,8 +19,8 @@
   padding-top: 12px !important;
 }
 
-#content h2::before {
-  background: url('/images/rest/h2-line.svg') no-repeat 50% !important;
+h2::before {
+  background: url('/assets/list-item.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
@@ -30,12 +30,12 @@
   height: 2px !important;
 }
 
-#content h3 {
+h3 {
   font-size: 20px !important;
   margin: 40px 0 20px !important;
 }
 
-#content p {
+p {
   color: inherit !important;
   background: inherit !important;
   font-size: 17px !important;
@@ -43,20 +43,20 @@
   margin: 0 0 20px !important;
 }
 
-#content a {
+a {
   color: #008be2 !important;
   text-decoration: underline !important;
   background-color: transparent !important;
 }
 
-#content ul {
+ul {
   list-style-position: outside !important;
   list-style-type: none !important;
   margin: 0 0 40px !important;
   padding: 0 !important;
 }
 
-#content li {
+li {
   color: inherit !important;
   background: inherit !important;
   font-size: 17px !important;
@@ -66,8 +66,8 @@
   position: relative !important;
 }
 
-#content ul > li::before {
-  background: url('/images/rest/list-item.svg') no-repeat 50% !important;
+ul > li::before {
+  background: url('/assets/list-item.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;
   top: 6px !important;

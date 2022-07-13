@@ -11,7 +11,7 @@ const StarsBar = styled.div<{
   isBright: boolean
 }>`
   grid-area: content;
-  background-image: url(/images/rest/ratings-star.svg);
+  background-image: url(/assets/ratings-star.svg);
   background-repeat: repeat-x;
   width: ${({ rating }) => Math.round(rating) * 24}px;
   background-position-y: ${({ isBright }) => (isBright ? 0 : '100%')};

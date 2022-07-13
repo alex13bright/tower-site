@@ -20,8 +20,9 @@ export const H2 = styled.h2`
 
   position: relative;
   padding-top: 12px;
+
   &::before {
-    background: url('/images/rest/h2-line.svg') no-repeat 50%;
+    background: url('/assets/h2-line.svg') no-repeat 50%;
     content: '';
     position: absolute;
     top: 0;
@@ -83,7 +84,7 @@ export const LI = styled.li`
   position: relative;
 
   &::before {
-    background: url('/images/rest/list-item.svg') no-repeat 50%;
+    background: url('/assets/list-item.svg') no-repeat 50%;
     content: '';
     position: absolute;
     top: 6px;

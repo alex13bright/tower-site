@@ -129,7 +129,7 @@ const BonusCode = styled.div`
     height: 12px;
     top: -12px;
     left: 50%;
-    background: url('/images/rest/scissors.svg') no-repeat;
+    background: url('/assets/scissors.svg') no-repeat;
   }
 `
 
@@ -177,7 +177,7 @@ const DetailsToggleButton = styled.button<{ isPressed: boolean }>`
     content: '';
     width: 16px;
     height: 16px;
-    background: url('/images/rest/more-down.svg') no-repeat center;
+    background: url('/assets/more-down.svg') no-repeat center;
     ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
   }
 `
