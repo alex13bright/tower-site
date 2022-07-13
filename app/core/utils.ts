@@ -1,9 +1,7 @@
 import { DefaultTheme, FlattenInterpolation, ThemedStyledProps } from 'styled-components'
-import { RatingsType } from '~/api/fake-data/dataTypes'
 import chroma from 'chroma-js'
 import { Country, Lang } from '~/core/types'
 import { directusUrl } from 'app.config'
-import { Schema } from '~/core/schema'
 
 export const directusLang = {
   en: 'en-US',

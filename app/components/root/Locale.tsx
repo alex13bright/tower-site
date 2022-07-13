@@ -1,5 +1,5 @@
 import React, { ReactElement, createContext, useContext, ReactNode } from 'react'
-import { Lang } from '~/api/fake-data/apiTypes'
+import { Lang } from '~/cms/fake-data/apiTypes'
 
 const Context = createContext<Lang | null>(null)
 

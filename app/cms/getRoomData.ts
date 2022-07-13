@@ -1,15 +1,15 @@
 import fs from 'fs'
-import { getDirectusClient } from '~/core/directus'
+import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
-import { path, pluck } from 'ramda'
+import { RoomType } from '~/cms/apiTypes'
 
 export const getRoomData = async (
   lang: Lang,
   country: Country,
   roomSlug: string,
   pageType: string
-) => {
+): Promise<RoomType> => {
   const directus = await getDirectusClient()
 
   const selectFields = [
@@ -205,6 +205,7 @@ export const getRoomData = async (
   if (typeof bonus !== 'string') throw new Error('bad bonus')
   if (typeof rakeback !== 'string') throw new Error('bad rakeback')
   if (typeof deposit !== 'string') throw new Error('bad deposit')
+  if (typeof maxBonus !== 'string') throw new Error('bad deposit')
   if (typeof rawKeyFacts !== 'string') throw new Error('bad rawKeyFacts')
   if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
 
@@ -217,7 +218,7 @@ export const getRoomData = async (
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
 
-  const pages = rawPages.map((page, i) => {
+  const pages = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
     const {
       content,
@@ -306,5 +307,5 @@ export const getRoomData = async (
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
-  return { room }
+  return room
 }

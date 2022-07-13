@@ -13,7 +13,7 @@ import {
 } from '~/styles/styles'
 import { darken } from '~/core/utils'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
-import { components } from '~/core/schema'
+import { components } from '~/cms/schema'
 
 const itemStyles = css`
   padding: 10px;

@@ -13,7 +13,7 @@ import {
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
-import { components } from '~/core/schema'
+import { components } from '~/cms/schema'
 
 const Main = styled(Table)`
   padding-top: 30px;

@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node'
-import { fetchLocaleList } from '~/api/fake-data/fetch'
+import { fetchLocaleList } from '~/cms/fake-data/fetch'
 import { narrowType } from '~/lib/libTypes'
-import { Lang, langs } from '~/api/fake-data/apiTypes'
+import { Lang, langs } from '~/cms/fake-data/apiTypes'
 
 const wwwRedirect = (url: URL, first: string, rest: string[]) => {
   if (first.toLowerCase() === 'www') redirectToHostname(url, rest)
