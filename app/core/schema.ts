@@ -712,12 +712,12 @@ export interface components {
       name?: string
       logo?: string | components['schemas']['Files']
       square_logo?: string | components['schemas']['Files']
-      reliability?: number
-      bonuses_promotions?: number
-      game_selection?: number
-      casual_players?: number
-      software_convenience?: number
-      deposits_withdrawals?: number
+      reliability?: string
+      bonuses_promotions?: string
+      game_selection?: string
+      casual_players?: string
+      software_convenience?: string
+      deposits_withdrawals?: string
       license_country?: (string | components['schemas']['ItemsCountries']) | null
       network?: string | components['schemas']['ItemsNetworks']
       type?: number | components['schemas']['ItemsRoomTypes']

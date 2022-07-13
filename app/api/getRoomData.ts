@@ -4,8 +4,8 @@ import { directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { components } from '~/core/schema'
 
-type Room = components['schemas']['ItemsRooms']
-type RoomsTranslation = components['schemas']['ItemsRoomsTranslations']
+// type Room = components['schemas']['ItemsRooms']
+// type RoomsTranslation = components['schemas']['ItemsRoomsTranslations']
 
 export const getRoomData = async (
   lang: Lang,
@@ -39,6 +39,9 @@ export const getRoomData = async (
     filter: {
       slug: {
         _eq: roomSlug,
+      },
+      status: {
+        _eq: 'published',
       },
     },
     deep: {
@@ -76,19 +79,100 @@ export const getRoomData = async (
       },
     },
   })
+
   fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
-  const { data: roomsRaw } = response
-  if (!Array.isArray(roomsRaw)) throw new Error('no data')
-  if (roomsRaw.length !== 1) throw new Error('get more than 1 room')
-  const roomRaw = roomsRaw[0]
-  const { translations: translationsRaw, ...roomRawRest } = roomRaw
-  if (!Array.isArray(translationsRaw)) throw new Error('bad translations')
-  if (translationsRaw.length < 1) throw new Error('room is not localized')
-  if (translationsRaw.length > 1) throw new Error('get more than 1 locale')
-  const translationRaw = translationsRaw
-  const translation = {}
-  const roomRest = {}
-  const room = { ...roomRest, ...translation }
+
+  const { data: rawRooms } = response
+  if (!Array.isArray(rawRooms)) throw new Error('no data')
+  if (rawRooms.length !== 1) throw new Error('get more than 1 room')
+  const rawRoom = rawRooms[0]
+  const {
+    translations: rawTranslations,
+    slug,
+    reliability: rawReliability,
+    bonuses_promotions: rawBonusesPromotions,
+    game_selection: rawGameSelection,
+    casual_players: rawCasualPlayers,
+    software_convenience: rawSoftwareConvenience,
+    deposits_withdrawals: rawDepositsWithdrawals,
+    license_country: licenseCountry,
+    devices: rawDevices,
+    accepted_countries: rawAcceptedCountries,
+    network: rawNetwork,
+    payments: rawPayments,
+    type: rawType,
+    logo: rawLogo,
+  } = rawRoom
+
+  if (!Array.isArray(rawTranslations)) throw new Error('bad rawTranslations')
+  if (!Array.isArray(rawDevices)) throw new Error('bad rawDevices')
+  if (!Array.isArray(rawPayments)) throw new Error('bad rawPayments')
+  if (!Array.isArray(rawAcceptedCountries)) throw new Error('bad rawAcceptedCountries')
+
+  if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
+  if (typeof rawType !== 'object') throw new Error('bad rawType')
+  if (typeof rawLogo !== 'object') throw new Error('bad rawLogo')
+
+  if (typeof slug !== 'string') throw new Error('bad slug')
+  if (typeof licenseCountry !== 'string') throw new Error('bad licenseCountry')
+
+  // for decimals must be number but directus return string instead
+  if (typeof rawReliability !== 'string') throw new Error('bad reliability')
+  if (typeof rawBonusesPromotions !== 'string') throw new Error('bad bonusesPromotions')
+  if (typeof rawGameSelection !== 'string') throw new Error('bad gameSelection')
+  if (typeof rawCasualPlayers !== 'string') throw new Error('bad casualPlayers')
+  if (typeof rawSoftwareConvenience !== 'string') throw new Error('bad softwareConvenience')
+  if (typeof rawDepositsWithdrawals !== 'string') throw new Error('bad depositsWithdrawals')
+
+  if (rawTranslations.length < 1) throw new Error('room is not localized')
+  if (rawTranslations.length > 1) throw new Error('get more than 1 locale')
+  const translationRaw = rawTranslations[0]
+  if (typeof translationRaw !== 'object') throw new Error('bad translation')
+
+  const {
+    title,
+    rakeback,
+    deposit,
+    max_bonus: maxBonus,
+    bonus_code: bonusCode,
+    key_facts: rawKeyFacts,
+    bonus,
+    pages: rawPages,
+  } = translationRaw
+
+  if (typeof title !== 'string') throw new Error(`bad title`)
+  if (typeof bonusCode !== 'string') throw new Error('bad bonusCode')
+  if (typeof bonus !== 'string') throw new Error('bad bonus')
+  if (typeof rakeback !== 'string') throw new Error('bad rakeback')
+  if (typeof deposit !== 'string') throw new Error('bad deposit')
+  if (typeof rawKeyFacts !== 'string') throw new Error('bad rawKeyFacts')
+  if (rawPages === undefined) throw new Error('bad rawPages')
+
+  const keyFacts = rawKeyFacts.split('\n')
+
+  const reliability = parseFloat(rawReliability)
+  const bonusesPromotions = parseFloat(rawBonusesPromotions)
+  const gameSelection = parseFloat(rawGameSelection)
+  const casualPlayers = parseFloat(rawGameSelection)
+  const softwareConvenience = parseFloat(rawSoftwareConvenience)
+  const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
+
+  const room = {
+    slug,
+    title,
+    keyFacts,
+    bonusCode,
+    bonus: { bonus, rakeback, deposit, maxBonus },
+    ratings: {
+      reliability,
+      bonusesPromotions,
+      gameSelection,
+      casualPlayers,
+      softwareConvenience,
+      depositsWithdrawals,
+    },
+  }
+
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   // if (!Array.isArray(roomRaw.translations) || roomRaw.translations.length !== 1)
