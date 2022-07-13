@@ -3,18 +3,9 @@ import { getDirectusClient } from '~/core/directus'
 import { directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { components } from '~/core/schema'
-import { isItem, Ref, Refs } from '~/api/directusLib'
 
-type Rooms = components['schemas']['ItemsRooms']
-
-const squeeze = <T>(value: Refs<T>): T | null =>
-  Array.isArray(value) && value.length === 1 ? value[0] : null
-
-const squeezeToObject = <T>(value: Refs<T>): T => {
-  const squeezed = squeeze(value)
-  if (squeezed === null || typeof squeezed !== 'object') throw new Error('error')
-  return squeezed
-}
+type Room = components['schemas']['ItemsRooms']
+type RoomsTranslation = components['schemas']['ItemsRoomsTranslations']
 
 export const getRoomData = async (
   lang: Lang,
@@ -43,7 +34,7 @@ export const getRoomData = async (
     'logo.id',
     'logo.title',
   ]
-  const response = await directus.items<'rooms', Rooms>('rooms').readByQuery({
+  const response = await directus.items('rooms').readByQuery({
     fields: selectFields.join(','),
     filter: {
       slug: {
@@ -87,18 +78,19 @@ export const getRoomData = async (
   })
   fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
   const { data: roomsRaw } = response
-  if (!isItem(roomsRaw)) throw new Error('error')
-  const roomRaw = squeezeToObject<components['schemas']['ItemsRooms']>(roomsRaw)
-
-  const { translations, ...roomRest } = roomRaw
-  const translationRaw =
-    squeezeToObject<Ref<components['schemas']['ItemsRoomsTranslations']>>(translations)
-
-  if (typeof translationRaw !== 'object') throw new Error('error')
-
-  // const {} = translationRaw
+  if (!Array.isArray(roomsRaw)) throw new Error('no data')
+  if (roomsRaw.length !== 1) throw new Error('get more than 1 room')
+  const roomRaw = roomsRaw[0]
+  const { translations: translationsRaw, ...roomRawRest } = roomRaw
+  if (!Array.isArray(translationsRaw)) throw new Error('bad translations')
+  if (translationsRaw.length < 1) throw new Error('room is not localized')
+  if (translationsRaw.length > 1) throw new Error('get more than 1 locale')
+  const translationRaw = translationsRaw
   const translation = {}
+  const roomRest = {}
   const room = { ...roomRest, ...translation }
+  fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
+
   // if (!Array.isArray(roomRaw.translations) || roomRaw.translations.length !== 1)
   //   throw new Error(err)
   // if (
