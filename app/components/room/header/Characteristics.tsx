@@ -28,12 +28,13 @@ const Main = styled(Table)`
     padding-right: ${sidePaddingSize.lg};
   }
 `
+const IsCountryAccepted = styled.tr``
 
-const Accepted = styled.span`
-  color: red;
-`
-const NotAccepted = styled.span`
+const Accepted = styled.td`
   color: #29cdb5;
+`
+const NotAccepted = styled.td`
+  color: #ee3c4b;
 `
 
 type Props = {
@@ -70,13 +71,13 @@ export const Characteristics = ({ className }: Props): ReactElement => {
             <IconList list={devices} urlFn={(name) => `/images/devices/${name}.svg`} />
           </Value>
         </Row>
-        <div>
+        <IsCountryAccepted>
           {isCountryAccepted ? (
             <Accepted>Woo-hoo! Players from {country} are accepted!</Accepted>
           ) : (
             <NotAccepted>Players from {country} are not accepted</NotAccepted>
           )}
-        </div>
+        </IsCountryAccepted>
       </Content>
     </Main>
   )

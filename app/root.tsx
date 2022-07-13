@@ -60,7 +60,7 @@ const Document = ({ children }: DocumentProps) => {
   // if (typeof documentMeta !== 'object') throw new Error()
   // const { title, description } = documentMeta
   return (
-    <html lang={locale}>
+    <html lang={locale.lang}>
       <head>
         {/*<title>{title}</title>*/}
         {/*<meta name="description" content={description} />*/}

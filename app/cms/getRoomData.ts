@@ -2,7 +2,7 @@ import fs from 'fs'
 import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
-import { RoomType } from '~/cms/apiTypes'
+import { RoomType } from '~/core/types'
 
 export const getRoomData = async (
   lang: Lang,
