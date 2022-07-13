@@ -119,5 +119,3 @@ type ImageProps = {
 export const Img = ({ children: name }: ImageProps): ReactElement => {
   return <div>{name}</div>
 }
-// ![GGpoker-giunness-record.jpg](http://localhost:1337/uploads/G_Gpoker_giunness_record_ae7dc3d206.jpg)
-// const [title, url] = children.slice(2, -1).split('](')

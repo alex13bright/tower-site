@@ -46,7 +46,7 @@ export const Room = (): ReactElement => {
       <Header />
       <Content>
         <Toc />
-        <ContentWrapper>
+        <ContentWrapper id="content">
           {/*<ReviewTitle1>GG Poker review</ReviewTitle1>*/}
           {/*<PageMeta />*/}
           <Review />
