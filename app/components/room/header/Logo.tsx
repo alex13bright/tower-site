@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
-import { cmsPublic } from '~/core/utils'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Image = styled.img`
   grid-area: logo;
@@ -20,7 +20,7 @@ type Props = {
 }
 
 export const Logo = ({ className }: Props): ReactElement => {
-  const data = useLoaderData()
+  const data = useLoaderData<LoaderData>()
   const { url, alt } = data.room.logo
   return <Image className={className} src={url} alt={alt} title={alt} />
 }

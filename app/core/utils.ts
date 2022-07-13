@@ -52,9 +52,9 @@ export const getRequestGeo = () => {}
 // export type I18n<Trans> = { en: Trans; ru: Trans; es: Trans }
 // export const useLocalized = <Trans>(i18n: I18n<Trans>): Trans => i18n[useLocale()]
 
-export const calcRating = (ratings: Record<string, string>): number => {
+export const calcRating = (ratings: Record<string, number>): number => {
   const values = Object.values(ratings)
-  return values.reduce((sum, rating) => sum + parseFloat(rating), 0) / values.length
+  return values.reduce((sum, rating) => sum + rating, 0) / values.length
 }
 
 export const darken = (color: string, intensity: number): string =>

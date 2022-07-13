@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
 import { components } from '~/cms/schema'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Main = styled(Table)`
   padding-top: 30px;
@@ -34,18 +35,8 @@ type Props = {
 }
 
 export const Characteristics = ({ className }: Props): ReactElement => {
-  const data = useLoaderData()
-  const { license_country, accepted_countries } = data.room
-  const roomType = data.room.type.translations[0].title
-  const isCountryAccepted = accepted_countries.length !== 0
-  const payments = data.room.payments.map((p: components['schemas']['ItemsRoomsPayments']) => {
-    if (typeof p.payments_id !== 'object') throw new Error()
-    return p.payments_id?.name
-  })
-  const devices = data.room.devices.map((p: components['schemas']['ItemsRoomsDevices']) => {
-    if (typeof p.devices_id !== 'object') throw new Error()
-    return p.devices_id?.name
-  })
+  const data = useLoaderData<LoaderData>()
+  const { roomType, licenseCountry, payments, devices, isCountryAccepted } = data.room
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>
@@ -56,20 +47,20 @@ export const Characteristics = ({ className }: Props): ReactElement => {
         </Row>
         <Row>
           <Name>License</Name>
-          <Value>{license_country}</Value>
+          <Value>{licenseCountry}</Value>
         </Row>
         <Row>
           <Name>Payments</Name>
           <Value>
             <HeaderValuesSpoiler height={20}>
-              <IconList list={payments} urlFn={(i) => `/images/payments/${i}-white.svg`} />
+              <IconList list={payments} urlFn={(name) => `/images/payments/${name}-white.svg`} />
             </HeaderValuesSpoiler>
           </Value>
         </Row>
         <Row>
           <Name>Devices</Name>
           <Value>
-            <IconList list={devices} urlFn={(i) => `/images/devices/${i}.svg`} />
+            <IconList list={devices} urlFn={(name) => `/images/devices/${name}.svg`} />
           </Value>
         </Row>
         <Row>

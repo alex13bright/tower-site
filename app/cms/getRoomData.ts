@@ -126,7 +126,7 @@ export const getRoomData = async (
   }
 
   if (!Array.isArray(rawAcceptedCountries)) throw new Error('bad rawAcceptedCountries')
-  const isAccepted = rawAcceptedCountries.length === 0
+  const isCountryAccepted = rawAcceptedCountries.length === 0
 
   if (
     typeof rawType !== 'object' ||
@@ -223,8 +223,8 @@ export const getRoomData = async (
     const {
       content,
       h1,
-      meta_title: title,
-      meta_description: description,
+      meta_title: metaTitle,
+      meta_description: metaDescription,
       author: rawAuthor,
       created: rawCreated,
       updated: rawUpdated,
@@ -233,8 +233,8 @@ export const getRoomData = async (
 
     if (typeof content !== 'string') throw new Error('bad content')
     if (typeof h1 !== 'string') throw new Error('bad h1')
-    if (typeof title !== 'string') throw new Error('bad title')
-    if (typeof description !== 'string') throw new Error('bad description')
+    if (typeof metaTitle !== 'string') throw new Error('bad title')
+    if (typeof metaDescription !== 'string') throw new Error('bad description')
     if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
     if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
     if (
@@ -244,6 +244,11 @@ export const getRoomData = async (
       typeof rawAuthor.translations[0].title !== 'string'
     )
       throw new Error('bad rawAuthor')
+
+    const author = rawAuthor.translations[0].title
+    const created = new Date(rawCreated).toLocaleDateString()
+    const updated = new Date(rawCreated).toLocaleDateString()
+
     if (
       typeof rawType !== 'object' ||
       rawType === null ||
@@ -253,12 +258,7 @@ export const getRoomData = async (
       typeof rawType.translations[0].title !== 'string'
     )
       throw new Error('bad rawAuthor')
-
-    const author = rawAuthor.translations[0].title
-    const created = new Date(rawCreated).toLocaleDateString()
-    const updated = new Date(rawCreated).toLocaleDateString()
-
-    const roomType = rawType.translations[0].title
+    const title = rawType.translations[0].title
     const type = rawType.name
     const url = `/rakeback-deals/${roomSlug}-${type}`
 
@@ -266,9 +266,10 @@ export const getRoomData = async (
 
     return {
       type,
+      title,
       url,
       isActive: type === pageType,
-      pageMeta: { title, description },
+      pageMeta: { title: metaTitle, description: metaDescription },
       contentMeta: { author, created, updated },
       roomType,
       h1,
@@ -284,8 +285,9 @@ export const getRoomData = async (
   const room = {
     slug,
     title,
-    isAccepted,
+    isCountryAccepted,
     roomType,
+    licenseCountry,
     network,
     logo,
     keyFacts,

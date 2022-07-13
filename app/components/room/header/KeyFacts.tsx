@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
 import { border, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Item = styled.li`
   display: flex;
@@ -54,15 +55,14 @@ type Props = {
 }
 
 export const KeyFacts = ({ className }: Props): ReactElement => {
-  const data = useLoaderData()
-  const [{ key_facts }] = data.room.translations
-  const keyFacts = key_facts.split('\n')
+  const data = useLoaderData<LoaderData>()
+  const { keyFacts } = data.room
   return (
     <Main className={className}>
       <Title>Key facts</Title>
       <List>
-        {keyFacts.map((item: string, i: number) => (
-          <Item key={i}>{item}</Item>
+        {keyFacts.map((fact: string, i: number) => (
+          <Item key={i}>{fact}</Item>
         ))}
       </List>
     </Main>

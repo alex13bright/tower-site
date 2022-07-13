@@ -14,6 +14,7 @@ import {
 import { darken } from '~/core/utils'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { components } from '~/cms/schema'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const itemStyles = css`
   padding: 10px;
@@ -120,45 +121,22 @@ type Props = {
   className?: string
 }
 export function NavButtons({ className }: Props): ReactElement {
-  const data = useLoaderData()
-  const { roomSlug, pageType } = data
-  const [{ pages }] = data.room.translations
-  const navs = pages.map((page: components['schemas']['ItemsRoomPages']) => {
-    const { type } = page
-    if (
-      typeof type !== 'object' ||
-      typeof type?.translations !== 'object' ||
-      typeof type.translations[0] === 'number' ||
-      !type.translations[0]?.title
-    ) {
-      throw new Error()
-    }
-    const { name } = type
-    const [{ title }] = type.translations
-    const isActive = name === pageType
-    const url = `/rakeback-deals/${roomSlug}-${name}`
-    return { url, title, isActive }
-  })
-  const navsLength = navs.length
+  const data = useLoaderData<LoaderData>()
+  const { pages } = data.room
   return (
     <Main className={className}>
-      <List length={navsLength}>
-        {navs.map(
-          (
-            { url, title, isActive = false }: { url: string; title: string; isActive: boolean },
-            i: number
-          ) => (
-            <Item key={i}>
-              {isActive ? (
-                <ActiveLink>{title}</ActiveLink>
-              ) : (
-                <StyledLink to={url} $isFirst={i === 0} $isLast={navsLength === i + 1}>
-                  {title}
-                </StyledLink>
-              )}
-            </Item>
-          )
-        )}
+      <List length={pages.length}>
+        {pages.map(({ url, title, isActive }, i: number) => (
+          <Item key={i}>
+            {isActive ? (
+              <ActiveLink>{title}</ActiveLink>
+            ) : (
+              <StyledLink to={url} $isFirst={i === 0} $isLast={pages.length === i + 1}>
+                {title}
+              </StyledLink>
+            )}
+          </Item>
+        ))}
       </List>
     </Main>
   )

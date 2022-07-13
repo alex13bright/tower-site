@@ -11,6 +11,7 @@ export type ContentMetaType = {
 
 export type PageType = {
   type: string
+  title: string
   url: string
   isActive: boolean
   pageMeta: PageMetaType
@@ -55,8 +56,9 @@ export type NetworkType = {
 export type RoomType = {
   slug: string
   title: string
-  isAccepted: boolean
+  isCountryAccepted: boolean
   roomType: string
+  licenseCountry: string
   network: NetworkType
   logo: ImageType
   keyFacts: KeyFactsType

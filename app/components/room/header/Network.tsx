@@ -3,6 +3,7 @@ import { border, secondaryDark, widthAtLeast } from '~/styles/styles'
 import { ReactElement } from 'react'
 import { useLoaderData } from '@remix-run/react'
 import { cmsPublic } from '~/core/utils'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Image = styled.img``
 
@@ -34,7 +35,7 @@ type Props = {
 }
 
 export const Network = ({ className }: Props): ReactElement => {
-  const data = useLoaderData()
+  const data = useLoaderData<LoaderData>()
   const { url, title, logo } = data.room.network
   return (
     <Main className={className} href={url}>
