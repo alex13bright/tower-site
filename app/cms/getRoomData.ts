@@ -281,6 +281,7 @@ export const getRoomData = async (
     return isActive ? i : activeIndex
   }, null)
   if (activePage === null) throw new Error('bad pageType')
+  pages[activePage].content = `<div id="cms">${pages[activePage].content}</div>`
 
   const room = {
     slug,

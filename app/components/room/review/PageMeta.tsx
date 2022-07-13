@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { proximaNovaSb, secondary, widthAtLeast } from '~/styles/styles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Title = styled.div.attrs({})`
     grid-area: title;
@@ -58,21 +58,22 @@ type Props = {
   className?: string
 }
 export const PageMeta = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { pageMeta } = data.room
+  const data = useLoaderData<LoaderData>()
+  const { pages, activePage } = data.room
+  const { author, created, updated } = pages[activePage].contentMeta
   return (
     <Main className={className}>
       <PageMetaItem kind="author">
         <Title>Author</Title>
-        <Value>{pageMeta.author}</Value>
+        <Value>{author}</Value>
       </PageMetaItem>
       <PageMetaItem kind="created">
         <Title>Created</Title>
-        <Value>{pageMeta.created}</Value>
+        <Value>{created}</Value>
       </PageMetaItem>
       <PageMetaItem kind="updated">
         <Title>Updated</Title>
-        <Value>{pageMeta.updated}</Value>
+        <Value>{updated}</Value>
       </PageMetaItem>
     </Main>
   )

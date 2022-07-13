@@ -1,17 +1,17 @@
-#tinymce h1,
-#tinymce h2,
-#tinymce h3,
-#tinymce h4,
-#tinymce h5 {
+#cms h1,
+#cms h2,
+#cms h3,
+#cms h4,
+#cms h5 {
   line-height: 1.2em !important;
 }
 
-#tinymce h1 {
+#cms h1 {
   font-size: 32px !important;
   margin-bottom: 16px !important;
 }
 
-#tinymce h2 {
+#cms h2 {
   font-size: 24px !important;
   margin: 40px 0 20px !important;
 
@@ -19,8 +19,8 @@
   padding-top: 12px !important;
 }
 
-#tinymce h2::before {
-  background: url('/assets/h2-line.svg') no-repeat 50% !important;
+#cms h2::before {
+  background: url('/assets/list-item.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
@@ -30,12 +30,12 @@
   height: 2px !important;
 }
 
-#tinymce h3 {
+#cms h3 {
   font-size: 20px !important;
   margin: 40px 0 20px !important;
 }
 
-#tinymce p {
+#cms p {
   color: inherit !important;
   background: inherit !important;
   font-size: 17px !important;
@@ -43,20 +43,20 @@
   margin: 0 0 20px !important;
 }
 
-#tinymce a {
+#cms a {
   color: #008be2 !important;
   text-decoration: underline !important;
   background-color: transparent !important;
 }
 
-#tinymce ul {
+#cms ul {
   list-style-position: outside !important;
   list-style-type: none !important;
   margin: 0 0 40px !important;
   padding: 0 !important;
 }
 
-#tinymce li {
+#cms li {
   color: inherit !important;
   background: inherit !important;
   font-size: 17px !important;
@@ -66,7 +66,7 @@
   position: relative !important;
 }
 
-#tinymce ul > li::before {
+#cms ul > li::before {
   background: url('/assets/list-item.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;

@@ -4,7 +4,7 @@ import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import { getRoomData } from '~/cms/getRoomData'
 import { RoomType } from '~/cms/apiTypes'
 
-import contentStyles from '~/styles/content-cms.css'
+import contentStyles from '~/styles/content-site.css'
 
 export const links: LinksFunction = () => {
   return [
