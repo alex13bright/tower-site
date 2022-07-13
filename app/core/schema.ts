@@ -611,7 +611,7 @@ export interface components {
     ItemsAuthorsTranslations: {
       id?: number
       authors_id?: (string | components['schemas']['ItemsAuthors']) | null
-      languages_id?: (string | components['schemas']['ItemsLanguages']) | null
+      languages_code?: (string | components['schemas']['ItemsLanguages']) | null
       title?: string
     }
     ItemsCountries: {
@@ -682,9 +682,9 @@ export interface components {
       updated?: string
       type?: (number | components['schemas']['ItemsRoomPageTypes']) | null
       rooms_translation?: (number | components['schemas']['ItemsRoomsTranslations']) | null
-      h1?: string | null
-      meta_title?: string | null
-      meta_description?: string | null
+      h1?: string
+      meta_title?: string
+      meta_description?: string
       main_accordion?: string
       main_group?: string
       meta_group?: string
@@ -729,8 +729,8 @@ export interface components {
       main_gpoup?: string
       translations?: (number | components['schemas']['ItemsRoomsTranslations'])[]
       logos_group?: string
-      main_accordion?: string
       accepted_countries?: (number | components['schemas']['ItemsRoomsCountries'])[]
+      main_accordion?: string
     }
     ItemsRoomsCountries: {
       id?: number

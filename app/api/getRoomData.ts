@@ -2,10 +2,6 @@ import fs from 'fs'
 import { getDirectusClient } from '~/core/directus'
 import { directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
-import { components } from '~/core/schema'
-
-// type Room = components['schemas']['ItemsRooms']
-// type RoomsTranslation = components['schemas']['ItemsRoomsTranslations']
 
 export const getRoomData = async (
   lang: Lang,
@@ -146,7 +142,7 @@ export const getRoomData = async (
   if (typeof rakeback !== 'string') throw new Error('bad rakeback')
   if (typeof deposit !== 'string') throw new Error('bad deposit')
   if (typeof rawKeyFacts !== 'string') throw new Error('bad rawKeyFacts')
-  if (rawPages === undefined) throw new Error('bad rawPages')
+  if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
 
   const keyFacts = rawKeyFacts.split('\n')
 
@@ -156,6 +152,69 @@ export const getRoomData = async (
   const casualPlayers = parseFloat(rawGameSelection)
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
+
+  const pages = rawPages.map((page, i) => {
+    if (typeof page !== 'object') throw new Error('bad page')
+    const {
+      content,
+      h1,
+      meta_title: title,
+      meta_description: description,
+      author: rawAuthor,
+      created: rawCreated,
+      updated: rawUpdated,
+      type: rawType,
+    } = page
+
+    if (typeof content !== 'string') throw new Error('bad content')
+    if (typeof h1 !== 'string') throw new Error('bad h1')
+    if (typeof title !== 'string') throw new Error('bad title')
+    if (typeof description !== 'string') throw new Error('bad description')
+    if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
+    if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
+    if (
+      typeof rawAuthor !== 'object' ||
+      !Array.isArray(rawAuthor.translations) ||
+      typeof rawAuthor.translations[0] !== 'object' ||
+      typeof rawAuthor.translations[0].title !== 'string'
+    )
+      throw new Error('bad rawAuthor')
+    if (
+      typeof rawType !== 'object' ||
+      rawType === null ||
+      typeof rawType.name !== 'string' ||
+      !Array.isArray(rawType.translations) ||
+      typeof rawType.translations[0] !== 'object' ||
+      typeof rawType.translations[0].title !== 'string'
+    )
+      throw new Error('bad rawAuthor')
+
+    const author = rawAuthor.translations[0].title
+    const created = new Date(rawCreated).toLocaleDateString()
+    const updated = new Date(rawCreated).toLocaleDateString()
+
+    const roomType = rawType.translations[0].title
+    const type = rawType.name
+    const url = `/rakeback-deals/${roomSlug}-${type}`
+
+    if (typeof rawType !== 'object') throw new Error('bad rawType')
+
+    return {
+      type,
+      url,
+      isActive: type === pageType,
+      pageMeta: { title, description },
+      contentMeta: { author, created, updated },
+      roomType,
+      h1,
+      content,
+    }
+  })
+
+  const activePage = pages.reduce<number | null>((activeIndex, { isActive }, i) => {
+    return isActive ? i : activeIndex
+  }, null)
+  if (activePage === null) throw new Error('bad pageType')
 
   const room = {
     slug,
@@ -171,6 +230,8 @@ export const getRoomData = async (
       softwareConvenience,
       depositsWithdrawals,
     },
+    pages,
+    activePage,
   }
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
