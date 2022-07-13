@@ -8,12 +8,7 @@ import contentStyles from '~/styles/content-site.css'
 import { Country } from '~/core/types'
 
 export const links: LinksFunction = () => {
-  return [
-    {
-      rel: 'stylesheet',
-      href: contentStyles,
-    },
-  ]
+  return [{ rel: 'stylesheet', href: contentStyles }]
 }
 
 export type LoaderData = {

@@ -10,6 +10,7 @@ export const getRoomData = async (
   roomSlug: string,
   pageType: string
 ): Promise<RoomType> => {
+  console.log(country)
   const directus = await getDirectusClient()
 
   const selectFields = [
@@ -59,23 +60,17 @@ export const getRoomData = async (
         },
         // @ts-ignore
         pages: {
-          author: {
-            ...translationsFilter,
-          },
-          type: {
-            ...translationsFilter,
-          },
+          author: translationsFilter,
+          type: translationsFilter,
         },
       },
       accepted_countries: { _filter: { countries_id: { _eq: country } } },
       // @ts-ignore
-      network: {
-        ...translationsFilter,
-      },
+      network: translationsFilter,
     },
   })
 
-  fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
+  // fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
 
   const { data: rawRooms } = response
   if (!Array.isArray(rawRooms)) throw new Error('no data')
@@ -126,7 +121,7 @@ export const getRoomData = async (
   }
 
   if (!Array.isArray(rawAcceptedCountries)) throw new Error('bad rawAcceptedCountries')
-  const isCountryAccepted = rawAcceptedCountries.length === 0
+  const isCountryAccepted = rawAcceptedCountries.length !== 0
 
   if (
     typeof rawType !== 'object' ||
@@ -308,7 +303,7 @@ export const getRoomData = async (
     activePage,
   }
 
-  fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
+  // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   return room
 }
