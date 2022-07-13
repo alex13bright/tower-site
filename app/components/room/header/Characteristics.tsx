@@ -13,7 +13,6 @@ import {
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
-import { components } from '~/cms/schema'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Main = styled(Table)`
@@ -30,13 +29,21 @@ const Main = styled(Table)`
   }
 `
 
+const Accepted = styled.span`
+  color: red;
+`
+const NotAccepted = styled.span`
+  color: #29cdb5;
+`
+
 type Props = {
   className?: string
 }
 
 export const Characteristics = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { roomType, licenseCountry, payments, devices, isCountryAccepted } = data.room
+  const { country, room } = data
+  const { roomType, licenseCountry, payments, devices, isCountryAccepted } = room
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>
@@ -63,10 +70,13 @@ export const Characteristics = ({ className }: Props): ReactElement => {
             <IconList list={devices} urlFn={(name) => `/images/devices/${name}.svg`} />
           </Value>
         </Row>
-        <Row>
-          <Name>isCountryAccepted</Name>
-          <Value>{isCountryAccepted}</Value>
-        </Row>
+        <div>
+          {isCountryAccepted ? (
+            <Accepted>Woo-hoo! Players from {country} are accepted!</Accepted>
+          ) : (
+            <NotAccepted>Players from {country} are not accepted</NotAccepted>
+          )}
+        </div>
       </Content>
     </Main>
   )

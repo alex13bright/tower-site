@@ -5,6 +5,7 @@ import { getRoomData } from '~/cms/getRoomData'
 import { RoomType } from '~/cms/apiTypes'
 
 import contentStyles from '~/styles/content-site.css'
+import { Country } from '~/core/types'
 
 export const links: LinksFunction = () => {
   return [
@@ -17,6 +18,7 @@ export const links: LinksFunction = () => {
 
 export type LoaderData = {
   room: RoomType
+  country: Country
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -27,7 +29,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const country = await getCountryFromRequest(request)
 
   const room = await getRoomData(lang, country, roomSlug, pageType)
-  const data = { room }
+  const data = { country, room }
   return json<LoaderData>(data)
 }
 
