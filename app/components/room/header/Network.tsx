@@ -35,12 +35,10 @@ type Props = {
 
 export const Network = ({ className }: Props): ReactElement => {
   const data = useLoaderData()
-  const { slug, translations, logo } = data.room.network
-  const [{ title }] = translations
-  const { id, title: alt } = logo
+  const { url, title, logo } = data.room.network
   return (
-    <Main className={className} href={`/network/${slug}`}>
-      <Image alt={alt} src={cmsPublic + id} width="20px" height="20px" />
+    <Main className={className} href={url}>
+      <Image src={logo.url} alt={logo.alt} title={logo.alt} width="20px" height="20px" />
       <Title>{title}</Title>
     </Main>
   )

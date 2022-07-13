@@ -1,7 +1,8 @@
 import fs from 'fs'
 import { getDirectusClient } from '~/core/directus'
-import { directusLang } from '~/core/utils'
+import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
+import { path, pluck } from 'ramda'
 
 export const getRoomData = async (
   lang: Lang,
@@ -30,6 +31,14 @@ export const getRoomData = async (
     'logo.id',
     'logo.title',
   ]
+  const langFilter = {
+    languages_code: { _eq: directusLang[lang] },
+  }
+  const translationsFilter = {
+    translations: {
+      _filter: langFilter,
+    },
+  }
   const response = await directus.items('rooms').readByQuery({
     fields: selectFields.join(','),
     filter: {
@@ -41,37 +50,27 @@ export const getRoomData = async (
       },
     },
     deep: {
+      // @ts-ignore
+      type: translationsFilter,
       translations: {
         _filter: {
-          languages_code: { _eq: directusLang[lang] },
+          ...langFilter,
           pages: { type: { name: { _eq: pageType } } },
         },
         // @ts-ignore
         pages: {
           author: {
-            translations: {
-              _filter: {
-                languages_code: { _eq: directusLang[lang] },
-              },
-            },
+            ...translationsFilter,
           },
           type: {
-            translations: {
-              _filter: {
-                languages_code: { _eq: directusLang[lang] },
-              },
-            },
+            ...translationsFilter,
           },
         },
       },
       accepted_countries: { _filter: { countries_id: { _eq: country } } },
+      // @ts-ignore
       network: {
-        // @ts-ignore
-        translations: {
-          _filter: {
-            languages_code: { _eq: directusLang[lang] },
-          },
-        },
+        ...translationsFilter,
       },
     },
   })
@@ -83,8 +82,9 @@ export const getRoomData = async (
   if (rawRooms.length !== 1) throw new Error('get more than 1 room')
   const rawRoom = rawRooms[0]
   const {
-    translations: rawTranslations,
     slug,
+    network: rawNetwork,
+    translations: rawTranslations,
     reliability: rawReliability,
     bonuses_promotions: rawBonusesPromotions,
     game_selection: rawGameSelection,
@@ -92,22 +92,62 @@ export const getRoomData = async (
     software_convenience: rawSoftwareConvenience,
     deposits_withdrawals: rawDepositsWithdrawals,
     license_country: licenseCountry,
-    devices: rawDevices,
     accepted_countries: rawAcceptedCountries,
-    network: rawNetwork,
+    devices: rawDevices,
     payments: rawPayments,
     type: rawType,
     logo: rawLogo,
   } = rawRoom
 
-  if (!Array.isArray(rawTranslations)) throw new Error('bad rawTranslations')
-  if (!Array.isArray(rawDevices)) throw new Error('bad rawDevices')
-  if (!Array.isArray(rawPayments)) throw new Error('bad rawPayments')
-  if (!Array.isArray(rawAcceptedCountries)) throw new Error('bad rawAcceptedCountries')
-
   if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
-  if (typeof rawType !== 'object') throw new Error('bad rawType')
-  if (typeof rawLogo !== 'object') throw new Error('bad rawLogo')
+  const {
+    slug: networkSlug,
+    logo: rawNetworkLogo,
+    translations: rawNetworkTranslations,
+  } = rawNetwork
+  if (
+    typeof networkSlug !== 'string' ||
+    typeof rawNetworkLogo !== 'object' ||
+    !Array.isArray(rawNetworkTranslations) ||
+    rawNetworkTranslations.length !== 1 ||
+    typeof rawNetworkTranslations[0] !== 'object' ||
+    typeof rawNetworkTranslations[0].title !== 'string' ||
+    typeof rawNetworkLogo.id !== 'string' ||
+    typeof rawNetworkLogo.title !== 'string'
+  )
+    throw new Error('bad rawNetwork')
+  const network = {
+    url: `/online-poker-networks/${networkSlug}-review`,
+    title: rawNetworkTranslations[0].title,
+    logo: {
+      url: `${cmsPublic}/${rawNetworkLogo.id}`,
+      alt: rawNetworkLogo.title,
+    },
+  }
+
+  if (!Array.isArray(rawAcceptedCountries)) throw new Error('bad rawAcceptedCountries')
+  const isAccepted = rawAcceptedCountries.length === 0
+
+  if (
+    typeof rawType !== 'object' ||
+    !Array.isArray(rawType.translations) ||
+    rawType.translations.length !== 1 ||
+    typeof rawType.translations[0] !== 'object' ||
+    typeof rawType.translations[0].title !== 'string'
+  )
+    throw new Error('bad rawType')
+  const roomType = rawType.translations[0].title
+
+  if (
+    typeof rawLogo !== 'object' ||
+    typeof rawLogo.id !== 'string' ||
+    typeof rawLogo.title !== 'string'
+  )
+    throw new Error('bad rawLogo')
+  const logo = {
+    url: `${cmsPublic}/${rawLogo.id}`,
+    alt: rawLogo.title,
+  }
 
   if (typeof slug !== 'string') throw new Error('bad slug')
   if (typeof licenseCountry !== 'string') throw new Error('bad licenseCountry')
@@ -120,11 +160,35 @@ export const getRoomData = async (
   if (typeof rawSoftwareConvenience !== 'string') throw new Error('bad softwareConvenience')
   if (typeof rawDepositsWithdrawals !== 'string') throw new Error('bad depositsWithdrawals')
 
+  if (!Array.isArray(rawDevices)) throw new Error('bad rawDevices')
+  const devices = rawDevices.map((rawDevice) => {
+    if (
+      typeof rawDevice !== 'object' ||
+      typeof rawDevice.devices_id !== 'object' ||
+      rawDevice.devices_id === null ||
+      typeof rawDevice.devices_id.name !== 'string'
+    )
+      throw new Error('bad device')
+    return rawDevice.devices_id.name
+  })
+
+  if (!Array.isArray(rawPayments)) throw new Error('bad rawDevices')
+  const payments = rawPayments.map((rawPayment) => {
+    if (
+      typeof rawPayment !== 'object' ||
+      typeof rawPayment.payments_id !== 'object' ||
+      rawPayment.payments_id === null ||
+      typeof rawPayment.payments_id.name !== 'string'
+    )
+      throw new Error('bad payment')
+    return rawPayment.payments_id.name
+  })
+
+  if (!Array.isArray(rawTranslations)) throw new Error('bad rawTranslations')
   if (rawTranslations.length < 1) throw new Error('room is not localized')
   if (rawTranslations.length > 1) throw new Error('get more than 1 locale')
   const translationRaw = rawTranslations[0]
   if (typeof translationRaw !== 'object') throw new Error('bad translation')
-
   const {
     title,
     rakeback,
@@ -219,6 +283,10 @@ export const getRoomData = async (
   const room = {
     slug,
     title,
+    isAccepted,
+    roomType,
+    network,
+    logo,
     keyFacts,
     bonusCode,
     bonus: { bonus, rakeback, deposit, maxBonus },
@@ -230,39 +298,13 @@ export const getRoomData = async (
       softwareConvenience,
       depositsWithdrawals,
     },
+    devices,
+    payments,
     pages,
     activePage,
   }
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
-  // if (!Array.isArray(roomRaw.translations) || roomRaw.translations.length !== 1)
-  //   throw new Error(err)
-  // if (
-  //   typeof roomRaw !== 'object' ||
-  //   !Array.isArray(roomRaw.translations) ||
-  //   roomRaw.translations.length !== 1
-  // )
-  //   throw new Error(err)
-
-  // const [translationRaw] = roomRaw.translations
-  // if (typeof translationRaw !== 'object') throw new Error(err)
-  //
-  // const { pages: pagesRaw } = translationRaw
-  // const pages = pagesRaw?.map((pageRaw) => {
-  //   if (typeof pageRaw !== 'object') throw new Error(err)
-  //   const { author: authorRaw } = pageRaw
-  //   if (!authorRaw) throw new Error(err)
-  //   const author = {}
-  //   return {
-  //     ...pick(pageRaw, 'content'),
-  //   }
-  // })
-  // const translation = omit(translationRaw, 'pages')
-  // const room = { ...omit(roomRaw, 'translations'), ...translation }
-  //
-  // const page = {}
-  // const documentMeta = {}
-  // const roomData = { page }
   return { room }
 }

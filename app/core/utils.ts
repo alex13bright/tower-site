@@ -62,4 +62,4 @@ export const calcRating = (ratings: Record<string, string>): number => {
 export const darken = (color: string, intensity: number): string =>
   chroma(color).darken(intensity).hex()
 
-export const cmsPublic = `${directusUrl}/assets/`
+export const cmsPublic = `${directusUrl}/assets`

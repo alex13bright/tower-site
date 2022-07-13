@@ -21,6 +21,6 @@ type Props = {
 
 export const Logo = ({ className }: Props): ReactElement => {
   const data = useLoaderData()
-  const { id, title: alt } = data.room.logo
-  return <Image className={className} alt={alt} src={cmsPublic + id} />
+  const { url, alt } = data.room.logo
+  return <Image className={className} src={url} alt={alt} title={alt} />
 }
