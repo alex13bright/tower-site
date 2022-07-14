@@ -2,7 +2,7 @@ import jsdom from 'jsdom'
 const { JSDOM } = jsdom
 
 export const extendContent = async (rawContent: string): Promise<string> => {
-  const cmdId = 'tinymce'
+  const cmdId = 'cms'
   const root = JSDOM.fragment(`<div id=${cmdId}>${rawContent}</div>`)
   const divs = root.querySelectorAll('div')
   divs.forEach((div) => {
