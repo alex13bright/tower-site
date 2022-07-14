@@ -2,16 +2,15 @@ import jsdom from 'jsdom'
 const { JSDOM } = jsdom
 
 export const extendContent = async (rawContent: string): Promise<string> => {
-  const cmdId = 'cms'
-  const withHtml = `<!DOCTYPE html><body><div id=${cmdId}>${rawContent}</div></body>`
-  const { document } = new JSDOM(withHtml).window
-  const divs = document.querySelectorAll('div')
+  const cmdId = 'tinymce'
+  const root = JSDOM.fragment(`<div id=${cmdId}>${rawContent}</div>`)
+  const divs = root.querySelectorAll('div')
   divs.forEach((div) => {
     const inlineStyle = div.getAttribute('style')
     const style = inlineStyle ? inlineStyle : ''
     div.setAttribute('style', style + ` display: grid;`)
   })
-  const tables = document.querySelectorAll('table')
+  const tables = root.querySelectorAll('table')
   tables.forEach((table) => {
     const firstTr = table.querySelector('tr')
     if (firstTr == null) throw new Error('content is null')
@@ -19,7 +18,7 @@ export const extendContent = async (rawContent: string): Promise<string> => {
     if (tds == null) throw new Error('content is null')
     table.setAttribute('style', `--cols: ${tds.length}`)
   })
-  const content = document.getElementById(cmdId)
-  if (content === null) throw new Error('content is null')
-  return content.outerHTML
+  if (root.firstChild === null) throw new Error('content is null')
+  // @ts-ignore
+  return root.firstChild.outerHTML
 }

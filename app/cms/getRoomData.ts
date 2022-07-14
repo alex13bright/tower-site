@@ -2,7 +2,7 @@ import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
-import { extendContent } from '~/core/cmmContentTransformations'
+import { extendContent } from '~/core/contentTransfs'
 
 export const getRoomData = async (
   lang: Lang,
