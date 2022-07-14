@@ -7,9 +7,9 @@ import { RoomType } from '~/core/types'
 import contentStyles from '~/styles/content-site.css'
 import { Country } from '~/core/types'
 
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: contentStyles }]
-}
+// export const links: LinksFunction = () => {
+//   return [{ rel: 'stylesheet', href: contentStyles }]
+// }
 
 export type LoaderData = {
   room: RoomType

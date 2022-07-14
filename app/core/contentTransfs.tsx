@@ -3,6 +3,7 @@ import { BonusFeed } from '~/components/common/BonusFeed'
 import jsdom from 'jsdom'
 import { RoomType } from '~/core/types'
 import { ServerStyleSheet } from 'styled-components'
+import * as fs from 'fs'
 const { JSDOM } = jsdom
 
 export const extendContent = async (rawContent: string, room: RoomType): Promise<string> => {
@@ -11,6 +12,8 @@ export const extendContent = async (rawContent: string, room: RoomType): Promise
   const sheet = new ServerStyleSheet()
   let markup = renderToString(sheet.collectStyles(<BonusFeed room={room} />))
   const styles = sheet.getStyleTags()
+  fs.writeFileSync(`${process.cwd()}/_log.styles.html`, styles)
+  sheet.seal()
   const cmdId = 'cms'
   const root = JSDOM.fragment(`<div id=${cmdId}>${rawContent}</div>`)
   console.log(styles)
@@ -20,10 +23,7 @@ export const extendContent = async (rawContent: string, room: RoomType): Promise
     const params = paramsStr ? paramsStr.split(',') : []
     switch (type) {
       case 'bonus': {
-        injection.outerHTML = `<div>
-            ${styles}
-            ${markup}
-        </div>`
+        injection.outerHTML = `<div>${styles}${markup}</div>`
       }
     }
   })
