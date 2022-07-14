@@ -72,6 +72,7 @@ export type RoomType = {
   licenseCountry: string
   network: NetworkType
   logo: ImageType
+  squareLogo: ImageType
   keyFacts: KeyFactsType
   bonusCode: string
   bonus: BonusType

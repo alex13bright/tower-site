@@ -30,6 +30,8 @@ export const getRoomData = async (
     'devices.devices_id.name',
     'logo.id',
     'logo.title',
+    'square_logo.id',
+    'square_logo.title',
   ]
   const langFilter = {
     languages_code: { _eq: directusLang[lang] },
@@ -91,6 +93,7 @@ export const getRoomData = async (
     payments: rawPayments,
     type: rawType,
     logo: rawLogo,
+    square_logo: rawSquareLogo,
   } = rawRoom
 
   if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
@@ -139,6 +142,17 @@ export const getRoomData = async (
   )
     throw new Error('bad rawLogo')
   const logo = {
+    url: `${cmsPublic}/${rawLogo.id}`,
+    alt: rawLogo.title,
+  }
+  console.log(rawSquareLogo)
+  if (
+    typeof rawSquareLogo !== 'object' ||
+    typeof rawSquareLogo.id !== 'string' ||
+    typeof rawSquareLogo.title !== 'string'
+  )
+    throw new Error('bad rawSquareLogo')
+  const squareLogo = {
     url: `${cmsPublic}/${rawLogo.id}`,
     alt: rawLogo.title,
   }
@@ -274,10 +288,10 @@ export const getRoomData = async (
   const activePage = pages.reduce<number | null>((activeIndex, { isActive }, i) => {
     return isActive ? i : activeIndex
   }, null)
-  if (activePage === null) throw new Error('bad pageType')
-  pages[activePage].content = await extendContent(pages[activePage].content)
 
-  const room = {
+  if (activePage === null) throw new Error('bad pageType')
+
+  const room: RoomType = {
     slug,
     title,
     isCountryAccepted,
@@ -285,6 +299,7 @@ export const getRoomData = async (
     licenseCountry,
     network,
     logo,
+    squareLogo,
     keyFacts,
     bonusCode,
     bonus: { bonus, rakeback, deposit, maxBonus },
@@ -301,6 +316,8 @@ export const getRoomData = async (
     pages,
     activePage,
   }
+
+  pages[activePage].content = await extendContent(pages[activePage].content, room)
 
   // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
