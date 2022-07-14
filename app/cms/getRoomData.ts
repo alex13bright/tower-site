@@ -1,8 +1,8 @@
-import fs from 'fs'
 import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
+import { extendContent } from '~/core/cmmContentTransformations'
 
 export const getRoomData = async (
   lang: Lang,
@@ -10,7 +10,6 @@ export const getRoomData = async (
   roomSlug: string,
   pageType: string
 ): Promise<RoomType> => {
-  console.log(country)
   const directus = await getDirectusClient()
 
   const selectFields = [
@@ -276,7 +275,7 @@ export const getRoomData = async (
     return isActive ? i : activeIndex
   }, null)
   if (activePage === null) throw new Error('bad pageType')
-  pages[activePage].content = `<div id="cms">${pages[activePage].content}</div>`
+  pages[activePage].content = await extendContent(pages[activePage].content)
 
   const room = {
     slug,

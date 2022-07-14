@@ -103,8 +103,9 @@ h1,
 }
 
 #cms table {
-  width: 100%;
+  display: grid;
   overflow-x: auto;
+  grid-template-columns: repeat(var(--cols), 1fr);
 }
 
 #cms caption {
@@ -115,13 +116,16 @@ h1,
 }
 
 #cms tbody {
+  display: contents;
 }
 
 #cms th {
+  display: contents;
   padding: 12px 16px;
 }
 
 #cms tr {
+  display: contents;
   padding: 12px 16px;
 }
 
@@ -141,5 +145,6 @@ h1,
 }
 
 #cms td {
+  display: grid;
   padding: 12px 16px;
 }
