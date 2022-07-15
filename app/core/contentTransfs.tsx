@@ -1,6 +1,7 @@
 import jsdom from 'jsdom'
 import { replaceAll } from '~/lib/utilities'
 import * as fs from 'fs'
+import { DOMParser, XMLSerializer } from 'xmldom'
 const { JSDOM } = jsdom
 
 const tagsToJsxMap = {
@@ -45,9 +46,13 @@ const preprocessDom = (content: string): string => {
     tableTag.setAttribute('data', JSON.stringify({ table, caption }))
   })
   if (root.firstChild === null) throw new Error('content is null')
-
   // @ts-ignore
-  return root.firstChild.innerHTML
+  const processedContent = root.firstChild.innerHTML
+  const xml = new DOMParser({
+    locator: {},
+    errorHandler: { warning: (w) => {}, error: (e) => {}, fatalError: (e) => console.error(e) },
+  }).parseFromString(processedContent, 'text/xml')
+  return new XMLSerializer().serializeToString(xml)
 }
 
 export const transformContent = (content: string): string => {
