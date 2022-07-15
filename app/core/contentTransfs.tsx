@@ -1,5 +1,6 @@
 import jsdom from 'jsdom'
 import { replaceAll } from '~/lib/utilities'
+import * as fs from 'fs'
 const { JSDOM } = jsdom
 
 const tagsToJsxMap = {
@@ -23,7 +24,7 @@ export const replaceTagsWithJsx = (content: string): string =>
   }, content)
 
 const preprocessDom = (content: string): string => {
-  const root = JSDOM.fragment(content)
+  const root = JSDOM.fragment(`<div>${content}</div>`)
 
   // table content to data attribute
   const tableTags = root.querySelectorAll('table')
@@ -47,8 +48,11 @@ const preprocessDom = (content: string): string => {
   if (root.firstChild === null) throw new Error('content is null')
 
   // @ts-ignore
-  return root.firstChild.outerHTML
+  return root.firstChild.innerHTML
 }
 
-export const transformContent = (content: string): string =>
-  replaceTagsWithJsx(preprocessDom(content))
+export const transformContent = (content: string): string => {
+  const res = replaceTagsWithJsx(preprocessDom(content))
+  fs.writeFileSync(`${process.cwd()}/_log.res.txt`, res)
+  return res
+}

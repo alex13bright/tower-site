@@ -92,7 +92,7 @@ type TableData = {
   caption: string | null
 }
 export const ExpandableTable = ({ data }: Props): ReactElement => {
-  const rowsAmount = 1
+  const rowsAmount = 2
   const tableData = JSON.parse(data) as TableData
   const { caption, table } = tableData
   const { isToggled: showLess, toggle } = useToggle(true)
