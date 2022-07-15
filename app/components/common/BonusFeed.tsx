@@ -24,7 +24,7 @@ const Logo = styled.img`
   width: 52px !important;
   aspect-ratio: 1 / 1 !important;
 `
-const HeaderInfoTitle = styled.div`
+const HeaderInfoTitle = styled.span`
   color: ${secondaryAction}!important;
   border-color: ${secondaryAction}!important;
   border: 1px solid ${secondaryAction}!important;
@@ -36,16 +36,16 @@ const HeaderInfoTitle = styled.div`
   text-align: center !important;
   text-transform: uppercase !important;
 `
-const HeaderInfoValue = styled.div`
+const HeaderInfoValue = styled.span`
   font-size: 20px !important;
   font-weight: 600 !important;
 `
 
-const HeaderInfo = styled.div`
+const HeaderInfo = styled.span`
   display: grid !important;
   align-items: center !important;
 `
-const Header = styled.div`
+const Header = styled.span`
   display: flex !important;
   justify-content: start !important;
   column-gap: 20px !important;
@@ -93,7 +93,7 @@ const StyledTooltip = styled(Tooltip)`
   display: grid !important;
 `
 
-const BonusCodeTitle = styled.div`
+const BonusCodeTitle = styled.span`
   color: ${secondaryDark}!important;
   text-transform: uppercase !important;
   font-family: ${proximaNovaSb}!important;
@@ -102,12 +102,12 @@ const BonusCodeTitle = styled.div`
   text-align: center !important;
 `
 
-const BonusCodeValue = styled.div`
+const BonusCodeValue = styled.span`
   font-weight: 700 !important;
   text-align: center !important;
 `
 
-const BonusCode = styled.div`
+const BonusCode = styled.span`
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-around !important;
@@ -139,7 +139,7 @@ const StyledSignUpButton = styled(SignUpButton)`
   font-size: 16px !important;
 `
 
-const Action = styled.div`
+const Action = styled.span`
   display: grid !important;
   grid-template-rows: repeat(2, 1fr) !important;
   gap: 10px !important;
@@ -183,7 +183,7 @@ const DetailsToggleButton = styled.button<{ isPressed: boolean }>`
   }
 `
 
-const DetailsContent = styled.div<{ isHidden: boolean }>`
+const DetailsContent = styled.span<{ isHidden: boolean }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')}!important;
   margin-top: 20px !important;
 
@@ -195,7 +195,7 @@ const DetailsContent = styled.div<{ isHidden: boolean }>`
   }
 `
 
-const Details = styled.div`
+const Details = styled.span`
   ${expandOnParentSides(contentSidePaddingSize.xs)}!important;
 
   color: #777 !important;
@@ -216,7 +216,7 @@ const Details = styled.div`
   }
 `
 
-const Main = styled.div`
+const Main = styled.span`
   display: grid !important;
   row-gap: 16px !important;
   margin-bottom: 30px !important;

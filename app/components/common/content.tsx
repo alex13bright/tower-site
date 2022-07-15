@@ -114,12 +114,8 @@ export const Figure = ({ image, caption }: FigureProps): ReactElement => {
   )
 }
 
-type ImageProps = {
-  children: ReactText
-}
-
-export const Img = ({ children: name }: ImageProps): ReactElement => {
-  return <div>{name}</div>
+export const Img = (...props: any): ReactElement => {
+  return <span>{JSON.stringify(props, null, 2)}</span>
 }
 
 type InjectionProps = {

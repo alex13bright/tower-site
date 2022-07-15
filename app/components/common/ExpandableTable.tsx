@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { cancelSideMargins, proximaNovaSb, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { useToggle } from '~/custom-hooks/useToggle'
+import * as fs from 'fs'
 
 const FoldButton = styled.button`
   border: 1px solid rgba(0, 139, 226, 0.5);
@@ -93,45 +94,46 @@ const fakeData = [
 ]
 
 type Props = {
-  caption: string
-  data: string[][]
   className?: string
-  lessNumber: number
+  children: any
 }
 
-export const ExpandableTable = ({
-  caption,
-  data,
-  className,
-  lessNumber = Infinity,
-}: Props): ReactElement => {
-  const { isToggled: showLess, toggle } = useToggle(true)
-
-  caption = fakeCaption
-  data = fakeData
-
-  const [headerRow, ...rows] = data
-  const bodyRows = rows.slice(0, showLess ? lessNumber : Infinity)
+export const ExpandableTable = ({ children }: Props): ReactElement => {
+  console.log(children)
   return (
-    <Main>
-      <Table className={className}>
-        <Caption>{caption}</Caption>
-        <TBody columns={headerRow.length}>
-          <TR>
-            {headerRow.map((title) => (
-              <TH key={title}>{title}</TH>
-            ))}
-          </TR>
-          {bodyRows.map((row, i) => (
-            <TR key={i}>
-              {row.map((value, i) => (
-                <TD key={i}>{value}</TD>
-              ))}
-            </TR>
-          ))}
-        </TBody>
-      </Table>
-      <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
-    </Main>
+    <table>
+      <tbody>
+        <tr>
+          <td>cell</td>
+        </tr>
+      </tbody>
+    </table>
   )
+  // const root = JSDOM.fragment(`<div id=${cmdId} style="display: grid">${rawContent}</div>`)
+  // const { isToggled: showLess, toggle } = useToggle(true)
+
+  // const [headerRow, ...rows] = data
+  // const bodyRows = rows.slice(0, showLess ? lessNumber : Infinity)
+  // return (
+  //   <Main>
+  //     <Table>
+  //       <Caption>{caption}</Caption>
+  //       <TBody columns={headerRow.length}>
+  //         <TR>
+  //           {headerRow.map((title) => (
+  //             <TH key={title}>{title}</TH>
+  //           ))}
+  //         </TR>
+  //         {bodyRows.map((row, i) => (
+  //           <TR key={i}>
+  //             {row.map((value, i) => (
+  //               <TD key={i}>{value}</TD>
+  //             ))}
+  //           </TR>
+  //         ))}
+  //       </TBody>
+  //     </Table>
+  //     <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
+  //   </Main>
+  // )
 }

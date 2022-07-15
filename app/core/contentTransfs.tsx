@@ -1,7 +1,6 @@
 import { renderToString } from 'react-dom/server'
 import { BonusFeed } from '~/components/common/BonusFeed'
 import jsdom from 'jsdom'
-import { RoomType } from '~/core/types'
 import { ServerStyleSheet } from 'styled-components'
 import * as fs from 'fs'
 import { replaceAll } from '~/lib/utilities'
@@ -16,11 +15,11 @@ const replaces = {
   ul: 'UL',
   li: 'LI',
   a: 'A',
-  'table cellspacing="0" cellpadding="0"': 'Table',
-  tbody: 'Tbody',
-  th: 'Th',
-  tr: 'Tr',
-  td: 'Td',
+  table: 'Table',
+  // tbody: 'TBody',
+  // th: 'TH',
+  // tr: 'TR',
+  // td: 'TD',
   img: 'Img',
   h6: 'Injection',
 }
