@@ -113,9 +113,12 @@ export const Figure = ({ image, caption }: FigureProps): ReactElement => {
     </StyledFigure>
   )
 }
-
-export const Img = (...props: any): ReactElement => {
-  return <span>{JSON.stringify(props, null, 2)}</span>
+// type ImgProps = {
+//   src: string
+//   alt: string
+// }
+export const Img = (props: any): ReactElement => {
+  return <img {...props} />
 }
 
 type InjectionProps = {

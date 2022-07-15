@@ -48,6 +48,7 @@ const preprocessDom = (content: string): string => {
   if (root.firstChild === null) throw new Error('content is null')
   // @ts-ignore
   const processedContent = root.firstChild.innerHTML
+  fs.writeFileSync(`${process.cwd()}/_log.processedContent.txt`, processedContent)
   const xml = new DOMParser({
     locator: {},
     errorHandler: { warning: (w) => {}, error: (e) => {}, fatalError: (e) => console.error(e) },
