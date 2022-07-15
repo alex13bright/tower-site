@@ -16,6 +16,11 @@ const replaces = {
   ul: 'UL',
   li: 'LI',
   a: 'A',
+  'table cellspacing="0" cellpadding="0"': 'Table',
+  tbody: 'Tbody',
+  th: 'Th',
+  tr: 'Tr',
+  td: 'Td',
   img: 'Img',
   h6: 'Injection',
 }
@@ -24,7 +29,7 @@ export const convertToJsx = (content: string): string => {
     content = replaceAll(content, `<${tag}`, `<${jsx}`)
     content = replaceAll(content, `</${tag}>`, `</${jsx}>`)
   })
-  fs.writeFileSync(`${process.cwd()}/_log.content.txt`, content)
+  // fs.writeFileSync(`${process.cwd()}/_log.content.txt`, content)
   return content
 }
 
