@@ -6,6 +6,24 @@ import { ServerStyleSheet } from 'styled-components'
 import * as fs from 'fs'
 const { JSDOM } = jsdom
 
+const replaces = {
+  p: 'P',
+  h1: 'H1',
+  h2: 'H2',
+  h3: 'H3',
+  h4: 'H4',
+  h5: 'H5',
+  h6: 'Injection',
+}
+export const convertToJsx = (content: string): string => {
+  Object.entries(replaces).forEach(([tag, jsx]) => {
+    content = content.replace(`<${tag}`, `<${jsx}`)
+    content = content.replace(`</${tag}>`, `</${jsx}>`)
+  })
+  fs.writeFileSync(`${process.cwd()}/_log.content.txt`, content)
+  return content
+}
+
 export const extendContent = async (rawContent: string, room: RoomType): Promise<string> => {
   const _now = Date.now()
 
@@ -23,8 +41,7 @@ export const extendContent = async (rawContent: string, room: RoomType): Promise
         const styles = sheet.getStyleTags()
         fs.writeFileSync(`${process.cwd()}/_log.styles.html`, styles)
         sheet.seal()
-
-        injection.outerHTML = `<div>${styles}${markup}</div>`
+        injection.outerHTML = `<Bonus>${styles}${markup}</Bonus>`
       }
     }
   })

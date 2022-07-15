@@ -2,7 +2,7 @@ import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
-import { extendContent } from '~/core/contentTransfs'
+import { convertToJsx } from '~/core/contentTransfs'
 import * as fs from 'fs'
 
 export const getRoomData = async (
@@ -317,7 +317,7 @@ export const getRoomData = async (
     activePage,
   }
 
-  pages[activePage].content = await extendContent(pages[activePage].content, room)
+  pages[activePage].content = convertToJsx(pages[activePage].content)
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
