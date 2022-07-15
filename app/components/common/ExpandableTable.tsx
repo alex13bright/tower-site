@@ -50,7 +50,7 @@ export const TR = styled.tr`
 export const TBody = styled.tbody<{ columns: number }>`
   overflow-x: auto;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(${({ columns }) => columns}, auto);
 
   & :nth-child(odd) td {
     background: linear-gradient(0deg, #f4f4f4, #f4f4f4),
@@ -83,57 +83,47 @@ const Main = styled.div`
   }
 `
 
-const fakeCaption = 'Platinum levels of Fish Buffet'
-const fakeData = [
-  ['Rank', 'Rewards', 'Average rakeback', 'FP required'],
-  ['Platinum Fish', '$1 for 500 FP', '20%', 'not required'],
-  ['Platinum Octopus', '$1 for 285 FP', '35%', '750К'],
-  ['Platinum Whale', '$1 for 200 FP', '50%', '1,5M'],
-  ['Platinum Shark', '$1 for 182 FP', '55%', '3M'],
-  ['GGPlatinum', '$1 for 167 FP', '60%', '5M'],
-]
-
 type Props = {
   className?: string
   children: any
 }
 
 export const ExpandableTable = ({ children }: Props): ReactElement => {
-  console.log(children)
-  return (
-    <table>
-      <tbody>
-        <tr>
-          <td>cell</td>
-        </tr>
-      </tbody>
-    </table>
-  )
-  // const root = JSDOM.fragment(`<div id=${cmdId} style="display: grid">${rawContent}</div>`)
-  // const { isToggled: showLess, toggle } = useToggle(true)
+  // temporary fragile implementation
+  const unfoldedRows = 5
+  let caption: string | null = null
 
-  // const [headerRow, ...rows] = data
-  // const bodyRows = rows.slice(0, showLess ? lessNumber : Infinity)
-  // return (
-  //   <Main>
-  //     <Table>
-  //       <Caption>{caption}</Caption>
-  //       <TBody columns={headerRow.length}>
-  //         <TR>
-  //           {headerRow.map((title) => (
-  //             <TH key={title}>{title}</TH>
-  //           ))}
-  //         </TR>
-  //         {bodyRows.map((row, i) => (
-  //           <TR key={i}>
-  //             {row.map((value, i) => (
-  //               <TD key={i}>{value}</TD>
-  //             ))}
-  //           </TR>
-  //         ))}
-  //       </TBody>
-  //     </Table>
-  //     <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
-  //   </Main>
-  // )
+  const data = children
+    .filter(({ type }) => type === 'tbody')[0]
+    .props.children.filter(({ type }) => type === 'tr')
+    .map(({ props }) =>
+      props.children.filter(({ type }) => type === 'td').map((d) => d.props.children.props.children)
+    )
+
+  const { isToggled: showLess, toggle } = useToggle(true)
+
+  const [headerRow, ...rows] = data
+  const bodyRows = rows.slice(0, showLess ? unfoldedRows : Infinity)
+  return (
+    <Main>
+      <Table>
+        <Caption>{caption}</Caption>
+        <TBody columns={headerRow.length}>
+          <TR>
+            {headerRow.map((title) => (
+              <TH key={title}>{title}</TH>
+            ))}
+          </TR>
+          {bodyRows.map((row, i) => (
+            <TR key={i}>
+              {row.map((value, i) => (
+                <TD key={i}>{value}</TD>
+              ))}
+            </TR>
+          ))}
+        </TBody>
+      </Table>
+      <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
+    </Main>
+  )
 }
