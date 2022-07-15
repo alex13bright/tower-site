@@ -45,7 +45,11 @@ export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
     if (isVisible === null) return
     stickyContextSetState((state) => ({ ...state, [isVisibleKey]: isVisible }))
   }, [isVisibleKey, isVisible, stickyContextSetState])
-  return <div ref={ref}>{children}</div>
+  return (
+    <div ref={ref} style={{ display: 'grid' }}>
+      {children}
+    </div>
+  )
 }
 
 const StickyBox = styled.div<{ isVisible: boolean }>`
