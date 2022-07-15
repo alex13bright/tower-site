@@ -72,6 +72,7 @@ export const Table = styled.table`
 
 const Main = styled.div`
   display: grid;
+  margin-bottom: 20px;
   row-gap: 16px;
   margin-left: -${contentSidePaddingSize.xs};
   margin-right: -${contentSidePaddingSize.xs};
@@ -86,19 +87,22 @@ type Props = {
   className?: string
   data: string
 }
-type TableDesc = string[][]
+type TableData = {
+  table: string[][]
+  caption: string | null
+}
 export const ExpandableTable = ({ data }: Props): ReactElement => {
-  const rowsAmount = 2
-  const tableDesc = JSON.parse(data) as TableDesc
-  const caption = 'caption'
+  const rowsAmount = 1
+  const tableData = JSON.parse(data) as TableData
+  const { caption, table } = tableData
   const { isToggled: showLess, toggle } = useToggle(true)
 
-  const [headerRow, ...rows] = tableDesc
+  const [headerRow, ...rows] = table
   const bodyRows = showLess ? rows.slice(0, rowsAmount) : rows
   return (
     <Main>
       <Table>
-        <Caption>{caption}</Caption>
+        {caption !== null ? <Caption>{caption}</Caption> : null}
         <TBody columns={headerRow.length}>
           <TR>
             {headerRow.map((title) => (

@@ -25,22 +25,24 @@ export const replaceTagsWithJsx = (content: string): string =>
 const preprocessDom = (content: string): string => {
   const root = JSDOM.fragment(content)
 
-  // table content to attribute
-  const tables = root.querySelectorAll('table')
-  tables.forEach((table) => {
-    const tbody = table.querySelector('tbody')
-    if (tbody === null) throw new Error('table without tbody')
-    const trs = table.querySelectorAll('tr')
-    const tableData: string[][] = []
-    trs.forEach((tr) => {
+  // table content to data attribute
+  const tableTags = root.querySelectorAll('table')
+  tableTags.forEach((tableTag) => {
+    const captionTag = tableTag.querySelector('caption')
+    const caption = captionTag !== null ? captionTag.innerHTML : null
+    const tbodyTag = tableTag.querySelector('tbody')
+    if (tbodyTag === null) throw new Error('table without tbody')
+    const trTags = tableTag.querySelectorAll('tr')
+    const table: string[][] = []
+    trTags.forEach((tr) => {
       const tds = tr.querySelectorAll('td')
       const trData: string[] = []
-      tableData.push(trData)
+      table.push(trData)
       tds.forEach((td) => {
         trData.push(td.innerHTML)
       })
     })
-    table.setAttribute('data', JSON.stringify(tableData))
+    tableTag.setAttribute('data', JSON.stringify({ table, caption }))
   })
   if (root.firstChild === null) throw new Error('content is null')
 
