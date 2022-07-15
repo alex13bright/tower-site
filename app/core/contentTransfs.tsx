@@ -4,6 +4,7 @@ import jsdom from 'jsdom'
 import { RoomType } from '~/core/types'
 import { ServerStyleSheet } from 'styled-components'
 import * as fs from 'fs'
+import { replaceAll } from '~/lib/utilities'
 const { JSDOM } = jsdom
 
 const replaces = {
@@ -12,13 +13,16 @@ const replaces = {
   h2: 'H2',
   h3: 'H3',
   h4: 'H4',
-  h5: 'H5',
+  ul: 'UL',
+  li: 'LI',
+  a: 'A',
+  img: 'Img',
   h6: 'Injection',
 }
 export const convertToJsx = (content: string): string => {
   Object.entries(replaces).forEach(([tag, jsx]) => {
-    content = content.replace(`<${tag}`, `<${jsx}`)
-    content = content.replace(`</${tag}>`, `</${jsx}>`)
+    content = replaceAll(content, `<${tag}`, `<${jsx}`)
+    content = replaceAll(content, `</${tag}>`, `</${jsx}>`)
   })
   fs.writeFileSync(`${process.cwd()}/_log.content.txt`, content)
   return content

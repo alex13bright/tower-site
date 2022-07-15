@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { AnchorProps } from '~/lib/libTypes'
+import { AnchorProps } from '~/lib/types'
 
 export const ExternalLink = (props: AnchorProps): ReactElement => {
   return (

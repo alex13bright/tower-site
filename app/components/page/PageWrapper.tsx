@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
 import { breakpoints, widthAtLeast } from '~/styles/styles'
-import { AsType } from '~/lib/libTypes'
+import { AsType } from '~/lib/types'
 
 const OuterBox = styled.div<{ as?: AsType }>`
   display: grid;

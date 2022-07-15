@@ -9,7 +9,7 @@ import {
 } from '~/styles/styles'
 import { ExternalLink } from '~/components/ui/ExternalLink'
 import { darken } from '~/core/utils'
-import { AnchorProps, ButtonProps } from '~/lib/libTypes'
+import { AnchorProps, ButtonProps } from '~/lib/types'
 
 const button = css`
   color: ${primaryDark};
