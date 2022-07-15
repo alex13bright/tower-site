@@ -16,7 +16,6 @@ export const extendContent = async (rawContent: string, room: RoomType): Promise
   sheet.seal()
   const cmdId = 'cms'
   const root = JSDOM.fragment(`<div id=${cmdId}>${rawContent}</div>`)
-  console.log(styles)
   const injections = root.querySelectorAll('h6')
   injections.forEach((injection) => {
     const [type, paramsStr] = injection.innerHTML.split('#')

@@ -3,6 +3,7 @@ import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
 import { extendContent } from '~/core/contentTransfs'
+import * as fs from 'fs'
 
 export const getRoomData = async (
   lang: Lang,
@@ -71,7 +72,7 @@ export const getRoomData = async (
     },
   })
 
-  // fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
+  fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
 
   const { data: rawRooms } = response
   if (!Array.isArray(rawRooms)) throw new Error('no data')
@@ -145,7 +146,6 @@ export const getRoomData = async (
     url: `${cmsPublic}/${rawLogo.id}`,
     alt: rawLogo.title,
   }
-  console.log(rawSquareLogo)
   if (
     typeof rawSquareLogo !== 'object' ||
     typeof rawSquareLogo.id !== 'string' ||
@@ -153,8 +153,8 @@ export const getRoomData = async (
   )
     throw new Error('bad rawSquareLogo')
   const squareLogo = {
-    url: `${cmsPublic}/${rawLogo.id}`,
-    alt: rawLogo.title,
+    url: `${cmsPublic}/${rawSquareLogo.id}`,
+    alt: rawSquareLogo.title,
   }
 
   if (typeof slug !== 'string') throw new Error('bad slug')
@@ -317,9 +317,9 @@ export const getRoomData = async (
     activePage,
   }
 
-  pages[activePage].content = await extendContent(pages[activePage].content, room)
+  // pages[activePage].content = await extendContent(pages[activePage].content, room)
 
-  // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
+  fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   return room
 }

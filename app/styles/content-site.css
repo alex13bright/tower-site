@@ -1,24 +1,3 @@
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul,
-li {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-}
-
-table,
-caption,
-tbody,
-tr,
-td {
-}
-
 #cms * {
   box-sizing: border-box;
 }
@@ -32,78 +11,78 @@ td {
 #cms h3,
 #cms h4,
 #cms h5 {
-  line-height: 1.2em !important;
+  line-height: 1.2em;
 }
 
 #cms h1 {
-  font-size: 32px !important;
-  margin-bottom: 16px !important;
+  font-size: 32px;
+  margin-bottom: 16px;
 }
 
 #cms h2 {
-  font-size: 24px !important;
-  margin: 40px 0 20px !important;
+  font-size: 24px;
+  margin: 40px 0 20px;
 
-  position: relative !important;
-  padding-top: 12px !important;
+  position: relative;
+  padding-top: 12px;
 }
 
 #cms h2::before {
-  background: url('/assets/list-item.svg') no-repeat 50% !important;
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  display: block !important;
-  width: 42px !important;
-  height: 2px !important;
+  background: url('/assets/list-item.svg') no-repeat 50%;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 42px;
+  height: 2px;
 }
 
 #cms h3 {
-  font-size: 20px !important;
-  margin: 40px 0 20px !important;
+  font-size: 20px;
+  margin: 40px 0 20px;
 }
 
 #cms p {
-  color: inherit !important;
-  background: inherit !important;
-  font-size: 17px !important;
-  line-height: 1.4em !important;
-  margin: 0 0 20px !important;
+  color: inherit;
+  background: inherit;
+  font-size: 17px;
+  line-height: 1.4em;
+  margin: 0 0 20px;
 }
 
 #cms a {
-  color: #008be2 !important;
-  text-decoration: underline !important;
-  background-color: transparent !important;
+  color: #008be2;
+  text-decoration: underline;
+  background-color: transparent;
 }
 
 #cms ul {
-  list-style-position: outside !important;
-  list-style-type: none !important;
-  margin: 0 0 40px !important;
-  padding: 0 !important;
+  list-style-position: outside;
+  list-style-type: none;
+  margin: 0 0 40px;
+  padding: 0;
 }
 
 #cms li {
-  color: inherit !important;
-  background: inherit !important;
-  font-size: 17px !important;
-  line-height: 21px !important;
-  margin-bottom: 15px !important;
-  padding-left: 25px !important;
-  position: relative !important;
+  color: inherit;
+  background: inherit;
+  font-size: 17px;
+  line-height: 21px;
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
 }
 
 #cms ul > li::before {
-  background: url('/assets/list-item.svg') no-repeat 50% !important;
-  content: '' !important;
-  position: absolute !important;
-  top: 6px !important;
-  left: 5px !important;
-  display: block !important;
-  width: 10px !important;
-  height: 9px !important;
+  background: url('/assets/list-item.svg') no-repeat 50%;
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  display: block;
+  width: 10px;
+  height: 9px;
 }
 
 #cms table {
