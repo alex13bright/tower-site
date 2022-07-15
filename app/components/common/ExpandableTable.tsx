@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { cancelSideMargins, proximaNovaSb, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import * as fs from 'fs'
 
 const FoldButton = styled.button`
   border: 1px solid rgba(0, 139, 226, 0.5);
@@ -85,25 +84,17 @@ const Main = styled.div`
 
 type Props = {
   className?: string
-  children: any
+  data: string
 }
-
-export const ExpandableTable = ({ children }: Props): ReactElement => {
-  // temporary fragile implementation
-  const unfoldedRows = 5
-  let caption: string | null = null
-
-  const data = children
-    .filter(({ type }) => type === 'tbody')[0]
-    .props.children.filter(({ type }) => type === 'tr')
-    .map(({ props }) =>
-      props.children.filter(({ type }) => type === 'td').map((d) => d.props.children.props.children)
-    )
-
+type TableDesc = string[][]
+export const ExpandableTable = ({ data }: Props): ReactElement => {
+  const rowsAmount = 2
+  const tableDesc = JSON.parse(data) as TableDesc
+  const caption = 'caption'
   const { isToggled: showLess, toggle } = useToggle(true)
 
-  const [headerRow, ...rows] = data
-  const bodyRows = rows.slice(0, showLess ? unfoldedRows : Infinity)
+  const [headerRow, ...rows] = tableDesc
+  const bodyRows = showLess ? rows.slice(0, rowsAmount) : rows
   return (
     <Main>
       <Table>
@@ -123,7 +114,9 @@ export const ExpandableTable = ({ children }: Props): ReactElement => {
           ))}
         </TBody>
       </Table>
-      <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
+      {rowsAmount < rows.length ? (
+        <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
+      ) : null}
     </Main>
   )
 }
