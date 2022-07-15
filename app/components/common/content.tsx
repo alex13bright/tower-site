@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { Link } from '@remix-run/react'
 import { accent } from '~/styles/styles'
 import { ReactElement, ReactNode, ReactText } from 'react'
+import { BonusFeed } from '~/components/common/BonusFeed'
 
 const hCss = css`
   line-height: 1.2em;
@@ -119,4 +120,18 @@ type ImageProps = {
 
 export const Img = ({ children: name }: ImageProps): ReactElement => {
   return <div>{name}</div>
+}
+
+type InjectionProps = {
+  children: ReactElement
+}
+export const Injection = ({ children }: InjectionProps) => {
+  const [type, paramsStr] = children.props.children.split('#')
+  const params = paramsStr ? paramsStr.split(',') : []
+  switch (type) {
+    case 'bonus': {
+      return <BonusFeed />
+    }
+  }
+  return null
 }

@@ -33,7 +33,7 @@ export const convertToJsx = (content: string): string => {
   return content
 }
 
-export const extendContent = async (rawContent: string, room: RoomType): Promise<string> => {
+export const extendContent = async (rawContent: string): Promise<string> => {
   const _now = Date.now()
 
   const cmdId = 'cms'
@@ -46,7 +46,7 @@ export const extendContent = async (rawContent: string, room: RoomType): Promise
     switch (type) {
       case 'bonus': {
         const sheet = new ServerStyleSheet()
-        let markup = renderToString(sheet.collectStyles(<BonusFeed room={room} />))
+        let markup = renderToString(sheet.collectStyles(<BonusFeed />))
         const styles = sheet.getStyleTags()
         fs.writeFileSync(`${process.cwd()}/_log.styles.html`, styles)
         sheet.seal()
