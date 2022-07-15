@@ -17,7 +17,8 @@ import { contentSidePaddingSize } from '~/components/page/pageStyles'
 import { LI, P, UL } from '~/components/common/content'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import { RoomType } from '~/core/types'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+import { useLoaderData } from '@remix-run/react'
 
 const Logo = styled.img`
   width: 52px !important;
@@ -231,12 +232,12 @@ const Main = styled.div`
 `
 
 type Props = {
-  room: RoomType
   className?: string
 }
 
-export const BonusFeed = ({ room, className }: Props): ReactElement => {
-  const { bonusCode, bonus: bonusObj, squareLogo } = room
+export const BonusFeed = ({ className }: Props): ReactElement => {
+  const data = useLoaderData<LoaderData>()
+  const { bonusCode, bonus: bonusObj, squareLogo } = data.room
   const { bonus, maxBonus, rakeback, deposit } = bonusObj
   const { url, alt } = squareLogo
   const { isToggled: isFolded, toggle } = useToggle(true)
