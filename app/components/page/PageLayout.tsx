@@ -20,7 +20,7 @@ export const PageLayout = ({ children }: Props): ReactElement => {
     <StickyContext>
       <Page>
         <PageHeader />
-        <PageWrapper as="main">
+        <PageWrapper forwardAs="main">
           {children}
           <StickyActions>
             <FakeContent>STICKY ACTION PANEL</FakeContent>

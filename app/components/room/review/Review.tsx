@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
-const Main = styled.div``
+const Main = styled.div`
+  display: grid;
+`
 
 type Props = {
   className?: string

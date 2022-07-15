@@ -2,14 +2,13 @@ import { Room } from '~/components/room/Room'
 import { json, LinksFunction, LoaderFunction } from '@remix-run/node'
 import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import { getRoomData } from '~/cms/getRoomData'
-import { RoomType } from '~/core/types'
-
-import contentStyles from '~/styles/content-site.css'
 import { Country } from '~/core/types'
+import { RoomType } from '~/core/types'
+import contentStyles from '~/styles/content-site.css'
 
-// export const links: LinksFunction = () => {
-//   return [{ rel: 'stylesheet', href: contentStyles }]
-// }
+export const links: LinksFunction = () => {
+  return [{ rel: 'stylesheet', href: contentStyles }]
+}
 
 export type LoaderData = {
   room: RoomType

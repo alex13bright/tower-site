@@ -317,7 +317,7 @@ export const getRoomData = async (
     activePage,
   }
 
-  // pages[activePage].content = await extendContent(pages[activePage].content, room)
+  pages[activePage].content = await extendContent(pages[activePage].content, room)
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 

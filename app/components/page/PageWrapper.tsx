@@ -13,14 +13,14 @@ const InnerBox = styled.div`
   max-width: ${breakpoints.xl}px;
 `
 type Props = {
-  as?: AsType
+  forwardAs?: AsType
   className?: string
   children?: ReactNode
 }
 
-export const PageWrapper = ({ className, as, children }: Props): ReactElement => {
+export const PageWrapper = ({ className, forwardAs, children }: Props): ReactElement => {
   return (
-    <OuterBox className={className} as={as}>
+    <OuterBox className={className} as={forwardAs}>
       <InnerBox>{children}</InnerBox>
     </OuterBox>
   )

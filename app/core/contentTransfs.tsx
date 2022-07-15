@@ -9,19 +9,21 @@ const { JSDOM } = jsdom
 export const extendContent = async (rawContent: string, room: RoomType): Promise<string> => {
   const _now = Date.now()
 
-  const sheet = new ServerStyleSheet()
-  let markup = renderToString(sheet.collectStyles(<BonusFeed room={room} />))
-  const styles = sheet.getStyleTags()
-  fs.writeFileSync(`${process.cwd()}/_log.styles.html`, styles)
-  sheet.seal()
   const cmdId = 'cms'
-  const root = JSDOM.fragment(`<div id=${cmdId}>${rawContent}</div>`)
+  const root = JSDOM.fragment(`<div id=${cmdId} style="display: grid">${rawContent}</div>`)
+
   const injections = root.querySelectorAll('h6')
   injections.forEach((injection) => {
     const [type, paramsStr] = injection.innerHTML.split('#')
     const params = paramsStr ? paramsStr.split(',') : []
     switch (type) {
       case 'bonus': {
+        const sheet = new ServerStyleSheet()
+        let markup = renderToString(sheet.collectStyles(<BonusFeed room={room} />))
+        const styles = sheet.getStyleTags()
+        fs.writeFileSync(`${process.cwd()}/_log.styles.html`, styles)
+        sheet.seal()
+
         injection.outerHTML = `<div>${styles}${markup}</div>`
       }
     }
