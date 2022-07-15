@@ -21,6 +21,10 @@ export const DynamicContent = ({ content, className }: Props): ReactElement => {
   }
   return (
     <StyledJsxParser
+      onError={(error) => {
+        throw error
+      }}
+      autoCloseVoidElements={true}
       className={className}
       bindings={bindings}
       components={{ P, UL, H1, H2, H3, Img, LI, A, Injection, Table: ExpandableTable } as any}
