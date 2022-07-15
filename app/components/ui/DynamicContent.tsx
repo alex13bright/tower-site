@@ -19,7 +19,6 @@ export const DynamicContent = ({ content, className }: Props): ReactElement => {
     // data: 'real_data',
     // myEventHandler: () => {},
   }
-  // console.log(content)
   return (
     <StyledJsxParser
       className={className}
