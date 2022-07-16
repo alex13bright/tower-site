@@ -58,3 +58,15 @@ export const expandOnParentSides = (size: string) => css`
   padding-left: ${size};
   padding-right: ${size};
 `
+
+export const pseudoIcon = css<{ $width: string; $height: string; svg: string; gap: string }>`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: ${({ gap }) => gap};
+  &::before {
+    content: '';
+    width: ${({ $width }) => $width};
+    height: ${({ $height }) => $height};
+    background: url(${({ svg }) => svg}) no-repeat 50%;
+  }
+`

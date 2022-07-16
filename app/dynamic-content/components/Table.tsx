@@ -1,7 +1,13 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { cancelSideMargins, proximaNovaSb, sidePaddings, widthAtLeast } from '~/styles/styles'
+import {
+  cancelSideMargins,
+  proximaNovaSb,
+  pseudoIcon,
+  sidePaddings,
+  widthAtLeast,
+} from '~/styles/styles'
 import { useToggle } from '~/custom-hooks/useToggle'
 
 const FoldButton = styled.button`
@@ -16,12 +22,12 @@ const FoldButton = styled.button`
   justify-self: center;
 `
 
-const tdCss = css`
+const cellCss = css`
   padding: 12px 16px;
 `
 
-export const TD = styled.td`
-  ${tdCss};
+const Cell = styled.td`
+  ${cellCss};
   white-space: nowrap;
   font-size: 15px;
   line-height: 16px;
@@ -34,8 +40,32 @@ export const TD = styled.td`
   place-items: center start;
 `
 
+const StyledPayment = styled.span<{
+  $width: string
+  $height: string
+  svg: string
+  gap: string
+}>`
+  ${pseudoIcon}
+`
+type PaymentCellProps = { payment: ReactElement }
+const PaymentCell = ({ payment }: PaymentCellProps) => {
+  return (
+    <Cell>
+      <StyledPayment
+        $width="20px"
+        $height="20px"
+        gap="10px"
+        svg={`/images/payments/${payment.props.children}-color.svg`}
+      >
+        {payment}
+      </StyledPayment>
+    </Cell>
+  )
+}
+
 export const TH = styled.th`
-  ${tdCss};
+  ${cellCss};
   background: #e9e9e9;
   border: 1px solid #dfdede;
   color: #777;
@@ -90,7 +120,7 @@ const Main = styled.div`
 `
 
 type TableData = {
-  table: string[][]
+  table: ReactElement[][]
   caption: string | null
 }
 const parseChildren = (children: ReactElement[]): TableData => {
@@ -112,17 +142,20 @@ const parseChildren = (children: ReactElement[]): TableData => {
 type Props = {
   className?: string
   children: any
+  'data-rows'?: string
+  'data-icon'?: string
 }
 
-export const Table = ({ children }: Props): ReactElement => {
+export const Table = ({ children, className, ...props }: Props): ReactElement => {
+  const dataRows = props['data-rows'] ? parseInt(props['data-rows']) : Infinity
+  const dataIcon = props['data-icon'] ? props['data-icon'] : null
   const tableData = parseChildren(children)
   const { caption, table } = tableData
 
-  const rowsAmount = 2
   const { isToggled: showLess, toggle } = useToggle(true)
 
   const [headerRow, ...rows] = table
-  const bodyRows = showLess ? rows.slice(0, rowsAmount) : rows
+  const bodyRows = showLess ? rows.slice(0, dataRows) : rows
   return (
     <Main>
       <StyledTable>
@@ -135,14 +168,18 @@ export const Table = ({ children }: Props): ReactElement => {
           </TR>
           {bodyRows.map((row, i) => (
             <TR key={i}>
-              {row.map((value, i) => (
-                <TD key={i}>{value}</TD>
-              ))}
+              {row.map((value, i) =>
+                dataIcon === 'payment' && i === 0 ? (
+                  <PaymentCell key={i} payment={value} />
+                ) : (
+                  <Cell key={i}>{value}</Cell>
+                )
+              )}
             </TR>
           ))}
         </TBody>
       </StyledTable>
-      {rowsAmount < rows.length ? (
+      {dataRows < rows.length ? (
         <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
       ) : null}
     </Main>

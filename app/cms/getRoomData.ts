@@ -3,7 +3,7 @@ import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
 import * as fs from 'fs'
-import { transformContent } from '~/core/contentTransfs'
+import { transformContent } from '~/dynamic-content/contentTransfs'
 
 export const getRoomData = async (
   lang: Lang,
