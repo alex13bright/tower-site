@@ -14,12 +14,12 @@ import { copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { P } from '~/components/dynamic-content/content'
+import { P } from '~/components/dynamic-content/tags/tags'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { useLoaderData } from '@remix-run/react'
-import { UnorderedList } from '~/components/dynamic-content/UnorderedList'
+import { UnorderedList } from '~/components/dynamic-content/tags/UnorderedList'
 
 const Logo = styled.img`
   width: 52px !important;

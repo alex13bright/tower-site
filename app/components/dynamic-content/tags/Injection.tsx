@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { BonusFeed } from '~/components/dynamic-content/BonusFeed'
+import { BonusFeed } from '~/components/dynamic-content/tags/BonusFeed'
 
 type InjectionProps = {
   children: ReactElement

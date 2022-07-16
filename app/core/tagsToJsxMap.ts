@@ -1,9 +1,9 @@
-import { P, H1, H2, H3 } from '~/components/dynamic-content/content'
-import { Table } from '~/components/dynamic-content/Table'
-import { Anchor } from '~/components/dynamic-content/Anchor'
-import { Image } from '~/components/dynamic-content/Image'
-import { Injection } from '~/components/dynamic-content/Injection'
-import { UnorderedList } from '~/components/dynamic-content/UnorderedList'
+import { P, H1, H2, H3 } from '~/components/dynamic-content/tags/tags'
+import { Table } from '~/components/dynamic-content/tags/Table'
+import { Anchor } from '~/components/dynamic-content/tags/Anchor'
+import { Image } from '~/components/dynamic-content/tags/Image'
+import { Injection } from '~/components/dynamic-content/tags/Injection'
+import { UnorderedList } from '~/components/dynamic-content/tags/UnorderedList'
 
 export const tagsToJsxMap = {
   p: P,
