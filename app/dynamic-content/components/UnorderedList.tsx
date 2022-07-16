@@ -11,7 +11,7 @@ const StyledLI = styled.li`
   position: relative;
 
   &::before {
-    background: url('/assets/list-item.svg') no-repeat 50%;
+    background: url('/images/main/list-item.svg') no-repeat 50%;
     content: '';
     position: absolute;
     top: 6px;

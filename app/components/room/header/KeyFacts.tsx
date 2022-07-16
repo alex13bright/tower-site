@@ -13,7 +13,7 @@ const Item = styled.li`
   &::before {
     width: 20px;
     height: 20px;
-    background-image: url('/assets/corona.svg');
+    background-image: url('/images/main/corona.svg');
     background-repeat: no-repeat;
     content: '';
   }

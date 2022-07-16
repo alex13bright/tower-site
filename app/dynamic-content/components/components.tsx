@@ -20,7 +20,7 @@ export const H2 = styled.h2`
   padding-top: 12px;
 
   &::before {
-    background: url('/assets/h2-line.svg') no-repeat 50%;
+    background: url('/images/main/h2-line.svg') no-repeat 50%;
     content: '';
     position: absolute;
     top: 0;

@@ -20,7 +20,7 @@
 }
 
 #tinymce h2::before {
-  background: url('/assets/9dc060a4-c2e5-43e5-8fbd-4c28712cbcf5.svg') no-repeat 50% !important;
+  background: url('/images/main/9dc060a4-c2e5-43e5-8fbd-4c28712cbcf5.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
@@ -67,7 +67,7 @@
 }
 
 #tinymce ul > li::before {
-  background: url('/assets/c25cf9fa-d1b5-4740-b519-4baba72ca338.svg') no-repeat 50% !important;
+  background: url('/images/main/c25cf9fa-d1b5-4740-b519-4baba72ca338.svg') no-repeat 50% !important;
   content: '' !important;
   position: absolute !important;
   top: 6px !important;

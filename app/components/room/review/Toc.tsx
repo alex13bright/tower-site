@@ -1,6 +1,5 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { useLoaderData } from '@remix-run/react'
 import {
   accent,
   cancelSideMargins,
@@ -101,7 +100,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
     display: block;
     width: 20px;
     height: 20px;
-    background: url(/assets/arrow-down-dark.svg) no-repeat 50%;
+    background: url(/images/main/arrow-down-dark.svg) no-repeat 50%;
     ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
 
     @media screen and ${widthAtLeast.lg} {

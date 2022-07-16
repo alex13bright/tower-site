@@ -6,8 +6,8 @@ import { Toc } from '~/components/room/review/Toc'
 import { Review } from '~/components/room/review/Review'
 import { contentSidePadding } from '~/components/page/pageStyles'
 import { widthAtLeast } from '~/styles/styles'
-import { FakeContent } from '~/components/styled/FakeContent'
 import { PageMeta } from '~/components/room/review/PageMeta'
+import { HeaderLevel1 } from '~/components/room/review/HeaderLevel1'
 
 const Layout = styled.section`
   display: grid;
@@ -47,12 +47,11 @@ export const Room = (): ReactElement => {
       <Content>
         <Toc />
         <ContentWrapper>
-          {/*<ReviewTitle1>GG Poker review</ReviewTitle1>*/}
+          <HeaderLevel1 />
           <PageMeta />
           <Review />
         </ContentWrapper>
       </Content>
-      <FakeContent height="1000px">FC</FakeContent>
     </Layout>
   )
 }

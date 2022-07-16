@@ -160,14 +160,6 @@ export const getRoomData = async (
   if (typeof slug !== 'string') throw new Error('bad slug')
   if (typeof licenseCountry !== 'string') throw new Error('bad licenseCountry')
 
-  // for decimals must be number but directus return string instead
-  if (typeof rawReliability !== 'string') throw new Error('bad reliability')
-  if (typeof rawBonusesPromotions !== 'string') throw new Error('bad bonusesPromotions')
-  if (typeof rawGameSelection !== 'string') throw new Error('bad gameSelection')
-  if (typeof rawCasualPlayers !== 'string') throw new Error('bad casualPlayers')
-  if (typeof rawSoftwareConvenience !== 'string') throw new Error('bad softwareConvenience')
-  if (typeof rawDepositsWithdrawals !== 'string') throw new Error('bad depositsWithdrawals')
-
   if (!Array.isArray(rawDevices)) throw new Error('bad rawDevices')
   const devices = rawDevices.map((rawDevice) => {
     if (
@@ -214,11 +206,17 @@ export const getRoomData = async (
   if (typeof rakeback !== 'string') throw new Error('bad rakeback')
   if (typeof deposit !== 'string') throw new Error('bad deposit')
   if (typeof maxBonus !== 'string') throw new Error('bad deposit')
-  if (typeof rawKeyFacts !== 'string') throw new Error('bad rawKeyFacts')
-  if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
 
+  if (typeof rawKeyFacts !== 'string') throw new Error('bad rawKeyFacts')
   const keyFacts = rawKeyFacts.split('\n')
 
+  // type for decimals must be a number but directus returns string instead
+  if (typeof rawReliability !== 'string') throw new Error('bad reliability')
+  if (typeof rawBonusesPromotions !== 'string') throw new Error('bad bonusesPromotions')
+  if (typeof rawGameSelection !== 'string') throw new Error('bad gameSelection')
+  if (typeof rawCasualPlayers !== 'string') throw new Error('bad casualPlayers')
+  if (typeof rawSoftwareConvenience !== 'string') throw new Error('bad softwareConvenience')
+  if (typeof rawDepositsWithdrawals !== 'string') throw new Error('bad depositsWithdrawals')
   const reliability = parseFloat(rawReliability)
   const bonusesPromotions = parseFloat(rawBonusesPromotions)
   const gameSelection = parseFloat(rawGameSelection)
@@ -226,6 +224,7 @@ export const getRoomData = async (
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
 
+  if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
   const pages = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
     const {
@@ -243,8 +242,7 @@ export const getRoomData = async (
     if (typeof h1 !== 'string') throw new Error('bad h1')
     if (typeof metaTitle !== 'string') throw new Error('bad title')
     if (typeof metaDescription !== 'string') throw new Error('bad description')
-    if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
-    if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
+
     if (
       typeof rawAuthor !== 'object' ||
       !Array.isArray(rawAuthor.translations) ||
@@ -252,9 +250,12 @@ export const getRoomData = async (
       typeof rawAuthor.translations[0].title !== 'string'
     )
       throw new Error('bad rawAuthor')
-
     const author = rawAuthor.translations[0].title
+
+    if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
     const created = new Date(rawCreated).toLocaleDateString()
+
+    if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
     const updated = new Date(rawCreated).toLocaleDateString()
 
     if (
@@ -265,12 +266,10 @@ export const getRoomData = async (
       typeof rawType.translations[0] !== 'object' ||
       typeof rawType.translations[0].title !== 'string'
     )
-      throw new Error('bad rawAuthor')
+      throw new Error('bad rawType')
     const title = rawType.translations[0].title
     const type = rawType.name
     const url = `/rakeback-deals/${roomSlug}-${type}`
-
-    if (typeof rawType !== 'object') throw new Error('bad rawType')
 
     return {
       type,

@@ -49,7 +49,7 @@ const SignUpButtonStyle = styled(ExternalLink)`
   }
 
   &::after {
-    background-image: url(/assets/arrow.svg);
+    background-image: url(/images/main/arrow.svg);
   }
 `
 
@@ -66,7 +66,7 @@ const StyledContactButton = styled.button`
   }
 
   &::after {
-    background-image: url(/assets/question.svg);
+    background-image: url(/images/main/question.svg);
     background-position-y: 50%;
   }
 `

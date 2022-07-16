@@ -37,6 +37,9 @@ type StickyMarkerProps = {
   children: ReactNode
 }
 
+const StickyMarkerMain = styled.div`
+  display: grid;
+`
 export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
   const [_, stickyContextSetState] = useStickyContext()
@@ -45,11 +48,7 @@ export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
     if (isVisible === null) return
     stickyContextSetState((state) => ({ ...state, [isVisibleKey]: isVisible }))
   }, [isVisibleKey, isVisible, stickyContextSetState])
-  return (
-    <div ref={ref} style={{ display: 'grid' }}>
-      {children}
-    </div>
-  )
+  return <StickyMarkerMain ref={ref}>{children}</StickyMarkerMain>
 }
 
 const StickyBox = styled.div<{ isVisible: boolean }>`

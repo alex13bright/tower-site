@@ -120,7 +120,7 @@ const BonusCode = styled.span`
   padding: 4px 20px !important;
 
   &:hover {
-    border: 1px dashed ${accent}!important;
+    border: 1px dashed ${accent} !important;
   }
 
   &:hover:before {
@@ -131,7 +131,7 @@ const BonusCode = styled.span`
     height: 12px !important;
     top: -12px !important;
     left: 50% !important;
-    background: url('/assets/scissors.svg') no-repeat !important;
+    background: url('/images/main/scissors.svg') no-repeat !important;
   }
 `
 
@@ -179,8 +179,8 @@ const DetailsToggleButton = styled.button<{ isPressed: boolean }>`
     content: '' !important;
     width: 16px !important;
     height: 16px !important;
-    background: url('/assets/more-down.svg') no-repeat center !important;
-    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')}!important;
+    background: url('/images/main/more-down.svg') no-repeat center !important;
+    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')} !important;
   }
 `
 
