@@ -1,9 +1,7 @@
-import { P, UL, A, H1, H2, H3, Img, LI, Injection } from '~/components/common/content'
-import { ExpandableTable } from '~/components/common/ExpandableTable'
-
 import { ReactElement } from 'react'
 import JsxParser from 'react-jsx-parser'
 import styled from 'styled-components'
+import { tagsToJsxMap } from '~/core/tagsToJsxMap'
 
 const StyledJsxParser = styled(JsxParser)`
   display: grid;
@@ -13,6 +11,10 @@ type Props = {
   content: string
   className?: string
 }
+
+const components = Object.fromEntries(
+  Object.values(tagsToJsxMap).map((com) => [com.displayName, com])
+)
 
 export const DynamicContent = ({ content, className }: Props): ReactElement => {
   const bindings = {
@@ -27,7 +29,7 @@ export const DynamicContent = ({ content, className }: Props): ReactElement => {
       autoCloseVoidElements={true}
       className={className}
       bindings={bindings}
-      components={{ P, UL, H1, H2, H3, Img, LI, A, Injection, Table: ExpandableTable } as any}
+      components={components}
       jsx={content}
     />
   )

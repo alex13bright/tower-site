@@ -71,7 +71,7 @@ export const Caption = styled.caption`
   order: 1;
 `
 
-export const Table = styled.table`
+export const StyledTable = styled.table`
   display: grid;
   row-gap: 10px;
 `
@@ -89,18 +89,13 @@ const Main = styled.div`
   }
 `
 
-type Props = {
-  className?: string
-  // data: string
-  children: any
-}
 type TableData = {
   table: string[][]
   caption: string | null
 }
-const parseTableData = (reactTableData: ReactElement[]): TableData => {
+const parseChildren = (children: ReactElement[]): TableData => {
   // caution: parse only first tbody
-  const [tbody] = reactTableData.filter(({ type }) => type === 'tbody')
+  const [tbody] = children.filter(({ type }) => type === 'tbody')
   const table = tbody.props.children
     .filter(({ type }: { type: string }) => type === 'tr')
     .map((tr: ReactElement) => {
@@ -110,24 +105,18 @@ const parseTableData = (reactTableData: ReactElement[]): TableData => {
       })
     })
 
-  // const table = reactTableData
-  //   .filter(({ type }) => type === 'tbody')[0]
-  //   .props.children.filter(({ type }) => type === 'tr')
-  //   .map((tr) => {
-  //     console.log(tr)
-  //     return tr.props.children
-  //       .filter(({ type }) => type === 'td')
-  //       .map((d) => {
-  //         console.log(d)
-  //         return d.props.children.props.children
-  //       })
-  //   })
   const caption = null
   return { caption, table }
 }
 
-export const ExpandableTable = ({ children }: Props): ReactElement => {
-  const tableData = parseTableData(children)
+type Props = {
+  className?: string
+  // data: string
+  children: any
+}
+
+export const Table = ({ children }: Props): ReactElement => {
+  const tableData = parseChildren(children)
   const { caption, table } = tableData
 
   const rowsAmount = 2
@@ -137,12 +126,12 @@ export const ExpandableTable = ({ children }: Props): ReactElement => {
   const bodyRows = showLess ? rows.slice(0, rowsAmount) : rows
   return (
     <Main>
-      <Table>
+      <StyledTable>
         {caption !== null ? <Caption>{caption}</Caption> : null}
         <TBody columns={headerRow.length}>
           <TR>
-            {headerRow.map((title) => (
-              <TH key={title}>{title}</TH>
+            {headerRow.map((title, i) => (
+              <TH key={i}>{title}</TH>
             ))}
           </TR>
           {bodyRows.map((row, i) => (
@@ -153,10 +142,11 @@ export const ExpandableTable = ({ children }: Props): ReactElement => {
             </TR>
           ))}
         </TBody>
-      </Table>
+      </StyledTable>
       {rowsAmount < rows.length ? (
         <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
       ) : null}
     </Main>
   )
 }
+Table.displayName = 'Table'

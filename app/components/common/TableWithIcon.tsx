@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { TD } from '~/components/common/ExpandableTable'
+import { TD } from '~/components/dynamic-content/Table'
 
 const IconDT = styled(TD)<{ svg: string; $width: string; $height: string }>`
   display: flex;

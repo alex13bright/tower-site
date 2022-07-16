@@ -14,11 +14,12 @@ import { copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
 import { contentSidePaddingSize } from '~/components/page/pageStyles'
-import { LI, P, UL } from '~/components/common/content'
+import { P } from '~/components/dynamic-content/content'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { useLoaderData } from '@remix-run/react'
+import { UnorderedList } from '~/components/dynamic-content/UnorderedList'
 
 const Logo = styled.img`
   width: 52px !important;
@@ -283,25 +284,25 @@ export const BonusFeed = ({ className }: Props): ReactElement => {
             Honeymoon for Newcomers. You will be able to choose one of two welcome bonuses for your
             first deposit at GGPoker:
           </P>
-          <UL>
-            <LI>
+          <UnorderedList>
+            <li>
               100% matched bonus up to $600: paid in $5 chunks for every $20 net rake (please check
               PVI rake), 90 days wagering time!important;
-            </LI>
-            <LI>Up to $100 in cash and free tickets: all rewards will expire after 30 days</LI>
+            </li>
+            <li>Up to $100 in cash and free tickets: all rewards will expire after 30 days</li>
             <P>Highlights:</P>
-            <UL>
-              <LI>The minimum deposit is $20</LI>
-              <LI>
+            <UnorderedList>
+              <li>The minimum deposit is $20</li>
+              <li>
                 All raked games contribute to the Match Bonus. Spin & Gold Insurance and All-in
                 Insurance do not contribute
-              </LI>
-              <LI>
+              </li>
+              <li>
                 The Match Bonus is excellent for deposits from $100. If you plan to deposit less,
                 choose the free tickets offer.
-              </LI>
-            </UL>
-          </UL>
+              </li>
+            </UnorderedList>
+          </UnorderedList>
         </DetailsContent>
       </Details>
     </Main>
