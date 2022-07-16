@@ -229,7 +229,7 @@ export const getRoomData = async (
   const pages = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
     const {
-      content,
+      content: rawContent,
       h1,
       meta_title: metaTitle,
       meta_description: metaDescription,
@@ -239,7 +239,7 @@ export const getRoomData = async (
       type: rawType,
     } = page
 
-    if (typeof content !== 'string') throw new Error('bad content')
+    if (typeof rawContent !== 'string') throw new Error('bad content')
     if (typeof h1 !== 'string') throw new Error('bad h1')
     if (typeof metaTitle !== 'string') throw new Error('bad title')
     if (typeof metaDescription !== 'string') throw new Error('bad description')
@@ -281,7 +281,8 @@ export const getRoomData = async (
       contentMeta: { author, created, updated },
       roomType,
       h1,
-      content,
+      rawContent,
+      content: '',
     }
   })
 
@@ -316,8 +317,7 @@ export const getRoomData = async (
     pages,
     activePage,
   }
-
-  pages[activePage].content = transformContent(pages[activePage].content)
+  pages[activePage].content = transformContent(pages[activePage].rawContent)
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 

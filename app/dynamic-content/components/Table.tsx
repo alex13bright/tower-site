@@ -116,6 +116,7 @@ type Props = {
 }
 
 export const Table = ({ children }: Props): ReactElement => {
+  throw new Error('pipez')
   const tableData = parseChildren(children)
   const { caption, table } = tableData
 

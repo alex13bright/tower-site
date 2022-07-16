@@ -17,10 +17,12 @@ import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
 import { LocaleContext, useLocale } from '~/components/root/Locale'
 import { Locale } from '~/core/types'
+import contentStyles from '~/dynamic-content/fallback-styles/content-site.css'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
+  { rel: 'stylesheet', href: contentStyles },
 ]
 
 export const meta: MetaFunction = () => ({

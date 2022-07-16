@@ -4,11 +4,6 @@ import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import { getRoomData } from '~/cms/getRoomData'
 import { Country } from '~/core/types'
 import { RoomType } from '~/core/types'
-// import contentStyles from '~/styles/content-site.css'
-
-// export const links: LinksFunction = () => {
-//   return [{ rel: 'stylesheet', href: contentStyles }]
-// }
 
 export type LoaderData = {
   room: RoomType

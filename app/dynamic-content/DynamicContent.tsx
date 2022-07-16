@@ -9,6 +9,7 @@ const StyledJsxParser = styled(JsxParser)`
 
 type Props = {
   content: string
+  rawContent: string
   className?: string
 }
 
@@ -16,7 +17,7 @@ const components = Object.fromEntries(
   Object.values(tagsToJsxMap).map((com) => [com.displayName, com])
 )
 
-export const DynamicContent = ({ content, className }: Props): ReactElement => {
+export const DynamicContent = ({ content, rawContent, className }: Props): ReactElement => {
   const bindings = {
     // data: 'real_data',
     // myEventHandler: () => {},
@@ -24,13 +25,61 @@ export const DynamicContent = ({ content, className }: Props): ReactElement => {
   return (
     <StyledJsxParser
       onError={(error) => {
-        throw error
+        console.log(error)
       }}
       autoCloseVoidElements={true}
       className={className}
       bindings={bindings}
       components={components}
       jsx={content}
+      renderError={({ error }: { error: string }) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<div id="cms" style="display: grid">${rawContent}</div>`,
+          }}
+        />
+      )}
     />
   )
 }
+
+/*
+
+renderError={({ error }: { error: string }) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<div id="cms" style="display: grid">${rawContent}</div>`,
+          }}
+        />
+      )}
+export const DynamicContent = ({ content, rawContent, className }: Props): ReactElement => {
+  const bindings = {
+    // data: 'real_data',
+    // myEventHandler: () => {},
+  }
+  let element = null
+  try {
+    element = (
+      <StyledJsxParser
+        onError={(error) => {
+          throw error
+        }}
+        autoCloseVoidElements={true}
+        className={className}
+        bindings={bindings}
+        components={components}
+        jsx={content}
+      />
+    )
+  } catch (error) {
+    element = (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `<div id="cms" style="display: grid">${rawContent}</div>`,
+        }}
+      />
+    )
+  }
+  return element
+}
+*/

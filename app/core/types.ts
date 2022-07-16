@@ -28,7 +28,8 @@ export type PageType = {
   pageMeta: PageMetaType
   contentMeta: ContentMetaType
   h1: string
-  content: string
+  rawContent: string
+  content?: string
 }
 
 export type BonusType = {
