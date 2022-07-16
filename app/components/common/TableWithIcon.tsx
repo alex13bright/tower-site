@@ -1,16 +1,25 @@
-import styled from 'styled-components'
+/*
+import styled, { css } from 'styled-components'
 import { TD } from '~/components/dynamic-content/Table'
 
-const IconDT = styled(TD)<{ svg: string; $width: string; $height: string }>`
-  display: flex;
-  gap: 10px;
-
+const pseudoIcon = css<{ $width: string; $height: string; svg: string; gap: string }>`
+  display: grid;
+  grid-area: content;
+  grid-template-areas: 'icon content';
+  gap: ${({ gap }) => gap};
   &::before {
+    grid-area: icon;
     content: '';
     width: ${({ $width }) => $width};
     height: ${({ $height }) => $height};
     background: url(${({ svg }) => svg}) no-repeat 50%;
   }
+`
+const IconDT = styled(TD)<{ svg: string; $width: string; $height: string }>`
+  //display: flex;
+  //gap: 10px;
+
+  ${pseudoIcon}
 `
 
 const DepositsAndWithdrawals = [
@@ -28,3 +37,6 @@ const addIcons = (data: string[][]) =>
     </IconDT>,
     ...row,
   ])
+*/
+
+export const TableWithIcon = null
