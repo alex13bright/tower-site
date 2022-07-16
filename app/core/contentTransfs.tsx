@@ -1,6 +1,6 @@
 import { replaceAll } from '~/lib/utilities'
 import * as fs from 'fs'
-import { tagsToJsxMap } from '~/core/tagsToJsxMap'
+import { tagsToJsxMap } from '~/dynamic-content/tagsToJsxMap'
 
 export const replaceTagsWithJsx = (content: string): string =>
   Object.entries(tagsToJsxMap).reduce((content, [tag, jsx]) => {

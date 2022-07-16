@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import JsxParser from 'react-jsx-parser'
 import styled from 'styled-components'
-import { tagsToJsxMap } from '~/core/tagsToJsxMap'
+import { tagsToJsxMap } from '~/dynamic-content/tagsToJsxMap'
 
 const StyledJsxParser = styled(JsxParser)`
   display: grid;

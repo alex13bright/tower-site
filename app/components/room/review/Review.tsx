@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
-import { DynamicContent } from '~/components/dynamic-content/DynamicContent'
+import { DynamicContent } from '~/dynamic-content/DynamicContent'
 // import styled from 'styled-components'
 
 // const Main = styled.div`
