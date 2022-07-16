@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 import { Form } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSize, contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { ContactButton, SignUpButton, TagButton } from '~/components/common/actionButton'
 
 const button = css`
@@ -30,8 +30,8 @@ const StyledForm = styled(Form)`
 const Main = styled.div`
   grid-area: actions;
   display: grid;
-  column-gap: ${contentSidePaddingSize.xs};
-  row-gap: calc(${contentSidePaddingSize.xs} / 2);
+  column-gap: ${contentSidePaddingSizePx};
+  row-gap: ${contentSidePaddingSize / 2}px;
 
   @media screen and ${widthAtLeast.md} {
     column-gap: ${sidePaddingSize.md};

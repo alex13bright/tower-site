@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import {
   cancelSideMargins,
   proximaNovaSb,
@@ -110,8 +110,8 @@ const Main = styled.div`
   display: grid;
   margin-bottom: 20px;
   row-gap: 16px;
-  margin-left: -${contentSidePaddingSize.xs};
-  margin-right: -${contentSidePaddingSize.xs};
+  margin-left: -${contentSidePaddingSizePx};
+  margin-right: -${contentSidePaddingSizePx};
 
   @media screen and ${widthAtLeast.md} {
     ${cancelSideMargins};

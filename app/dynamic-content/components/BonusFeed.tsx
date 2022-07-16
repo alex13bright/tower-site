@@ -13,7 +13,7 @@ import {
 import { copyToClip } from '~/core/browserUtilities'
 import { Tooltip } from '~/components/ui/Tooltip'
 import { SignUpButton } from '~/components/common/actionButton'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { P } from '~/dynamic-content/components/components'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
@@ -22,193 +22,193 @@ import { useLoaderData } from '@remix-run/react'
 import { UnorderedList } from '~/dynamic-content/components/UnorderedList'
 
 const Logo = styled.img`
-  width: 52px !important;
-  aspect-ratio: 1 / 1 !important;
+  width: 52px;
+  aspect-ratio: 1 / 1;
 `
 const HeaderInfoTitle = styled.span`
   color: ${secondaryAction}!important;
   border-color: ${secondaryAction}!important;
   border: 1px solid ${secondaryAction}!important;
-  border-radius: 100px !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.2px !important;
-  padding: 4px 8px 3px !important;
-  text-align: center !important;
-  text-transform: uppercase !important;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 4px 8px 3px;
+  text-align: center;
+  text-transform: uppercase;
 `
 const HeaderInfoValue = styled.span`
-  font-size: 20px !important;
-  font-weight: 600 !important;
+  font-size: 20px;
+  font-weight: 600;
 `
 
 const HeaderInfo = styled.span`
-  display: grid !important;
-  align-items: center !important;
+  display: grid;
+  align-items: center;
 `
 const Header = styled.span`
-  display: flex !important;
-  justify-content: start !important;
-  column-gap: 20px !important;
+  display: flex;
+  justify-content: start;
+  column-gap: 20px;
 
   @media screen and ${widthAtLeast.md} {
-    grid-area: header !important;
+    grid-area: header;
   }
 `
 
 const Title = styled.span`
-  color: #777 !important;
-  font-size: 12px !important;
-  line-height: 16px !important;
-  letter-spacing: 0.3px !important;
-  text-transform: uppercase !important;
+  color: #777;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 `
 const Value = styled.span`
-  color: #243238 !important;
-  flex: 0 0 33.3% !important;
-  font-size: 16px !important;
-  line-height: 22px !important;
+  color: #243238;
+  flex: 0 0 33.3%;
+  font-size: 16px;
+  line-height: 22px;
 `
 const Item = styled.li`
   font-family: ${proximaNovaSb}!important;
-  display: grid !important;
-  row-gap: 4px !important;
-  border-left: 1px solid #e9e9e9 !important;
+  display: grid;
+  row-gap: 4px;
+  border-left: 1px solid #e9e9e9;
   ${sidePaddings('10px')}!important;
 `
 const List = styled.ul`
-  display: grid !important;
-  grid-template-columns: repeat(3, auto) !important;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
 
   & li:first-child {
-    border-left: none !important;
-    padding-left: 0 !important;
+    border-left: none;
+    padding-left: 0;
   }
 
   @media screen and ${widthAtLeast.md} {
-    grid-area: list !important;
+    grid-area: list;
   }
 `
 
 const StyledTooltip = styled(Tooltip)`
-  display: grid !important;
+  display: grid;
 `
 
 const BonusCodeTitle = styled.span`
   color: ${secondaryDark}!important;
-  text-transform: uppercase !important;
+  text-transform: uppercase;
   font-family: ${proximaNovaSb}!important;
-  font-size: 10px !important;
-  line-height: 1em !important;
-  text-align: center !important;
+  font-size: 10px;
+  line-height: 1em;
+  text-align: center;
 `
 
 const BonusCodeValue = styled.span`
-  font-weight: 700 !important;
-  text-align: center !important;
+  font-weight: 700;
+  text-align: center;
 `
 
 const BonusCode = styled.span`
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-around !important;
-  row-gap: 2px !important;
-  cursor: pointer !important;
-  position: relative !important;
-  background: #fafafa !important;
-  border: 1px dashed hsla(0, 0%, 46.7%, 0.5) !important;
-  padding: 4px 20px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  row-gap: 2px;
+  cursor: pointer;
+  position: relative;
+  background: #fafafa;
+  border: 1px dashed hsla(0, 0%, 46.7%, 0.5);
+  padding: 4px 20px;
 
   &:hover {
-    border: 1px dashed ${accent} !important;
+    border: 1px dashed ${accent};
   }
 
   &:hover:before {
-    content: '' !important;
-    display: block !important;
-    position: absolute !important;
-    width: 18px !important;
-    height: 12px !important;
-    top: -12px !important;
-    left: 50% !important;
-    background: url('/images/main/scissors.svg') no-repeat !important;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 12px;
+    top: -12px;
+    left: 50%;
+    background: url('/images/main/scissors.svg') no-repeat;
   }
 `
 
 const StyledSignUpButton = styled(SignUpButton)`
-  padding: 10px !important;
-  font-size: 16px !important;
+  padding: 10px;
+  font-size: 16px;
 `
 
 const Action = styled.span`
-  display: grid !important;
-  grid-template-rows: repeat(2, 1fr) !important;
-  gap: 10px !important;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
 
   @media screen and ${widthAtLeast.sm} {
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-template-rows: auto !important;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 
   @media screen and ${widthAtLeast.md} {
-    grid-area: action !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: end !important;
+    grid-area: action;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 `
 
 const DetailsToggleTitle = styled.span`
-  font-size: 12px !important;
-  line-height: 16px !important;
-  align-items: center !important;
-  background: #fafafa !important;
-  border-bottom: 1px dashed #aaa !important;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  background: #fafafa;
+  border-bottom: 1px dashed #aaa;
 
   &:hover {
-    border: none !important;
+    border: none;
   }
 `
 
 const DetailsToggleButton = styled.button<{ isPressed: boolean }>`
-  display: flex !important;
-  column-gap: 4px !important;
-  user-select: none !important;
+  display: flex;
+  column-gap: 4px;
+  user-select: none;
 
   &::before {
-    content: '' !important;
-    width: 16px !important;
-    height: 16px !important;
-    background: url('/images/main/more-down.svg') no-repeat center !important;
-    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')} !important;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url('/images/main/more-down.svg') no-repeat center;
+    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
   }
 `
 
 const DetailsContent = styled.span<{ isHidden: boolean }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')}!important;
-  margin-top: 20px !important;
+  margin-top: 20px;
 
   & > p,
   ul,
   li {
-    font-size: 15px !important;
-    line-height: 18px !important;
+    font-size: 15px;
+    line-height: 18px;
   }
 `
 
 const Details = styled.span`
-  ${expandOnParentSides(contentSidePaddingSize.xs)}!important;
+  ${expandOnParentSides(contentSidePaddingSizePx)}!important;
 
-  color: #777 !important;
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  background: #fafafa !important;
-  border: 1px solid #e9e9e9 !important;
+  color: #777;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border: 1px solid #e9e9e9;
 
   @media screen and ${widthAtLeast.md} {
-    grid-area: details !important;
+    grid-area: details;
     ${cancelSideMargins}!important;
     ${sidePaddings(sidePaddingSize.md)}!important;
   }
@@ -218,17 +218,17 @@ const Details = styled.span`
 `
 
 const Main = styled.span`
-  display: grid !important;
-  row-gap: 16px !important;
-  margin-bottom: 30px !important;
+  display: grid;
+  row-gap: 16px;
+  margin-bottom: 30px;
 
   @media screen and ${widthAtLeast.md} {
-    grid-template-rows: auto auto auto !important;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       'header action'
       'list action'
-      'details details' !important;
-    grid-template-columns: 1fr 180px !important;
+      'details details';
+    grid-template-columns: 1fr 180px;
   }
 `
 

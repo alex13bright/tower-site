@@ -23,7 +23,7 @@ import {
 import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
 import { useLoaderData } from '@remix-run/react'
 import { darken } from '~/core/utils'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const StyledName = styled(Name)<{ kind: string }>`
@@ -82,7 +82,7 @@ const Info = styled.button`
 
 const Main = styled(Table)`
   grid-area: detailed;
-  ${expandOnParentSides(contentSidePaddingSize.xs)};
+  ${expandOnParentSides(contentSidePaddingSizePx)};
   padding-top: 30px;
   padding-bottom: 30px;
   background: #2c2f3c;

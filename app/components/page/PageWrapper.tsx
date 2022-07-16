@@ -1,19 +1,25 @@
 import styled from 'styled-components'
 import { ReactElement, ReactNode } from 'react'
-import { breakpoints, widthAtLeast } from '~/styles/styles'
+import { breakpoints } from '~/styles/styles'
 import { AsType } from '~/lib/types'
+import { contentSidePaddingSize } from '~/components/page/pageStyles'
 
+const xlPlusPaddings = `(min-width: ${breakpoints.xl + contentSidePaddingSize * 2}px)`
 const OuterBox = styled.div<{ as?: AsType }>`
   display: grid;
-  grid-template-areas: '. content .';
+
   min-width: ${breakpoints.xs}px;
-  @media screen and ${widthAtLeast.xl} {
+  @media screen and ${xlPlusPaddings} {
+    grid-template-areas: '. content .';
     grid-template-columns: 1fr ${breakpoints.xl}px 1fr;
   }
 `
 const InnerBox = styled.div`
+  max-width: ${breakpoints.xl}px;
   display: grid;
-  grid-area: content;
+  @media screen and ${xlPlusPaddings} {
+    grid-area: content;
+  }
 `
 
 type Props = {

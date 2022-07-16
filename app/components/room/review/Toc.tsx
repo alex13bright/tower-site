@@ -10,7 +10,7 @@ import {
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 
 const Anchor = styled.a`
@@ -114,7 +114,7 @@ const Main = styled.nav`
   border-radius: 10px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
 
-  ${expandOnParentSides(contentSidePaddingSize.xs)};
+  ${expandOnParentSides(contentSidePaddingSizePx)};
   padding-top: 16px;
   padding-bottom: 16px;
   margin-bottom: 40px;

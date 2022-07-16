@@ -17,7 +17,7 @@ import { Characteristics } from '~/components/room/header/Characteristics'
 import { DetailedRatings } from '~/components/room/header/DetailedRatings'
 import { KeyFacts } from '~/components/room/header/KeyFacts'
 import { NavButtons } from '~/components/room/header/NavButtons'
-import { contentSidePaddingSize } from '~/components/page/pageStyles'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { sidePaddingSize } from '~/components/room/header/headerStyles'
 
 const LogoHighlightsSpan = styled.div`
@@ -31,7 +31,7 @@ const LogoHighlightsSpan = styled.div`
   }
 `
 const Main = styled.div`
-  ${expandOnParentSides(contentSidePaddingSize.xs)};
+  ${expandOnParentSides(contentSidePaddingSizePx)};
 
   @media screen and ${widthAtLeast.md} {
     ${cancelSideMargins};

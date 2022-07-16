@@ -25,7 +25,7 @@ const StyledLI = styled.li`
 const StyledUL = styled.ul`
   list-style-position: outside;
   list-style-type: none;
-  margin: 0 0 40px;
+  margin: 0 0 40px 0;
   padding: 0;
 `
 
