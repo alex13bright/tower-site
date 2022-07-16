@@ -25,7 +25,7 @@ export const DynamicContent = ({ content, rawContent, className }: Props): React
   return (
     <StyledJsxParser
       onError={(error) => {
-        console.log(error)
+        console.log('StyledJsxParser', error)
       }}
       autoCloseVoidElements={true}
       className={className}
@@ -42,44 +42,3 @@ export const DynamicContent = ({ content, rawContent, className }: Props): React
     />
   )
 }
-
-/*
-
-renderError={({ error }: { error: string }) => (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<div id="cms" style="display: grid">${rawContent}</div>`,
-          }}
-        />
-      )}
-export const DynamicContent = ({ content, rawContent, className }: Props): ReactElement => {
-  const bindings = {
-    // data: 'real_data',
-    // myEventHandler: () => {},
-  }
-  let element = null
-  try {
-    element = (
-      <StyledJsxParser
-        onError={(error) => {
-          throw error
-        }}
-        autoCloseVoidElements={true}
-        className={className}
-        bindings={bindings}
-        components={components}
-        jsx={content}
-      />
-    )
-  } catch (error) {
-    element = (
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `<div id="cms" style="display: grid">${rawContent}</div>`,
-        }}
-      />
-    )
-  }
-  return element
-}
-*/
