@@ -26,6 +26,7 @@ export const DynamicContent = ({ content, rawContent, className }: Props): React
     <StyledJsxParser
       onError={(error) => {
         console.log('StyledJsxParser', error)
+        throw error
       }}
       autoCloseVoidElements={true}
       className={className}
