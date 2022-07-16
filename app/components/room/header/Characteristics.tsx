@@ -28,7 +28,9 @@ const Main = styled(Table)`
     padding-right: ${sidePaddingSize.lg};
   }
 `
-const IsCountryAccepted = styled.tr``
+const IsCountryAccepted = styled.tr`
+  padding-top: 30px;
+`
 
 const Accepted = styled.td`
   color: #29cdb5;
