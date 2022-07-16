@@ -29,6 +29,9 @@ export const TD = styled.td`
   background: linear-gradient(0deg, #fafafa, #fafafa),
     linear-gradient(180deg, #fff -1.39%, #f1efef 107.71%);
   border: 1px solid #e9e9e9;
+
+  display: grid;
+  place-items: center start;
 `
 
 export const TH = styled.th`
@@ -40,6 +43,9 @@ export const TH = styled.th`
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+
+  display: grid;
+  place-items: center;
 `
 
 export const TR = styled.tr`
@@ -85,16 +91,46 @@ const Main = styled.div`
 
 type Props = {
   className?: string
-  data: string
+  // data: string
+  children: any
 }
 type TableData = {
   table: string[][]
   caption: string | null
 }
-export const ExpandableTable = ({ data }: Props): ReactElement => {
-  const rowsAmount = 2
-  const tableData = JSON.parse(data) as TableData
+const parseTableData = (reactTableData: ReactElement[]): TableData => {
+  // caution: parse only first tbody
+  const [tbody] = reactTableData.filter(({ type }) => type === 'tbody')
+  const table = tbody.props.children
+    .filter(({ type }: { type: string }) => type === 'tr')
+    .map((tr: ReactElement) => {
+      const tds = tr.props.children.filter(({ type }: { type: string }) => type === 'td')
+      return tds.map((td: ReactElement) => {
+        return td?.props?.children
+      })
+    })
+
+  // const table = reactTableData
+  //   .filter(({ type }) => type === 'tbody')[0]
+  //   .props.children.filter(({ type }) => type === 'tr')
+  //   .map((tr) => {
+  //     console.log(tr)
+  //     return tr.props.children
+  //       .filter(({ type }) => type === 'td')
+  //       .map((d) => {
+  //         console.log(d)
+  //         return d.props.children.props.children
+  //       })
+  //   })
+  const caption = null
+  return { caption, table }
+}
+
+export const ExpandableTable = ({ children }: Props): ReactElement => {
+  const tableData = parseTableData(children)
   const { caption, table } = tableData
+
+  const rowsAmount = 2
   const { isToggled: showLess, toggle } = useToggle(true)
 
   const [headerRow, ...rows] = table

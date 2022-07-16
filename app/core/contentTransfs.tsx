@@ -1,8 +1,6 @@
-import jsdom from 'jsdom'
+import { JSDOM } from 'jsdom'
 import { replaceAll } from '~/lib/utilities'
 import * as fs from 'fs'
-import { DOMParser, XMLSerializer } from 'xmldom'
-const { JSDOM } = jsdom
 
 const tagsToJsxMap = {
   p: 'P',
@@ -47,17 +45,12 @@ const preprocessDom = (content: string): string => {
   })
   if (root.firstChild === null) throw new Error('content is null')
   // @ts-ignore
-  const processedContent = root.firstChild.innerHTML
-  fs.writeFileSync(`${process.cwd()}/_log.processedContent.txt`, processedContent)
-  const xml = new DOMParser({
-    locator: {},
-    errorHandler: { warning: (w) => {}, error: (e) => {}, fatalError: (e) => console.error(e) },
-  }).parseFromString(processedContent, 'text/xml')
-  return new XMLSerializer().serializeToString(xml)
+  return root.firstChild.innerHTML
 }
 
 export const transformContent = (content: string): string => {
-  const res = replaceTagsWithJsx(preprocessDom(content))
-  fs.writeFileSync(`${process.cwd()}/_log.res.txt`, res)
-  return res
+  // const processed = replaceTagsWithJsx(preprocessDom(content))
+  const processed = replaceTagsWithJsx(content)
+  fs.writeFileSync(`${process.cwd()}/_log.processed.txt`, processed)
+  return processed
 }
