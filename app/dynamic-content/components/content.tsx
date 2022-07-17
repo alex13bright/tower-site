@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import { ReactElement, useEffect, useRef } from 'react'
 import { slugify } from '~/core/singletons'
-import { useTocWithRef } from '~/components/room/PageContent'
+import { useTocContext } from '~/components/room/PageContent'
+import { useIsVisible } from '~/custom-hooks/useIsVisible'
 
 const hCss = css`
   line-height: 1.2em;
@@ -41,13 +42,23 @@ export const H2 = ({ children }: H2Props): ReactElement => {
   const title = children.props.children
   const id = slugify(title)
   const ref = useRef<HTMLHeadingElement | null>(null)
-  const [tocWithRef, setTocWithRef] = useTocWithRef()
+  const { refs, visibility } = useTocContext()
+  const { handler } = visibility
+  const { tocWithRef } = refs
+
   useEffect(() => {
     if (tocWithRef[id]) return
     // @ts-ignore
-    ref.current = document.getElementById(id)
+    // ref.current = document.getElementById(id)
     setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { ref } }))
-  }, [title])
+  }, [id, title, tocWithRef])
+
+  const isVisible = useIsVisible(ref)
+  useEffect(() => {
+    if (isVisible === null) return
+    handler(id, isVisible)
+  }, [id, isVisible, handler])
+
   return (
     <StyledH2 id={id} ref={ref}>
       {children}

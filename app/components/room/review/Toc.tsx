@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
 import {
+  accent,
   background,
   cancelSideMargins,
   contentTopPadding,
@@ -9,11 +10,12 @@ import {
   pseudoAbsolute,
   secondary,
   secondaryDark,
+  tertiary,
   widthAtLeast,
 } from '~/styles/styles'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import { useTocWithRef } from '~/components/room/PageContent'
+import { useTocContext } from '~/components/room/PageContent'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
@@ -49,19 +51,19 @@ const Item = styled.li<{ unmarked: boolean }>`
   }
 `
 
-// const UnmarkedItem = styled(Item)`
-//   color: ${accent};
-//   &::before {
-//     background: #c4c4c4;
-//     border: 2px solid #fff;
-//   }
-//   &::after {
-//     background: ${tertiary};
-//     top: 5px;
-//     left: 4px;
-//     width: 1px;
-//   }
-// `
+const UnmarkedItem = styled(Item)`
+  color: ${accent};
+  &::before {
+    background: #c4c4c4;
+    border: 2px solid #fff;
+  }
+  &::after {
+    background: ${tertiary};
+    top: 5px;
+    left: 4px;
+    width: 1px;
+  }
+`
 const MarkedItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
@@ -153,16 +155,18 @@ export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
-  const [tocWithRef] = useTocWithRef()
+  const { visibility } = useTocContext()
+  const { index } = visibility
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {toc.map(({ id, title }) => {
+        {toc.map(({ id, title }, i) => {
+          const SelectedItem = i < index ? MarkedItem : UnmarkedItem
           return (
-            <MarkedItem key={id} unmarked={false}>
+            <SelectedItem key={id} unmarked={false}>
               <Anchor
                 onClick={() => {
                   // const { ref } = tocWithRef[id]
@@ -174,7 +178,7 @@ export function Toc({ className }: Props): ReactElement {
               >
                 {title}
               </Anchor>
-            </MarkedItem>
+            </SelectedItem>
           )
         })}
       </List>
