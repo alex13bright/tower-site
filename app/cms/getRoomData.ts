@@ -1,11 +1,78 @@
 import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
-import { Country, Lang, TocItemType, TocModeType } from '~/core/types'
+import { Country, Lang, TocModeType } from '~/core/types'
 import { RoomType } from '~/core/types'
 import * as fs from 'fs'
 import { transformContent } from '~/dynamic-content/contentTransfs'
 import { extractToc } from '~/core/extractToc'
-import { isType } from '~/core/typeUtilities'
+import { components } from '~/cms/schema'
+
+type CmsPagesType = components['schemas']['ItemsRoomPages']
+
+const getActivePage = (rawActivePage: CmsPagesType, roomSlug: string) => {
+  if (typeof rawActivePage !== 'object') throw new Error('bad page')
+  const {
+    type: rawType,
+    meta_title: metaTitle,
+    meta_description: metaDescription,
+    author: rawAuthor,
+    created: rawCreated,
+    updated: rawUpdated,
+    h1,
+    toc_mode: tocMode,
+    content: rawContent,
+  } = rawActivePage
+
+  if (typeof rawContent !== 'string') throw new Error('bad content')
+  const content = transformContent(rawContent)
+
+  if (typeof tocMode !== 'number') throw new Error('bad tocMode')
+  const toc = extractToc(rawContent, tocMode as TocModeType)
+
+  if (typeof h1 !== 'string') throw new Error('bad h1')
+  if (typeof metaTitle !== 'string') throw new Error('bad title')
+  if (typeof metaDescription !== 'string') throw new Error('bad description')
+
+  if (
+    typeof rawAuthor !== 'object' ||
+    !Array.isArray(rawAuthor.translations) ||
+    typeof rawAuthor.translations[0] !== 'object' ||
+    typeof rawAuthor.translations[0].title !== 'string'
+  )
+    throw new Error('bad rawAuthor')
+  const author = rawAuthor.translations[0].title
+
+  if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
+  const created = new Date(rawCreated).toLocaleDateString()
+
+  if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
+  const updated = new Date(rawCreated).toLocaleDateString()
+
+  if (
+    typeof rawType !== 'object' ||
+    rawType === null ||
+    typeof rawType.name !== 'string' ||
+    !Array.isArray(rawType.translations) ||
+    typeof rawType.translations[0] !== 'object' ||
+    typeof rawType.translations[0].title !== 'string'
+  )
+    throw new Error('bad rawType')
+  const title = rawType.translations[0].title
+  const type = rawType.name
+  const url = `/rakeback-deals/${roomSlug}-${type}`
+
+  return {
+    type,
+    title,
+    url,
+    pageMeta: { title: metaTitle, description: metaDescription },
+    contentMeta: { author, created, updated },
+    h1,
+    rawContent,
+    content,
+    toc,
+  }
+}
 
 export const getRoomData = async (
   lang: Lang,
@@ -255,72 +322,16 @@ export const getRoomData = async (
   })
 
   // activePage
-  const [activePage] = rawPages.map((page) => {
-    if (typeof page !== 'object') throw new Error('bad page')
-    const {
-      type: rawType,
-      meta_title: metaTitle,
-      meta_description: metaDescription,
-      author: rawAuthor,
-      created: rawCreated,
-      updated: rawUpdated,
-      h1,
-      toc_mode: tocMode,
-      content: rawContent,
-    } = page
+  const activePageIndex = pages.reduce(
+    (activePageIndex: null | number, { isActive }, currentIndex) =>
+      isActive ? currentIndex : activePageIndex,
+    null
+  )
+  if (activePageIndex === null) throw new Error('bad pages')
 
-    if (typeof rawContent !== 'string') throw new Error('bad content')
-    const content = transformContent(rawContent)
-
-    if (typeof tocMode !== 'number') throw new Error('bad tocMode')
-    const toc = extractToc(rawContent, tocMode as TocModeType)
-
-    if (typeof h1 !== 'string') throw new Error('bad h1')
-    if (typeof metaTitle !== 'string') throw new Error('bad title')
-    if (typeof metaDescription !== 'string') throw new Error('bad description')
-
-    if (
-      typeof rawAuthor !== 'object' ||
-      !Array.isArray(rawAuthor.translations) ||
-      typeof rawAuthor.translations[0] !== 'object' ||
-      typeof rawAuthor.translations[0].title !== 'string'
-    )
-      throw new Error('bad rawAuthor')
-    const author = rawAuthor.translations[0].title
-
-    if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
-    const created = new Date(rawCreated).toLocaleDateString()
-
-    if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
-    const updated = new Date(rawCreated).toLocaleDateString()
-
-    if (
-      typeof rawType !== 'object' ||
-      rawType === null ||
-      typeof rawType.name !== 'string' ||
-      !Array.isArray(rawType.translations) ||
-      typeof rawType.translations[0] !== 'object' ||
-      typeof rawType.translations[0].title !== 'string'
-    )
-      throw new Error('bad rawType')
-    const title = rawType.translations[0].title
-    const type = rawType.name
-    const url = `/rakeback-deals/${roomSlug}-${type}`
-
-    return {
-      type,
-      title,
-      url,
-      pageMeta: { title: metaTitle, description: metaDescription },
-      contentMeta: { author, created, updated },
-      roomType,
-      h1,
-      rawContent,
-      content,
-      toc,
-    }
-  })
-  if (activePage === undefined) throw new Error('bad activePage')
+  const rawActivePage = rawPages[activePageIndex]
+  if (typeof rawActivePage !== 'object') throw new Error('bad pages')
+  const activePage = getActivePage(rawActivePage, roomSlug)
 
   const room: RoomType = {
     slug,

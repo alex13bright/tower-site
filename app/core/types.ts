@@ -40,7 +40,6 @@ export type ActivePageType = {
   url: string
   pageMeta: PageMetaType
   contentMeta: ContentMetaType
-  roomType: string
   h1: string
   rawContent: string
   content: string
