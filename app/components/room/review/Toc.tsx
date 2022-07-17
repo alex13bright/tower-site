@@ -14,6 +14,8 @@ import {
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 import { useTocWithRef } from '~/components/room/PageContent'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -148,25 +150,25 @@ type Props = {
 }
 
 export function Toc({ className }: Props): ReactElement {
+  const data = useLoaderData<LoaderData>()
+  const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
   const [tocWithRef] = useTocWithRef()
-  console.log('Toc', tocWithRef)
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {Object.entries(tocWithRef).map(([id, { title, ref }]) => {
+        {toc.map(({ id, title }) => {
           return (
             <MarkedItem key={id} unmarked={false}>
               <Anchor
                 onClick={() => {
-                  if (ref.current === null) {
-                    console.log('ref to  h2 is null')
-                    return
-                  }
-                  ref.current.scrollIntoView({ behavior: 'smooth' })
+                  // const { ref } = tocWithRef[id]
+                  const ref = document.getElementById(id)
+                  if (ref === null) throw new Error('Toc | ref is null')
+                  ref.scrollIntoView({ behavior: 'smooth' })
                 }}
                 href={'#' + id}
               >

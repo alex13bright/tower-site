@@ -11,6 +11,7 @@ export type LoaderData = {
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
+  console.log('run loader')
   const { roomPageSlug } = params
   if (roomPageSlug === undefined) throw new Error()
   const [roomSlug, pageType] = roomPageSlug.split('-')

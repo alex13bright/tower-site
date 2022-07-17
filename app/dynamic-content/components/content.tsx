@@ -40,17 +40,17 @@ type H2Props = {
 export const H2 = ({ children }: H2Props): ReactElement => {
   const title = children.props.children
   const id = slugify(title)
-  const ref = useRef<HTMLHeadingElement>(null)
+  const ref = useRef<HTMLHeadingElement | null>(null)
   const [tocWithRef, setTocWithRef] = useTocWithRef()
   useEffect(() => {
-    console.log('H2', 'before set tocWithRef')
     if (tocWithRef[id]) return
-    setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { id, title, ref } }))
-    console.log('H2', 'after set tocWithRef')
-  }, [])
+    // @ts-ignore
+    ref.current = document.getElementById(id)
+    setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { ref } }))
+  }, [title])
   return (
-    <StyledH2 id={id}>
-      <div ref={ref}>{children}</div>
+    <StyledH2 id={id} ref={ref}>
+      {children}
     </StyledH2>
   )
 }

@@ -15,7 +15,6 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
-import { TocItemType } from '~/core/types'
 
 const Content = styled.article`
   position: relative;
@@ -49,7 +48,7 @@ type Props = {
   className?: string
 }
 
-export type TocItemWihRef = TocItemType & {
+export type TocItemWihRef = {
   ref: RefObject<HTMLHeadingElement>
 }
 export type TocWihRef = Record<string, TocItemWihRef>
@@ -68,7 +67,6 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { content, rawContent } = data.room.activePage
   const tocWithRefWithSetter = useState<TocWihRef>({})
-  console.log('PageContent', tocWithRefWithSetter[0])
   return (
     <Content className={className}>
       <TocWithRefContext.Provider value={tocWithRefWithSetter}>
