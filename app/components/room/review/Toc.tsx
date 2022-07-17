@@ -17,6 +17,7 @@ import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { useLoaderData } from '@remix-run/react'
+import { TocType } from '~/core/types'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -148,13 +149,11 @@ const Main = styled.nav`
 
 type Props = {
   className?: string
+  toc: TocType
 }
 
-export function Toc({ className }: Props): ReactElement {
-  const data = useLoaderData<LoaderData>()
-  const { toc } = data.room.activePage
+export function Toc({ toc, className }: Props): ReactElement {
   const { isToggled: isUnfolded, toggle } = useToggle(false)
-
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
