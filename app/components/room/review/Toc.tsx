@@ -12,6 +12,8 @@ import {
 } from '~/styles/styles'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+import { useLoaderData } from '@remix-run/react'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -140,8 +142,8 @@ type Props = {
 }
 
 export function Toc({ className }: Props): ReactElement {
-  type Toc = { title: string; anchor: string }
-  const toc: Toc[] = []
+  const data = useLoaderData<LoaderData>()
+  const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
   return (
     <Main className={className}>
@@ -149,9 +151,9 @@ export function Toc({ className }: Props): ReactElement {
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {toc.map(({ title, anchor }: Toc) => (
+        {toc.map(({ title, anchor }) => (
           <MarkedItem key={anchor} unmarked={false}>
-            <Anchor href={'#' + anchor}>{title}</Anchor>
+            <Anchor href={anchor}>{title}</Anchor>
           </MarkedItem>
         ))}
       </List>

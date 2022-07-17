@@ -13,10 +13,7 @@ type Props = {
 }
 export const Review = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { pages, activePage } = data.room
-  const page = pages[activePage]
-  const { content, rawContent } = page
-  if (typeof content !== 'string') throw new Error('bad content')
+  const { content, rawContent } = data.room.activePage
   return <DynamicContent content={content} rawContent={rawContent} className={className} />
   // return <Main className={className} dangerouslySetInnerHTML={{ __html: content }} />
 }

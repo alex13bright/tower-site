@@ -4,6 +4,7 @@ import { Country, Lang } from '~/core/types'
 import { RoomType } from '~/core/types'
 import * as fs from 'fs'
 import { transformContent } from '~/dynamic-content/contentTransfs'
+import { extractToc } from '~/core/extractToc'
 
 export const getRoomData = async (
   lang: Lang,
@@ -146,6 +147,7 @@ export const getRoomData = async (
     url: `${cmsPublic}/${rawLogo.id}`,
     alt: rawLogo.title,
   }
+
   if (
     typeof rawSquareLogo !== 'object' ||
     typeof rawSquareLogo.id !== 'string' ||
@@ -224,21 +226,52 @@ export const getRoomData = async (
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
 
+  // pages
   if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
   const pages = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
+    const { type: rawType } = page
+
+    if (
+      typeof rawType !== 'object' ||
+      rawType === null ||
+      typeof rawType.name !== 'string' ||
+      !Array.isArray(rawType.translations) ||
+      typeof rawType.translations[0] !== 'object' ||
+      typeof rawType.translations[0].title !== 'string'
+    )
+      throw new Error('bad rawType')
+    const title = rawType.translations[0].title
+    const type = rawType.name
+    const url = `/rakeback-deals/${roomSlug}-${type}`
+
+    return {
+      type,
+      title,
+      url,
+      isActive: type === pageType,
+    }
+  })
+
+  if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
+  const [activePage] = rawPages.map((page) => {
+    if (typeof page !== 'object') throw new Error('bad page')
     const {
-      content: rawContent,
-      h1,
+      type: rawType,
       meta_title: metaTitle,
       meta_description: metaDescription,
       author: rawAuthor,
       created: rawCreated,
       updated: rawUpdated,
-      type: rawType,
+      h1,
+      content: rawContent,
     } = page
 
     if (typeof rawContent !== 'string') throw new Error('bad content')
+    const content = transformContent(rawContent)
+
+    const toc = extractToc(rawContent)
+
     if (typeof h1 !== 'string') throw new Error('bad h1')
     if (typeof metaTitle !== 'string') throw new Error('bad title')
     if (typeof metaDescription !== 'string') throw new Error('bad description')
@@ -275,21 +308,16 @@ export const getRoomData = async (
       type,
       title,
       url,
-      isActive: type === pageType,
       pageMeta: { title: metaTitle, description: metaDescription },
       contentMeta: { author, created, updated },
       roomType,
       h1,
       rawContent,
-      content: '',
+      content,
+      toc,
     }
   })
-
-  const activePage = pages.reduce<number | null>((activeIndex, { isActive }, i) => {
-    return isActive ? i : activeIndex
-  }, null)
-
-  if (activePage === null) throw new Error('bad pageType')
+  if (activePage === undefined) throw new Error('bad activePage')
 
   const room: RoomType = {
     slug,
@@ -316,7 +344,6 @@ export const getRoomData = async (
     pages,
     activePage,
   }
-  pages[activePage].content = transformContent(pages[activePage].rawContent)
 
   fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 

@@ -59,8 +59,7 @@ type Props = {
 }
 export const PageMeta = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { pages, activePage } = data.room
-  const { author, created, updated } = pages[activePage].contentMeta
+  const { author, created, updated } = data.room.activePage.contentMeta
   return (
     <Main className={className}>
       <PageMetaItem kind="author">

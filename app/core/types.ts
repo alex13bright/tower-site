@@ -20,16 +20,31 @@ export type ContentMetaType = {
   updated: string
 }
 
+export type TocItemType = {
+  title: string
+  anchor: string
+}
+
+export type TocType = TocItemType[]
+
 export type PageType = {
   type: string
   title: string
   url: string
   isActive: boolean
+}
+
+export type ActivePageType = {
+  type: string
+  title: string
+  url: string
   pageMeta: PageMetaType
   contentMeta: ContentMetaType
+  roomType: string
   h1: string
   rawContent: string
-  content?: string
+  content: string
+  toc: TocType
 }
 
 export type BonusType = {
@@ -81,5 +96,5 @@ export type RoomType = {
   devices: DevicesType
   payments: PaymentsType
   pages: PageType[]
-  activePage: number
+  activePage: ActivePageType
 }

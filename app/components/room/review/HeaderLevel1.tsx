@@ -9,7 +9,6 @@ type Props = {
 
 export const HeaderLevel1 = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { pages, activePage } = data.room
-  const { h1 } = pages[activePage]
+  const { h1 } = data.room.activePage
   return <H1 className={className}>{h1}</H1>
 }
