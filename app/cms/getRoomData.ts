@@ -1,10 +1,11 @@
 import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
-import { Country, Lang } from '~/core/types'
+import { Country, Lang, TocItemType, TocModeType } from '~/core/types'
 import { RoomType } from '~/core/types'
 import * as fs from 'fs'
 import { transformContent } from '~/dynamic-content/contentTransfs'
 import { extractToc } from '~/core/extractToc'
+import { isType } from '~/core/typeUtilities'
 
 export const getRoomData = async (
   lang: Lang,
@@ -253,7 +254,7 @@ export const getRoomData = async (
     }
   })
 
-  if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
+  // activePage
   const [activePage] = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
     const {
@@ -264,13 +265,15 @@ export const getRoomData = async (
       created: rawCreated,
       updated: rawUpdated,
       h1,
+      toc_mode: tocMode,
       content: rawContent,
     } = page
 
     if (typeof rawContent !== 'string') throw new Error('bad content')
     const content = transformContent(rawContent)
 
-    const toc = extractToc(rawContent)
+    if (typeof tocMode !== 'number') throw new Error('bad tocMode')
+    const toc = extractToc(rawContent, tocMode as TocModeType)
 
     if (typeof h1 !== 'string') throw new Error('bad h1')
     if (typeof metaTitle !== 'string') throw new Error('bad title')

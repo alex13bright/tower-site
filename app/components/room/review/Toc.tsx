@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import styled from 'styled-components'
 import {
   accent,
@@ -154,15 +154,20 @@ export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
+
+  useEffect(() => {
+    const h2s = toc.map(({ id }) => document.getElementById(id))
+  }, [])
+
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {toc.map(({ title, anchor }) => (
-          <MarkedItem key={anchor} unmarked={false}>
-            <Anchor href={anchor}>{title}</Anchor>
+        {toc.map(({ title, id }) => (
+          <MarkedItem key={id} unmarked={false}>
+            <Anchor href={'#' + id}>{title}</Anchor>
           </MarkedItem>
         ))}
       </List>

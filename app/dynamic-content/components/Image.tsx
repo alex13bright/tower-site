@@ -8,7 +8,8 @@ type ImageProps = {
   height: string
 }
 
-export const Image = ({ src, alt, style, width, height }: ImageProps): ReactElement => {
-  return <img src={src} alt={alt} style={style} width={width} height={height} />
+export const Image = ({ src, alt, style, width, height }: ImageProps): ReactElement | null => {
+  return null
+  // return <img src={src} alt={alt} style={style} width={width} height={height} />
 }
 Image.displayName = 'Image'

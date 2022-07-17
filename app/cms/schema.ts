@@ -685,7 +685,9 @@ export interface components {
       h1?: string
       meta_title?: string
       meta_description?: string
+      toc_mode?: number | null
       main_accordion?: string
+      settings_group?: string
       main_group?: string
       meta_group?: string
     }
@@ -712,12 +714,12 @@ export interface components {
       name?: string
       logo?: string | components['schemas']['Files']
       square_logo?: string | components['schemas']['Files']
-      reliability?: string
-      bonuses_promotions?: string
-      game_selection?: string
-      casual_players?: string
-      software_convenience?: string
-      deposits_withdrawals?: string
+      reliability?: number
+      bonuses_promotions?: number
+      game_selection?: number
+      casual_players?: number
+      software_convenience?: number
+      deposits_withdrawals?: number
       license_country?: (string | components['schemas']['ItemsCountries']) | null
       network?: string | components['schemas']['ItemsNetworks']
       type?: number | components['schemas']['ItemsRoomTypes']
@@ -752,12 +754,12 @@ export interface components {
       rooms_id?: (string | components['schemas']['ItemsRooms']) | null
       languages_code?: (string | components['schemas']['ItemsLanguages']) | null
       title?: string
-      rakeback?: string | null
-      deposit?: string | null
-      max_bonus?: string | null
+      rakeback?: string
+      deposit?: string
+      max_bonus?: string
       bonus_code?: string | null
       key_facts?: string | null
-      bonus?: string | null
+      bonus?: string
       bonus_group?: string
       main_accordion?: string
       pages?: (number | components['schemas']['ItemsRoomPages'])[]

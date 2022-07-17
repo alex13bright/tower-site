@@ -22,7 +22,7 @@ export type ContentMetaType = {
 
 export type TocItemType = {
   title: string
-  anchor: string
+  id: string
 }
 
 export type TocType = TocItemType[]
@@ -79,6 +79,8 @@ export type NetworkType = {
   title: string
   logo: ImageType
 }
+
+export type TocModeType = 0 | 1
 
 export type RoomType = {
   slug: string
