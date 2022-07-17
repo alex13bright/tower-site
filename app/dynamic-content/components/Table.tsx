@@ -48,7 +48,9 @@ const StyledPayment = styled.span<{
 }>`
   ${pseudoIcon}
 `
-type PaymentCellProps = { payment: ReactElement }
+type PaymentCellProps = {
+  payment: ReactElement
+}
 const PaymentCell = ({ payment }: PaymentCellProps) => {
   return (
     <Cell>
@@ -78,8 +80,8 @@ export const TH = styled.th`
   place-items: center;
 `
 
-export const TR = styled.tr`
-  display: contents;
+export const TR = styled.tr<{ isVisible: boolean }>`
+  display: ${({ isVisible }) => (isVisible ? 'contents' : 'none')};
 `
 
 export const TBody = styled.tbody<{ columns: number }>`
@@ -155,28 +157,32 @@ export const Table = ({ children, className, ...props }: Props): ReactElement =>
   const { isToggled: showLess, toggle } = useToggle(true)
 
   const [headerRow, ...rows] = table
-  const bodyRows = showLess ? rows.slice(0, dataRows) : rows
+  // const bodyRows = showLess ? rows.slice(0, dataRows) : rows
+  const displayedRowsAmount = showLess ? dataRows : rows.length
   return (
     <Main>
       <StyledTable>
         {caption !== null ? <Caption>{caption}</Caption> : null}
         <TBody columns={headerRow.length}>
-          <TR>
+          <TR isVisible={true}>
             {headerRow.map((title, i) => (
               <TH key={i}>{title}</TH>
             ))}
           </TR>
-          {bodyRows.map((row, i) => (
-            <TR key={i}>
-              {row.map((value, i) =>
-                dataIcon === 'payment' && i === 0 ? (
-                  <PaymentCell key={i} payment={value} />
-                ) : (
-                  <Cell key={i}>{value}</Cell>
-                )
-              )}
-            </TR>
-          ))}
+          {rows.map((row, i) => {
+            const isVisible = i < displayedRowsAmount
+            return (
+              <TR key={i} isVisible={isVisible}>
+                {row.map((value, i) => {
+                  return dataIcon === 'payment' && i === 0 ? (
+                    <PaymentCell key={i} payment={value} />
+                  ) : (
+                    <Cell key={i}>{value}</Cell>
+                  )
+                })}
+              </TR>
+            )
+          })}
         </TBody>
       </StyledTable>
       {dataRows < rows.length ? (
