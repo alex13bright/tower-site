@@ -23,15 +23,7 @@ const Content = styled.article`
     grid-template-areas: 'toc . .';
 
     column-gap: 24px;
-    grid-template-columns: [left-part] minmax(184px, 2fr) [central-part] minmax(704px, 7fr) [right-part] minmax(
-        288px,
-        3fr
-      );
-  }
-
-  @media screen and ${widthAtLeast.xl} {
-    column-gap: 56px;
-    grid-template-columns: [left-part] auto [central-part] 742px [right-part] 326px;
+    grid-template-columns: [left-part] 200px [central-part] 1fr [right-part] 320px;
   }
 `
 
