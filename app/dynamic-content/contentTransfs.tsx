@@ -1,5 +1,4 @@
 import { replaceAll } from '~/lib/utilities'
-import * as fs from 'fs'
 import { tagsToJsxMap } from '~/dynamic-content/tagsToJsxMap'
 
 export const replaceTagsWithJsx = (content: string): string =>
@@ -11,7 +10,7 @@ export const replaceTagsWithJsx = (content: string): string =>
 
 export const transformContent = (content: string): string => {
   const transformedContent = replaceTagsWithJsx(content)
-  fs.writeFileSync(`${process.cwd()}/_log.transformedContent.txt`, transformedContent)
+  // fs.writeFileSync(`${process.cwd()}/_log.transformedContent.txt`, transformedContent)
   return transformedContent
 }
 

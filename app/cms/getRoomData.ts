@@ -2,7 +2,6 @@ import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang, TocModeType } from '~/core/types'
 import { RoomType } from '~/core/types'
-import * as fs from 'fs'
 import { transformContent } from '~/dynamic-content/contentTransfs'
 import { extractToc } from '~/core/extractToc'
 import { components } from '~/cms/schema'
@@ -141,7 +140,7 @@ export const getRoomData = async (
     },
   })
 
-  fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
+  // fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
 
   const { data: rawRooms } = response
   if (!Array.isArray(rawRooms)) throw new Error('no data')
@@ -359,7 +358,7 @@ export const getRoomData = async (
     activePage,
   }
 
-  fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
+  // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   return room
 }
