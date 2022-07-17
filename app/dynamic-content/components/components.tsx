@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+import { ReactElement } from 'react'
+import { slugify } from '~/core/singletons'
 
 const hCss = css`
   line-height: 1.2em;
@@ -11,7 +13,7 @@ export const H1 = styled.h1`
 `
 H1.displayName = 'H1'
 
-export const H2 = styled.h2`
+export const StyledH2 = styled.h2`
   ${hCss};
   font-size: 24px;
   margin: 40px 0 20px;
@@ -30,6 +32,14 @@ export const H2 = styled.h2`
     height: 2px;
   }
 `
+type H2Props = {
+  children: ReactElement
+}
+
+export const H2 = ({ children }: H2Props): ReactElement => {
+  const id = slugify(children.props.children)
+  return <StyledH2 id={id}>{children}</StyledH2>
+}
 H2.displayName = 'H2'
 
 export const H3 = styled.h3`

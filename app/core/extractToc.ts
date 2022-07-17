@@ -1,10 +1,11 @@
-import slugify from 'slugify'
 import { TocType } from '~/core/types'
+import { slugify } from '~/core/singletons'
 
 export const extractToc = (content: string): TocType => {
   const titles = ['header 2 title 1', 'header 2 title 2']
-  return titles.map((title, slug) => ({
+  const toc = titles.map((title) => ({
     title,
-    anchor: slugify(title),
+    anchor: `#${slugify(title)}`,
   }))
+  return toc
 }
