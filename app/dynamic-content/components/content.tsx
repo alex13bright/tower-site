@@ -41,18 +41,17 @@ type H2Props = {
 export const H2 = ({ children }: H2Props): ReactElement => {
   const title = children.props.children
   const id = slugify(title)
-  const ref = useRef<HTMLHeadingElement | null>(null)
+  const ref = useRef<HTMLHeadingElement>(null)
   const { refs, visibility } = useTocContext()
-  const { handler } = visibility
-  const { tocWithRef } = refs
 
+  const { tocWithRef, setTocWithRef } = refs
   useEffect(() => {
     if (tocWithRef[id]) return
-    // @ts-ignore
     // ref.current = document.getElementById(id)
     setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { ref } }))
-  }, [id, title, tocWithRef])
+  }, [id, title, tocWithRef, setTocWithRef])
 
+  const { handler } = visibility
   const isVisible = useIsVisible(ref)
   useEffect(() => {
     if (isVisible === null) return

@@ -1,8 +1,8 @@
 import {
   createContext,
   Dispatch,
-  MutableRefObject,
   ReactElement,
+  RefObject,
   SetStateAction,
   useCallback,
   useContext,
@@ -51,7 +51,7 @@ type Props = {
 }
 
 export type TocItemWihRef = {
-  ref: MutableRefObject<HTMLHeadingElement>
+  ref: RefObject<HTMLHeadingElement>
 }
 export type TocWihRef = Record<string, TocItemWihRef>
 
