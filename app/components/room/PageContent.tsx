@@ -68,8 +68,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { content, rawContent } = data.room.activePage
   const tocWithRefWithSetter = useState<TocWihRef>({})
-  const [tocWithRef] = tocWithRefWithSetter
-  console.log('PageContent', tocWithRef)
+  console.log('PageContent', tocWithRefWithSetter[0])
   return (
     <Content className={className}>
       <TocWithRefContext.Provider value={tocWithRefWithSetter}>

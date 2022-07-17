@@ -47,10 +47,10 @@ export const H2 = ({ children }: H2Props): ReactElement => {
     if (tocWithRef[id]) return
     setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { id, title, ref } }))
     console.log('H2', 'after set tocWithRef')
-  }, [id, title])
+  }, [])
   return (
-    <StyledH2 ref={ref} id={id}>
-      {children}
+    <StyledH2 id={id}>
+      <div ref={ref}>{children}</div>
     </StyledH2>
   )
 }
