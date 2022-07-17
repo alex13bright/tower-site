@@ -2,10 +2,13 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import {
   accent,
+  background,
   cancelSideMargins,
+  contentTopPadding,
   expandOnParentSides,
   proximaNovaSb,
   pseudoAbsolute,
+  secondary,
   secondaryDark,
   tertiary,
   widthAtLeast,
@@ -78,7 +81,7 @@ const List = styled.ul<{ isVisible: boolean }>`
   padding: 16px 0;
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 
-  @media screen and ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.xm} {
     display: block;
   }
 `
@@ -93,7 +96,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
   font-size: 16px;
   font-weight: 700;
 
-  @media screen and ${widthAtLeast.lg} {
+  @media screen and ${widthAtLeast.xm} {
     pointer-events: none;
   }
 
@@ -105,31 +108,37 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
     background: url(/images/main/arrow-down-dark.svg) no-repeat 50%;
     ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
 
-    @media screen and ${widthAtLeast.lg} {
+    @media screen and ${widthAtLeast.xm} {
       display: none;
     }
   }
 `
-
 const Main = styled.nav`
+  background: ${background};
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+
   display: grid;
-  border-radius: 10px;
-  box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
+  border-bottom: 1px solid ${secondary};
+  //border-radius: 10px;
+  //box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
 
   ${expandOnParentSides(contentSidePaddingSizePx)};
-  padding-top: 16px;
-  padding-bottom: 16px;
-  margin-bottom: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 
   @media screen and ${widthAtLeast.md} {
+    padding-top: 16px;
+    padding-bottom: 16px;
     ${cancelSideMargins};
-    margin-bottom: 20px;
   }
-  @media screen and ${widthAtLeast.lg} {
+
+  @media screen and ${widthAtLeast.xm} {
+    border-bottom: none;
     grid-area: toc;
-    position: sticky;
-    top: 0;
-    left: 0;
+    top: ${contentTopPadding};
     height: min-content;
     border-radius: 0;
     box-shadow: none;

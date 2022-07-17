@@ -70,3 +70,5 @@ export const pseudoIcon = css<{ $width: string; $height: string; svg: string; ga
     background: url(${({ svg }) => svg}) no-repeat 50%;
   }
 `
+
+export const contentTopPadding = '40px'
