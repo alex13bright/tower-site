@@ -69,11 +69,11 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const { content, rawContent } = data.room.activePage
   const tocWithRefWithSetter = useState<TocWihRef>({})
   const [tocWithRef] = tocWithRefWithSetter
-  console.log(tocWithRef)
+  console.log('PageContent', tocWithRef)
   return (
     <Content className={className}>
       <TocWithRefContext.Provider value={tocWithRefWithSetter}>
-        <Toc tocWithRef={tocWithRef} />
+        <Toc />
         <ContentWrapper>
           <HeaderLevel1 />
           <PageMeta />

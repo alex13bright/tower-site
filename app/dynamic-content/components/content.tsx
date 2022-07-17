@@ -43,10 +43,10 @@ export const H2 = ({ children }: H2Props): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null)
   const [tocWithRef, setTocWithRef] = useTocWithRef()
   useEffect(() => {
-    console.log('1')
+    console.log('H2', 'before set tocWithRef')
     if (tocWithRef[id]) return
-    console.log('2')
     setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { id, title, ref } }))
+    console.log('H2', 'after set tocWithRef')
   }, [id, title])
   return (
     <StyledH2 ref={ref} id={id}>

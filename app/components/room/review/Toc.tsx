@@ -13,7 +13,7 @@ import {
 } from '~/styles/styles'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import { TocWihRef } from '~/components/room/PageContent'
+import { useTocWithRef } from '~/components/room/PageContent'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -145,11 +145,12 @@ const Main = styled.nav`
 
 type Props = {
   className?: string
-  tocWithRef: TocWihRef
 }
 
-export function Toc({ tocWithRef, className }: Props): ReactElement {
+export function Toc({ className }: Props): ReactElement {
   const { isToggled: isUnfolded, toggle } = useToggle(false)
+  const [tocWithRef] = useTocWithRef()
+  console.log('Toc', tocWithRef)
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
