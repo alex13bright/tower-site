@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
 import {
   accent,
@@ -155,10 +155,6 @@ export function Toc({ className }: Props): ReactElement {
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
 
-  useEffect(() => {
-    const h2s = toc.map(({ id }) => document.getElementById(id))
-  }, [])
-
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
@@ -167,7 +163,16 @@ export function Toc({ className }: Props): ReactElement {
       <List isVisible={isUnfolded}>
         {toc.map(({ title, id }) => (
           <MarkedItem key={id} unmarked={false}>
-            <Anchor href={'#' + id}>{title}</Anchor>
+            <Anchor
+              onClick={() => {
+                const h2 = document.getElementById(id)
+                if (h2 === null) throw new Error('there is no corresponding h2')
+                h2.scrollIntoView({ behavior: 'smooth' })
+              }}
+              href={'#' + id}
+            >
+              {title}
+            </Anchor>
           </MarkedItem>
         ))}
       </List>

@@ -75,9 +75,9 @@ const Document = ({ children }: DocumentProps) => {
       <body>
         {children}
         <GlobalStyles />
-        <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        {/*<ScrollRestoration />*/}
       </body>
     </html>
   )
