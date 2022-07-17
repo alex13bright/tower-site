@@ -1,7 +1,6 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
 import {
-  accent,
   background,
   cancelSideMargins,
   contentTopPadding,
@@ -10,14 +9,11 @@ import {
   pseudoAbsolute,
   secondary,
   secondaryDark,
-  tertiary,
   widthAtLeast,
 } from '~/styles/styles'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
-import { useLoaderData } from '@remix-run/react'
-import { TocType } from '~/core/types'
+import { TocWihRef } from '~/components/room/PageContent'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -51,19 +47,19 @@ const Item = styled.li<{ unmarked: boolean }>`
   }
 `
 
-const UnmarkedItem = styled(Item)`
-  color: ${accent};
-  &::before {
-    background: #c4c4c4;
-    border: 2px solid #fff;
-  }
-  &::after {
-    background: ${tertiary};
-    top: 5px;
-    left: 4px;
-    width: 1px;
-  }
-`
+// const UnmarkedItem = styled(Item)`
+//   color: ${accent};
+//   &::before {
+//     background: #c4c4c4;
+//     border: 2px solid #fff;
+//   }
+//   &::after {
+//     background: ${tertiary};
+//     top: 5px;
+//     left: 4px;
+//     width: 1px;
+//   }
+// `
 const MarkedItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
@@ -149,10 +145,10 @@ const Main = styled.nav`
 
 type Props = {
   className?: string
-  toc: TocType
+  tocWithRef: TocWihRef
 }
 
-export function Toc({ toc, className }: Props): ReactElement {
+export function Toc({ tocWithRef, className }: Props): ReactElement {
   const { isToggled: isUnfolded, toggle } = useToggle(false)
   return (
     <Main className={className}>
@@ -160,20 +156,24 @@ export function Toc({ toc, className }: Props): ReactElement {
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>
-        {toc.map(({ title, id }) => (
-          <MarkedItem key={id} unmarked={false}>
-            <Anchor
-              onClick={() => {
-                const h2 = document.getElementById(id)
-                if (h2 === null) throw new Error('there is no corresponding h2')
-                h2.scrollIntoView({ behavior: 'smooth' })
-              }}
-              href={'#' + id}
-            >
-              {title}
-            </Anchor>
-          </MarkedItem>
-        ))}
+        {Object.entries(tocWithRef).map(([id, { title, ref }]) => {
+          return (
+            <MarkedItem key={id} unmarked={false}>
+              <Anchor
+                onClick={() => {
+                  if (ref.current === null) {
+                    console.log('ref to  h2 is null')
+                    return
+                  }
+                  ref.current.scrollIntoView({ behavior: 'smooth' })
+                }}
+                href={'#' + id}
+              >
+                {title}
+              </Anchor>
+            </MarkedItem>
+          )
+        })}
       </List>
     </Main>
   )

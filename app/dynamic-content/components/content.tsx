@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useRef } from 'react'
 import { slugify } from '~/core/singletons'
+import { useTocWithRef } from '~/components/room/PageContent'
 
 const hCss = css`
   line-height: 1.2em;
@@ -37,8 +38,21 @@ type H2Props = {
 }
 
 export const H2 = ({ children }: H2Props): ReactElement => {
-  const id = slugify(children.props.children)
-  return <StyledH2 id={id}>{children}</StyledH2>
+  const title = children.props.children
+  const id = slugify(title)
+  const ref = useRef<HTMLHeadingElement>(null)
+  const [tocWithRef, setTocWithRef] = useTocWithRef()
+  useEffect(() => {
+    console.log('1')
+    if (tocWithRef[id]) return
+    console.log('2')
+    setTocWithRef((tocWithRef) => ({ ...tocWithRef, [id]: { id, title, ref } }))
+  }, [id, title])
+  return (
+    <StyledH2 ref={ref} id={id}>
+      {children}
+    </StyledH2>
+  )
 }
 H2.displayName = 'H2'
 

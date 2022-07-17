@@ -1,4 +1,12 @@
-import { MutableRefObject, ReactElement, useRef, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  ReactElement,
+  RefObject,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react'
 import styled from 'styled-components'
 import { Toc } from '~/components/room/review/Toc'
 import { HeaderLevel1 } from '~/components/room/review/HeaderLevel1'
@@ -7,7 +15,7 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
-import { TocItemType, TocType } from '~/core/types'
+import { TocItemType } from '~/core/types'
 
 const Content = styled.article`
   position: relative;
@@ -40,24 +48,38 @@ const ContentWrapper = styled.div`
 type Props = {
   className?: string
 }
+
 export type TocItemWihRef = TocItemType & {
-  ref?: MutableRefObject<HTMLHeadingElement>
+  ref: RefObject<HTMLHeadingElement>
 }
-export type TocWihRef = TocItemWihRef[]
+export type TocWihRef = Record<string, TocItemWihRef>
+
+const TocWithRefContext = createContext<[TocWihRef, Dispatch<SetStateAction<TocWihRef>>] | null>(
+  null
+)
+
+export const useTocWithRef = () => {
+  const tocWithRefWithSetter = useContext(TocWithRefContext)
+  if (tocWithRefWithSetter === null) throw new Error('TocWithRefContext not found')
+  return tocWithRefWithSetter
+}
 
 export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  useRef()
-  const { content, rawContent, toc } = data.room.activePage
-  const [tocWihRef, setTocWihRef] = useState<TocWihRef>(toc)
+  const { content, rawContent } = data.room.activePage
+  const tocWithRefWithSetter = useState<TocWihRef>({})
+  const [tocWithRef] = tocWithRefWithSetter
+  console.log(tocWithRef)
   return (
     <Content className={className}>
-      <Toc toc={tocWihRef} />
-      <ContentWrapper>
-        <HeaderLevel1 />
-        <PageMeta />
-        <DynamicContent content={content} rawContent={rawContent} className={className} />
-      </ContentWrapper>
+      <TocWithRefContext.Provider value={tocWithRefWithSetter}>
+        <Toc tocWithRef={tocWithRef} />
+        <ContentWrapper>
+          <HeaderLevel1 />
+          <PageMeta />
+          <DynamicContent content={content} rawContent={rawContent} className={className} />
+        </ContentWrapper>
+      </TocWithRefContext.Provider>
     </Content>
   )
 }

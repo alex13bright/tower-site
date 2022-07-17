@@ -1,4 +1,4 @@
-import { P, H1, H2, H3 } from '~/dynamic-content/components/components'
+import { P, H1, H2, H3 } from '~/dynamic-content/components/content'
 import { Table } from '~/dynamic-content/components/Table'
 import { Anchor } from '~/dynamic-content/components/Anchor'
 import { Image } from '~/dynamic-content/components/Image'

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { H1 } from '~/dynamic-content/components/components'
+import { H1 } from '~/dynamic-content/components/content'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
