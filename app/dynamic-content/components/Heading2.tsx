@@ -24,11 +24,11 @@ export const StyledH2 = styled.h2`
     height: 2px;
   }
 `
-type H2Props = {
+type Heading2Props = {
   children: ReactElement
 }
 
-export const Heading2 = ({ children }: H2Props): ReactElement => {
+export const Heading2 = ({ children }: Heading2Props): ReactElement => {
   const title = children.props.children
   const id = slugify(title)
   const ref = useRef<HTMLHeadingElement>(null)
@@ -39,7 +39,7 @@ export const Heading2 = ({ children }: H2Props): ReactElement => {
   useEffect(() => {
     if (isVisible === null) return
     handler(id, isVisible)
-  }, [id, isVisible])
+  }, [handler, id, isVisible])
 
   const { scrolls, setScrolls } = scrollsWithSetter
   useEffect(() => {
@@ -57,7 +57,7 @@ export const Heading2 = ({ children }: H2Props): ReactElement => {
         },
       },
     }))
-  }, [id]) // , state
+  }, [id, state])
 
   return (
     <StyledH2

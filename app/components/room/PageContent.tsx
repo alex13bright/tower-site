@@ -5,6 +5,7 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useMemo,
   useState,
 } from 'react'
 import styled from 'styled-components'
@@ -88,14 +89,15 @@ export const PageContent = ({ className }: Props): ReactElement => {
     },
     [toc]
   )
+  const memoized = useMemo(() => {
+    return {
+      scrollsWithSetter: { scrolls, setScrolls },
+      visibility: { index, handler },
+    }
+  }, [handler, index, scrolls])
   return (
     <Content className={className}>
-      <TocContext.Provider
-        value={{
-          scrollsWithSetter: { scrolls, setScrolls },
-          visibility: { index, handler },
-        }}
-      >
+      <TocContext.Provider value={memoized}>
         <Toc />
         <ContentWrapper>
           <HeaderLevel1 />
