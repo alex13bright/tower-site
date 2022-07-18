@@ -165,7 +165,7 @@ export function Toc({ className }: Props): ReactElement {
       </TitleButton>
       <List isVisible={isUnfolded}>
         {toc.map(({ id, title }, i) => {
-          const SelectedItem = i < index ? PastItem : NotPastItem
+          const SelectedItem = i <= index ? PastItem : NotPastItem
           return (
             <SelectedItem key={id} unmarked={false}>
               <Anchor

@@ -44,7 +44,7 @@ export const HeadingLevel2 = ({ children }: Heading2Props): ReactElement => {
   const positionVisibility = usePositionVisibility(ref)
   useEffect(() => {
     if (positionVisibility === null) return
-    const isPast = positionVisibility !== 'bottom'
+    const isPast = positionVisibility === 'top'
     handler(id, isPast)
   }, [handler, id, positionVisibility])
 

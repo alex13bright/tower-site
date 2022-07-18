@@ -75,13 +75,10 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const [index, setIndex] = useState(-1)
   const handler = useCallback<Handler>(
     (id, isPast) => {
-      const idIndex =
-        id === ''
-          ? toc.length
-          : toc.reduce(
-              (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
-              null
-            )
+      const idIndex = toc.reduce(
+        (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
+        null
+      )
       if (idIndex === null) throw new Error('id of h2 is not in the toc')
       if (!isPast && idIndex <= index) {
         setIndex(idIndex - 1)
