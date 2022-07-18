@@ -33,7 +33,7 @@ type Heading2Props = {
   children: ReactElement
 }
 
-export const Heading2 = ({ children }: Heading2Props): ReactElement => {
+export const HeadingLevel2 = ({ children }: Heading2Props): ReactElement => {
   const title = parseChildren(children)
   const id = slugify(title)
   const ref = useRef<HTMLHeadingElement>(null)
@@ -79,4 +79,4 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
     </StyledH2>
   )
 }
-Heading2.displayName = 'Heading2'
+HeadingLevel2.displayName = 'HeadingLevel2'

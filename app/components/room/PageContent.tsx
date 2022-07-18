@@ -16,7 +16,6 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
-import { FakeContent } from '~/components/styled/FakeContent'
 
 const Content = styled.article`
   position: relative;
@@ -76,10 +75,13 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const [index, setIndex] = useState(-1)
   const handler = useCallback<Handler>(
     (id, isPast) => {
-      const idIndex = toc.reduce(
-        (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
-        null
-      )
+      const idIndex =
+        id === ''
+          ? toc.length
+          : toc.reduce(
+              (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
+              null
+            )
       if (idIndex === null) throw new Error('id of h2 is not in the toc')
       if (!isPast && idIndex <= index) {
         setIndex(idIndex - 1)
@@ -102,9 +104,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <ContentWrapper>
           <HeaderLevel1 />
           <PageMeta />
-          <FakeContent height="1000px">F1</FakeContent>
           <DynamicContent content={content} rawContent={rawContent} className={className} />
-          <FakeContent height="1000px">F2</FakeContent>
         </ContentWrapper>
       </TocContext.Provider>
     </Content>

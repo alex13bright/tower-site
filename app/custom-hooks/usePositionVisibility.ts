@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
-export type PositionVisibility = 'top' | 'visible' | 'bottom'
+export type PositionVisibility = 'top' | 'middle' | 'bottom'
 export const usePositionVisibility = (
   ref: MutableRefObject<HTMLElement | null>
 ): null | PositionVisibility => {
@@ -13,7 +13,7 @@ export const usePositionVisibility = (
         const [entry] = entries
         const { isIntersecting, boundingClientRect } = entry
         if (isIntersecting) {
-          setPositionVisibility('visible')
+          setPositionVisibility('middle')
         } else {
           setPositionVisibility(boundingClientRect.top > 0 ? 'bottom' : 'top')
         }

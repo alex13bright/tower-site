@@ -4,12 +4,12 @@ import { Anchor } from '~/dynamic-content/components/Anchor'
 import { Image } from '~/dynamic-content/components/Image'
 import { Injection } from '~/dynamic-content/components/Injection'
 import { UnorderedList } from '~/dynamic-content/components/UnorderedList'
-import { Heading2 } from '~/dynamic-content/components/Heading2'
+import { HeadingLevel2 } from '~/dynamic-content/components/HeadingLevel2'
 
 export const tagsToJsxMap = {
   p: P,
   h1: H1,
-  h2: Heading2,
+  h2: HeadingLevel2,
   h3: H3,
   ul: UnorderedList,
   a: Anchor,
