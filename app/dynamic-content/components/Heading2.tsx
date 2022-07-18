@@ -72,4 +72,4 @@ export const Heading2 = ({ children }: H2Props): ReactElement => {
     </StyledH2>
   )
 }
-Heading2.displayName = 'H2'
+Heading2.displayName = 'Heading2'

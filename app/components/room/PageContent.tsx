@@ -80,11 +80,10 @@ export const PageContent = ({ className }: Props): ReactElement => {
       )
       if (idIndex === null) throw new Error('id of h2 is not in the toc')
       console.log(id, isVisible, idIndex)
-      return
       if (isVisible && idIndex > index) {
-        setIndex(idIndex + 1)
+        // setIndex(idIndex + 1)
       } else if (idIndex < index) {
-        setIndex(idIndex)
+        // setIndex(idIndex)
       }
     },
     [toc]
