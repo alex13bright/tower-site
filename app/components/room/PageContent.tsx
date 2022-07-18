@@ -73,7 +73,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { content, rawContent, toc } = data.room.activePage
   const [scrolls, setScrolls] = useState<Scrolls>({})
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(-1)
   const handler = useCallback<Handler>(
     (id, isPast) => {
       const idIndex = toc.reduce(
@@ -81,14 +81,13 @@ export const PageContent = ({ className }: Props): ReactElement => {
         null
       )
       if (idIndex === null) throw new Error('id of h2 is not in the toc')
-      console.log(id, isPast, idIndex)
-      if (isPast && idIndex > index) {
-        // setIndex(idIndex + 1)
-      } else if (idIndex < index) {
-        // setIndex(idIndex)
+      if (!isPast && idIndex <= index) {
+        setIndex(idIndex - 1)
+      } else if (isPast && idIndex > index) {
+        setIndex(idIndex)
       }
     },
-    [toc]
+    [index, toc]
   )
   const memoized = useMemo(() => {
     return {

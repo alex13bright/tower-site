@@ -51,7 +51,7 @@ const Item = styled.li<{ unmarked: boolean }>`
   }
 `
 
-const UnmarkedItem = styled(Item)`
+const NotPastItem = styled(Item)`
   color: ${accent};
   &::before {
     background: #c4c4c4;
@@ -64,7 +64,7 @@ const UnmarkedItem = styled(Item)`
     width: 1px;
   }
 `
-const MarkedItem = styled(Item)`
+const PastItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
     background: #fff;
@@ -165,7 +165,7 @@ export function Toc({ className }: Props): ReactElement {
       </TitleButton>
       <List isVisible={isUnfolded}>
         {toc.map(({ id, title }, i) => {
-          const SelectedItem = i < index ? MarkedItem : UnmarkedItem
+          const SelectedItem = i <= index ? PastItem : NotPastItem
           return (
             <SelectedItem key={id} unmarked={false}>
               <Anchor

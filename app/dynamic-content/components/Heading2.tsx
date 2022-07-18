@@ -43,7 +43,7 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
   const positionVisibility = usePositionVisibility(ref)
   useEffect(() => {
     if (positionVisibility === null) return
-    const isPast = positionVisibility === 'top' || positionVisibility === 'visible'
+    const isPast = positionVisibility !== 'bottom'
     handler(id, isPast)
   }, [handler, id, positionVisibility])
 
@@ -63,7 +63,7 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
         },
       },
     }))
-  }, [id, state])
+  }, [id, scrolls, setScrolls, state])
 
   return (
     <StyledH2
