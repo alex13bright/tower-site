@@ -155,8 +155,8 @@ export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
-  const { refs, visibility } = useTocContext()
-  const { tocWithRef } = refs
+  const { scrollsWithSetter, visibility } = useTocContext()
+  const { scrolls } = scrollsWithSetter
   const { index } = visibility
   return (
     <Main className={className}>
@@ -170,10 +170,8 @@ export function Toc({ className }: Props): ReactElement {
             <SelectedItem key={id} unmarked={false}>
               <Anchor
                 onClick={() => {
-                  const { ref } = tocWithRef[id]
-                  // const ref = { current: document.getElementById(id) }
-                  if (ref.current === null) throw new Error('Toc | ref is null')
-                  ref.current.scrollIntoView({ behavior: 'smooth' })
+                  const { scroll } = scrolls[id]
+                  scroll()
                 }}
                 href={'#' + id}
               >

@@ -2,7 +2,6 @@ import {
   createContext,
   Dispatch,
   ReactElement,
-  RefObject,
   SetStateAction,
   useCallback,
   useContext,
@@ -50,14 +49,11 @@ type Props = {
   className?: string
 }
 
-export type TocItemWihRef = {
-  ref: RefObject<HTMLHeadingElement>
-}
-export type TocWihRef = Record<string, TocItemWihRef>
+export type Scrolls = Record<string, { scroll: () => void }>
 
 type Handler = (id: string, isVisible: boolean) => void
 type TocContextType = {
-  refs: { tocWithRef: TocWihRef; setTocWithRef: Dispatch<SetStateAction<TocWihRef>> }
+  scrollsWithSetter: { scrolls: Scrolls; setScrolls: Dispatch<SetStateAction<Scrolls>> }
   visibility: {
     index: number
     handler: Handler
@@ -75,16 +71,18 @@ export const useTocContext = () => {
 export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { content, rawContent } = data.room.activePage
-  const [tocWithRef, setTocWithRef] = useState<TocWihRef>({})
+  const [scrolls, setScrolls] = useState<Scrolls>({})
   const [index, setVisibility] = useState(0)
   const handler = useCallback<Handler>((id, isVisible) => {
-    console.log(id, isVisible)
-    fakeUse(setVisibility)
+    fakeUse(id, isVisible, setVisibility)
   }, [])
   return (
     <Content className={className}>
       <TocContext.Provider
-        value={{ refs: { tocWithRef, setTocWithRef }, visibility: { index, handler } }}
+        value={{
+          scrollsWithSetter: { scrolls, setScrolls },
+          visibility: { index, handler },
+        }}
       >
         <Toc />
         <ContentWrapper>
