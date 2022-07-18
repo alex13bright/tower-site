@@ -15,7 +15,6 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
-import { fakeUse } from '~/core/utils'
 
 const Content = styled.article`
   position: relative;
@@ -70,12 +69,26 @@ export const useTocContext = () => {
 
 export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { content, rawContent } = data.room.activePage
+  const { content, rawContent, toc } = data.room.activePage
   const [scrolls, setScrolls] = useState<Scrolls>({})
-  const [index, setVisibility] = useState(0)
-  const handler = useCallback<Handler>((id, isVisible) => {
-    fakeUse(id, isVisible, setVisibility)
-  }, [])
+  const [index, setIndex] = useState(0)
+  const handler = useCallback<Handler>(
+    (id, isVisible) => {
+      const idIndex = toc.reduce(
+        (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
+        null
+      )
+      if (idIndex === null) throw new Error('id of h2 is not in the toc')
+      console.log(id, isVisible, idIndex)
+      return
+      if (isVisible && idIndex > index) {
+        setIndex(idIndex + 1)
+      } else if (idIndex < index) {
+        setIndex(idIndex)
+      }
+    },
+    [toc]
+  )
   return (
     <Content className={className}>
       <TocContext.Provider

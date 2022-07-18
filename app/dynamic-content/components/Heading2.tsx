@@ -34,13 +34,12 @@ export const Heading2 = ({ children }: H2Props): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null)
   const { scrollsWithSetter, visibility } = useTocContext()
   const [state, setState] = useState<HTMLHeadingElement | null>(null)
-
   const { handler } = visibility
   const isVisible = useIsVisible(ref)
   useEffect(() => {
     if (isVisible === null) return
     handler(id, isVisible)
-  }, [id, isVisible, handler])
+  }, [id, isVisible])
 
   const { scrolls, setScrolls } = scrollsWithSetter
   useEffect(() => {
@@ -58,7 +57,7 @@ export const Heading2 = ({ children }: H2Props): ReactElement => {
         },
       },
     }))
-  }, [id, state])
+  }, [id]) // , state
 
   return (
     <StyledH2
