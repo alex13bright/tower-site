@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ReactElement, useEffect, useRef, useState } from 'react'
 import { slugify } from '~/core/singletons'
 import { useTocContext } from '~/components/room/PageContent'
-import { useIsVisible } from '~/custom-hooks/useIsVisible'
+import { usePositionVisibility } from '~/custom-hooks/usePositionVisibility'
 import { hCss } from '~/dynamic-content/components/content'
 
 export const StyledH2 = styled.h2`
@@ -40,11 +40,12 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
   const { scrollsWithSetter, visibility } = useTocContext()
   const [state, setState] = useState<HTMLHeadingElement | null>(null)
   const { handler } = visibility
-  const isVisible = useIsVisible(ref)
+  const positionVisibility = usePositionVisibility(ref)
   useEffect(() => {
-    if (isVisible === null) return
-    handler(id, isVisible)
-  }, [handler, id, isVisible])
+    if (positionVisibility === null) return
+    const isPast = positionVisibility === 'top' || positionVisibility === 'visible'
+    handler(id, isPast)
+  }, [handler, id, positionVisibility])
 
   const { scrolls, setScrolls } = scrollsWithSetter
   useEffect(() => {
@@ -54,7 +55,6 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
       ...scrolls,
       [id]: {
         scroll: () => {
-          console.log('g')
           // console.log(ref.current) todo: why null???
           // console.log(state.scrollIntoView) todo: why broken?
           const realRef = document.getElementById(id)

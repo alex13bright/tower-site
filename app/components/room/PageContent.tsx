@@ -16,6 +16,7 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
+import { FakeContent } from '~/components/styled/FakeContent'
 
 const Content = styled.article`
   position: relative;
@@ -51,7 +52,7 @@ type Props = {
 
 export type Scrolls = Record<string, { scroll: () => void }>
 
-type Handler = (id: string, isVisible: boolean) => void
+type Handler = (id: string, isPast: boolean) => void
 type TocContextType = {
   scrollsWithSetter: { scrolls: Scrolls; setScrolls: Dispatch<SetStateAction<Scrolls>> }
   visibility: {
@@ -74,14 +75,14 @@ export const PageContent = ({ className }: Props): ReactElement => {
   const [scrolls, setScrolls] = useState<Scrolls>({})
   const [index, setIndex] = useState(0)
   const handler = useCallback<Handler>(
-    (id, isVisible) => {
+    (id, isPast) => {
       const idIndex = toc.reduce(
         (idIndex: number | null, { id: tocId }, i) => (id === tocId ? i : idIndex),
         null
       )
       if (idIndex === null) throw new Error('id of h2 is not in the toc')
-      console.log(id, isVisible, idIndex)
-      if (isVisible && idIndex > index) {
+      console.log(id, isPast, idIndex)
+      if (isPast && idIndex > index) {
         // setIndex(idIndex + 1)
       } else if (idIndex < index) {
         // setIndex(idIndex)
@@ -102,7 +103,9 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <ContentWrapper>
           <HeaderLevel1 />
           <PageMeta />
+          <FakeContent height="1000px">F1</FakeContent>
           <DynamicContent content={content} rawContent={rawContent} className={className} />
+          <FakeContent height="1000px">F2</FakeContent>
         </ContentWrapper>
       </TocContext.Provider>
     </Content>
