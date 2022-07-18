@@ -37,8 +37,9 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
   const title = parseChildren(children)
   const id = slugify(title)
   const ref = useRef<HTMLHeadingElement>(null)
-  const { scrollsWithSetter, visibility } = useTocContext()
   const [state, setState] = useState<HTMLHeadingElement | null>(null)
+
+  const { scrollsWithSetter, visibility } = useTocContext()
   const { handler } = visibility
   const positionVisibility = usePositionVisibility(ref)
   useEffect(() => {
