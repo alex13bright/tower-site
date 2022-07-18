@@ -169,7 +169,8 @@ export function Toc({ className }: Props): ReactElement {
           return (
             <SelectedItem key={id} unmarked={false}>
               <Anchor
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   const { scroll } = scrolls[id]
                   scroll()
                 }}

@@ -24,12 +24,17 @@ export const StyledH2 = styled.h2`
     height: 2px;
   }
 `
+
+const parseChildren = (children: ReactElement) => {
+  return children.props.children
+}
+
 type Heading2Props = {
   children: ReactElement
 }
 
 export const Heading2 = ({ children }: Heading2Props): ReactElement => {
-  const title = children.props.children
+  const title = parseChildren(children)
   const id = slugify(title)
   const ref = useRef<HTMLHeadingElement>(null)
   const { scrollsWithSetter, visibility } = useTocContext()
@@ -49,6 +54,7 @@ export const Heading2 = ({ children }: Heading2Props): ReactElement => {
       ...scrolls,
       [id]: {
         scroll: () => {
+          console.log('g')
           // console.log(ref.current) todo: why null???
           // console.log(state.scrollIntoView) todo: why broken?
           const realRef = document.getElementById(id)
