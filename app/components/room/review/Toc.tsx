@@ -26,7 +26,7 @@ const Anchor = styled.a`
   line-height: 18px;
 `
 
-const Item = styled.li<{ unmarked: boolean }>`
+const Item = styled.li`
   padding: 0 0 15px 15px;
   position: relative;
   &::before {
@@ -123,8 +123,6 @@ const Main = styled.nav`
 
   display: grid;
   border-bottom: 1px solid ${secondary};
-  //border-radius: 10px;
-  //box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
 
   ${expandOnParentSides(contentSidePaddingSizePx)};
   padding-top: 8px;
@@ -165,7 +163,7 @@ export function Toc({ className }: Props): ReactElement {
         {toc.map(({ id, title }, i) => {
           const ItemComponent = i <= scrolledIndex ? ScrolledItem : NotScrolledItem
           return (
-            <ItemComponent key={id} unmarked={false}>
+            <ItemComponent key={id}>
               <Anchor
                 onClick={(e) => {
                   e.preventDefault()
