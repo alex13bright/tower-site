@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { FakeContent } from '../styled/FakeContent'
 import { PageWrapper } from './PageWrapper'
-import { headerFooterColor } from '~/styles/styles'
+import { headerFooterColor } from '~/components/page/pageStyles'
 
 const HeaderPageWrapper = styled(PageWrapper).attrs({ forwardedAs: 'header' })`
   ${headerFooterColor};

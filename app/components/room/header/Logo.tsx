@@ -1,21 +1,17 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Image = styled.img`
+  grid-area: logo;
   place-self: center;
   margin: 15px 0;
-  ${headerBlock};
-  grid-area: logo;
   height: 60px;
-  width: auto;
 
   @media screen and ${widthAtLeast.md} {
-    height: 60px;
-    margin: 10px;
+    justify-self: start;
   }
 `
 
@@ -24,7 +20,7 @@ type Props = {
 }
 
 export const Logo = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { title, logo } = data.room
-  return <Image className={className} alt={`${title}-logo`} src={logo} />
+  const data = useLoaderData<LoaderData>()
+  const { url, alt } = data.room.logo
+  return <Image className={className} src={url} alt={alt} title={alt} />
 }

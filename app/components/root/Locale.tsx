@@ -1,6 +1,5 @@
 import React, { ReactElement, createContext, useContext, ReactNode } from 'react'
-
-export type Locale = 'en' | 'ru' | 'es'
+import { Locale } from '~/core/types'
 
 const Context = createContext<Locale | null>(null)
 

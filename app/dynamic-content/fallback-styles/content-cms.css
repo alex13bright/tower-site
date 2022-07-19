@@ -1,0 +1,78 @@
+#tinymce h1,
+#tinymce h2,
+#tinymce h3,
+#tinymce h4,
+#tinymce h5 {
+  line-height: 1.2em !important;
+}
+
+#tinymce h1 {
+  font-size: 32px !important;
+  margin-bottom: 16px !important;
+}
+
+#tinymce h2 {
+  font-size: 24px !important;
+  margin: 40px 0 20px !important;
+
+  position: relative !important;
+  padding-top: 12px !important;
+}
+
+#tinymce h2::before {
+  background: url('/images/main/9dc060a4-c2e5-43e5-8fbd-4c28712cbcf5.svg') no-repeat 50% !important;
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  width: 42px !important;
+  height: 2px !important;
+}
+
+#tinymce h3 {
+  font-size: 20px !important;
+  margin: 40px 0 20px !important;
+}
+
+#tinymce p {
+  color: inherit !important;
+  background: inherit !important;
+  font-size: 17px !important;
+  line-height: 1.4em !important;
+  margin: 0 0 20px !important;
+}
+
+#tinymce a {
+  color: #008be2 !important;
+  text-decoration: underline !important;
+  background-color: transparent !important;
+}
+
+#tinymce ul {
+  list-style-position: outside !important;
+  list-style-type: none !important;
+  margin: 0 0 40px !important;
+  padding: 0 !important;
+}
+
+#tinymce li {
+  color: inherit !important;
+  background: inherit !important;
+  font-size: 17px !important;
+  line-height: 21px !important;
+  margin-bottom: 15px !important;
+  padding-left: 25px !important;
+  position: relative !important;
+}
+
+#tinymce ul > li::before {
+  background: url('/images/main/c25cf9fa-d1b5-4740-b519-4baba72ca338.svg') no-repeat 50% !important;
+  content: '' !important;
+  position: absolute !important;
+  top: 6px !important;
+  left: 5px !important;
+  display: block !important;
+  width: 10px !important;
+  height: 9px !important;
+}

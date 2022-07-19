@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
-import { headerBlock, headerTitle } from '~/components/room/header/headerStyles'
-import { border, widthAtLeast } from '~/styles/styles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import { headerTitle, sidePaddingSize } from '~/components/room/header/headerStyles'
+import { border, sidePaddings, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Item = styled.li`
   display: flex;
@@ -13,7 +13,7 @@ const Item = styled.li`
   &::before {
     width: 20px;
     height: 20px;
-    background-image: url('/images/rest/corona.svg');
+    background-image: url('/images/main/corona.svg');
     background-repeat: no-repeat;
     content: '';
   }
@@ -33,17 +33,20 @@ const Main = styled.div`
   row-gap: 16px;
   border-top: 1px solid ${border};
   padding-top: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
 
-  ${headerBlock};
-  grid-area: advantages;
+  grid-area: keyFacts;
 
   @media screen and ${widthAtLeast.md} {
     border-top: none;
     border-left: 1px solid ${border};
     padding-top: 0;
-    padding-bottom: 0;
     margin-top: 30px;
+    padding-left: ${sidePaddingSize.md};
+  }
+
+  @media screen and ${widthAtLeast.lg} {
+    ${sidePaddings(sidePaddingSize.lg)};
   }
 `
 
@@ -51,15 +54,15 @@ type Props = {
   className?: string
 }
 
-export const Advantages = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
-  const { advantages } = data.room
+export const KeyFacts = ({ className }: Props): ReactElement => {
+  const data = useLoaderData<LoaderData>()
+  const { keyFacts } = data.room
   return (
     <Main className={className}>
       <Title>Key facts</Title>
       <List>
-        {advantages.map((item, i) => (
-          <Item key={i}>{item}</Item>
+        {keyFacts.map((fact: string, i: number) => (
+          <Item key={i}>{fact}</Item>
         ))}
       </List>
     </Main>

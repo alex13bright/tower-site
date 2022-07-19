@@ -1,10 +1,20 @@
 import { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
-import { headerBlock } from '~/components/room/header/headerStyles'
 import { Link, useLoaderData } from '@remix-run/react'
-import { accent, backgroundDark, widthAtLeast } from '~/styles/styles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
+import {
+  accent,
+  background,
+  backgroundDark,
+  proximaNovaSb,
+  secondary,
+  sidePaddings,
+  tertiary,
+  widthAtLeast,
+} from '~/styles/styles'
 import { darken } from '~/core/utils'
+import { sidePaddingSize } from '~/components/room/header/headerStyles'
+import { components } from '~/cms/schema'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const itemStyles = css`
   padding: 10px;
@@ -14,65 +24,116 @@ const itemStyles = css`
   place-content: center;
   text-align: center;
   height: 100%;
-`
 
-const StyledLink = styled(Link)`
+  @media screen and ${widthAtLeast.lg} {
+    ${sidePaddings(sidePaddingSize.lg)};
+    font-family: ${proximaNovaSb};
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    line-height: 20px;
+    mix-blend-mode: normal;
+    padding: 12px 36px;
+    white-space: nowrap;
+    border-bottom: none;
+    border-radius: 0;
+  }
+`
+const firstCss = css`
+  border-top-left-radius: 4px;
+`
+const lastCss = css`
+  border-right: none;
+  border-top-right-radius: 4px;
+`
+const StyledLink = styled(Link)<{ $isFirst: boolean; $isLast: boolean }>`
   ${itemStyles};
-  font-weight: bold;
+  font-weight: 700;
   color: ${backgroundDark.start};
   background-color: ${accent};
   &:hover {
     background-color: ${darken(accent, 0.1)};
+  }
+
+  @media screen and ${widthAtLeast.lg} {
+    border: none;
+    color: ${secondary};
+    background: #f1efef;
+    border-right: 1px solid ${tertiary};
+    ${({ $isFirst }) => $isFirst && firstCss};
+    ${({ $isLast }) => $isLast && lastCss};
+
+    &:hover {
+      background-color: #e9e9e9;
+    }
   }
 `
 
 const ActiveLink = styled.span`
   ${itemStyles};
   color: ${accent};
+
+  @media screen and ${widthAtLeast.lg} {
+    background: ${background};
+
+    border: 1px solid ${secondary};
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transform: scale(1.1) translateY(-2px);
+    color: #243238;
+    font-weight: 700;
+  }
 `
 
 const Item = styled.li``
 
-const amountToColumns = (amount: number): number => {
-  if (amount % 2 === 0) return 2
-  if (amount > 4) return 1
-  return amount
-}
-
-const List = styled.ul<{ amount: number }>`
+const List = styled.ul<{ length: number }>`
   display: grid;
-  padding: 5px;
   gap: 5px;
+  grid-template-columns: 1fr;
+
   @media screen and ${widthAtLeast.sm} {
-    grid-template-columns: repeat(${({ amount }) => amountToColumns(amount)}, 1fr);
+    grid-template-columns: repeat(${({ length }) => (length == 3 ? 3 : 2)}, 1fr);
   }
+
   @media screen and ${widthAtLeast.md} {
-    grid-template-columns: repeat(${({ amount }) => amount}, 1fr);
+    grid-template-columns: repeat(${({ length }) => length}, 1fr);
+  }
+
+  @media screen and ${widthAtLeast.lg} {
+    display: flex;
+    justify-items: start;
+    gap: 0;
   }
 `
 
 const Main = styled.div`
+  grid-area: nav;
   display: grid;
   margin-top: 30px;
-  ${headerBlock};
-  grid-area: nav;
+  margin-bottom: 30px;
+  @media screen and ${widthAtLeast.lg} {
+    margin-bottom: 0;
+  }
 `
 
 type Props = {
   className?: string
 }
 export function NavButtons({ className }: Props): ReactElement {
-  const data: LoaderData = useLoaderData()
-  const { navs } = data.room
+  const data = useLoaderData<LoaderData>()
+  const { pages } = data.room
   return (
     <Main className={className}>
-      <List amount={navs.length}>
-        {navs.map(({ url, title, isActive = false }, i) => (
+      <List length={pages.length}>
+        {pages.map(({ url, title, isActive }, i: number) => (
           <Item key={i}>
             {isActive ? (
               <ActiveLink>{title}</ActiveLink>
             ) : (
-              <StyledLink to={url}>{title}</StyledLink>
+              <StyledLink to={url} $isFirst={i === 0} $isLast={pages.length === i + 1}>
+                {title}
+              </StyledLink>
             )}
           </Item>
         ))}

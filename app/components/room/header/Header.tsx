@@ -1,16 +1,24 @@
 import styled from 'styled-components'
 import { StickyMarker } from '~/components/page/StickyActions'
-import { backgroundDark, primaryDark, widthAtLeast } from '~/styles/styles'
+import {
+  backgroundDark,
+  cancelSideMargins,
+  expandOnParentSides,
+  primaryDark,
+  widthAtLeast,
+} from '~/styles/styles'
 import { Ratings } from '~/components/room/header/Ratings'
 import { Network } from '~/components/room/header/Network'
 import { Highlights } from '~/components/room/header/Highlights'
 import { Actions } from '~/components/room/header/Actions'
 import { Logo } from '~/components/room/header/Logo'
 import { ReactElement } from 'react'
-import { Features } from '~/components/room/header/Features'
+import { Characteristics } from '~/components/room/header/Characteristics'
 import { DetailedRatings } from '~/components/room/header/DetailedRatings'
-import { Advantages } from '~/components/room/header/Advantages'
+import { KeyFacts } from '~/components/room/header/KeyFacts'
 import { NavButtons } from '~/components/room/header/NavButtons'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
+import { sidePaddingSize } from '~/components/room/header/headerStyles'
 
 const LogoHighlightsSpan = styled.div`
   display: contents;
@@ -23,13 +31,24 @@ const LogoHighlightsSpan = styled.div`
   }
 `
 const Main = styled.div`
+  ${expandOnParentSides(contentSidePaddingSizePx)};
+
+  @media screen and ${widthAtLeast.md} {
+    ${cancelSideMargins};
+    padding-left: ${sidePaddingSize.md};
+    padding-right: ${sidePaddingSize.md};
+  }
+  @media screen and ${widthAtLeast.xl} {
+    padding-left: ${sidePaddingSize.lg};
+    padding-right: ${sidePaddingSize.lg};
+  }
+
   color: ${primaryDark};
   font-size: 16px;
   line-height: 20px;
   background: linear-gradient(0deg, ${backgroundDark.start}, ${backgroundDark.end} 67.71%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding-bottom: 30px;
 
   display: grid;
   grid-template-areas:
@@ -38,8 +57,8 @@ const Main = styled.div`
     'ratings'
     'highlights'
     'actions'
-    'features'
-    'advantages'
+    'characteristics'
+    'keyFacts'
     'detailed'
     'nav';
   grid-template-columns: 1fr;
@@ -49,7 +68,7 @@ const Main = styled.div`
       'network .'
       'logo ratings'
       'highlights highlights'
-      'features advantages'
+      'characteristics keyFacts'
       'actions actions'
       'detailed detailed'
       'nav nav';
@@ -60,7 +79,7 @@ const Main = styled.div`
     grid-template-areas:
       'network . .'
       'logo-highlights logo-highlights ratings'
-      'features advantages detailed'
+      'characteristics keyFacts detailed'
       'actions actions actions'
       'nav nav nav';
     grid-template-columns: 1fr 1fr 1fr;
@@ -81,8 +100,8 @@ export const Header = ({ className }: Props): ReactElement => {
         </LogoHighlightsSpan>
         <Ratings />
         <Actions />
-        <Features />
-        <Advantages />
+        <Characteristics />
+        <KeyFacts />
         <DetailedRatings />
         <NavButtons />
       </Main>

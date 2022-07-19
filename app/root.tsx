@@ -9,17 +9,20 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { DynamicLinks } from 'remix-utils'
+import { DynamicLinks, useRouteData } from 'remix-utils'
 import { json } from '@remix-run/node'
-import { getCountryFromRequest, getLocaleFromRequest } from '~/core/utils'
-import { permanentRedirect } from '~/core/permanentReidrect'
+import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import normalizeStylesUrl from '~/styles/normalizeStyles.css'
 import { PageLayout } from '~/components/page/PageLayout'
 import { GlobalStyles } from '~/styles/GlobalStyles'
-import { Locale, LocaleContext, useLocale } from '~/components/root/Locale'
+import { LocaleContext, useLocale } from '~/components/root/Locale'
+import { Locale } from '~/core/types'
+import contentStyles from '~/dynamic-content/fallback-styles/content-site.css'
+
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: normalizeStylesUrl },
   { rel: 'stylesheet', href: '/fonts/ProximaNova/styles.css' },
+  { rel: 'stylesheet', href: contentStyles },
 ]
 
 export const meta: MetaFunction = () => ({
@@ -30,13 +33,12 @@ export const meta: MetaFunction = () => ({
 
 type LoaderData = {
   locale: Locale
-  country: string
 }
+
 export const loader: LoaderFunction = async ({ request }) => {
-  await permanentRedirect(request)
-  const locale = getLocaleFromRequest(request)
+  const lang = await getLangFromRequest(request)
   const country = await getCountryFromRequest(request)
-  return json<LoaderData>({ locale: locale as Locale, country })
+  return json<LoaderData>({ locale: { lang, country } })
 }
 
 export default function Root() {
@@ -57,9 +59,14 @@ type DocumentProps = {
 }
 const Document = ({ children }: DocumentProps) => {
   const locale = useLocale()
+  // const { documentMeta } = useRouteData('routes/rakeback-deals/$roomPageSlug')
+  // if (typeof documentMeta !== 'object') throw new Error()
+  // const { title, description } = documentMeta
   return (
-    <html lang={locale}>
+    <html lang={locale.lang}>
       <head>
+        {/*<title>{title}</title>*/}
+        {/*<meta name="description" content={description} />*/}
         <Meta />
         <DynamicLinks />
         <Links />
@@ -68,9 +75,9 @@ const Document = ({ children }: DocumentProps) => {
       <body>
         {children}
         <GlobalStyles />
-        <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        {/*<ScrollRestoration />*/}
       </body>
     </html>
   )

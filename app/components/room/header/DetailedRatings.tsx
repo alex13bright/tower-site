@@ -1,19 +1,30 @@
 import { ReactElement, useState } from 'react'
-import { Table, Caption, Content, Row, Name, Value } from '~/components/room/header/headerStyles'
+import {
+  Table,
+  Caption,
+  Content,
+  Row,
+  Name,
+  Value,
+  sidePaddingSize,
+} from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import {
   accent,
   border,
+  cancelSideMargins,
+  expandOnParentSides,
   primaryDark,
   proximaNovaSb,
   secondaryDark,
+  sidePaddings,
   widthAtLeast,
 } from '~/styles/styles'
 import { HowDoWeRate } from '~/components/room/header/HowDoWeRate'
-import { headerBlock } from '~/components/room/header/headerStyles'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
 import { useLoaderData } from '@remix-run/react'
 import { darken } from '~/core/utils'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const StyledName = styled(Name)<{ kind: string }>`
   display: grid;
@@ -46,32 +57,15 @@ const StyledValue = styled(Value)`
   }
 `
 
-const StyledTable = styled(Table)`
-  background: #2c2f3c;
-  border-radius: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  ${headerBlock};
-  grid-area: detailed;
-  @media screen and ${widthAtLeast.md} {
-    margin-top: 30px;
-  }
-  @media screen and ${widthAtLeast.md} {
-    margin-top: 0;
-    border-top: 1px solid ${border};
-  }
-`
-
 const StyledCaption = styled(Caption)`
   display: flex;
   justify-content: space-between;
 `
 
 const StyledContent = styled(Content)`
-  @media screen and ${widthAtLeast.md} {
+  @media screen and ${widthAtLeast.xm} {
     grid-template-columns: 1fr 1fr;
-    column-gap: 60px;
+    column-gap: calc(2 * ${sidePaddingSize.md});
   }
   @media screen and ${widthAtLeast.lg} {
     grid-template-columns: 1fr;
@@ -86,12 +80,31 @@ const Info = styled.button`
   color: ${darken(accent, 0.3)};
 `
 
+const Main = styled(Table)`
+  grid-area: detailed;
+  ${expandOnParentSides(contentSidePaddingSizePx)};
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: #2c2f3c;
+  border-radius: 10px;
+  @media screen and ${widthAtLeast.md} {
+    ${expandOnParentSides(sidePaddingSize.md)};
+    padding-top: 30px;
+  }
+  @media screen and ${widthAtLeast.lg} {
+    ${cancelSideMargins};
+    ${sidePaddings(sidePaddingSize.lg)};
+    margin-top: 0;
+    border-top: 1px solid ${border};
+  }
+`
+
 type Props = {
   className?: string
 }
 
 export const DetailedRatings = ({ className }: Props): ReactElement => {
-  const data: LoaderData = useLoaderData()
+  const data = useLoaderData<LoaderData>()
   const {
     reliability,
     bonusesPromotions,
@@ -104,7 +117,7 @@ export const DetailedRatings = ({ className }: Props): ReactElement => {
   return (
     <>
       <HowDoWeRate isVisible={isVisible} setIsVisible={setIsVisible} />
-      <StyledTable className={className}>
+      <Main className={className}>
         <StyledCaption>
           <Title>Our ratings</Title>
           <Info onClick={() => setIsVisible(true)}>How do we rate?</Info>
@@ -135,7 +148,7 @@ export const DetailedRatings = ({ className }: Props): ReactElement => {
             <StyledValue>{depositsWithdrawals}</StyledValue>
           </Row>
         </StyledContent>
-      </StyledTable>
+      </Main>
     </>
   )
 }

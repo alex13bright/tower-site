@@ -1,16 +1,23 @@
 import { ReactElement } from 'react'
 import styled from 'styled-components'
-import { LoaderData } from '~/routes/rakeback-deals/$roomId'
-import { useLoaderData } from '@remix-run/react'
 import {
   accent,
+  background,
+  cancelSideMargins,
+  contentTopPadding,
+  expandOnParentSides,
   proximaNovaSb,
   pseudoAbsolute,
+  secondary,
   secondaryDark,
   tertiary,
   widthAtLeast,
 } from '~/styles/styles'
-import { UtilityButton, Container, useSpoiler } from '~/components/ui/Spoiler'
+import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
+import { useToggle } from '~/custom-hooks/useToggle'
+import { useTocContext } from '~/components/room/PageContent'
+import { useLoaderData } from '@remix-run/react'
+import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -44,7 +51,7 @@ const Item = styled.li<{ unmarked: boolean }>`
   }
 `
 
-const UnmarkedItem = styled(Item)`
+const NotPastItem = styled(Item)`
   color: ${accent};
   &::before {
     background: #c4c4c4;
@@ -57,7 +64,7 @@ const UnmarkedItem = styled(Item)`
     width: 1px;
   }
 `
-const MarkedItem = styled(Item)`
+const PastItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
     background: #fff;
@@ -71,45 +78,72 @@ const MarkedItem = styled(Item)`
   }
 `
 
-const List = styled.ul`
+const List = styled.ul<{ isVisible: boolean }>`
   padding: 16px 0;
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+
+  @media screen and ${widthAtLeast.xm} {
+    display: block;
+  }
 `
 
-const Title = styled.div`
-  color: #243238;
-  font-size: 16px;
-  line-height: 36px;
-  font-style: normal;
-  font-weight: bold;
-`
-
-const StyledButton = styled(UtilityButton)`
-  background: url(/images/rest/arrow-down-dark.svg) no-repeat 50%;
-  width: 20px;
-  height: 20px;
-`
-
-const TitleButtonSpan = styled.div`
+const TitleButton = styled.button<{ isPressed: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 36px;
-  cursor: pointer;
-`
 
+  color: #243238;
+  font-size: 16px;
+  font-weight: 700;
+
+  @media screen and ${widthAtLeast.xm} {
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(/images/main/arrow-down-dark.svg) no-repeat 50%;
+    ${({ isPressed }) => (isPressed ? `transform: rotateX(180deg)` : '')};
+
+    @media screen and ${widthAtLeast.xm} {
+      display: none;
+    }
+  }
+`
 const Main = styled.nav`
-  border-radius: 10px;
-  box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
-  padding: 16px 24px;
+  background: ${background};
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  border-bottom: 1px solid ${secondary};
+  //border-radius: 10px;
+  //box-shadow: 0 5px 30px rgb(0 0 0 / 10%);
+
+  ${expandOnParentSides(contentSidePaddingSizePx)};
+  padding-top: 8px;
+  padding-bottom: 8px;
 
   @media screen and ${widthAtLeast.md} {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    ${cancelSideMargins};
   }
-  @media screen and ${widthAtLeast.lg} {
-    position: sticky;
-    top: 0;
-    left: 0;
+
+  @media screen and ${widthAtLeast.xm} {
+    border-bottom: none;
+    grid-area: toc;
+    top: ${contentTopPadding};
+    height: min-content;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
   }
 `
 
@@ -118,25 +152,36 @@ type Props = {
 }
 
 export function Toc({ className }: Props): ReactElement {
-  const data: LoaderData = useLoaderData()
-  const { toc } = data.room
-  const { containerRef, maxHeight, isButtonHidden, isButtonPressed, toggle } = useSpoiler(0)
-
+  const data = useLoaderData<LoaderData>()
+  const { toc } = data.room.activePage
+  const { isToggled: isUnfolded, toggle } = useToggle(false)
+  const { scrollsWithSetter, visibility } = useTocContext()
+  const { scrolls } = scrollsWithSetter
+  const { index } = visibility
   return (
-    <Main ref={containerRef} className={className}>
-      <TitleButtonSpan onClick={toggle}>
-        <Title>Contents</Title>
-        <StyledButton isHidden={isButtonHidden} isPressed={isButtonPressed} />
-      </TitleButtonSpan>
-      <Container containerRef={containerRef} maxHeight={maxHeight}>
-        <List>
-          {toc.map(({ title, anchor }) => (
-            <MarkedItem key={anchor} unmarked={false}>
-              <Anchor href={'#' + anchor}>{title}</Anchor>
-            </MarkedItem>
-          ))}
-        </List>
-      </Container>
+    <Main className={className}>
+      <TitleButton onClick={toggle} isPressed={isUnfolded}>
+        Contents
+      </TitleButton>
+      <List isVisible={isUnfolded}>
+        {toc.map(({ id, title }, i) => {
+          const SelectedItem = i <= index ? PastItem : NotPastItem
+          return (
+            <SelectedItem key={id} unmarked={false}>
+              <Anchor
+                onClick={(e) => {
+                  e.preventDefault()
+                  const { scroll } = scrolls[id]
+                  scroll()
+                }}
+                href={'#' + id}
+              >
+                {title}
+              </Anchor>
+            </SelectedItem>
+          )
+        })}
+      </List>
     </Main>
   )
 }

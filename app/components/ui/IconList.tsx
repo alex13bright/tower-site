@@ -19,17 +19,14 @@ const Image = styled.img`
 `
 
 type Props<ItemType> = {
+  list: ItemType[]
   urlFn: (item: string) => string
-  children: ItemType[]
 }
 
-export function IconList<ItemType extends string>({
-  children,
-  urlFn,
-}: Props<ItemType>): ReactElement {
+export function IconList<ItemType extends string>({ list, urlFn }: Props<ItemType>): ReactElement {
   return (
     <List>
-      {children.map((item) => (
+      {list.map((item) => (
         <Item key={item} title={item}>
           <Image alt={item} src={urlFn(item)} />
         </Item>

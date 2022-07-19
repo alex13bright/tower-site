@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { primary, proximaNova } from '~/styles/styles'
+import { background, primary, proximaNova } from '~/styles/styles'
 export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -7,17 +7,15 @@ export const GlobalStyles = createGlobalStyle`
 
   html,
   body {
-    width: 100%;
     margin: 0;
   }
 
   body {
-    color: ${primary};
     font-family: ${proximaNova};
-  }
-
-  h1 {
-    line-height: 1em;
+    color: ${primary};
+    background-color: ${background};
+    font-size: 17px;
+    line-height: 1rem;
   }
 
   a {
@@ -30,7 +28,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
-  li {
+  ul {
     list-style-type: none;
   }
 
@@ -41,6 +39,7 @@ export const GlobalStyles = createGlobalStyle`
 
   button {
     outline: none;
+
     &:focus {
       outline: none;
     }
