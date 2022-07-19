@@ -51,7 +51,7 @@ const Item = styled.li<{ unmarked: boolean }>`
   }
 `
 
-const NotPastItem = styled(Item)`
+const NotScrolledItem = styled(Item)`
   color: ${accent};
   &::before {
     background: #c4c4c4;
@@ -64,7 +64,7 @@ const NotPastItem = styled(Item)`
     width: 1px;
   }
 `
-const PastItem = styled(Item)`
+const ScrolledItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
     background: #fff;
@@ -155,9 +155,7 @@ export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
-  const { scrollsWithSetter, visibility } = useTocContext()
-  const { scrolls } = scrollsWithSetter
-  const { index } = visibility
+  const { scrollHandlersMap, scrolledIndex } = useTocContext()
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
@@ -165,20 +163,20 @@ export function Toc({ className }: Props): ReactElement {
       </TitleButton>
       <List isVisible={isUnfolded}>
         {toc.map(({ id, title }, i) => {
-          const SelectedItem = i <= index ? PastItem : NotPastItem
+          const ItemComponent = i <= scrolledIndex ? ScrolledItem : NotScrolledItem
           return (
-            <SelectedItem key={id} unmarked={false}>
+            <ItemComponent key={id} unmarked={false}>
               <Anchor
                 onClick={(e) => {
                   e.preventDefault()
-                  const { scroll } = scrolls[id]
-                  scroll()
+                  const scrollHandler = scrollHandlersMap[id]
+                  scrollHandler()
                 }}
                 href={'#' + id}
               >
                 {title}
               </Anchor>
-            </SelectedItem>
+            </ItemComponent>
           )
         })}
       </List>

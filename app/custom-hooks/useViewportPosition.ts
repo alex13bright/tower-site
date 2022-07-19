@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 
 export type PositionVisibility = 'top' | 'middle' | 'bottom'
-export const usePositionVisibility = (
+export const useViewportPosition = (
   ref: MutableRefObject<HTMLElement | null>
 ): null | PositionVisibility => {
   const [positionVisibility, setPositionVisibility] = useState<null | PositionVisibility>(null)

@@ -49,15 +49,14 @@ type Props = {
   className?: string
 }
 
-export type Scrolls = Record<string, { scroll: () => void }>
+export type ScrollHandlersMap = Record<string, () => void>
 
-type Handler = (id: string, isPast: boolean) => void
+type ScrollIndexHandler = (id: string, isPast: boolean) => void
 type TocContextType = {
-  scrollsWithSetter: { scrolls: Scrolls; setScrolls: Dispatch<SetStateAction<Scrolls>> }
-  visibility: {
-    index: number
-    handler: Handler
-  }
+  scrollHandlersMap: ScrollHandlersMap
+  setScrollHandlersMap: Dispatch<SetStateAction<ScrollHandlersMap>>
+  scrolledIndex: number
+  scrollIndexHandler: ScrollIndexHandler
 }
 
 const TocContext = createContext<TocContextType | null>(null)
@@ -71,26 +70,30 @@ export const useTocContext = () => {
 export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { content, rawContent, toc } = data.room.activePage
-  const [scrolls, setScrolls] = useState<Scrolls>({})
-  const [index, setIndex] = useState(-1)
-  const handler = useCallback<Handler>(
-    (id, isPast) => {
-      const idIndex = toc.findIndex(({ id: tocId }) => id === tocId)
-      if (idIndex === -1) throw new Error('id of h2 is not in the toc')
-      if (!isPast && idIndex <= index) {
-        setIndex(idIndex - 1)
-      } else if (isPast && idIndex > index) {
-        setIndex(idIndex)
+  const [scrollHandlersMap, setScrollHandlersMap] = useState<ScrollHandlersMap>({})
+  const [scrolledIndex, setScrolledIndex] = useState(-1)
+  const scrollIndexHandler = useCallback<ScrollIndexHandler>(
+    (id, isScrolled) => {
+      const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
+      if (currentIndex === -1) throw new Error('id of h2 is not in the toc')
+      if (!isScrolled && currentIndex <= scrolledIndex) {
+        setScrolledIndex(currentIndex - 1)
+      } else if (isScrolled && currentIndex > scrolledIndex) {
+        setScrolledIndex(currentIndex)
       }
     },
-    [index, toc]
+    [scrolledIndex, toc]
   )
-  const memoized = useMemo(() => {
-    return {
-      scrollsWithSetter: { scrolls, setScrolls },
-      visibility: { index, handler },
-    }
-  }, [handler, index, scrolls])
+  const memoized = useMemo(
+    () => ({
+      scrolledIndex,
+      scrollIndexHandler,
+      scrollHandlersMap,
+      setScrollHandlersMap,
+    }),
+    [scrollIndexHandler, scrolledIndex, scrollHandlersMap]
+  )
+
   return (
     <Content className={className}>
       <TocContext.Provider value={memoized}>

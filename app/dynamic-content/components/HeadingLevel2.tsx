@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ReactElement, useEffect, useRef, useState } from 'react'
 import { slugify } from '~/core/singletons'
 import { useTocContext } from '~/components/room/PageContent'
-import { usePositionVisibility } from '~/custom-hooks/usePositionVisibility'
+import { useViewportPosition } from '~/custom-hooks/useViewportPosition'
 import { hCss } from '~/dynamic-content/components/content'
 
 export const StyledH2 = styled.h2`
@@ -39,32 +39,29 @@ export const HeadingLevel2 = ({ children }: Heading2Props): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null)
   const [state, setState] = useState<HTMLHeadingElement | null>(null)
 
-  const { scrollsWithSetter, visibility } = useTocContext()
-  const { handler } = visibility
-  const positionVisibility = usePositionVisibility(ref)
-  useEffect(() => {
-    if (positionVisibility === null) return
-    const isPast = positionVisibility === 'top'
-    handler(id, isPast)
-  }, [handler, id, positionVisibility])
+  const { scrolledIndex, scrollIndexHandler, scrollHandlersMap, setScrollHandlersMap } =
+    useTocContext()
 
-  const { scrolls, setScrolls } = scrollsWithSetter
+  const viewportPosition = useViewportPosition(ref)
+  const isScrolled = viewportPosition === 'top'
+  useEffect(() => {
+    scrollIndexHandler(id, isScrolled)
+  }, [scrollIndexHandler, id, isScrolled])
+
   useEffect(() => {
     if (state === null) return
-    if (scrolls[id]) return
-    setScrolls((scrolls) => ({
-      ...scrolls,
-      [id]: {
-        scroll: () => {
-          // console.log(ref.current) todo: why null???
-          // console.log(state.scrollIntoView) todo: why broken?
-          const realRef = document.getElementById(id)
-          if (realRef === null) throw new Error('realRef to self is null')
-          realRef.scrollIntoView({ behavior: 'smooth' })
-        },
+    if (scrollHandlersMap[id]) return
+    setScrollHandlersMap((prevMap) => ({
+      ...prevMap,
+      [id]: () => {
+        // console.log(ref.current) todo: why null???
+        // console.log(state.scrollIntoView) todo: why broken?
+        const realRef = document.getElementById(id)
+        if (realRef === null) throw new Error('realRef to self is null')
+        realRef.scrollIntoView({ behavior: 'smooth' })
       },
     }))
-  }, [id, scrolls, setScrolls, state])
+  }, [id, scrolledIndex, scrollHandlersMap, setScrollHandlersMap, state])
 
   return (
     <StyledH2
