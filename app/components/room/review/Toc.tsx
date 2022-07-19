@@ -68,6 +68,7 @@ const NotScrolledItem = styled(Item)`
     width: 1px;
   }
 `
+
 const ScrolledItem = styled(Item)`
   color: ${secondaryDark};
   &::before {
@@ -127,6 +128,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
     }
   }
 `
+
 const Main = styled.nav`
   background: ${background};
   z-index: 999;
@@ -183,7 +185,7 @@ export function Toc({ className }: Props): ReactElement {
         const newScrolledIndex = entries.reduce((scrolledIndex, entry) => {
           const { boundingClientRect, target } = entry
           const { id } = target
-          const isScrolled = boundingClientRect.top < 0
+          const isScrolled = boundingClientRect.bottom <= 0
           const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
           if (currentIndex === -1)
             throw new Error(`toc | correspondent heading is not found | id: ${id}`)
@@ -199,7 +201,7 @@ export function Toc({ className }: Props): ReactElement {
         if (newScrolledIndex !== scrolledIndex) setScrolledIndex(newScrolledIndex)
       },
       {
-        threshold: 1.0,
+        threshold: [0],
       }
     )
 
