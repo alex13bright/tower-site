@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { useScroll } from '~/custom-hooks/useScroll'
 import { widthAtLeast } from '~/styles/styles'
@@ -29,6 +29,6 @@ const StyledButton = styled.button<{ isActive: boolean }>`
 export const PageTopButton = (): ReactElement => {
   const [isActive, setActive] = useState<boolean>(false)
   const handleClick = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-  useScroll(() => setActive(window.scrollY > DISPLAY_DELAY_OFFSET))
+  useScroll(useCallback(() => setActive(window.scrollY > DISPLAY_DELAY_OFFSET), []))
   return <StyledButton isActive={isActive} onClick={handleClick} />
 }
