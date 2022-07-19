@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
   accent,
@@ -15,7 +15,6 @@ import {
 } from '~/styles/styles'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
-import { useTocContext } from '~/components/room/PageContent'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
@@ -153,7 +152,50 @@ export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
   const { isToggled: isUnfolded, toggle } = useToggle(false)
-  const { scrollHandlersMap, scrolledIndex } = useTocContext()
+
+  const [scrolledIndex, setScrolledIndex] = useState(-1)
+  const headingsRef = useRef<Record<string, HTMLElement>>({})
+
+  useEffect(() => {
+    const { current: headings } = headingsRef
+    toc.forEach(({ id }) => {
+      const element = document.getElementById(id)
+      if (element === null) throw new Error(`toc | h2 not found | id: ${id} `)
+      headings[id] = element
+    })
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const newScrolledIndex = entries.reduce((scrolledIndex, entry) => {
+          const { boundingClientRect, target } = entry
+          const { id } = target
+          const isScrolled = boundingClientRect.top < 0
+          const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
+          if (currentIndex === -1)
+            throw new Error(`toc | correspondent heading is not found | id: ${id}`)
+
+          if (!isScrolled && currentIndex <= scrolledIndex) {
+            return currentIndex - 1
+          } else if (isScrolled && currentIndex > scrolledIndex) {
+            return currentIndex
+          } else {
+            return scrolledIndex
+          }
+        }, scrolledIndex)
+        if (newScrolledIndex !== scrolledIndex) setScrolledIndex(newScrolledIndex)
+      },
+      {
+        threshold: 1.0,
+      }
+    )
+
+    const elements = Object.values(headings)
+    elements.forEach((element) => observer.observe(element))
+    return () => {
+      elements.forEach((element) => observer.unobserve(element))
+    }
+  }, [scrolledIndex, toc])
+
   return (
     <Main className={className}>
       <TitleButton onClick={toggle} isPressed={isUnfolded}>
@@ -167,8 +209,8 @@ export function Toc({ className }: Props): ReactElement {
               <Anchor
                 onClick={(e) => {
                   e.preventDefault()
-                  const scrollHandler = scrollHandlersMap[id]
-                  scrollHandler()
+                  const ref = headingsRef.current[id]
+                  ref.scrollIntoView({ behavior: 'smooth' })
                 }}
                 href={'#' + id}
               >

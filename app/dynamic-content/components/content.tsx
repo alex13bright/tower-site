@@ -11,6 +11,27 @@ export const H1 = styled.h1`
 `
 H1.displayName = 'H1'
 
+export const H2 = styled.h2`
+  ${hCss};
+  font-size: 24px;
+  margin: 40px 0 20px;
+
+  position: relative;
+  padding-top: 12px;
+
+  &::before {
+    background: url('/images/main/h2-line.svg') no-repeat 50%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 42px;
+    height: 2px;
+  }
+`
+H2.displayName = 'H2'
+
 export const H3 = styled.h3`
   ${hCss};
   font-size: 20px;

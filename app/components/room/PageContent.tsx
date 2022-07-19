@@ -1,16 +1,7 @@
-import {
-  createContext,
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { Toc } from '~/components/room/review/Toc'
-import { HeaderLevel1 } from '~/components/room/review/HeaderLevel1'
+import { HeadingLevel1 } from '~/components/room/review/HeadingLevel1'
 import { PageMeta } from '~/components/room/review/PageMeta'
 import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
@@ -49,61 +40,18 @@ type Props = {
   className?: string
 }
 
-export type ScrollHandlersMap = Record<string, () => void>
-
-type ScrollIndexHandler = (id: string, isPast: boolean) => void
-type TocContextType = {
-  scrollHandlersMap: ScrollHandlersMap
-  setScrollHandlersMap: Dispatch<SetStateAction<ScrollHandlersMap>>
-  scrolledIndex: number
-  scrollIndexHandler: ScrollIndexHandler
-}
-
-const TocContext = createContext<TocContextType | null>(null)
-
-export const useTocContext = () => {
-  const context = useContext(TocContext)
-  if (context === null) throw new Error('TocWithRefContext not found')
-  return context
-}
-
 export const PageContent = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { content, rawContent, toc } = data.room.activePage
-  const [scrollHandlersMap, setScrollHandlersMap] = useState<ScrollHandlersMap>({})
-  const [scrolledIndex, setScrolledIndex] = useState(-1)
-  const scrollIndexHandler = useCallback<ScrollIndexHandler>(
-    (id, isScrolled) => {
-      const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
-      if (currentIndex === -1) throw new Error('id of h2 is not in the toc')
-      if (!isScrolled && currentIndex <= scrolledIndex) {
-        setScrolledIndex(currentIndex - 1)
-      } else if (isScrolled && currentIndex > scrolledIndex) {
-        setScrolledIndex(currentIndex)
-      }
-    },
-    [scrolledIndex, toc]
-  )
-  const memoized = useMemo(
-    () => ({
-      scrolledIndex,
-      scrollIndexHandler,
-      scrollHandlersMap,
-      setScrollHandlersMap,
-    }),
-    [scrollIndexHandler, scrolledIndex, scrollHandlersMap]
-  )
+  const { content, rawContent } = data.room.activePage
 
   return (
     <Content className={className}>
-      <TocContext.Provider value={memoized}>
-        <Toc />
-        <ContentWrapper>
-          <HeaderLevel1 />
-          <PageMeta />
-          <DynamicContent content={content} rawContent={rawContent} className={className} />
-        </ContentWrapper>
-      </TocContext.Provider>
+      <Toc />
+      <ContentWrapper>
+        <HeadingLevel1 />
+        <PageMeta />
+        <DynamicContent content={content} rawContent={rawContent} className={className} />
+      </ContentWrapper>
     </Content>
   )
 }

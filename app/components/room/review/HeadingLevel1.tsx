@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-export const HeaderLevel1 = ({ className }: Props): ReactElement => {
+export const HeadingLevel1 = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const { h1 } = data.room.activePage
   return <H1 className={className}>{h1}</H1>
