@@ -71,4 +71,4 @@ export const pseudoIcon = css<{ $width: string; $height: string; svg: string; ga
   }
 `
 
-export const contentTopPadding = '40px'
+export const contentTopPadding = 40

@@ -42,7 +42,7 @@ const StickyMarkerMain = styled.div`
 `
 export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [_, stickyContextSetState] = useStickyContext()
+  const [, stickyContextSetState] = useStickyContext()
   const isVisible = useIsVisible(ref)
   useEffect(() => {
     if (isVisible === null) return
@@ -51,12 +51,14 @@ export const StickyMarker = ({ isVisibleKey, children }: StickyMarkerProps) => {
   return <StickyMarkerMain ref={ref}>{children}</StickyMarkerMain>
 }
 
+export const stickyActionsHeight = 100
+
 const StickyBox = styled.div<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? 'grid' : 'none')};
   position: fixed;
   left: 0;
   bottom: 0;
-  height: 100px;
+  height: ${stickyActionsHeight}px;
   width: 100%;
   background-color: grey;
 `

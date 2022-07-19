@@ -17,6 +17,11 @@ import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { useToggle } from '~/custom-hooks/useToggle'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+import { stickyActionsHeight } from '~/components/page/StickyActions'
+
+const listPadding = 16
+const titleHeight = 36
+const mainPadding = 8
 
 const Anchor = styled.a`
   font-family: ${proximaNovaSb};
@@ -77,12 +82,21 @@ const ScrolledItem = styled(Item)`
   }
 `
 
+const offset = titleHeight + listPadding + mainPadding + stickyActionsHeight
+const offsetXm = offset + contentTopPadding
 const List = styled.ul<{ isVisible: boolean }>`
-  padding: 16px 0;
+  padding: ${listPadding}px 0;
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+
+  max-height: calc(100vh - ${offset}px);
+  overflow-y: auto;
 
   @media screen and ${widthAtLeast.xm} {
     display: block;
+  }
+
+  @media screen and ${widthAtLeast.xm} {
+    max-height: calc(100vh - ${offsetXm}px);
   }
 `
 
@@ -90,7 +104,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 36px;
+  height: ${titleHeight}px;
 
   color: #243238;
   font-size: 16px;
@@ -124,8 +138,8 @@ const Main = styled.nav`
   border-bottom: 1px solid ${secondary};
 
   ${expandOnParentSides(contentSidePaddingSizePx)};
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: ${mainPadding}px;
+  padding-bottom: ${mainPadding}px;
 
   @media screen and ${widthAtLeast.md} {
     padding-top: 16px;

@@ -8,21 +8,22 @@ import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
 
+const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
   position: relative;
   display: grid;
-  row-gap: ${contentTopPadding};
+  row-gap: ${contentTopPaddingPx};
 
   @media screen and ${widthAtLeast.xm} {
     row-gap: 0;
-    padding-top: ${contentTopPadding};
+    padding-top: ${contentTopPaddingPx};
     grid-template-areas: 'toc content';
     grid-template-columns: 200px 1fr;
     column-gap: 24px;
   }
 
   @media screen and ${widthAtLeast.lg} {
-    padding-top: ${contentTopPadding};
+    padding-top: ${contentTopPaddingPx};
     grid-template-areas: 'toc content .';
     grid-template-columns: 200px 1fr 320px;
   }
