@@ -171,6 +171,9 @@ export function Toc({ className }: Props): ReactElement {
 
   const [scrolledIndex, setScrolledIndex] = useState(-1)
   const headingsRef = useRef<Record<string, HTMLElement>>({})
+  // scrolledIndexRef to avoid observe/unobserve
+  const scrolledIndexRef = useRef(scrolledIndex)
+  scrolledIndexRef.current = scrolledIndex
 
   useEffect(() => {
     const { current: headings } = headingsRef
@@ -182,6 +185,7 @@ export function Toc({ className }: Props): ReactElement {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        const scrolledIndex = scrolledIndexRef.current
         const newScrolledIndex = entries.reduce((scrolledIndex, entry) => {
           const { boundingClientRect, target } = entry
           const { id } = target
@@ -210,7 +214,7 @@ export function Toc({ className }: Props): ReactElement {
     return () => {
       elements.forEach((element) => observer.unobserve(element))
     }
-  }, [scrolledIndex, toc])
+  }, [toc]) // scrolledIndex,
 
   return (
     <Main className={className}>
