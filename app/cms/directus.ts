@@ -12,8 +12,3 @@ export async function getDirectusClient() {
 
   return directus
 }
-
-// @ts-nocheck
-// npx directus-typescript-gen --host http://localhost:8055 --email admin@a.com --password yJ7Aa36JK9t8 --typeName Schema --outFile schema.ts
-
-// don't forget in CMS for M2M relation fields set up cascade deleting
