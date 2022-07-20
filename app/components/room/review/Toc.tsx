@@ -167,70 +167,65 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
-  const [isUnfolded, toggleIsUnfolded] = useToggle(false)
+  const [isExpanded, toggleExpansion] = useToggle(false)
 
   const [scrolledIndex, setScrolledIndex] = useState(-1)
   const headingsRef = useRef<Record<string, HTMLElement>>({})
-  // scrolledIndexRef to avoid observe/unobserve
-  const scrolledIndexRef = useRef(scrolledIndex)
-  scrolledIndexRef.current = scrolledIndex
 
   useEffect(() => {
-    const { current: headings } = headingsRef
-    toc.forEach(({ id }) => {
+    const headings = headingsRef.current
+    for (const { id } of toc) {
       const element = document.getElementById(id)
       if (element === null) throw new Error(`toc | h2 not found | id: ${id} `)
       headings[id] = element
-    })
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const scrolledIndex = scrolledIndexRef.current
-        const newScrolledIndex = entries.reduce((scrolledIndex, entry) => {
-          const { boundingClientRect, target } = entry
-          const { id } = target
-          const isScrolled = boundingClientRect.bottom <= 0
-          const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
-          if (currentIndex === -1)
-            throw new Error(`toc | correspondent heading is not found | id: ${id}`)
+        setScrolledIndex((scrolledIndex) =>
+          entries.reduce((scrolledIndex, entry) => {
+            const { boundingClientRect, target } = entry
+            const { id } = target
+            const isScrolled = boundingClientRect.bottom <= 0
+            const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
+            if (currentIndex === -1)
+              throw new Error(`toc | correspondent heading is not found | id: ${id}`)
 
-          if (!isScrolled && currentIndex <= scrolledIndex) {
-            return currentIndex - 1
-          } else if (isScrolled && currentIndex > scrolledIndex) {
-            return currentIndex
-          } else {
-            return scrolledIndex
-          }
-        }, scrolledIndex)
-        if (newScrolledIndex !== scrolledIndex) setScrolledIndex(newScrolledIndex)
+            if (!isScrolled && currentIndex <= scrolledIndex) {
+              return currentIndex - 1
+            } else if (isScrolled && currentIndex > scrolledIndex) {
+              return currentIndex
+            } else {
+              return scrolledIndex
+            }
+          }, scrolledIndex)
+        )
       },
-      {
-        threshold: [0],
-      }
+      { threshold: 0 }
     )
 
     const elements = Object.values(headings)
-    elements.forEach((element) => observer.observe(element))
+    elements.forEach(observer.observe)
     return () => {
-      elements.forEach((element) => observer.unobserve(element))
+      elements.forEach(observer.unobserve)
     }
   }, [toc]) // scrolledIndex,
 
   return (
     <Main className={className}>
-      <TitleButton onClick={toggleIsUnfolded} isPressed={isUnfolded}>
+      <TitleButton onClick={toggleExpansion} isPressed={isExpanded}>
         Contents
       </TitleButton>
-      <List isVisible={isUnfolded}>
+      <List isVisible={isExpanded}>
         {toc.map(({ id, title }, i) => {
           const ItemComponent = i <= scrolledIndex ? ScrolledItem : NotScrolledItem
+          const element = headingsRef.current[id]
           return (
             <ItemComponent key={id}>
               <Anchor
                 onClick={(e) => {
                   e.preventDefault()
-                  const ref = headingsRef.current[id]
-                  ref.scrollIntoView({ behavior: 'smooth' })
+                  element.scrollIntoView({ behavior: 'smooth' })
                 }}
                 href={'#' + id}
               >
