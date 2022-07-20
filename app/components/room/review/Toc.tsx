@@ -167,7 +167,7 @@ type Props = {
 export function Toc({ className }: Props): ReactElement {
   const data = useLoaderData<LoaderData>()
   const { toc } = data.room.activePage
-  const { isToggled: isUnfolded, toggle } = useToggle(false)
+  const [isUnfolded, toggleIsUnfolded] = useToggle(false)
 
   const [scrolledIndex, setScrolledIndex] = useState(-1)
   const headingsRef = useRef<Record<string, HTMLElement>>({})
@@ -218,7 +218,7 @@ export function Toc({ className }: Props): ReactElement {
 
   return (
     <Main className={className}>
-      <TitleButton onClick={toggle} isPressed={isUnfolded}>
+      <TitleButton onClick={toggleIsUnfolded} isPressed={isUnfolded}>
         Contents
       </TitleButton>
       <List isVisible={isUnfolded}>

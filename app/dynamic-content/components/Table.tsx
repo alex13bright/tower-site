@@ -154,11 +154,11 @@ export const Table = ({ children, className, ...props }: Props): ReactElement =>
   const tableData = parseChildren(children)
   const { caption, table } = tableData
 
-  const { isToggled: showLess, toggle } = useToggle(true)
+  const [isCollapsed, toggleIsCollapsed] = useToggle(true)
 
   const [headerRow, ...rows] = table
-  // const bodyRows = showLess ? rows.slice(0, dataRows) : rows
-  const displayedRowsAmount = showLess ? dataRows : rows.length
+  // const bodyRows = isCollapsed ? rows.slice(0, dataRows) : rows
+  const displayedRowsAmount = isCollapsed ? dataRows : rows.length
   return (
     <Main>
       <StyledTable>
@@ -186,7 +186,9 @@ export const Table = ({ children, className, ...props }: Props): ReactElement =>
         </TBody>
       </StyledTable>
       {dataRows < rows.length ? (
-        <FoldButton onClick={toggle}>{showLess ? 'Show more' : 'Show less'}</FoldButton>
+        <FoldButton onClick={toggleIsCollapsed}>
+          {isCollapsed ? 'Show more' : 'Show less'}
+        </FoldButton>
       ) : null}
     </Main>
   )

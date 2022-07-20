@@ -241,7 +241,7 @@ export const BonusFeed = ({ className }: Props): ReactElement => {
   const { bonusCode, bonus: bonusObj, squareLogo } = data.room
   const { bonus, maxBonus, rakeback, deposit } = bonusObj
   const { url, alt } = squareLogo
-  const { isToggled: isFolded, toggle } = useToggle(true)
+  const [isFolded, toggleIsFolded] = useToggle(true)
   return (
     <Main className={className}>
       <Header>
@@ -275,7 +275,7 @@ export const BonusFeed = ({ className }: Props): ReactElement => {
         <StyledSignUpButton href="#" />
       </Action>
       <Details>
-        <DetailsToggleButton onClick={toggle} isPressed={isFolded}>
+        <DetailsToggleButton onClick={toggleIsFolded} isPressed={isFolded}>
           <DetailsToggleTitle>Details</DetailsToggleTitle>
         </DetailsToggleButton>
         <DetailsContent isHidden={isFolded}>
