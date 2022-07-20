@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from 'react'
+import { ReactElement, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
   accent,
@@ -18,12 +18,13 @@ import { useToggle } from '~/custom-hooks/useToggle'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { stickyActionsHeight } from '~/components/page/StickyActions'
+import { TocType } from '~/core/types'
 
 const listPadding = 16
 const titleHeight = 36
 const mainPadding = 8
 
-const Anchor = styled.a`
+const StyledAnchor = styled.a`
   font-family: ${proximaNovaSb};
   font-size: 14px;
   font-style: normal;
@@ -160,6 +161,40 @@ const Main = styled.nav`
   }
 `
 
+const useObserverState = (toc: TocType) => {
+  const [scrolledIndex, setScrolledIndex] = useState(-1)
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(
+        (entries) => {
+          setScrolledIndex((scrolledIndex) =>
+            entries.reduce((scrolledIndex, entry) => {
+              const { boundingClientRect, target } = entry
+              const { id } = target
+              const isScrolled = boundingClientRect.bottom <= 0
+              const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
+              if (currentIndex === -1)
+                throw new Error(`toc | correspondent heading is not found | id: ${id}`)
+
+              if (!isScrolled && currentIndex <= scrolledIndex) {
+                return currentIndex - 1
+              } else if (isScrolled && currentIndex > scrolledIndex) {
+                return currentIndex
+              } else {
+                return scrolledIndex
+              }
+            }, scrolledIndex)
+          )
+        },
+        { threshold: 0 }
+      ),
+    [toc]
+  )
+
+  return { scrolledIndex, observer }
+}
+
 type Props = {
   className?: string
 }
@@ -169,47 +204,7 @@ export function Toc({ className }: Props): ReactElement {
   const { toc } = data.room.activePage
   const [isExpanded, toggleExpansion] = useToggle(false)
 
-  const [scrolledIndex, setScrolledIndex] = useState(-1)
-  const headingsRef = useRef<Record<string, HTMLElement>>({})
-
-  useEffect(() => {
-    const headings = headingsRef.current
-    for (const { id } of toc) {
-      const element = document.getElementById(id)
-      if (element === null) throw new Error(`toc | h2 not found | id: ${id} `)
-      headings[id] = element
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setScrolledIndex((scrolledIndex) =>
-          entries.reduce((scrolledIndex, entry) => {
-            const { boundingClientRect, target } = entry
-            const { id } = target
-            const isScrolled = boundingClientRect.bottom <= 0
-            const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
-            if (currentIndex === -1)
-              throw new Error(`toc | correspondent heading is not found | id: ${id}`)
-
-            if (!isScrolled && currentIndex <= scrolledIndex) {
-              return currentIndex - 1
-            } else if (isScrolled && currentIndex > scrolledIndex) {
-              return currentIndex
-            } else {
-              return scrolledIndex
-            }
-          }, scrolledIndex)
-        )
-      },
-      { threshold: 0 }
-    )
-
-    const elements = Object.values(headings)
-    elements.forEach(observer.observe)
-    return () => {
-      elements.forEach(observer.unobserve)
-    }
-  }, [toc]) // scrolledIndex,
+  const { scrolledIndex, observer } = useObserverState(toc)
 
   return (
     <Main className={className}>
@@ -217,24 +212,54 @@ export function Toc({ className }: Props): ReactElement {
         Contents
       </TitleButton>
       <List isVisible={isExpanded}>
-        {toc.map(({ id, title }, i) => {
-          const ItemComponent = i <= scrolledIndex ? ScrolledItem : NotScrolledItem
-          const element = headingsRef.current[id]
-          return (
-            <ItemComponent key={id}>
-              <Anchor
-                onClick={(e) => {
-                  e.preventDefault()
-                  element.scrollIntoView({ behavior: 'smooth' })
-                }}
-                href={'#' + id}
-              >
-                {title}
-              </Anchor>
-            </ItemComponent>
-          )
-        })}
+        {toc.map(({ id, title }, i) => (
+          <ListItem
+            key={id}
+            id={id}
+            title={title}
+            isScrolled={i <= scrolledIndex}
+            observer={observer}
+          />
+        ))}
       </List>
     </Main>
+  )
+}
+
+interface AnchorProps {
+  id: string
+  title: string
+  isScrolled: boolean
+  observer: IntersectionObserver
+}
+
+function ListItem({ id, title, isScrolled, observer }: AnchorProps) {
+  const ItemComponent = isScrolled ? ScrolledItem : NotScrolledItem
+
+  const element = useMemo(() => {
+    const el = document.getElementById(id)
+    if (!el) {
+      throw new Error(`toc | correspondent heading is not found | id: ${id}`)
+    }
+    return el
+  }, [id])
+
+  useEffect(() => {
+    observer.observe(element)
+    return () => observer.unobserve(element)
+  }, [element, observer])
+
+  return (
+    <ItemComponent>
+      <StyledAnchor
+        onClick={(e) => {
+          e.preventDefault()
+          element.scrollIntoView({ behavior: 'smooth' })
+        }}
+        href={'#' + id}
+      >
+        {title}
+      </StyledAnchor>
+    </ItemComponent>
   )
 }
