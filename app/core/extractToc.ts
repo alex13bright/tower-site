@@ -5,16 +5,6 @@ import { slugify } from '~/core/singletons'
 
 export const extractToc = (content: string, tocMode: TocModeType): TocType => {
   const root = JSDOM.fragment(`<div>${content}</div>`)
-  const titles: { title: string; slug: string | null }[] = []
-  const tags: NodeListOf<HTMLElement> = root.querySelectorAll('h2')
-  tags.forEach((tag) => {
-    const title = tag.innerHTML
-    const slug = null
-    titles.push({ title, slug })
-  })
-
-  return titles.map(({ title, slug }) => ({
-    title,
-    id: slug !== null ? slug : `${slugify(title)}`,
-  }))
+  const tags = root.querySelectorAll('h2')
+  return [...tags].map(({ innerHTML }) => ({ title: innerHTML, id: slugify(innerHTML) }))
 }
