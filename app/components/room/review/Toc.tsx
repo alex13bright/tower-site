@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useMemo, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {
   accent,
@@ -31,7 +31,7 @@ const StyledAnchor = styled.a`
   line-height: 18px;
 `
 
-const Item = styled.li`
+const StyledItem = styled.li`
   padding: 0 0 15px 15px;
   position: relative;
   &::before {
@@ -56,7 +56,7 @@ const Item = styled.li`
   }
 `
 
-const NotScrolledItem = styled(Item)`
+const NotScrolledItem = styled(StyledItem)`
   color: ${accent};
   &::before {
     background: #c4c4c4;
@@ -70,7 +70,7 @@ const NotScrolledItem = styled(Item)`
   }
 `
 
-const ScrolledItem = styled(Item)`
+const ScrolledItem = styled(StyledItem)`
   color: ${secondaryDark};
   &::before {
     background: #fff;
@@ -161,90 +161,57 @@ const Main = styled.nav`
   }
 `
 
-const useObserverState = (toc: TocType) => {
+const useScrollIndexObserver = (toc: TocType) => {
   const [scrolledIndex, setScrolledIndex] = useState(-1)
+  const [observer, setObserver] = useState<IntersectionObserver | null>(null)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setScrolledIndex((scrolledIndex) =>
+          entries.reduce((scrolledIndex, entry) => {
+            const { boundingClientRect, target } = entry
+            const { id } = target
+            const isScrolled = boundingClientRect.bottom <= 0
+            const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
+            if (currentIndex === -1)
+              throw new Error(`toc | correspondent heading is not found | id: ${id}`)
 
-  const observer = useMemo(
-    () =>
-      new IntersectionObserver(
-        (entries) => {
-          setScrolledIndex((scrolledIndex) =>
-            entries.reduce((scrolledIndex, entry) => {
-              const { boundingClientRect, target } = entry
-              const { id } = target
-              const isScrolled = boundingClientRect.bottom <= 0
-              const currentIndex = toc.findIndex(({ id: tocId }) => id === tocId)
-              if (currentIndex === -1)
-                throw new Error(`toc | correspondent heading is not found | id: ${id}`)
-
-              if (!isScrolled && currentIndex <= scrolledIndex) {
-                return currentIndex - 1
-              } else if (isScrolled && currentIndex > scrolledIndex) {
-                return currentIndex
-              } else {
-                return scrolledIndex
-              }
-            }, scrolledIndex)
-          )
-        },
-        { threshold: 0 }
-      ),
-    [toc]
-  )
+            if (!isScrolled && currentIndex <= scrolledIndex) {
+              return currentIndex - 1
+            } else if (isScrolled && currentIndex > scrolledIndex) {
+              return currentIndex
+            } else {
+              return scrolledIndex
+            }
+          }, scrolledIndex)
+        )
+      },
+      { threshold: 0 }
+    )
+    setObserver(observer)
+  }, [toc])
 
   return { scrolledIndex, observer }
 }
 
-type Props = {
-  className?: string
-}
-
-export function Toc({ className }: Props): ReactElement {
-  const data = useLoaderData<LoaderData>()
-  const { toc } = data.room.activePage
-  const [isExpanded, toggleExpansion] = useToggle(false)
-
-  const { scrolledIndex, observer } = useObserverState(toc)
-
-  return (
-    <Main className={className}>
-      <TitleButton onClick={toggleExpansion} isPressed={isExpanded}>
-        Contents
-      </TitleButton>
-      <List isVisible={isExpanded}>
-        {toc.map(({ id, title }, i) => (
-          <ListItem
-            key={id}
-            id={id}
-            title={title}
-            isScrolled={i <= scrolledIndex}
-            observer={observer}
-          />
-        ))}
-      </List>
-    </Main>
-  )
-}
-
-interface AnchorProps {
+type ItemProps = {
   id: string
   title: string
   isScrolled: boolean
-  observer: IntersectionObserver
+  observer: IntersectionObserver | null
 }
 
-function ListItem({ id, title, isScrolled, observer }: AnchorProps) {
+const Item = ({ id, title, isScrolled, observer }: ItemProps) => {
   const ItemComponent = isScrolled ? ScrolledItem : NotScrolledItem
-
-  const element = useMemo(() => {
-    const el = document.getElementById(id)
-    if (!el) {
-      throw new Error(`toc | correspondent heading is not found | id: ${id}`)
-    }
-    return el
+  const [element, setElement] = useState<HTMLElement | null>(null)
+  useEffect(() => {
+    const e = document.getElementById(id)
+    if (!e) throw new Error(`toc | correspondent heading is not found | id: ${id}`)
+    setElement(e)
   }, [id])
 
   useEffect(() => {
+    if (observer === null || element === null) return
     observer.observe(element)
     return () => observer.unobserve(element)
   }, [element, observer])
@@ -254,6 +221,7 @@ function ListItem({ id, title, isScrolled, observer }: AnchorProps) {
       <StyledAnchor
         onClick={(e) => {
           e.preventDefault()
+          if (element === null) throw new Error('did someone somehow click it on server? :)')
           element.scrollIntoView({ behavior: 'smooth' })
         }}
         href={'#' + id}
@@ -261,5 +229,36 @@ function ListItem({ id, title, isScrolled, observer }: AnchorProps) {
         {title}
       </StyledAnchor>
     </ItemComponent>
+  )
+}
+
+type Props = {
+  className?: string
+}
+
+export const Toc = ({ className }: Props): ReactElement => {
+  const data = useLoaderData<LoaderData>()
+  const { toc } = data.room.activePage
+  const [isExpanded, toggleExpansion] = useToggle(false)
+
+  const { scrolledIndex, observer } = useScrollIndexObserver(toc)
+
+  return (
+    <Main className={className}>
+      <TitleButton onClick={toggleExpansion} isPressed={isExpanded}>
+        Contents
+      </TitleButton>
+      <List isVisible={isExpanded}>
+        {toc.map(({ id, title }, i) => (
+          <Item
+            key={id}
+            id={id}
+            title={title}
+            isScrolled={i <= scrolledIndex}
+            observer={observer}
+          />
+        ))}
+      </List>
+    </Main>
   )
 }
