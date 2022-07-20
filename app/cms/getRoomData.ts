@@ -2,7 +2,7 @@ import { getDirectusClient } from '~/cms/directus'
 import { cmsPublic, directusLang } from '~/core/utils'
 import { Country, Lang, TocModeType } from '~/core/types'
 import { RoomType } from '~/core/types'
-import { transformContent } from '~/dynamic-content/contentTransfs'
+import { transformContent } from '~/dynamic-content/contentTransform'
 import { extractToc } from '~/core/extractToc'
 import { components } from '~/cms/schema'
 
