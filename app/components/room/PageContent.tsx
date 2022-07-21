@@ -8,6 +8,7 @@ import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
 import { Screenshots } from '~/components/room/review/Screenshots'
+import { FakeContent } from '~/components/styled/FakeContent'
 
 const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
@@ -53,6 +54,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <HeadingLevel1 />
         <PageMeta />
         <DynamicContent content={content} rawContent={rawContent} className={className} />
+        <FakeContent height="500px">FC</FakeContent>
       </ContentWrapper>
       <Screenshots />
     </Content>

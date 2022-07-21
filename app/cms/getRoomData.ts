@@ -48,9 +48,9 @@ const getActivePage = (rawActivePage: RoomPages, page: PageType) => {
   if (typeof rawUpdatedAt !== 'string') throw new Error('bad rawUpdated')
   const updated = new Date(rawUpdatedAt).toLocaleDateString()
 
-  const title = typeof rawTitle === 'string' ? rawTitle : ''
-  const description = typeof rawDescription === 'string' ? rawDescription : ''
   const h1 = typeof rawH1 === 'string' ? rawH1 : ''
+  const title = typeof rawTitle === 'string' ? rawTitle : h1
+  const description = typeof rawDescription === 'string' ? rawDescription : ''
 
   const rawContentString = typeof rawContent === 'string' ? rawContent : ''
   const content = transformContent(rawContentString)
@@ -304,7 +304,8 @@ export const getRoomData = async (
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
 
-  if (typeof rawScreenshots !== 'object') throw new Error('bad rawScreenshots')
+  if (!Array.isArray(rawScreenshots) || rawScreenshots.length < 1)
+    throw new Error('bad rawScreenshots')
   const screenshots = rawScreenshots.map((rawScreenshot) => {
     if (
       typeof rawScreenshot !== 'object' ||
