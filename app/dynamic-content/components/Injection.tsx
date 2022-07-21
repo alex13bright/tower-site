@@ -1,17 +1,19 @@
 import { ReactElement } from 'react'
 import { BonusFeed } from '~/dynamic-content/components/BonusFeed'
+import { fakeUse } from '~/core/utils'
 
-type InjectionProps = {
+type Props = {
   children: ReactElement
 }
-export const Injection = ({ children }: InjectionProps) => {
+export const Injection = ({ children }: Props) => {
+  return null
   const [type, paramsStr] = children.props.children.split('#')
   const params = paramsStr ? paramsStr.split(',') : []
+  fakeUse(params)
   switch (type) {
     case 'bonus': {
       return <BonusFeed />
     }
   }
-  return null
 }
 Injection.displayName = 'Injection'

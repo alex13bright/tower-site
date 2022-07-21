@@ -5,9 +5,9 @@ import { getRoomData } from '~/cms/getRoomData'
 import { Country } from '~/core/types'
 import { RoomType } from '~/core/types'
 
-import photoswipeStylesUrl from 'photoswipe/dist/photoswipe.css'
+import photoSwipeStylesUrl from 'photoswipe/dist/photoswipe.css'
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: photoswipeStylesUrl }]
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: photoSwipeStylesUrl }]
 
 export type LoaderData = {
   room: RoomType

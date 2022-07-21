@@ -52,14 +52,16 @@ export const ScreenShots = ({ className }: Props): ReactElement => {
         <GalleryBox>
           <BigImageBox>
             <Item
-              original="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
-              thumbnail="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+              width="750"
+              height="251"
+              original="https://worldpokerdeals.com/uploads/ggpoker%20tournaments.jpg"
+              thumbnail="https://worldpokerdeals.com/uploads/ggpoker%20tournaments.jpg"
               alt="Photo of seashore by Folkert Gorter"
               caption="Author: Folkert Gorter"
             >
               {({ ref, open }) => (
                 <BigImage
-                  src="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+                  src="https://worldpokerdeals.com/uploads/ggpoker%20tournaments.jpg"
                   ref={ref as React.MutableRefObject<HTMLImageElement>}
                   onClick={open}
                 />
@@ -68,6 +70,8 @@ export const ScreenShots = ({ className }: Props): ReactElement => {
           </BigImageBox>
           <SmallImagesBox>
             <Item
+              width="500"
+              height="907"
               original="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
               thumbnail="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
               alt="Photo of seashore by Folkert Gorter"
@@ -82,28 +86,32 @@ export const ScreenShots = ({ className }: Props): ReactElement => {
               )}
             </Item>
             <Item
+              width="1280"
+              height="1280"
               original="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
-              thumbnail="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+              thumbnail="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
               alt="Photo of seashore by Folkert Gorter"
               caption="Author: Folkert Gorter"
             >
               {({ ref, open }) => (
                 <SmallImage
-                  src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+                  src="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
                   ref={ref as React.MutableRefObject<HTMLImageElement>}
                   onClick={open}
                 />
               )}
             </Item>
             <Item
+              width="1280"
+              height="1280"
               original="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
-              thumbnail="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+              thumbnail="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
               alt="Photo of seashore by Folkert Gorter"
               caption="Author: Folkert Gorter"
             >
               {({ ref, open }) => (
                 <SmallImage
-                  src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+                  src="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
                   ref={ref as React.MutableRefObject<HTMLImageElement>}
                   onClick={open}
                 />
