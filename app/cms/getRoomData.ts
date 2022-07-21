@@ -1,5 +1,5 @@
 import { getDirectusClient } from '~/cms/directus'
-import { cmsPublic, directusLang } from '~/core/utils'
+import { cmsPublic, directusLang, fakeUse } from '~/core/utils'
 import { Country, Lang, PageType } from '~/core/types'
 import { RoomType } from '~/core/types'
 import { transformContent } from '~/dynamic-content/contentTransform'
@@ -52,19 +52,19 @@ const getActivePage = (rawActivePage: RoomPages, page: PageType) => {
   const description = typeof rawDescription === 'string' ? rawDescription : ''
   const h1 = typeof rawH1 === 'string' ? rawH1 : ''
 
-  if (typeof rawContent !== 'string') throw new Error('bad content')
-  const content = transformContent(rawContent)
+  const rawContentString = typeof rawContent === 'string' ? rawContent : ''
+  const content = transformContent(rawContentString)
 
   if (tocMode !== 'include_all_that_not_excluded' && tocMode !== 'exclude_all_that_not_included')
     throw new Error('bad tocMode')
-  const toc = extractToc(rawContent, tocMode)
+  const toc = extractToc(rawContentString, tocMode)
 
   return {
     ...page,
     pageMeta: { title, description },
     contentMeta: { author, created, updated },
     h1,
-    rawContent,
+    rawContent: rawContentString,
     content,
     toc,
   }
@@ -91,7 +91,8 @@ export const getRoomData = async (
     'pages.room_page_types_id.name',
     'pages.room_page_types_id.translations.*',
     'pages.translations.*',
-    'pages.translations.author.translations.title',
+    'pages.translations.content_meta_author.name',
+    'pages.translations.content_meta_author.translations.*',
     'pages.translations.type.name',
     'pages.translations.type.translations.title',
     'devices.devices_id.name',
@@ -122,9 +123,10 @@ export const getRoomData = async (
     deep: {
       type: translationsFilter,
       pages: {
-        ...translationsFilter,
-        author: translationsFilter,
-        type: translationsFilter,
+        translations: {
+          _filter: langFilter,
+          content_meta_author: translationsFilter,
+        },
         room_page_types_id: translationsFilter,
       },
       translations: {
@@ -349,6 +351,7 @@ export const getRoomData = async (
     activePage,
   }
 
+  fakeUse(room)
   // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   return room
