@@ -79,7 +79,7 @@ export type NetworkType = {
   logo: ImageType
 }
 
-export type TocModeType = 0 | 1
+export type TocModeType = 'include_all_that_not_excluded' | 'exclude_all_that_not_included'
 
 export type RoomType = {
   slug: string
