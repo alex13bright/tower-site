@@ -5,6 +5,7 @@ import { RoomType } from '~/core/types'
 import { transformContent } from '~/dynamic-content/contentTransform'
 import { extractToc } from '~/core/extractToc'
 import { components } from '~/cms/schema'
+import * as fs from 'fs'
 
 type CmsPagesType = components['schemas']['ItemsRoomPages']
 
@@ -90,17 +91,17 @@ export const getRoomData = async (
     'payments.payments_id.name',
     'type.name',
     'type.translations.title',
-    'translations.*',
-    'translations.pages.*',
-    'translations.pages.author.name',
-    'translations.pages.author.translations.title',
-    'translations.pages.type.name',
-    'translations.pages.type.translations.title',
+    'pages.*',
+    'pages.translations.*',
+    'pages.translations.author.translations.title',
+    'pages.translations.type.name',
+    'pages.translations.type.translations.title',
     'devices.devices_id.name',
     'logo.id',
     'logo.title',
     'square_logo.id',
     'square_logo.title',
+    'translations.*',
   ]
   const langFilter = {
     languages_code: { _eq: directusLang[lang] },
@@ -140,7 +141,7 @@ export const getRoomData = async (
     },
   })
 
-  // fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
+  fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
 
   const { data: rawRooms } = response
   if (!Array.isArray(rawRooms)) throw new Error('no data')
@@ -163,6 +164,7 @@ export const getRoomData = async (
     type: rawType,
     logo: rawLogo,
     square_logo: rawSquareLogo,
+    pages: rawPages,
   } = rawRoom
 
   if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
@@ -266,7 +268,6 @@ export const getRoomData = async (
     bonus_code: bonusCode,
     key_facts: rawKeyFacts,
     bonus,
-    pages: rawPages,
   } = translationRaw
 
   if (typeof title !== 'string') throw new Error(`bad title`)

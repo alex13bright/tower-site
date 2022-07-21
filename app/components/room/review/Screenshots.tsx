@@ -45,7 +45,7 @@ type Props = {
   className?: string
 }
 
-export const ScreenShots = ({ className }: Props): ReactElement => {
+export const Screenshots = ({ className }: Props): ReactElement => {
   return (
     <Main className={className}>
       <Gallery withCaption options={galleryOptions}>

@@ -7,7 +7,7 @@ import { contentTopPadding, widthAtLeast } from '~/styles/styles'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
-import { ScreenShots } from '~/components/room/review/ScreenShots'
+import { Screenshots } from '~/components/room/review/Screenshots'
 
 const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
@@ -54,7 +54,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <PageMeta />
         <DynamicContent content={content} rawContent={rawContent} className={className} />
       </ContentWrapper>
-      <ScreenShots />
+      <Screenshots />
     </Content>
   )
 }

@@ -239,6 +239,20 @@ export interface paths {
     /** Update an existing room_pages item. */
     patch: operations['updateSingleItemsRoomPages']
   }
+  '/items/room_pages_files': {
+    /** List the room_pages_files items. */
+    get: operations['readItemsRoomPagesFiles']
+    /** Create a new room_pages_files item. */
+    post: operations['createItemsRoomPagesFiles']
+  }
+  '/items/room_pages_files/{id}': {
+    /** Retrieve a single room_pages_files item by unique identifier. */
+    get: operations['readSingleItemsRoomPagesFiles']
+    /** Delete an existing room_pages_files item. */
+    delete: operations['deleteSingleItemsRoomPagesFiles']
+    /** Update an existing room_pages_files item. */
+    patch: operations['updateSingleItemsRoomPagesFiles']
+  }
   '/items/room_types': {
     /** List the room_types items. */
     get: operations['readItemsRoomTypes']
@@ -322,6 +336,34 @@ export interface paths {
     delete: operations['deleteSingleItemsRoomsPayments']
     /** Update an existing rooms_payments item. */
     patch: operations['updateSingleItemsRoomsPayments']
+  }
+  '/items/rooms_room_page_types': {
+    /** List the rooms_room_page_types items. */
+    get: operations['readItemsRoomsRoomPageTypes']
+    /** Create a new rooms_room_page_types item. */
+    post: operations['createItemsRoomsRoomPageTypes']
+  }
+  '/items/rooms_room_page_types/{id}': {
+    /** Retrieve a single rooms_room_page_types item by unique identifier. */
+    get: operations['readSingleItemsRoomsRoomPageTypes']
+    /** Delete an existing rooms_room_page_types item. */
+    delete: operations['deleteSingleItemsRoomsRoomPageTypes']
+    /** Update an existing rooms_room_page_types item. */
+    patch: operations['updateSingleItemsRoomsRoomPageTypes']
+  }
+  '/items/rooms_room_page_types_translations': {
+    /** List the rooms_room_page_types_translations items. */
+    get: operations['readItemsRoomsRoomPageTypesTranslations']
+    /** Create a new rooms_room_page_types_translations item. */
+    post: operations['createItemsRoomsRoomPageTypesTranslations']
+  }
+  '/items/rooms_room_page_types_translations/{id}': {
+    /** Retrieve a single rooms_room_page_types_translations item by unique identifier. */
+    get: operations['readSingleItemsRoomsRoomPageTypesTranslations']
+    /** Delete an existing rooms_room_page_types_translations item. */
+    delete: operations['deleteSingleItemsRoomsRoomPageTypesTranslations']
+    /** Update an existing rooms_room_page_types_translations item. */
+    patch: operations['updateSingleItemsRoomsRoomPageTypesTranslations']
   }
   '/items/rooms_translations': {
     /** List the rooms_translations items. */
@@ -681,15 +723,19 @@ export interface components {
       created?: string
       updated?: string
       type?: (number | components['schemas']['ItemsRoomPageTypes']) | null
-      rooms_translation?: (number | components['schemas']['ItemsRoomsTranslations']) | null
       h1?: string
       meta_title?: string
       meta_description?: string
       toc_mode?: number | null
       main_accordion?: string
-      settings_group?: string
       main_group?: string
+      settings_group?: string
       meta_group?: string
+    }
+    ItemsRoomPagesFiles: {
+      id?: number
+      room_pages_id?: (number | components['schemas']['ItemsRoomPages']) | null
+      directus_files_id?: (string | components['schemas']['Files']) | null
     }
     ItemsRoomTypes: {
       id?: number
@@ -714,25 +760,26 @@ export interface components {
       name?: string
       logo?: string | components['schemas']['Files']
       square_logo?: string | components['schemas']['Files']
-      reliability?: string
-      bonuses_promotions?: string
-      game_selection?: string
-      casual_players?: string
-      software_convenience?: string
-      deposits_withdrawals?: string
+      reliability?: number
+      bonuses_promotions?: number
+      game_selection?: number
+      casual_players?: number
+      software_convenience?: number
+      deposits_withdrawals?: number
       license_country?: (string | components['schemas']['ItemsCountries']) | null
       network?: string | components['schemas']['ItemsNetworks']
       type?: number | components['schemas']['ItemsRoomTypes']
       slug?: string
       payments?: (number | components['schemas']['ItemsRoomsPayments'])[]
-      additional_group?: string
       ratings_group?: string
-      devices?: (number | components['schemas']['ItemsRoomsDevices'])[]
-      main_gpoup?: string
-      translations?: (number | components['schemas']['ItemsRoomsTranslations'])[]
+      additional_group?: string
       logos_group?: string
-      accepted_countries?: (number | components['schemas']['ItemsRoomsCountries'])[]
       main_accordion?: string
+      translations?: (number | components['schemas']['ItemsRoomsTranslations'])[]
+      accepted_countries?: (number | components['schemas']['ItemsRoomsCountries'])[]
+      pages?: (number | components['schemas']['ItemsRoomsRoomPageTypes'])[]
+      main_group?: string
+      devices?: (number | components['schemas']['ItemsRoomsDevices'])[]
     }
     ItemsRoomsCountries: {
       id?: number
@@ -749,6 +796,37 @@ export interface components {
       rooms_id?: (string | components['schemas']['ItemsRooms']) | null
       payments_id?: (number | components['schemas']['ItemsPayments']) | null
     }
+    ItemsRoomsRoomPageTypes: {
+      id?: number
+      rooms_id?: (string | components['schemas']['ItemsRooms']) | null
+      room_page_types_id?: (number | components['schemas']['ItemsRoomPageTypes']) | null
+      toc_mode?: string
+      document_meta_title?: string | null
+      document_meta_description?: string | null
+      content_meta_author?: (string | components['schemas']['ItemsAuthors']) | null
+      content_meta_created_at?: string | null
+      content_meta_updated_at?: string | null
+      h1?: string | null
+      main_accordion?: string
+      translations?: (number | components['schemas']['ItemsRoomsRoomPageTypesTranslations'])[]
+      meta_group?: string
+      settings_group?: string
+    }
+    ItemsRoomsRoomPageTypesTranslations: {
+      id?: number
+      rooms_room_page_types_id?: (number | components['schemas']['ItemsRoomsRoomPageTypes']) | null
+      languages_code?: (string | components['schemas']['ItemsLanguages']) | null
+      document_meta_title?: string | null
+      document_meta_description?: string | null
+      content_meta_author?: (string | components['schemas']['ItemsAuthors']) | null
+      h1?: string | null
+      content_meta_updated_at?: string | null
+      content_meta_created_at?: string | null
+      content?: string | null
+      meta_group?: string
+      main_accordion?: string
+      main_group?: string
+    }
     ItemsRoomsTranslations: {
       id?: number
       rooms_id?: (string | components['schemas']['ItemsRooms']) | null
@@ -762,7 +840,6 @@ export interface components {
       bonus?: string
       bonus_group?: string
       main_accordion?: string
-      pages?: (number | components['schemas']['ItemsRoomPages'])[]
       main_group?: string
     }
     ItemsSettings: { [key: string]: any }
@@ -3093,6 +3170,140 @@ export interface operations {
       }
     }
   }
+  /** List the room_pages_files items. */
+  readItemsRoomPagesFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** A limit on the number of objects that are returned. */
+        limit?: components['parameters']['Limit']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+        /** How many items to skip when fetching data. */
+        offset?: components['parameters']['Offset']
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components['parameters']['Sort']
+        /** Select items in collection by given conditions. */
+        filter?: components['parameters']['Filter']
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components['parameters']['Search']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomPagesFiles'][]
+            meta?: components['x-metadata']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+  }
+  /** Create a new room_pages_files item. */
+  createItemsRoomPagesFiles: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomPagesFiles'][]
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['ItemsRoomPagesFiles'][]
+          | components['schemas']['ItemsRoomPagesFiles']
+      }
+    }
+  }
+  /** Retrieve a single room_pages_files item by unique identifier. */
+  readSingleItemsRoomPagesFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomPagesFiles']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Delete an existing room_pages_files item. */
+  deleteSingleItemsRoomPagesFiles: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: unknown
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Update an existing room_pages_files item. */
+  updateSingleItemsRoomPagesFiles: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomPagesFiles']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ItemsRoomPagesFiles']
+      }
+    }
+  }
   /** List the room_types items. */
   readItemsRoomTypes: {
     parameters: {
@@ -3894,6 +4105,274 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': components['schemas']['ItemsRoomsPayments']
+      }
+    }
+  }
+  /** List the rooms_room_page_types items. */
+  readItemsRoomsRoomPageTypes: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** A limit on the number of objects that are returned. */
+        limit?: components['parameters']['Limit']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+        /** How many items to skip when fetching data. */
+        offset?: components['parameters']['Offset']
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components['parameters']['Sort']
+        /** Select items in collection by given conditions. */
+        filter?: components['parameters']['Filter']
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components['parameters']['Search']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypes'][]
+            meta?: components['x-metadata']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+  }
+  /** Create a new rooms_room_page_types item. */
+  createItemsRoomsRoomPageTypes: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypes'][]
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['ItemsRoomsRoomPageTypes'][]
+          | components['schemas']['ItemsRoomsRoomPageTypes']
+      }
+    }
+  }
+  /** Retrieve a single rooms_room_page_types item by unique identifier. */
+  readSingleItemsRoomsRoomPageTypes: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypes']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Delete an existing rooms_room_page_types item. */
+  deleteSingleItemsRoomsRoomPageTypes: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: unknown
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Update an existing rooms_room_page_types item. */
+  updateSingleItemsRoomsRoomPageTypes: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypes']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ItemsRoomsRoomPageTypes']
+      }
+    }
+  }
+  /** List the rooms_room_page_types_translations items. */
+  readItemsRoomsRoomPageTypesTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** A limit on the number of objects that are returned. */
+        limit?: components['parameters']['Limit']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+        /** How many items to skip when fetching data. */
+        offset?: components['parameters']['Offset']
+        /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+        sort?: components['parameters']['Sort']
+        /** Select items in collection by given conditions. */
+        filter?: components['parameters']['Filter']
+        /** Filter by items that contain the given search query in one of their fields. */
+        search?: components['parameters']['Search']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypesTranslations'][]
+            meta?: components['x-metadata']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+  }
+  /** Create a new rooms_room_page_types_translations item. */
+  createItemsRoomsRoomPageTypesTranslations: {
+    parameters: {
+      query: {
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypesTranslations'][]
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+    }
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['ItemsRoomsRoomPageTypesTranslations'][]
+          | components['schemas']['ItemsRoomsRoomPageTypesTranslations']
+      }
+    }
+  }
+  /** Retrieve a single rooms_room_page_types_translations item by unique identifier. */
+  readSingleItemsRoomsRoomPageTypesTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypesTranslations']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Delete an existing rooms_room_page_types_translations item. */
+  deleteSingleItemsRoomsRoomPageTypesTranslations: {
+    parameters: {
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: unknown
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+  }
+  /** Update an existing rooms_room_page_types_translations item. */
+  updateSingleItemsRoomsRoomPageTypesTranslations: {
+    parameters: {
+      query: {
+        /** Control what fields are being returned in the object. */
+        fields?: components['parameters']['Fields']
+        /** What metadata to return in the response. */
+        meta?: components['parameters']['Meta']
+      }
+      path: {
+        /** Index of the item. */
+        id: number | string
+      }
+    }
+    responses: {
+      /** Successful request */
+      200: {
+        content: {
+          'application/json': {
+            data?: components['schemas']['ItemsRoomsRoomPageTypesTranslations']
+          }
+        }
+      }
+      401: components['responses']['UnauthorizedError']
+      404: components['responses']['NotFoundError']
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ItemsRoomsRoomPageTypesTranslations']
       }
     }
   }
@@ -6629,12 +7108,15 @@ export type Schema = {
   room_page_types: components['schemas']['ItemsRoomPageTypes']
   room_page_types_translations: components['schemas']['ItemsRoomPageTypesTranslations']
   room_pages: components['schemas']['ItemsRoomPages']
+  room_pages_files: components['schemas']['ItemsRoomPagesFiles']
   room_types: components['schemas']['ItemsRoomTypes']
   room_types_translations: components['schemas']['ItemsRoomTypesTranslations']
   rooms: components['schemas']['ItemsRooms']
   rooms_countries: components['schemas']['ItemsRoomsCountries']
   rooms_devices: components['schemas']['ItemsRoomsDevices']
   rooms_payments: components['schemas']['ItemsRoomsPayments']
+  rooms_room_page_types: components['schemas']['ItemsRoomsRoomPageTypes']
+  rooms_room_page_types_translations: components['schemas']['ItemsRoomsRoomPageTypesTranslations']
   rooms_translations: components['schemas']['ItemsRoomsTranslations']
   settings: components['schemas']['ItemsSettings']
   system: components['schemas']['ItemsSystem']
