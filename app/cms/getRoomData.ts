@@ -19,7 +19,7 @@ const getActivePage = (rawActivePage: RoomPages, page: PageType) => {
     rawTranslations.length !== 1 ||
     typeof rawTranslations[0] !== 'object'
   )
-    throw new Error('bad rawTranslations')
+    throw new Error('getActivePage | bad translations')
   const [translation] = rawTranslations
 
   const {
@@ -80,6 +80,11 @@ export const getRoomData = async (
 
   const selectFields = [
     '*',
+    'translations.*',
+    'translations.screenshots.directus_files_id.id',
+    'translations.screenshots.directus_files_id.title',
+    'translations.screenshots.directus_files_id.width',
+    'translations.screenshots.directus_files_id.height',
     'network.slug',
     'network.translations.title',
     'network.logo.id',
@@ -100,7 +105,6 @@ export const getRoomData = async (
     'logo.title',
     'square_logo.id',
     'square_logo.title',
-    'translations.*',
   ]
   const langFilter = {
     languages_code: { _eq: directusLang[lang] },
@@ -145,14 +149,8 @@ export const getRoomData = async (
   const rawRoom = rawRooms[0]
   const {
     slug,
-    network: rawNetwork,
     translations: rawTranslations,
-    reliability: rawReliability,
-    bonuses_promotions: rawBonusesPromotions,
-    game_selection: rawGameSelection,
-    casual_players: rawCasualPlayers,
-    software_convenience: rawSoftwareConvenience,
-    deposits_withdrawals: rawDepositsWithdrawals,
+    network: rawNetwork,
     license_country: licenseCountry,
     accepted_countries: rawAcceptedCountries,
     devices: rawDevices,
@@ -162,6 +160,21 @@ export const getRoomData = async (
     square_logo: rawSquareLogo,
     pages: rawPages,
   } = rawRoom
+  const {
+    reliability: rawReliability,
+    bonuses_promotions: rawBonusesPromotions,
+    game_selection: rawGameSelection,
+    casual_players: rawCasualPlayers,
+    software_convenience: rawSoftwareConvenience,
+    deposits_withdrawals: rawDepositsWithdrawals,
+  } = rawRoom as {
+    reliability?: string
+    bonuses_promotions?: string
+    game_selection?: string
+    casual_players?: string
+    software_convenience?: string
+    deposits_withdrawals?: string
+  }
 
   if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
   const {
@@ -264,6 +277,7 @@ export const getRoomData = async (
     bonus_code: bonusCode,
     key_facts: rawKeyFacts,
     bonus,
+    screenshots: rawScreenshots,
   } = translationRaw
 
   if (typeof title !== 'string') throw new Error(`bad title`)
@@ -289,6 +303,22 @@ export const getRoomData = async (
   const casualPlayers = parseFloat(rawGameSelection)
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
+
+  if (typeof rawScreenshots !== 'object') throw new Error('bad rawScreenshots')
+  const screenshots = rawScreenshots.map((rawScreenshot) => {
+    if (
+      typeof rawScreenshot !== 'object' ||
+      typeof rawScreenshot.directus_files_id !== 'object' ||
+      rawScreenshot.directus_files_id === null ||
+      typeof rawScreenshot.directus_files_id.id !== 'string' ||
+      typeof rawScreenshot.directus_files_id.title !== 'string' ||
+      typeof rawScreenshot.directus_files_id.width !== 'number' ||
+      typeof rawScreenshot.directus_files_id.height !== 'number'
+    )
+      throw new Error('bad rawScreenshot')
+    const { id: fileName, title, width, height } = rawScreenshot.directus_files_id
+    return { url: `${cmsPublic}/${fileName}`, title, width, height }
+  })
 
   // pages
   if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
@@ -337,6 +367,7 @@ export const getRoomData = async (
     keyFacts,
     bonusCode,
     bonus: { bonus, rakeback, deposit, maxBonus },
+    screenshots,
     ratings: {
       reliability,
       bonusesPromotions,
