@@ -1,14 +1,6 @@
 import { ReactNode } from 'react'
 import { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node'
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from '@remix-run/react'
+import { Links, LiveReload, Meta, Outlet, Scripts, useLoaderData } from '@remix-run/react'
 import { DynamicLinks, useRouteData } from 'remix-utils'
 import { json } from '@remix-run/node'
 import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
@@ -71,10 +63,10 @@ const Document = ({ children }: DocumentProps) => {
         <DynamicLinks />
         <Links />
         {typeof document === 'undefined' ? '__STYLES__' : null}
+        <GlobalStyles />
       </head>
       <body>
         {children}
-        <GlobalStyles />
         <Scripts />
         <LiveReload />
         {/*<ScrollRestoration />*/}

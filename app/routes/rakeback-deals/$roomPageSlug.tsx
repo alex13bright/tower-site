@@ -1,9 +1,13 @@
 import { Room } from '~/components/room/Room'
-import { json, LoaderFunction } from '@remix-run/node'
+import { json, LinksFunction, LoaderFunction } from '@remix-run/node'
 import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import { getRoomData } from '~/cms/getRoomData'
 import { Country } from '~/core/types'
 import { RoomType } from '~/core/types'
+
+import photoswipeStylesUrl from 'photoswipe/dist/photoswipe.css'
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: photoswipeStylesUrl }]
 
 export type LoaderData = {
   room: RoomType
