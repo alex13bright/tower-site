@@ -1,114 +1,117 @@
-import { CSSProperties, ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
+import styled, { css } from 'styled-components'
+import { widthAtLeast } from '~/styles/styles'
+
+const image = css`
+  cursor: pointer;
+  object-fit: cover;
+  width: 100%;
+`
+
+const BigImage = styled.img`
+  ${image};
+`
+
+const SmallImage = styled.img`
+  ${image};
+`
+
+const BigImageBox = styled.div``
+
+const SmallImagesBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 12px;
+`
+
+const GalleryBox = styled.div`
+  display: grid;
+  row-gap: 12px;
+`
+
+const Main = styled.div`
+  display: none;
+  @media screen and ${widthAtLeast.lg} {
+    display: grid;
+    align-items: start;
+    grid-area: screenshots;
+  }
+`
+
+const galleryOptions = { zoom: false } as any
 
 type Props = {
   className?: string
 }
 
 export const ScreenShots = ({ className }: Props): ReactElement => {
-  const smallItemStyles: CSSProperties = {
-    cursor: 'pointer',
-    objectFit: 'cover',
-    width: '100%',
-    maxHeight: '100%',
-  }
   return (
-    <Gallery withCaption>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '240px 171px 171px',
-          gridTemplateRows: '114px 114px',
-          gridGap: 12,
-        }}
-      >
-        <Item
-          original="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
-          thumbnail="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
-          width="1600"
-          height="1600"
-          alt="Photo of seashore by Folkert Gorter"
-          caption="Author: Folkert Gorter"
-        >
-          {({ ref, open }) => (
-            <img
-              style={{ cursor: 'pointer' }}
-              src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
-              ref={ref as React.MutableRefObject<HTMLImageElement>}
-              onClick={open}
-            />
-          )}
-        </Item>
-        <Item
-          original="https://farm6.staticflickr.com/5591/15008867125_b61960af01_h.jpg"
-          thumbnail="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg"
-          width="1600"
-          height="1068"
-          alt="Photo of mountain lake by Samuel Rohl"
-          // No `caption` there
-        >
-          {({ ref, open }) => (
-            <img
-              style={smallItemStyles}
-              src="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg"
-              ref={ref as React.MutableRefObject<HTMLImageElement>}
-              onClick={open}
-            />
-          )}
-        </Item>
-        <Item
-          original="https://farm4.staticflickr.com/3902/14985871946_86abb8c56f_b.jpg"
-          thumbnail="https://farm4.staticflickr.com/3902/14985871946_86abb8c56f_m.jpg"
-          width="1600"
-          height="1066"
-          alt="Photo of fog in the village by Ales Krivec"
-          // You can use html tags
-          caption="<h1>Author: Ales Krivec</h1>"
-        >
-          {({ ref, open }) => (
-            <img
-              style={smallItemStyles}
-              src="https://farm4.staticflickr.com/3902/14985871946_86abb8c56f_m.jpg"
-              ref={ref as React.MutableRefObject<HTMLImageElement>}
-              onClick={open}
-            />
-          )}
-        </Item>
-        <Item
-          original="https://farm6.staticflickr.com/5584/14985868676_b51baa4071_h.jpg"
-          thumbnail="https://farm6.staticflickr.com/5584/14985868676_4b802b932a_m.jpg"
-          width="1600"
-          height="1066"
-          alt="Photo of river sunset by Michael Hull"
-          caption="Author: Michael Hull"
-        >
-          {({ ref, open }) => (
-            <img
-              style={{ ...smallItemStyles, gridColumnStart: 2 }}
-              src="https://farm6.staticflickr.com/5584/14985868676_4b802b932a_m.jpg"
-              ref={ref as React.MutableRefObject<HTMLImageElement>}
-              onClick={open}
-            />
-          )}
-        </Item>
-        <Item
-          original="https://farm4.staticflickr.com/3920/15008465772_d50c8f0531_h.jpg"
-          thumbnail="https://farm4.staticflickr.com/3920/15008465772_383e697089_m.jpg"
-          width="1600"
-          height="1066"
-          alt="Photo of bear by Thomas Lefebvre"
-          caption="Author: Thomas Lefebvre"
-        >
-          {({ ref, open }) => (
-            <img
-              style={smallItemStyles}
-              src="https://farm4.staticflickr.com/3920/15008465772_383e697089_m.jpg"
-              ref={ref as React.MutableRefObject<HTMLImageElement>}
-              onClick={open}
-            />
-          )}
-        </Item>
-      </div>
-    </Gallery>
+    <Main className={className}>
+      <Gallery withCaption options={galleryOptions}>
+        <GalleryBox>
+          <BigImageBox>
+            <Item
+              original="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+              thumbnail="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+              alt="Photo of seashore by Folkert Gorter"
+              caption="Author: Folkert Gorter"
+            >
+              {({ ref, open }) => (
+                <BigImage
+                  src="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+                  ref={ref as React.MutableRefObject<HTMLImageElement>}
+                  onClick={open}
+                />
+              )}
+            </Item>
+          </BigImageBox>
+          <SmallImagesBox>
+            <Item
+              original="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+              thumbnail="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+              alt="Photo of seashore by Folkert Gorter"
+              caption="Author: Folkert Gorter"
+            >
+              {({ ref, open }) => (
+                <SmallImage
+                  src="https://media.worldpokerdeals01.com/images/gallery-large/pppoker-cosmo-table-holdem-eng.jpg"
+                  ref={ref as React.MutableRefObject<HTMLImageElement>}
+                  onClick={open}
+                />
+              )}
+            </Item>
+            <Item
+              original="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
+              thumbnail="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+              alt="Photo of seashore by Folkert Gorter"
+              caption="Author: Folkert Gorter"
+            >
+              {({ ref, open }) => (
+                <SmallImage
+                  src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+                  ref={ref as React.MutableRefObject<HTMLImageElement>}
+                  onClick={open}
+                />
+              )}
+            </Item>
+            <Item
+              original="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
+              thumbnail="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+              alt="Photo of seashore by Folkert Gorter"
+              caption="Author: Folkert Gorter"
+            >
+              {({ ref, open }) => (
+                <SmallImage
+                  src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+                  ref={ref as React.MutableRefObject<HTMLImageElement>}
+                  onClick={open}
+                />
+              )}
+            </Item>
+          </SmallImagesBox>
+        </GalleryBox>
+      </Gallery>
+    </Main>
   )
 }

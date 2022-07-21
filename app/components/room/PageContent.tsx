@@ -25,7 +25,7 @@ const Content = styled.article`
 
   @media screen and ${widthAtLeast.lg} {
     padding-top: ${contentTopPaddingPx};
-    grid-template-areas: 'toc content .';
+    grid-template-areas: 'toc content screenshots';
     grid-template-columns: 200px 1fr 320px;
   }
 `
@@ -53,8 +53,8 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <HeadingLevel1 />
         <PageMeta />
         <DynamicContent content={content} rawContent={rawContent} className={className} />
-        <ScreenShots />
       </ContentWrapper>
+      <ScreenShots />
     </Content>
   )
 }

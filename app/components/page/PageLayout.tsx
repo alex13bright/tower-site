@@ -22,9 +22,9 @@ export const PageLayout = ({ children }: Props): ReactElement => {
         <PageHeader />
         <PageWrapper forwardAs="main">
           {children}
-          <StickyActions>
-            <FakeContent>STICKY ACTION PANEL</FakeContent>
-          </StickyActions>
+          {/*<StickyActions>*/}
+          {/*  <FakeContent>STICKY ACTION PANEL</FakeContent>*/}
+          {/*</StickyActions>*/}
         </PageWrapper>
         <StickyMarker isVisibleKey="isFooterVisible">
           <PageFooter />
