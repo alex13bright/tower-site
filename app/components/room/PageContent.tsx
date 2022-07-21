@@ -14,6 +14,7 @@ const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
   position: relative;
   display: grid;
+  align-items: start;
   row-gap: ${contentTopPaddingPx};
 
   @media screen and ${widthAtLeast.xm} {

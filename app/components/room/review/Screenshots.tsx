@@ -32,11 +32,28 @@ const GalleryBox = styled.div`
   row-gap: 12px;
 `
 
+const Title = styled.div`
+  display: grid;
+  row-gap: 12px;
+  color: #243238;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  line-height: 22px;
+
+  &::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: #ccc;
+  }
+`
+
 const Main = styled.div`
   display: none;
   @media screen and ${widthAtLeast.lg} {
     display: grid;
-    align-items: start;
+    row-gap: 20px;
     grid-area: screenshots;
   }
 `
@@ -54,6 +71,7 @@ export const Screenshots = ({ className }: Props): ReactElement => {
   const { title, url, width, height } = firstScreenshot
   return (
     <Main className={className}>
+      <Title> Screenshots</Title>
       <Gallery withCaption options={galleryOptions}>
         <GalleryBox>
           <BigImageBox>
