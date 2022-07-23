@@ -1,4 +1,4 @@
-import { proximaNovaSb, secondaryDark, tertiary } from '~/styles/styles'
+import { primaryDark, proximaNovaSb, secondaryDark, tertiary } from '~/styles/styles'
 import styled, { css } from 'styled-components'
 
 export const sidePaddingSize = {
@@ -20,6 +20,21 @@ export const Name = styled.td`
   display: flex;
 `
 
+export const createNameWithIcon = (folder: string) => styled(Name)<{ kind: string }>`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  color: ${primaryDark};
+  font-family: ${proximaNovaSb};
+
+  &::before {
+    width: 20px;
+    height: 20px;
+    content: '';
+    background-image: url('/icons/${folder}/${({ kind }) => kind}.svg');
+    background-repeat: no-repeat;
+  }
+`
 export const Value = styled.td`
   grid-area: value;
   font-family: ${proximaNovaSb};
@@ -31,6 +46,8 @@ export const Row = styled.tr`
   column-gap: 10px;
   grid-template-areas: 'name line value';
   grid-template-columns: auto minmax(40px, 1fr) auto;
+  line-height: 20px;
+
   &::after {
     grid-area: line;
     background-image: linear-gradient(90deg, #555 40%, hsla(0, 0%, 100%, 0) 0);

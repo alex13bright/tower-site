@@ -79,7 +79,14 @@ export type NetworkType = {
   logo: ImageType
 }
 
-export type TocModeType = 0 | 1
+export type ScreenshotsType = {
+  url: string
+  title: string
+  width: number
+  height: number
+}
+
+export type TocModeType = 'include_all_that_not_excluded' | 'exclude_all_that_not_included'
 
 export type RoomType = {
   slug: string
@@ -93,6 +100,7 @@ export type RoomType = {
   keyFacts: KeyFactsType
   bonusCode: string
   bonus: BonusType
+  screenshots: ScreenshotsType[]
   ratings: RatingsType
   devices: DevicesType
   payments: PaymentsType

@@ -1,9 +1,13 @@
 import { Room } from '~/components/room/Room'
-import { json, LoaderFunction } from '@remix-run/node'
+import { json, LinksFunction, LoaderFunction } from '@remix-run/node'
 import { getCountryFromRequest, getLangFromRequest } from '~/core/utils'
 import { getRoomData } from '~/cms/getRoomData'
 import { Country } from '~/core/types'
 import { RoomType } from '~/core/types'
+
+import photoSwipeStylesUrl from 'photoswipe/dist/photoswipe.css'
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: photoSwipeStylesUrl }]
 
 export type LoaderData = {
   room: RoomType
@@ -11,7 +15,6 @@ export type LoaderData = {
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  console.log('run loader')
   const { roomPageSlug } = params
   if (roomPageSlug === undefined) throw new Error()
   const [roomSlug, pageType] = roomPageSlug.split('-')

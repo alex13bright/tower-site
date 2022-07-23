@@ -1,39 +1,40 @@
 import { getDirectusClient } from '~/cms/directus'
-import { cmsPublic, directusLang } from '~/core/utils'
-import { Country, Lang, TocModeType } from '~/core/types'
+import { cmsPublic, directusLang, fakeUse } from '~/core/utils'
+import { Country, Lang, PageType } from '~/core/types'
 import { RoomType } from '~/core/types'
 import { transformContent } from '~/dynamic-content/contentTransform'
 import { extractToc } from '~/core/extractToc'
 import { components } from '~/cms/schema'
+import * as fs from 'fs'
 
-type CmsPagesType = components['schemas']['ItemsRoomPages']
+type RoomPages = components['schemas']['ItemsRoomsRoomPageTypes']
 
-const getActivePage = (rawActivePage: CmsPagesType, roomSlug: string) => {
+const getActivePage = (rawActivePage: RoomPages, page: PageType) => {
   if (typeof rawActivePage !== 'object') throw new Error('bad page')
+
+  const { toc_mode: tocMode, translations: rawTranslations } = rawActivePage
+
+  if (
+    !Array.isArray(rawTranslations) ||
+    rawTranslations.length !== 1 ||
+    typeof rawTranslations[0] !== 'object'
+  )
+    throw new Error('getActivePage | bad translations')
+  const [translation] = rawTranslations
+
   const {
-    type: rawType,
-    meta_title: metaTitle,
-    meta_description: metaDescription,
-    author: rawAuthor,
-    created: rawCreated,
-    updated: rawUpdated,
-    h1,
-    toc_mode: tocMode,
+    content_meta_author: rawAuthor,
+    content_meta_created_at: rawCreatedAt,
+    content_meta_updated_at: rawUpdatedAt,
+    document_meta_title: rawTitle,
+    document_meta_description: rawDescription,
+    h1: rawH1,
     content: rawContent,
-  } = rawActivePage
-
-  if (typeof rawContent !== 'string') throw new Error('bad content')
-  const content = transformContent(rawContent)
-
-  if (typeof tocMode !== 'number') throw new Error('bad tocMode')
-  const toc = extractToc(rawContent, tocMode as TocModeType)
-
-  if (typeof h1 !== 'string') throw new Error('bad h1')
-  if (typeof metaTitle !== 'string') throw new Error('bad title')
-  if (typeof metaDescription !== 'string') throw new Error('bad description')
+  } = translation
 
   if (
     typeof rawAuthor !== 'object' ||
+    rawAuthor === null ||
     !Array.isArray(rawAuthor.translations) ||
     typeof rawAuthor.translations[0] !== 'object' ||
     typeof rawAuthor.translations[0].title !== 'string'
@@ -41,33 +42,29 @@ const getActivePage = (rawActivePage: CmsPagesType, roomSlug: string) => {
     throw new Error('bad rawAuthor')
   const author = rawAuthor.translations[0].title
 
-  if (typeof rawCreated !== 'string') throw new Error('bad rawCreated')
-  const created = new Date(rawCreated).toLocaleDateString()
+  if (typeof rawCreatedAt !== 'string') throw new Error('bad rawCreated')
+  const created = new Date(rawCreatedAt).toLocaleDateString()
 
-  if (typeof rawUpdated !== 'string') throw new Error('bad rawUpdated')
-  const updated = new Date(rawCreated).toLocaleDateString()
+  if (typeof rawUpdatedAt !== 'string') throw new Error('bad rawUpdated')
+  const updated = new Date(rawUpdatedAt).toLocaleDateString()
 
-  if (
-    typeof rawType !== 'object' ||
-    rawType === null ||
-    typeof rawType.name !== 'string' ||
-    !Array.isArray(rawType.translations) ||
-    typeof rawType.translations[0] !== 'object' ||
-    typeof rawType.translations[0].title !== 'string'
-  )
-    throw new Error('bad rawType')
-  const title = rawType.translations[0].title
-  const type = rawType.name
-  const url = `/rakeback-deals/${roomSlug}-${type}`
+  const h1 = typeof rawH1 === 'string' ? rawH1 : ''
+  const title = typeof rawTitle === 'string' ? rawTitle : h1
+  const description = typeof rawDescription === 'string' ? rawDescription : ''
+
+  const rawContentString = typeof rawContent === 'string' ? rawContent : ''
+  const content = transformContent(rawContentString)
+
+  if (tocMode !== 'include_all_that_not_excluded' && tocMode !== 'exclude_all_that_not_included')
+    throw new Error('bad tocMode')
+  const toc = extractToc(rawContentString, tocMode)
 
   return {
-    type,
-    title,
-    url,
-    pageMeta: { title: metaTitle, description: metaDescription },
+    ...page,
+    pageMeta: { title, description },
     contentMeta: { author, created, updated },
     h1,
-    rawContent,
+    rawContent: rawContentString,
     content,
     toc,
   }
@@ -83,6 +80,11 @@ export const getRoomData = async (
 
   const selectFields = [
     '*',
+    'translations.*',
+    'translations.screenshots.directus_files_id.id',
+    'translations.screenshots.directus_files_id.title',
+    'translations.screenshots.directus_files_id.width',
+    'translations.screenshots.directus_files_id.height',
     'network.slug',
     'network.translations.title',
     'network.logo.id',
@@ -90,12 +92,14 @@ export const getRoomData = async (
     'payments.payments_id.name',
     'type.name',
     'type.translations.title',
-    'translations.*',
-    'translations.pages.*',
-    'translations.pages.author.name',
-    'translations.pages.author.translations.title',
-    'translations.pages.type.name',
-    'translations.pages.type.translations.title',
+    'pages.*',
+    'pages.room_page_types_id.name',
+    'pages.room_page_types_id.translations.*',
+    'pages.translations.*',
+    'pages.translations.content_meta_author.name',
+    'pages.translations.content_meta_author.translations.*',
+    'pages.translations.type.name',
+    'pages.translations.type.translations.title',
     'devices.devices_id.name',
     'logo.id',
     'logo.title',
@@ -121,26 +125,23 @@ export const getRoomData = async (
       },
     },
     deep: {
-      // @ts-ignore
       type: translationsFilter,
+      pages: {
+        translations: {
+          _filter: langFilter,
+          content_meta_author: translationsFilter,
+        },
+        room_page_types_id: translationsFilter,
+      },
       translations: {
-        _filter: {
-          ...langFilter,
-          pages: { type: { name: { _eq: pageType } } },
-        },
-        // @ts-ignore
-        pages: {
-          author: translationsFilter,
-          type: translationsFilter,
-        },
+        _filter: langFilter,
       },
       accepted_countries: { _filter: { countries_id: { _eq: country } } },
-      // @ts-ignore
       network: translationsFilter,
     },
-  })
+  } as any)
 
-  // fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
+  fs.writeFileSync(`${process.cwd()}/_log.response.json`, JSON.stringify(response, null, 2))
 
   const { data: rawRooms } = response
   if (!Array.isArray(rawRooms)) throw new Error('no data')
@@ -148,14 +149,8 @@ export const getRoomData = async (
   const rawRoom = rawRooms[0]
   const {
     slug,
-    network: rawNetwork,
     translations: rawTranslations,
-    reliability: rawReliability,
-    bonuses_promotions: rawBonusesPromotions,
-    game_selection: rawGameSelection,
-    casual_players: rawCasualPlayers,
-    software_convenience: rawSoftwareConvenience,
-    deposits_withdrawals: rawDepositsWithdrawals,
+    network: rawNetwork,
     license_country: licenseCountry,
     accepted_countries: rawAcceptedCountries,
     devices: rawDevices,
@@ -163,7 +158,23 @@ export const getRoomData = async (
     type: rawType,
     logo: rawLogo,
     square_logo: rawSquareLogo,
+    pages: rawPages,
   } = rawRoom
+  const {
+    reliability: rawReliability,
+    bonuses_promotions: rawBonusesPromotions,
+    game_selection: rawGameSelection,
+    casual_players: rawCasualPlayers,
+    software_convenience: rawSoftwareConvenience,
+    deposits_withdrawals: rawDepositsWithdrawals,
+  } = rawRoom as {
+    reliability?: string
+    bonuses_promotions?: string
+    game_selection?: string
+    casual_players?: string
+    software_convenience?: string
+    deposits_withdrawals?: string
+  }
 
   if (typeof rawNetwork !== 'object') throw new Error('bad rawNetwork')
   const {
@@ -266,7 +277,7 @@ export const getRoomData = async (
     bonus_code: bonusCode,
     key_facts: rawKeyFacts,
     bonus,
-    pages: rawPages,
+    screenshots: rawScreenshots,
   } = translationRaw
 
   if (typeof title !== 'string') throw new Error(`bad title`)
@@ -293,23 +304,40 @@ export const getRoomData = async (
   const softwareConvenience = parseFloat(rawSoftwareConvenience)
   const depositsWithdrawals = parseFloat(rawDepositsWithdrawals)
 
+  if (!Array.isArray(rawScreenshots) || rawScreenshots.length < 1)
+    throw new Error('bad rawScreenshots')
+  const screenshots = rawScreenshots.map((rawScreenshot) => {
+    if (
+      typeof rawScreenshot !== 'object' ||
+      typeof rawScreenshot.directus_files_id !== 'object' ||
+      rawScreenshot.directus_files_id === null ||
+      typeof rawScreenshot.directus_files_id.id !== 'string' ||
+      typeof rawScreenshot.directus_files_id.title !== 'string' ||
+      typeof rawScreenshot.directus_files_id.width !== 'number' ||
+      typeof rawScreenshot.directus_files_id.height !== 'number'
+    )
+      throw new Error('bad rawScreenshot')
+    const { id: fileName, title, width, height } = rawScreenshot.directus_files_id
+    return { url: `${cmsPublic}/${fileName}`, title, width, height }
+  })
+
   // pages
   if (!Array.isArray(rawPages)) throw new Error('bad rawPages')
   const pages = rawPages.map((page) => {
     if (typeof page !== 'object') throw new Error('bad page')
-    const { type: rawType } = page
+    const roomPageType = page.room_page_types_id
 
     if (
-      typeof rawType !== 'object' ||
-      rawType === null ||
-      typeof rawType.name !== 'string' ||
-      !Array.isArray(rawType.translations) ||
-      typeof rawType.translations[0] !== 'object' ||
-      typeof rawType.translations[0].title !== 'string'
+      typeof roomPageType !== 'object' ||
+      roomPageType === null ||
+      typeof roomPageType.name !== 'string' ||
+      !Array.isArray(roomPageType.translations) ||
+      typeof roomPageType.translations[0] !== 'object' ||
+      typeof roomPageType.translations[0].title !== 'string'
     )
       throw new Error('bad rawType')
-    const title = rawType.translations[0].title
-    const type = rawType.name
+    const title = roomPageType.translations[0].title
+    const type = roomPageType.name
     const url = `/rakeback-deals/${roomSlug}-${type}`
 
     return {
@@ -321,16 +349,12 @@ export const getRoomData = async (
   })
 
   // activePage
-  const activePageIndex = pages.reduce(
-    (activePageIndex: null | number, { isActive }, currentIndex) =>
-      isActive ? currentIndex : activePageIndex,
-    null
-  )
-  if (activePageIndex === null) throw new Error('bad pages')
+  const activePageIndex = pages.findIndex(({ isActive }) => isActive)
+  if (activePageIndex === -1) throw new Error('bad pages')
 
   const rawActivePage = rawPages[activePageIndex]
   if (typeof rawActivePage !== 'object') throw new Error('bad pages')
-  const activePage = getActivePage(rawActivePage, roomSlug)
+  const activePage = getActivePage(rawActivePage, pages[activePageIndex])
 
   const room: RoomType = {
     slug,
@@ -344,6 +368,7 @@ export const getRoomData = async (
     keyFacts,
     bonusCode,
     bonus: { bonus, rakeback, deposit, maxBonus },
+    screenshots,
     ratings: {
       reliability,
       bonusesPromotions,
@@ -358,6 +383,7 @@ export const getRoomData = async (
     activePage,
   }
 
+  fakeUse(room)
   // fs.writeFileSync(`${process.cwd()}/_log.room.json`, JSON.stringify(room, null, 2))
 
   return room

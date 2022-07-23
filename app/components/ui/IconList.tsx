@@ -1,12 +1,24 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 
-const List = styled.ul`
+export const StyledIcon = styled.img<{ $height: string }>`
+  height: 20px;
+`
+export type IconProps = {
+  name: string
+  folder: string
+  height?: string
+}
+export const Icon = ({ name, folder, height = '20px' }: IconProps): ReactElement => {
+  return <StyledIcon alt={name} src={`/icons/${folder}/${name}.svg`} $height={height} />
+}
+
+const List = styled.ul<{ listGap: string }>`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   justify-content: end;
   align-items: start;
+  gap: ${({ listGap }) => listGap};
 `
 
 const Item = styled.li`
@@ -14,23 +26,17 @@ const Item = styled.li`
   align-items: center;
 `
 
-const Image = styled.img`
-  height: 20px;
-`
-
-type Props<ItemType> = {
-  list: ItemType[]
-  urlFn: (item: string) => string
+export type IconListProps = {
+  list: string[]
+  folder: string
+  listGap: string
 }
-
-export function IconList<ItemType extends string>({ list, urlFn }: Props<ItemType>): ReactElement {
-  return (
-    <List>
-      {list.map((item) => (
-        <Item key={item} title={item}>
-          <Image alt={item} src={urlFn(item)} />
-        </Item>
-      ))}
-    </List>
-  )
-}
+export const IconList = ({ list, folder, listGap }: IconListProps): ReactElement => (
+  <List listGap={listGap}>
+    {list.map((name) => (
+      <Item key={name} title={name}>
+        <Icon name={name} folder={folder} />
+      </Item>
+    ))}
+  </List>
+)

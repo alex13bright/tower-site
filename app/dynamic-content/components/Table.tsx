@@ -9,6 +9,7 @@ import {
   widthAtLeast,
 } from '~/styles/styles'
 import { useToggle } from '~/custom-hooks/useToggle'
+import { TableData } from '~/dynamic-content/components/Injection'
 
 const FoldButton = styled.button`
   border: 1px solid rgba(0, 139, 226, 0.5);
@@ -121,38 +122,17 @@ const Main = styled.div`
   }
 `
 
-type TableData = {
-  table: ReactElement[][]
-  caption: string | null
-}
-const parseChildren = (children: ReactElement[]): TableData => {
-  // caution: parse only first tbody
-  const [tbody] = children.filter(({ type }) => type === 'tbody')
-  const table = tbody.props.children
-    .filter(({ type }: { type: string }) => type === 'tr')
-    .map((tr: ReactElement) => {
-      const tds = tr.props.children.filter(({ type }: { type: string }) => type === 'td')
-      return tds.map((td: ReactElement) => {
-        return td?.props?.children
-      })
-    })
-
-  const caption = null
-  return { caption, table }
-}
-
 type Props = {
   className?: string
-  children: any
+  data: TableData
   'data-rows'?: string
   'data-icon'?: string
 }
 
-export const Table = ({ children, className, ...props }: Props): ReactElement => {
+export const Table = ({ data, className, ...props }: Props): ReactElement => {
   const dataRows = props['data-rows'] ? parseInt(props['data-rows']) : Infinity
   const dataIcon = props['data-icon'] ? props['data-icon'] : null
-  const tableData = parseChildren(children)
-  const { caption, table } = tableData
+  const { caption, table } = data
 
   const [isCollapsed, toggleIsCollapsed] = useToggle(true)
 

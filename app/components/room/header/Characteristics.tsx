@@ -63,14 +63,14 @@ export const Characteristics = ({ className }: Props): ReactElement => {
           <Name>Payments</Name>
           <Value>
             <HeaderValuesSpoiler height={20}>
-              <IconList list={payments} urlFn={(name) => `/images/payments/${name}-white.svg`} />
+              <IconList list={payments} folder="payments/white" listGap="10px" />
             </HeaderValuesSpoiler>
           </Value>
         </Row>
         <Row>
           <Name>Devices</Name>
           <Value>
-            <IconList list={devices} urlFn={(name) => `/images/devices/${name}.svg`} />
+            <IconList list={devices} folder="devices" listGap="10px" />
           </Value>
         </Row>
         <IsCountryAccepted>
