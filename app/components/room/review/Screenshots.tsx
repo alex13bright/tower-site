@@ -1,23 +1,15 @@
 import { MutableRefObject, ReactElement } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { useLoaderData } from '@remix-run/react'
 import { AsideBarTitle } from '~/components/common/AsideBarTitle'
 
-const image = css`
+const Image = styled.img`
   cursor: pointer;
   object-fit: cover;
   width: 100%;
-`
-
-const BigImage = styled.img`
-  ${image};
-`
-
-const SmallImage = styled.img`
-  ${image};
 `
 
 const BigImageBox = styled.div``
@@ -68,7 +60,7 @@ export const Screenshots = ({ className }: Props): ReactElement => {
               caption={title}
             >
               {({ ref, open }) => (
-                <BigImage
+                <Image
                   src={url}
                   alt={title}
                   ref={ref as MutableRefObject<HTMLImageElement>}
@@ -90,7 +82,7 @@ export const Screenshots = ({ className }: Props): ReactElement => {
                   caption={title}
                 >
                   {({ ref, open }) => (
-                    <SmallImage
+                    <Image
                       src={url}
                       alt={title}
                       ref={ref as MutableRefObject<HTMLImageElement>}
