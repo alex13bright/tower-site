@@ -9,10 +9,15 @@ import {
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
-import { basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
+import { background, basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
 const Caption = styled.caption`
+  background: #2e3141;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 1px solid #2e3141;
+
   height: 64px;
   padding: 0 24px;
   display: flex;
@@ -30,29 +35,32 @@ const Caption = styled.caption`
 `
 
 const StyledContent = styled(Content)`
-  background: #fafafa;
-  border-radius: 4px;
   border: 1px solid #e9e9e9;
-
+  background: #fafafa;
   padding: 20px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  &:hover {
+    background: ${background};
+  }
 `
 const NameWithIcon = createNameWithIcon('general')
 
 const StyledNameWithIcon = styled(NameWithIcon)`
   color: ${secondary};
   font-size: 16px;
+  font-weight: 400;
 `
+
 const Main = styled(Table)`
-  display: none;
+  @media screen and ${widthAtLeast.md} {
+    grid-area: general;
+  }
 
   @media screen and ${widthAtLeast.lg} {
-    background: #2e3141;
-    border-radius: 4px;
-    border: 1px solid #e9e9e9;
-
     row-gap: 0;
     display: grid;
-    grid-area: general-information;
   }
 `
 

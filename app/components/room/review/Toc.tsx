@@ -145,6 +145,7 @@ const Main = styled.nav`
   padding-bottom: ${mainPadding}px;
 
   @media screen and ${widthAtLeast.md} {
+    grid-area: toc;
     padding-top: 16px;
     padding-bottom: 16px;
     ${cancelSideMargins};

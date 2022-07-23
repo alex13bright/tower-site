@@ -18,11 +18,21 @@ const Content = styled.article`
   align-items: start;
   row-gap: ${contentTopPaddingPx};
 
+  @media screen and ${widthAtLeast.md} {
+    grid-template-areas:
+      'toc toc'
+      'content content'
+      'general support';
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   @media screen and ${widthAtLeast.xm} {
     row-gap: 0;
     padding-top: ${contentTopPaddingPx};
-    grid-template-areas: 'toc content';
-    grid-template-columns: 200px 1fr;
+    grid-template-areas:
+      'toc content content content'
+      'general general support support';
+    grid-template-columns: 200px repeat(2, 1fr) 200px;
     column-gap: 24px;
   }
 
@@ -30,7 +40,7 @@ const Content = styled.article`
     padding-top: ${contentTopPaddingPx};
     grid-template-areas:
       'toc content screenshots'
-      'toc content general-information';
+      'toc content general';
     grid-template-columns: 200px 1fr 320px;
   }
 `
@@ -38,7 +48,7 @@ const Content = styled.article`
 const ContentWrapper = styled.div`
   display: grid;
 
-  @media screen and ${widthAtLeast.xm} {
+  @media screen and ${widthAtLeast.md} {
     grid-area: content;
   }
 `
