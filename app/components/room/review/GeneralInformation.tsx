@@ -2,7 +2,6 @@ import { ReactElement } from 'react'
 import { IconList } from '~/components/ui/IconList'
 import {
   Table,
-  Caption,
   Content,
   Row,
   Value,
@@ -10,8 +9,22 @@ import {
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
-import { secondary, widthAtLeast } from '~/styles/styles'
+import { primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+
+export const Caption = styled.caption`
+  background: #2e3141;
+  border: 1px solid #2e3141;
+  color: ${primaryDark};
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding: 20px 24px;
+
+  &::after {
+    content: '';
+  }
+`
 
 const NameWithIcon = createNameWithIcon('general')
 
