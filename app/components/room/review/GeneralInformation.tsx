@@ -9,23 +9,33 @@ import {
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
-import { primaryDark, secondary, widthAtLeast } from '~/styles/styles'
+import { basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
-export const Caption = styled.caption`
-  background: #2e3141;
-  border: 1px solid #2e3141;
+const Caption = styled.caption`
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   color: ${primaryDark};
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.2px;
-  padding: 20px 24px;
 
   &::after {
-    content: '';
+    ${basicPseudoIcon};
   }
 `
 
+const StyledContent = styled(Content)`
+  background: #fafafa;
+  border-radius: 4px;
+  border: 1px solid #e9e9e9;
+
+  padding: 20px;
+`
 const NameWithIcon = createNameWithIcon('general')
 
 const StyledNameWithIcon = styled(NameWithIcon)`
@@ -36,6 +46,11 @@ const Main = styled(Table)`
   display: none;
 
   @media screen and ${widthAtLeast.lg} {
+    background: #2e3141;
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+
+    row-gap: 0;
     display: grid;
     grid-area: general-information;
   }
@@ -69,8 +84,10 @@ export const GeneralInformation = ({ className }: Props): ReactElement => {
   } = { ...data.room, ...extraData }
   return (
     <Main className={className}>
-      <Caption>Characteristics</Caption>
-      <Content>
+      <Caption $width="40px" $height="40px" url="/decorations/general-information.svg">
+        General information
+      </Caption>
+      <StyledContent>
         <Row>
           <StyledNameWithIcon kind="founded-in">Founded in</StyledNameWithIcon>
           <Value>{foundedIn}</Value>
@@ -81,7 +98,7 @@ export const GeneralInformation = ({ className }: Props): ReactElement => {
             <IconList list={games} folder="games/white" listGap="4px" />
           </Value>
         </Row>
-      </Content>
+      </StyledContent>
     </Main>
   )
 }

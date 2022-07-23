@@ -11,11 +11,11 @@ const Item = styled.li`
   column-gap: 20px;
 
   &::before {
+    content: '';
     width: 20px;
     height: 20px;
-    background-image: url('/images/main/corona.svg');
+    background-image: url('/decorations/corona.svg');
     background-repeat: no-repeat;
-    content: '';
   }
 `
 
