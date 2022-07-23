@@ -3,7 +3,6 @@ import { Row, Value } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
-import { IconList } from '~/components/ui/IconList'
 import {
   Available,
   Caption,
@@ -11,6 +10,7 @@ import {
   StyledContent,
   StyledNameWithIcon,
 } from '~/components/common/styles'
+import { fakeUse } from '~/core/utils'
 
 const StyledMain = styled(Main)`
   grid-area: support;
@@ -22,26 +22,13 @@ type Props = {
 
 export const Support = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const extraData = {
-    foundedIn: '2007',
-    RNGCertificate: 'bmmTestlabs',
-    trafficAtPeakHours: '100000',
-    trackers: false,
-    minMaxDeposit: '10–10000$',
-    accountCurrencies: ['usd'],
-    games: ['mtt', 'fast', 'spins', 'nlh', 'plo', 'aof', 'cash', '6+', 'plo5'],
+  fakeUse(data)
+  const support = {
+    email: 'help@ggpoker.com',
+    phone: null,
+    liveChat: true,
   }
-  const {
-    foundedIn,
-    network,
-    licenseCountry,
-    RNGCertificate,
-    trafficAtPeakHours,
-    trackers,
-    minMaxDeposit,
-    accountCurrencies,
-    games,
-  } = { ...data.room, ...extraData }
+  const { email, phone, liveChat } = support
   return (
     <StyledMain className={className}>
       <Caption $width="40px" $height="40px" url="/decorations/support.svg">
@@ -49,45 +36,17 @@ export const Support = ({ className }: Props): ReactElement => {
       </Caption>
       <StyledContent>
         <Row>
-          <StyledNameWithIcon kind="founded-in">Founded in</StyledNameWithIcon>
-          <Value>{foundedIn}</Value>
+          <StyledNameWithIcon kind="email">Email</StyledNameWithIcon>
+          <Value>{email}</Value>
         </Row>
         <Row>
-          <StyledNameWithIcon kind="network">Network</StyledNameWithIcon>
-          <Value>{network.title}</Value>
+          <StyledNameWithIcon kind="phone">Phone</StyledNameWithIcon>
+          <Value>{phone === null ? <Available isAvailable={false} /> : phone}</Value>
         </Row>
         <Row>
-          <StyledNameWithIcon kind="license-country">License country</StyledNameWithIcon>
-          <Value>{licenseCountry}</Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="rng-certificate">RNG certificate</StyledNameWithIcon>
-          <Value>{RNGCertificate}</Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="traffic-at-peak-hours">trafficAtPeakHours</StyledNameWithIcon>
-          <Value>{trafficAtPeakHours}</Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="trackers">Trackers</StyledNameWithIcon>
+          <StyledNameWithIcon kind="live-chat">Live chat</StyledNameWithIcon>
           <Value>
-            <Available isAvailable={trackers} />
-          </Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="min-max-deposit">Min/Max deposit</StyledNameWithIcon>
-          <Value>{minMaxDeposit}</Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="currencies">Account currencies</StyledNameWithIcon>
-          <Value>
-            <IconList list={accountCurrencies} folder="currencies" listGap="4px" />
-          </Value>
-        </Row>
-        <Row>
-          <StyledNameWithIcon kind="games">Games</StyledNameWithIcon>
-          <Value>
-            <IconList list={games} folder="games/white" listGap="4px" />
+            <Available isAvailable={liveChat} />
           </Value>
         </Row>
       </StyledContent>
