@@ -1,6 +1,18 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 
+export const StyledIcon = styled.img<{ $height: string }>`
+  height: 20px;
+`
+export type IconProps = {
+  name: string
+  folder: string
+  height?: string
+}
+export const Icon = ({ name, folder, height = '20px' }: IconProps): ReactElement => {
+  return <StyledIcon alt={name} src={`/icons/${folder}/${name}.svg`} $height={height} />
+}
+
 const List = styled.ul<{ listGap: string }>`
   display: flex;
   flex-wrap: wrap;
@@ -12,23 +24,19 @@ const List = styled.ul<{ listGap: string }>`
 const Item = styled.li`
   display: flex;
   align-items: center;
+  background-color: #008be2;
 `
 
-const Image = styled.img`
-  height: 20px;
-`
-
-type Props = {
+export type IconListProps = {
   list: string[]
   folder: string
   listGap: string
 }
-
-export const IconList = ({ list, folder, listGap }: Props): ReactElement => (
+export const IconList = ({ list, folder, listGap }: IconListProps): ReactElement => (
   <List listGap={listGap}>
-    {list.map((item) => (
-      <Item key={item} title={item}>
-        <Image alt={item} src={`/icons/${folder}/${item}.svg`} />
+    {list.map((name) => (
+      <Item key={name} title={name}>
+        <Icon name={name} folder={folder} />
       </Item>
     ))}
   </List>

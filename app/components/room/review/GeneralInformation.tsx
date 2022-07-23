@@ -1,5 +1,4 @@
 import { ReactElement } from 'react'
-import { IconList } from '~/components/ui/IconList'
 import {
   Table,
   Content,
@@ -11,6 +10,12 @@ import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { background, basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+import { Icon, IconList } from '~/components/ui/IconList'
+
+const Available = ({ isAvailable }: { isAvailable: boolean }): ReactElement => {
+  const name = isAvailable ? 'yes' : 'no'
+  return <Icon name={name} folder="general" height="16px" />
+}
 
 const Caption = styled.caption`
   background: #2e3141;
@@ -99,6 +104,38 @@ export const GeneralInformation = ({ className }: Props): ReactElement => {
         <Row>
           <StyledNameWithIcon kind="founded-in">Founded in</StyledNameWithIcon>
           <Value>{foundedIn}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="network">Network</StyledNameWithIcon>
+          <Value>{network.title}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="license-country">License country</StyledNameWithIcon>
+          <Value>{licenseCountry}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="rng-certificate">RNG certificate</StyledNameWithIcon>
+          <Value>{RNGCertificate}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="traffic-at-peak-hours">trafficAtPeakHours</StyledNameWithIcon>
+          <Value>{trafficAtPeakHours}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="trackers">Trackers</StyledNameWithIcon>
+          <Value>
+            <Available isAvailable={trackers} />
+          </Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="min-max-deposit">Min/Max deposit</StyledNameWithIcon>
+          <Value>{minMaxDeposit}</Value>
+        </Row>
+        <Row>
+          <StyledNameWithIcon kind="currencies">Account currencies</StyledNameWithIcon>
+          <Value>
+            <IconList list={accountCurrencies} folder="currencies" listGap="4px" />
+          </Value>
         </Row>
         <Row>
           <StyledNameWithIcon kind="games">Games</StyledNameWithIcon>
