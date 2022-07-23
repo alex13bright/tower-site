@@ -29,7 +29,7 @@ export const PageLayout = ({ children }: Props): ReactElement => {
         <StickyMarker isVisibleKey="isFooterVisible">
           <PageFooter />
         </StickyMarker>
-        <PageTopButton />
+        {/*<PageTopButton />*/}
       </Page>
     </StickyContext>
   )

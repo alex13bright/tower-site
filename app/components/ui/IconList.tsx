@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { ReactElement } from 'react'
 
-const List = styled.ul`
+const List = styled.ul<{ listGap: string }>`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   justify-content: end;
   align-items: start;
+  gap: ${({ listGap }) => listGap};
 `
 
 const Item = styled.li`
@@ -18,21 +18,18 @@ const Image = styled.img`
   height: 20px;
 `
 
-type Props<ItemType> = {
-  list: ItemType[]
+type Props = {
+  list: string[]
+  folder: string
+  listGap: string
 }
 
-export const createIconList = (folder: string) => {
-  function ItemType<ItemType extends string>({ list }: Props<ItemType>): ReactElement {
-    return (
-      <List>
-        {list.map((item) => (
-          <Item key={item} title={item}>
-            <Image alt={item} src={`/icons/${folder}/${item}`} />
-          </Item>
-        ))}
-      </List>
-    )
-  }
-  return ItemType
-}
+export const IconList = ({ list, folder, listGap }: Props): ReactElement => (
+  <List listGap={listGap}>
+    {list.map((item) => (
+      <Item key={item} title={item}>
+        <Image alt={item} src={`/icons/${folder}/${item}.svg`} />
+      </Item>
+    ))}
+  </List>
+)

@@ -30,7 +30,7 @@ export const createNameWithIcon = (folder: string) => styled(Name)<{ kind: strin
     width: 20px;
     height: 20px;
     content: '';
-    background-image: url('/images/${folder}/${({ kind }) => kind}.svg');
+    background-image: url('/icons/${folder}/${({ kind }) => kind}.svg');
     background-repeat: no-repeat;
   }
 `
