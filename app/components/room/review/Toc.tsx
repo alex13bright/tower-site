@@ -131,6 +131,7 @@ const TitleButton = styled.button<{ isPressed: boolean }>`
 `
 
 const Main = styled.nav`
+  grid-area: toc;
   background: ${background};
   z-index: 999;
   position: sticky;
@@ -145,7 +146,6 @@ const Main = styled.nav`
   padding-bottom: ${mainPadding}px;
 
   @media screen and ${widthAtLeast.md} {
-    grid-area: toc;
     padding-top: 16px;
     padding-bottom: 16px;
     ${cancelSideMargins};

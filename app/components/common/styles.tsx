@@ -4,6 +4,8 @@ import { ReactElement } from 'react'
 import { background, basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { Content, createNameWithIcon, Table } from '~/components/room/header/headerStyles'
 
+export const pageContentColumnsGap = '20px'
+
 const StyledGraphicValue = styled(GraphicValue)<{ $color: string }>`
   border-radius: 50%;
   background-color: ${({ $color }) => $color};

@@ -26,11 +26,12 @@ const GalleryBox = styled.div`
 `
 
 const Main = styled.div`
+  grid-area: screenshots;
   display: none;
+
   @media screen and ${widthAtLeast.lg} {
     display: grid;
     row-gap: 20px;
-    grid-area: screenshots;
   }
 `
 
@@ -47,7 +48,7 @@ export const Screenshots = ({ className }: Props): ReactElement => {
   const { title, url, width, height } = firstScreenshot
   return (
     <Main className={className}>
-      <AsideBarTitle> Screenshots</AsideBarTitle>
+      <AsideBarTitle>Screenshots</AsideBarTitle>
       <Gallery withCaption options={galleryOptions}>
         <GalleryBox>
           <BigImageBox>
