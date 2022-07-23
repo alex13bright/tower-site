@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { useLoaderData } from '@remix-run/react'
+import { AsideBarTitle } from '~/components/common/AsideBarTitle'
 
 const image = css`
   cursor: pointer;
@@ -32,23 +33,6 @@ const GalleryBox = styled.div`
   row-gap: 12px;
 `
 
-const Title = styled.div`
-  display: grid;
-  row-gap: 12px;
-  color: #243238;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.1px;
-  line-height: 22px;
-
-  &::before {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: #ccc;
-  }
-`
-
 const Main = styled.div`
   display: none;
   @media screen and ${widthAtLeast.lg} {
@@ -71,7 +55,7 @@ export const Screenshots = ({ className }: Props): ReactElement => {
   const { title, url, width, height } = firstScreenshot
   return (
     <Main className={className}>
-      <Title> Screenshots</Title>
+      <AsideBarTitle> Screenshots</AsideBarTitle>
       <Gallery withCaption options={galleryOptions}>
         <GalleryBox>
           <BigImageBox>

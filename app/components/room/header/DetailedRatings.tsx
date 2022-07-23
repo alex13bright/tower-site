@@ -4,9 +4,9 @@ import {
   Caption,
   Content,
   Row,
-  Name,
   Value,
   sidePaddingSize,
+  createNameWithIcon,
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import {
@@ -14,8 +14,6 @@ import {
   border,
   cancelSideMargins,
   expandOnParentSides,
-  primaryDark,
-  proximaNovaSb,
   secondaryDark,
   sidePaddings,
   widthAtLeast,
@@ -26,22 +24,9 @@ import { darken } from '~/core/utils'
 import { contentSidePaddingSizePx } from '~/components/page/pageStyles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 
-const StyledName = styled(Name)<{ kind: string }>`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 20px;
-  color: ${primaryDark};
-  font-family: ${proximaNovaSb};
-  &::before {
-    width: 20px;
-    height: 20px;
-    content: '';
-    background-image: url('/images/ratings/${({ kind }) => kind}.svg');
-    background-repeat: no-repeat;
-  }
-`
+const NameWithIcon = createNameWithIcon('ratings')
 
-const StyledValue = styled(Value)`
+const RattingValue = styled(Value)`
   display: flex;
   align-items: baseline;
   color: ${accent};
@@ -124,28 +109,28 @@ export const DetailedRatings = ({ className }: Props): ReactElement => {
         </StyledCaption>
         <StyledContent>
           <Row>
-            <StyledName kind="reliability">Reliability</StyledName>
-            <StyledValue>{reliability}</StyledValue>
+            <NameWithIcon kind="reliability">Reliability</NameWithIcon>
+            <RattingValue>{reliability}</RattingValue>
           </Row>
           <Row>
-            <StyledName kind="bonusesPromotions">Bonuses and promotions</StyledName>
-            <StyledValue>{bonusesPromotions}</StyledValue>
+            <NameWithIcon kind="bonusesPromotions">Bonuses and promotions</NameWithIcon>
+            <RattingValue>{bonusesPromotions}</RattingValue>
           </Row>
           <Row>
-            <StyledName kind="gameSelection">Game selection</StyledName>
-            <StyledValue>{gameSelection}</StyledValue>
+            <NameWithIcon kind="gameSelection">Game selection</NameWithIcon>
+            <RattingValue>{gameSelection}</RattingValue>
           </Row>
           <Row>
-            <StyledName kind="casualPlayers">Casual players</StyledName>
-            <StyledValue>{casualPlayers}</StyledValue>
+            <NameWithIcon kind="casualPlayers">Casual players</NameWithIcon>
+            <RattingValue>{casualPlayers}</RattingValue>
           </Row>
           <Row>
-            <StyledName kind="softwareConvenience">Convenience of the_software</StyledName>
-            <StyledValue>{softwareConvenience}</StyledValue>
+            <NameWithIcon kind="softwareConvenience">Convenience of the_software</NameWithIcon>
+            <RattingValue>{softwareConvenience}</RattingValue>
           </Row>
           <Row>
-            <StyledName kind="depositsWithdrawals">Deposits and withdrawals</StyledName>
-            <StyledValue>{depositsWithdrawals}</StyledValue>
+            <NameWithIcon kind="depositsWithdrawals">Deposits and withdrawals</NameWithIcon>
+            <RattingValue>{depositsWithdrawals}</RattingValue>
           </Row>
         </StyledContent>
       </Main>

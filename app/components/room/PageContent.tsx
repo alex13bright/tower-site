@@ -9,6 +9,7 @@ import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
 import { DynamicContent } from '~/dynamic-content/DynamicContent'
 import { Screenshots } from '~/components/room/review/Screenshots'
 import { FakeContent } from '~/components/styled/FakeContent'
+import { GeneralInformation } from '~/components/room/review/GeneralInformation'
 
 const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
@@ -27,7 +28,9 @@ const Content = styled.article`
 
   @media screen and ${widthAtLeast.lg} {
     padding-top: ${contentTopPaddingPx};
-    grid-template-areas: 'toc content screenshots';
+    grid-template-areas:
+      'toc content screenshots'
+      'toc content general-information';
     grid-template-columns: 200px 1fr 320px;
   }
 `
@@ -58,6 +61,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
         <FakeContent height="500px">FC</FakeContent>
       </ContentWrapper>
       <Screenshots />
+      <GeneralInformation />
     </Content>
   )
 }
