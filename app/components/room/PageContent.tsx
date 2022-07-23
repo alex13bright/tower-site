@@ -10,6 +10,7 @@ import { DynamicContent } from '~/dynamic-content/DynamicContent'
 import { Screenshots } from '~/components/room/review/Screenshots'
 import { FakeContent } from '~/components/styled/FakeContent'
 import { GeneralInformation } from '~/components/room/review/GeneralInformation'
+import { Support } from '~/components/room/review/Support'
 
 const contentTopPaddingPx = contentTopPadding + 'px'
 const Content = styled.article`
@@ -72,6 +73,7 @@ export const PageContent = ({ className }: Props): ReactElement => {
       </ContentWrapper>
       <Screenshots />
       <GeneralInformation />
+      <Support />
     </Content>
   )
 }

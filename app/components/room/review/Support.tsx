@@ -13,20 +13,20 @@ import {
 } from '~/components/common/styles'
 
 const StyledMain = styled(Main)`
-  grid-area: general;
+  grid-area: support;
 `
 
 type Props = {
   className?: string
 }
 
-export const GeneralInformation = ({ className }: Props): ReactElement => {
+export const Support = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
   const extraData = {
     foundedIn: '2007',
     RNGCertificate: 'bmmTestlabs',
     trafficAtPeakHours: '100000',
-    trackers: true,
+    trackers: false,
     minMaxDeposit: '10–10000$',
     accountCurrencies: ['usd'],
     games: ['mtt', 'fast', 'spins', 'nlh', 'plo', 'aof', 'cash', '6+', 'plo5'],
@@ -44,8 +44,8 @@ export const GeneralInformation = ({ className }: Props): ReactElement => {
   } = { ...data.room, ...extraData }
   return (
     <StyledMain className={className}>
-      <Caption $width="40px" $height="40px" url="/decorations/general-information.svg">
-        General information
+      <Caption $width="40px" $height="40px" url="/decorations/support.svg">
+        Support
       </Caption>
       <StyledContent>
         <Row>
