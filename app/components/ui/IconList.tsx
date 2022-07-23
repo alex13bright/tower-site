@@ -24,7 +24,6 @@ const List = styled.ul<{ listGap: string }>`
 const Item = styled.li`
   display: flex;
   align-items: center;
-  background-color: #008be2;
 `
 
 export type IconListProps = {

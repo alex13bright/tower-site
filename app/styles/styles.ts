@@ -65,6 +65,7 @@ export const basicPseudoIcon = css<{ $width: string; $height: string; url: strin
   height: ${({ $height }) => $height};
   background-image: url('${({ url }) => url}');
   background-repeat: no-repeat;
+  background-position: center;
 `
 
 export const pseudoIcon = css<{ $width: string; $height: string; svg: string; gap: string }>`

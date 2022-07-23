@@ -10,11 +10,18 @@ import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { background, basicPseudoIcon, primaryDark, secondary, widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
-import { Icon, IconList } from '~/components/ui/IconList'
+import { IconList } from '~/components/ui/IconList'
+import { GraphicValue } from '~/components/common/GraphicValue'
 
+const StyledGraphicValue = styled(GraphicValue)<{ $color: string }>`
+  border-radius: 50%;
+  background-color: ${({ $color }) => $color};
+`
 const Available = ({ isAvailable }: { isAvailable: boolean }): ReactElement => {
-  const name = isAvailable ? 'yes' : 'no'
-  return <Icon name={name} folder="general" height="16px" />
+  const [name, color] = isAvailable ? ['yes', 'green'] : ['no', 'red']
+  return (
+    <StyledGraphicValue folder="general" name={name} width="16px" height="16px" $color={color} />
+  )
 }
 
 const Caption = styled.caption`
@@ -79,7 +86,7 @@ export const GeneralInformation = ({ className }: Props): ReactElement => {
     foundedIn: '2007',
     RNGCertificate: 'bmmTestlabs',
     trafficAtPeakHours: '100000',
-    trackers: false,
+    trackers: true,
     minMaxDeposit: '10–10000$',
     accountCurrencies: ['usd'],
     games: ['mtt', 'fast', 'spins', 'nlh', 'plo', 'aof', 'cash', '6+', 'plo5'],
