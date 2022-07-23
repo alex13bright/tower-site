@@ -39,7 +39,7 @@ const PageMetaItem = styled.span<{ kind: string }>`
     content: '';
     width: 12px;
     height: 12px;
-    background-image: url('/images/page-meta/${({ kind }) => kind}.svg');
+    background-image: url('/icons/content-meta/${({ kind }) => kind}.svg');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.5;

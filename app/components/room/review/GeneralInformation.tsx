@@ -9,11 +9,14 @@ import {
   Name,
   Value,
   sidePaddingSize,
+  createNameWithIcon,
 } from '~/components/room/header/headerStyles'
 import styled from 'styled-components'
 import { useLoaderData } from '@remix-run/react'
 import { widthAtLeast } from '~/styles/styles'
 import { LoaderData } from '~/routes/rakeback-deals/$roomPageSlug'
+
+const NameWithIcon = createNameWithIcon('icons')
 
 const Main = styled(Table)`
   padding-top: 30px;
@@ -45,25 +48,41 @@ type Props = {
 
 export const GeneralInformation = ({ className }: Props): ReactElement => {
   const data = useLoaderData<LoaderData>()
-  const { country, room } = data
-  const { roomType, licenseCountry, payments, devices, isCountryAccepted } = room
+  const extraData = {
+    foundedIn: '2007',
+    RNGCertificate: 'bmmTestlabs',
+    trafficAtPeakHours: '100000',
+    trackers: false,
+    minMaxDeposit: '10–10000$',
+    accountCurrencies: ['usd'],
+    games: ['mtt', 'fast', 'spins', 'nlh', 'plo', 'aof', 'cash', '6+', 'plo5'],
+  }
+  Object.assign(data.room, extraData)
+  const {
+    foundedIn,
+    network,
+    licenseCountry,
+    RNGCertificate,
+    trafficAtPeakHours,
+    trackers,
+    minMaxDeposit,
+    accountCurrencies,
+    games,
+  } = data.room
   return (
     <Main className={className}>
       <Caption>Characteristics</Caption>
       <Content>
         <Row>
-          <Name>Room type</Name>
-          <Value>{roomType}</Value>
+          <NameWithIcon kind="foundedIn">Founded in</NameWithIcon>
+          <Value>{foundedIn}</Value>
         </Row>
+
         <Row>
-          <Name>License</Name>
-          <Value>{licenseCountry}</Value>
-        </Row>
-        <Row>
-          <Name>Payments</Name>
+          <NameWithIcon kind="foundedIn">Founded in</NameWithIcon>
           <Value>
             <HeaderValuesSpoiler height={20}>
-              <IconList list={payments} urlFn={(name) => `/images/payments/${name}-white.svg`} />
+              <IconList list={games} folder="" />
             </HeaderValuesSpoiler>
           </Value>
         </Row>

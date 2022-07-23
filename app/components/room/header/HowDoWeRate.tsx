@@ -25,7 +25,7 @@ const Item = styled.li<{ kind: string }>`
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('/images/ratings/${({ kind }) => kind}.svg');
+    background-image: url('/icons/ratings/${({ kind }) => kind}.svg');
     background-repeat: no-repeat;
   }
 `
